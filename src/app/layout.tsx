@@ -2,6 +2,22 @@ import type { Metadata, Viewport } from 'next';
 import { Bricolage_Grotesque, Mukta } from 'next/font/google';
 import 'lenis/dist/lenis.css';
 import './globals.css';
+/*
+ * All page styles ship as one site-wide stylesheet (~40 KB gzipped). Route-split
+ * CSS made Next preload every linked page's stylesheet on prefetch, which
+ * Chrome reports as "preloaded but not used" warnings — and one sheet also
+ * makes every navigation instant.
+ */
+import '@/styles/landing.css';
+import '@/styles/jobs.css';
+import '@/app/rights/rights.module.css';
+import '@/app/safety/safety.module.css';
+import '@/components/rights/rights-ui.module.css';
+import '@/components/safety/safety-ui.module.css';
+import '@/components/profile/profile.module.css';
+import '@/components/diary/diary.module.css';
+import '@/components/workers/workers.module.css';
+import '@/components/post-job/postjob.module.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TabBar from '@/components/TabBar';
@@ -50,7 +66,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFS_SCRIPT }} />
       </head>
-      <body>
+      {/* extensions (Grammarly, translators…) add attributes to <body>; ignore those diffs */}
+      <body suppressHydrationWarning>
         <noscript>
           <style>{'[data-reveal]{opacity:1!important;transform:none!important}'}</style>
         </noscript>
