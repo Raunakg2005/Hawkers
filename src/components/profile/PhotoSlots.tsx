@@ -33,14 +33,14 @@ export default function PhotoSlots({
             <li key={i} className={s.photo}>
               {url ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={url} alt={t(`Work photo ${i + 1}`, `काम की फ़ोटो ${i + 1}`)} />
+                <img src={url} alt={t(`Work photo ${i + 1}`, `काम की फ़ोटो ${i + 1}`, `कामाचा फोटो ${i + 1}`, `કામનો ફોટો ${i + 1}`)} />
               ) : (
                 <span className={s.photoSaved}>
                   <Camera aria-hidden="true" />
-                  <T en={`Photo ${i + 1} added`} hi={`फ़ोटो ${i + 1} जुड़ी`} />
+                  <T en={`Photo ${i + 1} added`} hi={`फ़ोटो ${i + 1} जुड़ी`} mr={`फोटो ${i + 1} जोडला`} gu={`ફોટો ${i + 1} ઉમેર્યો`} />
                 </span>
               )}
-              <button type="button" className={s.photoRemove} onClick={() => onRemove(i)} aria-label={t(`Remove photo ${i + 1}`, `फ़ोटो ${i + 1} हटाएँ`)}>
+              <button type="button" className={s.photoRemove} onClick={() => onRemove(i)} aria-label={t(`Remove photo ${i + 1}`, `फ़ोटो ${i + 1} हटाएँ`, `फोटो ${i + 1} काढा`, `ફોટો ${i + 1} કાઢો`)}>
                 <X aria-hidden="true" />
               </button>
             </li>
@@ -63,7 +63,7 @@ export default function PhotoSlots({
             <label htmlFor={id} className={s.photoAdd}>
               <ImagePlus aria-hidden="true" />
               <span>
-                <T en="Add work photo" hi="काम की फ़ोटो जोड़ें" />
+                <T en="Add work photo" hi="काम की फ़ोटो जोड़ें" mr="कामाचा फोटो जोडा" gu="કામનો ફોટો ઉમેરો" />
               </span>
             </label>
           </li>

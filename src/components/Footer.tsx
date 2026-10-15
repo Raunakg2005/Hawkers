@@ -18,16 +18,18 @@ export default function Footer() {
               <T
                 en="A digital naka for India’s daily-wage workers — find work, show your skill, know your rights. No résumé needed."
                 hi="भारत के दिहाड़ी मज़दूरों के लिए डिजिटल नाका — काम खोजें, हुनर दिखाएँ, अधिकार जानें। बायोडाटा की ज़रूरत नहीं।"
+                mr="भारतातील रोजंदारी कामगारांसाठी डिजिटल नाका — काम शोधा, कौशल्य दाखवा, हक्क जाणा. बायोडाटाची गरज नाही."
+                gu="ભારતના રોજમદાર કામદારો માટે ડિજિટલ નાકા — કામ શોધો, આવડત બતાવો, અધિકાર જાણો. બાયોડેટાની જરૂર નથી."
               />
             </p>
             <p className="subtle">
-              <T en="Hackathon prototype · all data is mock" hi="हैकाथॉन प्रोटोटाइप · सारा डेटा नमूना है" />
+              <T en="Hackathon prototype · all data is mock" hi="हैकाथॉन प्रोटोटाइप · सारा डेटा नमूना है" mr="हॅकेथॉन प्रोटोटाइप · सर्व डेटा नमुना आहे" gu="હેકાથોન પ્રોટોટાઇપ · બધો ડેટા નમૂનો છે" />
             </p>
           </div>
 
           <div>
             <h3>
-              <T en="For workers" hi="मज़दूरों के लिए" />
+              <T en="For workers" hi="मज़दूरों के लिए" mr="कामगारांसाठी" gu="કામદારો માટે" />
             </h3>
             <ul>
               {[NAV[0], NAV[2], NAV_MORE[0], NAV[4]].map((n) => (
@@ -42,7 +44,7 @@ export default function Footer() {
 
           <div>
             <h3>
-              <T en="For employers" hi="मालिकों के लिए" />
+              <T en="For employers" hi="मालिकों के लिए" mr="मालकांसाठी" gu="માલિકો માટે" />
             </h3>
             <ul>
               {[NAV[1], NAV_MORE[1]].map((n) => (
@@ -54,7 +56,7 @@ export default function Footer() {
               ))}
               <li>
                 <Link href="/rights#rights">
-                  <T en="Fair pay guide" hi="सही मज़दूरी गाइड" />
+                  <T en="Fair pay guide" hi="सही मज़दूरी गाइड" mr="योग्य मजुरी मार्गदर्शक" gu="યોગ્ય મજૂરી માર્ગદર્શિકા" />
                 </Link>
               </li>
             </ul>
@@ -62,7 +64,7 @@ export default function Footer() {
 
           <div>
             <h3>
-              <T en="Help lines" hi="हेल्पलाइन" />
+              <T en="Help lines" hi="हेल्पलाइन" mr="हेल्पलाइन" gu="હેલ્પલાઇન" />
             </h3>
             <ul>
               {HELPLINES.slice(0, 4).map((h) => (
@@ -82,10 +84,10 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>
-            <T en="Built for “Beyond the Waiting Line” · Inclusive Design" hi="“इंतज़ार से आगे” के लिए बनाया गया · समावेशी डिज़ाइन" />
+            <T en="Built for “Beyond the Waiting Line” · Inclusive Design" hi="“इंतज़ार से आगे” के लिए बनाया गया · समावेशी डिज़ाइन" mr="“प्रतीक्षेच्या पलीकडे” साठी बनवले · सर्वसमावेशक डिझाइन" gu="“રાહથી આગળ” માટે બનાવ્યું · સર્વસમાવેશી ડિઝાઇન" />
           </span>
           <span>
-            <T en="Scheme info is simplified — always confirm on official sites." hi="योजनाओं की जानकारी सरल की गई है — सरकारी साइट पर ज़रूर जाँचें।" />
+            <T en="Scheme info is simplified — always confirm on official sites." hi="योजनाओं की जानकारी सरल की गई है — सरकारी साइट पर ज़रूर जाँचें।" mr="योजनांची माहिती सोपी केली आहे — सरकारी साइटवर नक्की तपासा." gu="યોજનાઓની માહિતી સરળ કરી છે — સરકારી સાઇટ પર જરૂર તપાસો." />
           </span>
         </div>
       </div>

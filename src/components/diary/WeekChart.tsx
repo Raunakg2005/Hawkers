@@ -35,6 +35,8 @@ export default function WeekChart({ entries, today }: { entries: DiaryEntry[]; t
   const summary = t(
     `Last 7 days: ${rupee(total)} earned over ${worked.length} days.${best ? ` Best day ${fmtDate(best.key, 'en')} with ${rupee(best.total)}.` : ''}`,
     `पिछले 7 दिन: ${worked.length} दिन में ${rupee(total)} कमाए।${best ? ` सबसे अच्छा दिन ${fmtDate(best.key, 'hi')}, ${rupee(best.total)}।` : ''}`,
+    `मागील 7 दिवस: ${worked.length} दिवसांत ${rupee(total)} कमावले.${best ? ` सर्वात चांगला दिवस ${fmtDate(best.key, 'mr')}, ${rupee(best.total)}.` : ''}`,
+    `છેલ્લા 7 દિવસ: ${worked.length} દિવસમાં ${rupee(total)} કમાયા.${best ? ` સૌથી સારો દિવસ ${fmtDate(best.key, 'gu')}, ${rupee(best.total)}.` : ''}`,
   );
 
   return (
@@ -43,19 +45,19 @@ export default function WeekChart({ entries, today }: { entries: DiaryEntry[]; t
         {summary}
       </p>
 
-      <div className={s.chart} role="group" aria-label={t('Earnings, last 7 days', 'पिछले 7 दिन की कमाई')} aria-describedby="chart-summary">
+      <div className={s.chart} role="group" aria-label={t('Earnings, last 7 days', 'पिछले 7 दिन की कमाई', 'मागील 7 दिवसांची कमाई', 'છેલ્લા 7 દિવસની કમાણી')} aria-describedby="chart-summary">
         {avg > 0 && (
           <div className={s.avgLine} style={{ '--y': (avg / max).toFixed(3) } as React.CSSProperties} aria-hidden="true">
             <span>
-              <T en={`avg ${shortRupee(avg)}`} hi={`औसत ${shortRupee(avg)}`} />
+              <T en={`avg ${shortRupee(avg)}`} hi={`औसत ${shortRupee(avg)}`} mr={`सरासरी ${shortRupee(avg)}`} gu={`સરેરાશ ${shortRupee(avg)}`} />
             </span>
           </div>
         )}
         {days.map((d, i) => {
           const isToday = d.key === today;
           const on = d.key === selected.key;
-          const label = `${fmtDate(d.key, lang)}${isToday ? ` (${t('today', 'आज')})` : ''}: ${
-            d.total ? `${rupee(d.total)}${d.owed ? `, ${rupee(d.owed)} ${t('not paid yet', 'अभी बाक़ी')}` : ''}` : t('no work', 'कोई काम नहीं')
+          const label = `${fmtDate(d.key, lang)}${isToday ? ` (${t('today', 'आज', 'आज', 'આજે')})` : ''}: ${
+            d.total ? `${rupee(d.total)}${d.owed ? `, ${rupee(d.owed)} ${t('not paid yet', 'अभी बाक़ी', 'अजून बाकी', 'હજી બાકી')}` : ''}` : t('no work', 'कोई काम नहीं', 'काम नाही', 'કોઈ કામ નહીં')
           }`;
           return (
             <button
@@ -78,7 +80,7 @@ export default function WeekChart({ entries, today }: { entries: DiaryEntry[]; t
                 </span>
               </span>
               <span className={s.barDay} aria-hidden="true">
-                <span>{isToday ? <T en="Today" hi="आज" /> : <Tx l={WEEKDAY_SHORT[d.dow]} />}</span>
+                <span>{isToday ? <T en="Today" hi="आज" mr="आज" gu="આજે" /> : <Tx l={WEEKDAY_SHORT[d.dow]} />}</span>
                 <small>{parseKey(d.key).getDate()}</small>
               </span>
             </button>
@@ -89,15 +91,15 @@ export default function WeekChart({ entries, today }: { entries: DiaryEntry[]; t
       <ul className={s.legend} aria-hidden="true">
         <li>
           <i className={s.lgPaid} />
-          <T en="Paid" hi="मिल गया" />
+          <T en="Paid" hi="मिल गया" mr="मिळाले" gu="મળી ગયા" />
         </li>
         <li>
           <i className={s.lgOwed} />
-          <T en="Not paid yet" hi="अभी बाक़ी" />
+          <T en="Not paid yet" hi="अभी बाक़ी" mr="अजून बाकी" gu="હજી બાકી" />
         </li>
         <li>
           <i className={s.lgToday} />
-          <T en="Today" hi="आज" />
+          <T en="Today" hi="आज" mr="आज" gu="આજે" />
         </li>
       </ul>
 
@@ -113,9 +115,9 @@ export default function WeekChart({ entries, today }: { entries: DiaryEntry[]; t
                 <TradeTile trade={e.trade} size="sm" />
                 <span className={s.dayEmployer}>
                   {e.employer}
-                  {e.verified && <BadgeCheck aria-label={t('Confirmed by employer', 'मालिक ने पक्का किया')} className={s.okIcon} />}
+                  {e.verified && <BadgeCheck aria-label={t('Confirmed by employer', 'मालिक ने पक्का किया', 'मालकाने पक्के केले', 'માલિકે પાકું કર્યું')} className={s.okIcon} />}
                 </span>
-                <span className={`chip ${e.paid ? 'chip-success' : 'chip-warning'}`}>{e.paid ? <T en="Paid" hi="मिल गया" /> : <T en="Not yet" hi="बाक़ी" />}</span>
+                <span className={`chip ${e.paid ? 'chip-success' : 'chip-warning'}`}>{e.paid ? <T en="Paid" hi="मिल गया" mr="मिळाले" gu="મળી ગયા" /> : <T en="Not yet" hi="बाक़ी" mr="बाकी" gu="બાકી" />}</span>
                 <span className="money">{rupee(e.amount)}</span>
               </li>
             ))}
@@ -124,9 +126,14 @@ export default function WeekChart({ entries, today }: { entries: DiaryEntry[]; t
           <p className={`subtle ${s.noWork}`}>
             <CalendarX2 aria-hidden="true" />
             {selected.key === today ? (
-              <T en="Nothing written for today yet. Add it below when you finish work." hi="आज का कुछ नहीं लिखा। काम ख़त्म होने पर नीचे जोड़ें।" />
+              <T
+                en="Nothing written for today yet. Add it below when you finish work."
+                hi="आज का कुछ नहीं लिखा। काम ख़त्म होने पर नीचे जोड़ें।"
+                mr="आजचे अजून काही लिहिलेले नाही. काम संपल्यावर खाली जोडा."
+                gu="આજનું હજી કંઈ લખ્યું નથી. કામ પૂરું થાય ત્યારે નીચે ઉમેરો."
+              />
             ) : (
-              <T en="No work written for this day." hi="इस दिन का कोई काम नहीं लिखा।" />
+              <T en="No work written for this day." hi="इस दिन का कोई काम नहीं लिखा।" mr="या दिवसाचे कोणतेही काम लिहिलेले नाही." gu="આ દિવસનું કોઈ કામ લખ્યું નથી." />
             )}
           </p>
         )}
@@ -134,18 +141,18 @@ export default function WeekChart({ entries, today }: { entries: DiaryEntry[]; t
 
       <table className="sr-only">
         <caption>
-          <T en="Earnings by day, last 7 days" hi="पिछले 7 दिन, दिन के हिसाब से कमाई" />
+          <T en="Earnings by day, last 7 days" hi="पिछले 7 दिन, दिन के हिसाब से कमाई" mr="मागील 7 दिवस, दिवसानुसार कमाई" gu="છેલ્લા 7 દિવસ, દિવસ પ્રમાણે કમાણી" />
         </caption>
         <thead>
           <tr>
             <th scope="col">
-              <T en="Day" hi="दिन" />
+              <T en="Day" hi="दिन" mr="दिवस" gu="દિવસ" />
             </th>
             <th scope="col">
-              <T en="Paid" hi="मिल गया" />
+              <T en="Paid" hi="मिल गया" mr="मिळाले" gu="મળી ગયા" />
             </th>
             <th scope="col">
-              <T en="Not paid yet" hi="अभी बाक़ी" />
+              <T en="Not paid yet" hi="अभी बाक़ी" mr="अजून बाकी" gu="હજી બાકી" />
             </th>
           </tr>
         </thead>

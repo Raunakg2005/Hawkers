@@ -64,7 +64,7 @@ export default function AddWorkForm({
     <form className={s.form} onSubmit={submit} noValidate>
       <div className="field">
         <label className="label" htmlFor="work-employer">
-          <T en="Who did you work for?" hi="किसके यहाँ काम किया?" />
+          <T en="Who did you work for?" hi="किसके यहाँ काम किया?" mr="कोणाकडे काम केले?" gu="કોને ત્યાં કામ કર્યું?" />
         </label>
         <input
           id="work-employer"
@@ -72,7 +72,7 @@ export default function AddWorkForm({
           list="employer-list"
           value={employer}
           onChange={(e) => setEmployer(e.target.value)}
-          placeholder={t('Name of employer or contractor', 'मालिक या ठेकेदार का नाम')}
+          placeholder={t('Name of employer or contractor', 'मालिक या ठेकेदार का नाम', 'मालकाचे किंवा ठेकेदाराचे नाव', 'માલિક કે કૉન્ટ્રાક્ટરનું નામ')}
           aria-invalid={errors.employer || undefined}
           aria-describedby={errors.employer ? 'err-employer' : undefined}
           autoComplete="off"
@@ -86,19 +86,19 @@ export default function AddWorkForm({
         {errors.employer && (
           <p id="err-employer" className={s.fieldErr}>
             <CircleAlert aria-hidden="true" />
-            <T en="Please write the employer's name." hi="कृपया मालिक का नाम लिखें।" />
+            <T en="Please write the employer's name." hi="कृपया मालिक का नाम लिखें।" mr="कृपया मालकाचे नाव लिहा." gu="મહેરબાની કરીને માલિકનું નામ લખો." />
           </p>
         )}
       </div>
 
       <fieldset className={s.fs}>
         <legend className="label">
-          <T en="What work?" hi="कौन सा काम?" />
+          <T en="What work?" hi="कौन सा काम?" mr="कोणते काम?" gu="કયું કામ?" />
           <span className={s.legendValue}>
             · <Tx l={TRADE[trade].name} />
           </span>
         </legend>
-        <div className={`scroller ${s.tradePick}`} role="radiogroup" aria-label={t('Type of work', 'काम का प्रकार')}>
+        <div className={`scroller ${s.tradePick}`} role="radiogroup" aria-label={t('Type of work', 'काम का प्रकार', 'कामाचा प्रकार', 'કામનો પ્રકાર')}>
           {TRADES.map((tr) => (
             <button
               key={tr.id}
@@ -108,7 +108,7 @@ export default function AddWorkForm({
               className={s.tradeOpt}
               style={{ '--tile': tradeColor(tr.id) } as React.CSSProperties}
               onClick={() => setTrade(tr.id)}
-              title={t(tr.name.en, tr.name.hi)}
+              title={t(tr.name.en, tr.name.hi, tr.name.mr, tr.name.gu)}
             >
               <span className={s.tradeOptIcon}>
                 <TradeIcon trade={tr.id} />
@@ -123,7 +123,7 @@ export default function AddWorkForm({
 
       <div className="field">
         <label className="label" htmlFor="work-amount">
-          <T en="How much? (₹)" hi="कितने पैसे? (₹)" />
+          <T en="How much? (₹)" hi="कितने पैसे? (₹)" mr="किती पैसे? (₹)" gu="કેટલા પૈસા? (₹)" />
         </label>
         <div className={s.amountRow}>
           <span className={s.rupeePrefix} aria-hidden="true">
@@ -151,11 +151,16 @@ export default function AddWorkForm({
         {errors.amount ? (
           <p id="err-amount" className={s.fieldErr}>
             <CircleAlert aria-hidden="true" />
-            <T en="Please write the amount in rupees." hi="कृपया रुपये लिखें।" />
+            <T en="Please write the amount in rupees." hi="कृपया रुपये लिखें।" mr="कृपया रुपये लिहा." gu="મહેરબાની કરીને રૂપિયા લખો." />
           </p>
         ) : (
           <p id="amount-hint" className="subtle">
-            <T en={`Fair for ${TRADE[trade].name.en}: ${rupee(fair[0])}–${rupee(fair[1])} a day`} hi={`${TRADE[trade].name.hi} के लिए सही: ${rupee(fair[0])}–${rupee(fair[1])} रोज़`} />
+            <T
+              en={`Fair for ${TRADE[trade].name.en}: ${rupee(fair[0])}–${rupee(fair[1])} a day`}
+              hi={`${TRADE[trade].name.hi} के लिए सही: ${rupee(fair[0])}–${rupee(fair[1])} रोज़`}
+              mr={`${TRADE[trade].name.mr} साठी योग्य: रोज ${rupee(fair[0])}–${rupee(fair[1])}`}
+              gu={`${TRADE[trade].name.gu} માટે યોગ્ય: રોજના ${rupee(fair[0])}–${rupee(fair[1])}`}
+            />
           </p>
         )}
       </div>
@@ -163,22 +168,22 @@ export default function AddWorkForm({
       <div className={s.formRow}>
         <fieldset className={s.fs}>
           <legend className="label">
-            <T en="Got the money?" hi="पैसे मिल गए?" />
+            <T en="Got the money?" hi="पैसे मिल गए?" mr="पैसे मिळाले का?" gu="પૈસા મળી ગયા?" />
           </legend>
           <div className={`segmented ${s.paidSeg}`}>
             <button type="button" aria-pressed={paid} onClick={() => setPaid(true)}>
               <HandCoins aria-hidden="true" />
-              <T en="Paid" hi="मिल गए" />
+              <T en="Paid" hi="मिल गए" mr="मिळाले" gu="મળી ગયા" />
             </button>
             <button type="button" aria-pressed={!paid} onClick={() => setPaid(false)}>
               <Clock aria-hidden="true" />
-              <T en="Not yet" hi="अभी नहीं" />
+              <T en="Not yet" hi="अभी नहीं" mr="अजून नाही" gu="હજી નહીં" />
             </button>
           </div>
         </fieldset>
         <div className="field">
           <label className="label" htmlFor="work-date">
-            <T en="Date" hi="तारीख़" />
+            <T en="Date" hi="तारीख़" mr="तारीख" gu="તારીખ" />
           </label>
           <input id="work-date" type="date" className="input" value={date} max={today} onChange={(e) => setDate(e.target.value)} />
         </div>
@@ -186,7 +191,7 @@ export default function AddWorkForm({
 
       <button type="submit" className="btn btn-primary btn-lg btn-block">
         <Plus aria-hidden="true" />
-        <T en="Save this work" hi="यह काम सेव करें" />
+        <T en="Save this work" hi="यह काम सेव करें" mr="हे काम सेव्ह करा" gu="આ કામ સેવ કરો" />
       </button>
     </form>
   );

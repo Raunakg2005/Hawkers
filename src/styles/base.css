@@ -104,11 +104,17 @@ ol {
 
 /* ── Language switching (see components/T.tsx) */
 :root[data-lang='hi'] .l-en,
-:root:not([data-lang='hi']) .l-hi {
+:root[data-lang='mr'] .l-en,
+:root[data-lang='gu'] .l-en,
+:root:not([data-lang='hi']) .l-hi,
+:root:not([data-lang='mr']) .l-mr,
+:root:not([data-lang='gu']) .l-gu {
   display: none !important;
 }
 
-:root[data-lang='hi'] body {
+:root[data-lang='hi'] body,
+:root[data-lang='mr'] body,
+:root[data-lang='gu'] body {
   /* Devanagari needs a touch more line-height for matras */
   line-height: 1.7;
 }
@@ -224,7 +230,9 @@ main {
   color: var(--color-brand-text);
 }
 
-:root[data-lang='hi'] .eyebrow {
+:root[data-lang='hi'] .eyebrow,
+:root[data-lang='mr'] .eyebrow,
+:root[data-lang='gu'] .eyebrow {
   letter-spacing: 0.02em;
 }
 

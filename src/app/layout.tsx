@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Bricolage_Grotesque, Mukta } from 'next/font/google';
+import { Bricolage_Grotesque, Mukta, Mukta_Vaani } from 'next/font/google';
 import 'lenis/dist/lenis.css';
 import './globals.css';
 /*
@@ -21,6 +21,7 @@ import '@/components/post-job/postjob.module.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TabBar from '@/components/TabBar';
+import LanguageWelcome from '@/components/LanguageWelcome';
 import SmoothScroll from '@/components/SmoothScroll';
 import MotionManager from '@/components/MotionManager';
 import { T } from '@/components/T';
@@ -38,6 +39,15 @@ const mukta = Mukta({
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-mukta',
   display: 'swap',
+});
+
+// Gujarati glyphs only; not preloaded, so it downloads just for Gujarati readers.
+const muktaVaani = Mukta_Vaani({
+  subsets: ['gujarati'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-mukta-vaani',
+  display: 'swap',
+  preload: false,
 });
 
 const DESCRIPTION =
@@ -62,7 +72,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="light" className={`${bricolage.variable} ${mukta.variable}`} suppressHydrationWarning>
+    <html lang="en" data-theme="light" className={`${bricolage.variable} ${mukta.variable} ${muktaVaani.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFS_SCRIPT }} />
       </head>
@@ -72,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <style>{'[data-reveal]{opacity:1!important;transform:none!important}'}</style>
         </noscript>
         <a className="skip-link" href="#main">
-          <T en="Skip to content" hi="सामग्री पर जाएँ" />
+          <T en="Skip to content" hi="सामग्री पर जाएँ" mr="मजकुराकडे जा" gu="સામગ્રી પર જાઓ" />
         </a>
         <div className="grain" aria-hidden="true" />
         <div className="scroll-progress" aria-hidden="true">
@@ -82,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <TabBar />
+        <LanguageWelcome />
         <SmoothScroll />
         <MotionManager />
       </body>

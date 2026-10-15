@@ -132,34 +132,182 @@
   }
 }
 
-/* Language toggle: big "A / अ" so it's findable without reading */
-.lang-toggle {
+/* Language picker: each language in its own script */
+.lang-picker {
+  position: relative;
+}
+
+.lang-btn {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   height: 44px;
-  padding: 4px;
-  gap: 2px;
+  padding: 0 10px 0 12px;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   background: var(--color-surface);
-}
-
-.lang-toggle button {
-  min-width: 36px;
-  height: 34px;
-  padding: 0 8px;
-  border-radius: var(--radius-sm);
+  color: var(--color-heading);
   font-weight: var(--fw-bold);
   font-size: 0.95rem;
-  color: var(--color-text-muted);
-  transition:
-    background-color var(--dur-fast),
-    color var(--dur-fast);
 }
 
-.lang-toggle button[aria-pressed='true'] {
-  background: var(--color-heading);
-  color: var(--color-bg);
+.lang-btn > svg:first-child {
+  width: 18px;
+  height: 18px;
+  color: var(--color-brand-text);
+}
+
+.lang-btn > svg:last-child {
+  width: 16px;
+  height: 16px;
+  color: var(--color-text-subtle);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.lang-pop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 220px;
+  padding: var(--space-2);
+  display: grid;
+  gap: 4px;
+  border-radius: var(--radius-lg);
+  background: var(--color-glass-strong);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  animation: pop-in var(--dur-base) var(--ease-out);
+  z-index: var(--z-drawer);
+}
+
+.lang-pop button {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  text-align: left;
+  color: var(--color-heading);
+  transition: background-color var(--dur-fast);
+}
+
+.lang-pop button:hover {
+  background: var(--color-surface-2);
+}
+
+.lang-pop button[aria-checked='true'] {
+  background: var(--color-brand-soft);
+}
+
+.lang-pop button svg {
+  width: 18px;
+  height: 18px;
+  margin-left: auto;
+  align-self: center;
+  color: var(--color-brand-text);
+}
+
+.lang-native {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-lg);
+}
+
+.lang-en {
+  font-size: var(--fs-xs);
+  color: var(--color-text-subtle);
+}
+
+.lang-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.lang-grid button {
+  display: grid;
+  justify-items: start;
+  gap: 0;
+  min-height: 60px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-heading);
+  text-align: left;
+  transition:
+    border-color var(--dur-fast),
+    background-color var(--dur-fast);
+}
+
+.lang-grid button[aria-pressed='true'] {
+  border-color: var(--color-brand);
+  background: var(--color-brand-soft);
+}
+
+/* First-visit language sheet */
+.lang-welcome {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom) + var(--space-3));
+  z-index: var(--z-toast);
+  width: min(460px, calc(100vw - 2 * var(--gutter)));
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-xl);
+  background: var(--color-glass-strong);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transform: translateX(-50%);
+  animation: welcome-in var(--dur-slow) var(--ease-out);
+}
+
+@keyframes welcome-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 24px);
+  }
+}
+
+.lang-welcome-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.lang-welcome-head > svg {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  color: var(--color-brand-text);
+}
+
+.lang-welcome-head p {
+  flex: 1;
+  font-weight: var(--fw-bold);
+  color: var(--color-heading);
+  font-size: var(--fs-sm);
+  line-height: 1.4;
+}
+
+@media (min-width: 1100px) {
+  .lang-welcome {
+    left: auto;
+    right: var(--space-6);
+    bottom: var(--space-6);
+    transform: none;
+  }
+  @keyframes welcome-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+  }
 }
 
 /* Theme toggle icon swap — driven by CSS, no hydration mismatch */
