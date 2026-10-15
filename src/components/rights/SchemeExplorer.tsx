@@ -13,7 +13,7 @@ import {
   Sparkles,
   UsersRound,
 } from 'lucide-react';
-import type { Scheme, SchemeNeed } from '@/data/types';
+import type { L, Scheme, SchemeNeed } from '@/data/types';
 import { DOCS, NEEDS, SCHEMES } from '@/data/schemes';
 import { T, Tx } from '@/components/T';
 import ReadAloud from '@/components/ReadAloud';
@@ -32,18 +32,18 @@ type Work = 'construction' | 'vendor' | 'other';
 type Answers = { age?: Age; income?: Income; work?: Work };
 type Complete = Required<Answers>;
 
-const AGE: { id: Age; l: { en: string; hi: string } }[] = [
+const AGE: { id: Age; l: L }[] = [
   { id: 'a18', l: { en: '18 – 40', hi: '18 – 40', mr: '18 – 40', gu: '18 – 40' } },
   { id: 'a41', l: { en: '41 – 50', hi: '41 – 50', mr: '41 – 50', gu: '41 – 50' } },
   { id: 'a51', l: { en: '51 – 60', hi: '51 – 60', mr: '51 – 60', gu: '51 – 60' } },
   { id: 'a60', l: { en: 'Above 60', hi: '60 से ज़्यादा', mr: '60 पेक्षा जास्त', gu: '60થી વધુ' } },
 ];
-const INCOME: { id: Income; l: { en: string; hi: string } }[] = [
+const INCOME: { id: Income; l: L }[] = [
   { id: 'low', l: { en: 'Up to ₹10,000', hi: '₹10,000 तक', mr: '₹10,000 पर्यंत', gu: '₹10,000 સુધી' } },
   { id: 'mid', l: { en: '₹10,000 – 15,000', hi: '₹10,000 – 15,000', mr: '₹10,000 – 15,000', gu: '₹10,000 – 15,000' } },
   { id: 'high', l: { en: 'More than ₹15,000', hi: '₹15,000 से ज़्यादा', mr: '₹15,000 पेक्षा जास्त', gu: '₹15,000થી વધુ' } },
 ];
-const WORK: { id: Work; l: { en: string; hi: string } }[] = [
+const WORK: { id: Work; l: L }[] = [
   { id: 'construction', l: { en: 'Building / construction', hi: 'बिल्डिंग / निर्माण', mr: 'बिल्डिंग / बांधकाम', gu: 'બિલ્ડિંગ / બાંધકામ' } },
   { id: 'vendor', l: { en: 'Street vendor', hi: 'रेहड़ी-पटरी', mr: 'फेरीवाला', gu: 'લારી-ગલ્લા / ફેરિયા' } },
   { id: 'other', l: { en: 'Other daily work', hi: 'दूसरा दिहाड़ी काम', mr: 'इतर रोजंदारी काम', gu: 'બીજું રોજમદારી કામ' } },
@@ -195,6 +195,16 @@ export default function SchemeExplorer() {
                       <b>{likely.size}</b> योजनाएँ <b>शायद</b> आपके लिए हैं
                     </>
                   }
+                  mr={
+                    <>
+                      <b>{likely.size}</b> योजना <b>कदाचित</b> तुमच्यासाठी आहेत
+                    </>
+                  }
+                  gu={
+                    <>
+                      <b>{likely.size}</b> યોજનાઓ <b>કદાચ</b> તમારા માટે છે
+                    </>
+                  }
                 />
               </p>
               <ul className={s.likelyChips}>
@@ -245,6 +255,16 @@ export default function SchemeExplorer() {
             hi={
               <>
                 {SCHEMES.length} में से <b>{shown}</b> योजनाएँ
+              </>
+            }
+            mr={
+              <>
+                {SCHEMES.length} पैकी <b>{shown}</b> योजना
+              </>
+            }
+            gu={
+              <>
+                {SCHEMES.length}માંથી <b>{shown}</b> યોજનાઓ
               </>
             }
           />
@@ -310,8 +330,8 @@ function Question<V extends string>({
   onPick,
 }: {
   n: number;
-  q: { en: string; hi: string };
-  options: { id: V; l: { en: string; hi: string } }[];
+  q: L;
+  options: { id: V; l: L }[];
   value?: V;
   onPick: (v: V) => void;
 }) {
@@ -358,7 +378,7 @@ function SchemeCard({ scheme: sc, index, hidden, likely }: { scheme: Scheme; ind
             <Tx l={sc.short} />
           </p>
         </div>
-        <ReadAloud en={speech.en} hi={speech.hi} label={t(`Listen: ${sc.name}`, `सुनें: ${sc.name}`)} />
+        <ReadAloud en={speech.en} hi={speech.hi} mr={speech.mr} gu={speech.gu} label={t(`Listen: ${sc.name}`, `सुनें: ${sc.name}`, `ऐका: ${sc.name}`, `સાંભળો: ${sc.name}`)} />
       </header>
 
       <ul className={s.schemeNeeds} aria-label={t('Helps with', 'इसमें मदद', 'यात मदत', 'આમાં મદદ')}>
@@ -466,7 +486,7 @@ function SchemeCard({ scheme: sc, index, hidden, likely }: { scheme: Scheme; ind
         {sc.helpline && (
           <a href={telHref(sc.helpline)} className="btn btn-primary">
             <PhoneCall aria-hidden="true" />
-            <T en={`Call ${sc.helpline}`} hi={`कॉल करें ${sc.helpline}`} />
+            <T en={`Call ${sc.helpline}`} hi={`कॉल करें ${sc.helpline}`} mr={`${sc.helpline} वर कॉल करा`} gu={`${sc.helpline} પર કૉલ કરો`} />
           </a>
         )}
         <a href={sc.site} target="_blank" rel="noopener noreferrer" className="btn">

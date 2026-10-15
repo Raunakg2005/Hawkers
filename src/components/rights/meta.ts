@@ -63,5 +63,7 @@ export function schemeSpeech(s: Scheme): L {
   return {
     en: `${s.name}. ${s.short.en}. ${s.benefit.en} Who can apply: ${s.who.en} Cost: ${s.cost.en}. Where to go: ${s.where.en}.${s.helpline ? ` Helpline: ${s.helpline.replace(/\s/g, '').split('').join(' ')}.` : ''}`,
     hi: `${s.name}। ${s.short.hi}। ${s.benefit.hi} कौन ले सकता है: ${s.who.hi} ख़र्च: ${s.cost.hi}। कहाँ जाएँ: ${s.where.hi}।${s.helpline ? ` हेल्पलाइन: ${s.helpline.replace(/\s/g, '').split('').join(' ')}।` : ''}`,
+    mr: `${s.name}. ${s.short.mr}. ${s.benefit.mr} कोण घेऊ शकतो: ${s.who.mr} खर्च: ${s.cost.mr}. कुठे जायचे: ${s.where.mr}.${s.helpline ? ` हेल्पलाइन: ${s.helpline.replace(/\s/g, '').split('').join(' ')}.` : ''}`,
+    gu: `${s.name}. ${s.short.gu}. ${s.benefit.gu} કોણ લઈ શકે: ${s.who.gu} ખર્ચ: ${s.cost.gu}. ક્યાં જવું: ${s.where.gu}.${s.helpline ? ` હેલ્પલાઇન: ${s.helpline.replace(/\s/g, '').split('').join(' ')}.` : ''}`,
   };
 }
