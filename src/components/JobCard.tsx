@@ -22,7 +22,8 @@ export function jobSpeech(job: Job) {
  * Uses a stretched link so the Listen button can sit inside without nesting
  * interactive elements.
  */
-export default function JobCard({ job, index = 0 }: { job: Job; index?: number }) {
+export default function JobCard({ job, index = 0, href }: { job: Job; index?: number; /** null = preview card with no link */ href?: string | null }) {
+  const link = href === undefined ? `/jobs/${job.id}` : href;
   const score = trustScore(job.flags, job.employer.verified);
   const speech = jobSpeech(job);
   return (
@@ -34,9 +35,13 @@ export default function JobCard({ job, index = 0 }: { job: Job; index?: number }
             <Tx l={DURATIONS[job.duration].hint} /> · <Tx l={job.length} />
           </span>
           <h3>
-            <Link href={`/jobs/${job.id}`} className="stretched">
+            {link ? (
+              <Link href={link} className="stretched">
+                <Tx l={job.title} />
+              </Link>
+            ) : (
               <Tx l={job.title} />
-            </Link>
+            )}
           </h3>
           <p className="job-card-employer">
             {job.employer.name}
@@ -103,7 +108,9 @@ export default function JobCard({ job, index = 0 }: { job: Job; index?: number }
           </span>
         ))}
         <span className="subtle posted">
-          {job.postedHoursAgo < 24 ? (
+          {job.postedHoursAgo < 1 ? (
+            <T en="Just now" hi="अभी" />
+          ) : job.postedHoursAgo < 24 ? (
             <T en={`${job.postedHoursAgo}h ago`} hi={`${job.postedHoursAgo} घंटे पहले`} />
           ) : (
             <T en="1 day ago" hi="1 दिन पहले" />
