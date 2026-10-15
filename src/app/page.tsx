@@ -22,7 +22,6 @@ import {
   WalletCards,
   WifiOff,
 } from 'lucide-react';
-import '@/styles/landing.css';
 import HeroCanvas from '@/components/HeroCanvas';
 import HeroPoster from '@/components/HeroPoster';
 import JobCard from '@/components/JobCard';

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { MapPin } from 'lucide-react';
-import '@/styles/jobs.css';
 import JobBoard from '@/components/jobs/JobBoard';
 import { T } from '@/components/T';
 

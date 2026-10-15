@@ -22,7 +22,6 @@ import {
   UsersRound,
   WalletCards,
 } from 'lucide-react';
-import '@/styles/jobs.css';
 import { JOBS, getJob } from '@/data/jobs';
 import { DURATIONS, PAID_WHEN, PAY_MODE, PAY_UNIT, PERKS, RISK, TRADE, rupee, trustLevel, trustScore } from '@/data/trades';
 import type { Job, RiskFlag } from '@/data/types';

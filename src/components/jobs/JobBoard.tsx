@@ -225,15 +225,7 @@ export default function JobBoard() {
         </div>
       )}
 
-      {view === 'map' ? (
-        <JobsMap jobs={[...results.safe, ...(showRisky ? results.risky : [])]} />
-      ) : results.safe.length ? (
-        <div className="cards-grid">
-          {results.safe.map((j, i) => (
-            <JobCard key={j.id} job={j} index={i} />
-          ))}
-        </div>
-      ) : (
+      {results.safe.length === 0 && !(view === 'map' && showRisky && results.risky.length) ? (
         <div className="empty">
           <Search aria-hidden="true" />
           <p>
@@ -242,6 +234,14 @@ export default function JobBoard() {
           <button type="button" className="btn btn-primary" onClick={reset}>
             <T en="Show all jobs" hi="सारे काम दिखाएँ" />
           </button>
+        </div>
+      ) : view === 'map' ? (
+        <JobsMap jobs={[...results.safe, ...(showRisky ? results.risky : [])]} />
+      ) : (
+        <div className="cards-grid">
+          {results.safe.map((j, i) => (
+            <JobCard key={j.id} job={j} index={i} />
+          ))}
         </div>
       )}
 

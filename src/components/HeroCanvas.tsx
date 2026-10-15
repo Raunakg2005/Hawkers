@@ -67,5 +67,7 @@ export default function HeroCanvas() {
     };
   }, [lite]);
 
-  return <canvas ref={ref} className="hero-canvas" aria-hidden="true" />;
+  // A fresh <canvas> per mount: re-using one after renderer.dispose() leaves stale
+  // WebGL pixel-store state behind (texImage3D warnings when 3D is switched back on).
+  return <canvas key={lite ? 'lite' : 'gl'} ref={ref} className="hero-canvas" aria-hidden="true" />;
 }
