@@ -28,13 +28,14 @@ import {
   UsersRound,
   WalletCards,
 } from 'lucide-react';
-import type { Duration, Job, L, PaidWhen, PayMode, PayUnit, Perk, TradeId } from '@/data/types';
+import type { Duration, Job, L, Lang, PaidWhen, PayMode, PayUnit, Perk, TradeId } from '@/data/types';
 import { DURATIONS, PAID_WHEN, PAY_MODE, PAY_UNIT, PERKS, TRADE, TRADES, rupee } from '@/data/trades';
 import { T, Tx } from '@/components/T';
 import { TradeIcon, tradeColor } from '@/components/TradeIcon';
 import JobCard from '@/components/JobCard';
 import FairBand, { fairStatus } from '@/components/workers/FairBand';
 import { useLang } from '@/lib/prefs';
+import { localeOf } from '@/lib/i18n';
 import { AREAS, DEFAULT_DRAFT, IDEAS, KINDS, STEPS, reviveDraft, type Draft, type Kind } from './postjob-data';
 import s from './postjob.module.css';
 
@@ -49,13 +50,13 @@ const DURATION_LIST: Duration[] = ['daily', 'short', 'long'];
 type ErrKey = 'trade' | 'title' | 'area' | 'date' | 'hours' | 'amount' | 'payMode';
 
 const ERR: Record<ErrKey, L> = {
-  trade: { en: 'Choose the type of work.', hi: 'काम का प्रकार चुनें।' },
-  title: { en: 'Give the job a short title (at least 4 letters).', hi: 'काम का छोटा नाम लिखें (कम से कम 4 अक्षर)।' },
-  area: { en: 'Choose the area where the work is.', hi: 'काम का इलाका चुनें।' },
-  date: { en: 'Pick the start date.', hi: 'शुरू होने की तारीख़ चुनें।' },
-  hours: { en: 'End time must be after start time.', hi: 'ख़त्म होने का समय, शुरू के समय के बाद होना चाहिए।' },
-  amount: { en: 'Enter the pay amount.', hi: 'मज़दूरी की रकम लिखें।' },
-  payMode: { en: 'Choose at least one way to pay.', hi: 'भुगतान का कम से कम एक तरीका चुनें।' },
+  trade: { en: 'Choose the type of work.', hi: 'काम का प्रकार चुनें।', mr: 'कामाचा प्रकार निवडा.', gu: 'કામનો પ્રકાર પસંદ કરો.' },
+  title: { en: 'Give the job a short title (at least 4 letters).', hi: 'काम का छोटा नाम लिखें (कम से कम 4 अक्षर)।', mr: 'कामाचे छोटे नाव लिहा (किमान 4 अक्षरे).', gu: 'કામનું ટૂંકું નામ લખો (ઓછામાં ઓછા 4 અક્ષર).' },
+  area: { en: 'Choose the area where the work is.', hi: 'काम का इलाका चुनें।', mr: 'कामाचा भाग निवडा.', gu: 'કામનો વિસ્તાર પસંદ કરો.' },
+  date: { en: 'Pick the start date.', hi: 'शुरू होने की तारीख़ चुनें।', mr: 'सुरुवातीची तारीख निवडा.', gu: 'શરૂ થવાની તારીખ પસંદ કરો.' },
+  hours: { en: 'End time must be after start time.', hi: 'ख़त्म होने का समय, शुरू के समय के बाद होना चाहिए।', mr: 'संपण्याची वेळ सुरू होण्याच्या वेळेनंतर असायला हवी.', gu: 'પૂરું થવાનો સમય શરૂ થવાના સમય પછી હોવો જોઈએ.' },
+  amount: { en: 'Enter the pay amount.', hi: 'मज़दूरी की रकम लिखें।', mr: 'मजुरीची रक्कम लिहा.', gu: 'મજૂરીની રકમ લખો.' },
+  payMode: { en: 'Choose at least one way to pay.', hi: 'भुगतान का कम से कम एक तरीका चुनें।', mr: 'पैसे देण्याची किमान एक पद्धत निवडा.', gu: 'પૈસા આપવાની ઓછામાં ઓછી એક રીત પસંદ કરો.' },
 };
 
 const isTrade = (v: string | null): v is TradeId => !!v && v in TRADE;
@@ -181,25 +182,31 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
 
   const lengthL: L =
     d.duration === 'daily'
-      ? { en: '1 day', hi: '1 दिन' }
+      ? { en: '1 day', hi: '1 दिन', mr: '1 दिवस', gu: '1 દિવસ' }
       : d.duration === 'short'
-        ? { en: `${d.length} days`, hi: `${d.length} दिन` }
-        : { en: `${d.length} ${d.length === 1 ? 'month' : 'months'}`, hi: `${d.length} ${d.length === 1 ? 'महीना' : 'महीने'}` };
+        ? { en: `${d.length} days`, hi: `${d.length} दिन`, mr: `${d.length} दिवस`, gu: `${d.length} દિવસ` }
+        : {
+            en: `${d.length} ${d.length === 1 ? 'month' : 'months'}`,
+            hi: `${d.length} ${d.length === 1 ? 'महीना' : 'महीने'}`,
+            mr: `${d.length} ${d.length === 1 ? 'महिना' : 'महिने'}`,
+            gu: `${d.length} ${d.length === 1 ? 'મહિનો' : 'મહિના'}`,
+          };
 
   const startL: L = useMemo(() => {
-    if (d.start === 'today') return { en: 'Today', hi: 'आज' };
-    if (d.start === 'tomorrow') return { en: 'Tomorrow', hi: 'कल' };
+    if (d.start === 'today') return { en: 'Today', hi: 'आज', mr: 'आज', gu: 'આજે' };
+    if (d.start === 'tomorrow') return { en: 'Tomorrow', hi: 'कल', mr: 'उद्या', gu: 'આવતીકાલે' };
     const dt = new Date(d.date + 'T00:00:00');
-    if (!d.date || Number.isNaN(dt.getTime())) return { en: 'Date to be fixed', hi: 'तारीख़ तय होनी है' };
+    if (!d.date || Number.isNaN(dt.getTime())) return { en: 'Date to be fixed', hi: 'तारीख़ तय होनी है', mr: 'तारीख ठरायची आहे', gu: 'તારીખ નક્કી કરવાની છે' };
     const o: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' };
-    return { en: dt.toLocaleDateString('en-IN', o), hi: dt.toLocaleDateString('hi-IN', o) };
+    const fmt = (l: Lang) => dt.toLocaleDateString(localeOf(l), o);
+    return { en: fmt('en'), hi: fmt('hi'), mr: fmt('mr'), gu: fmt('gu') };
   }, [d.start, d.date]);
 
   const titleL: L = (() => {
     const idea = d.trade && d.ideaIdx !== null ? IDEAS[d.trade][d.ideaIdx] : null;
     const typed = d.title.trim();
-    if (idea && (typed === idea.en || typed === idea.hi)) return idea;
-    return typed ? { en: typed, hi: typed } : { en: 'Your job title', hi: 'आपके काम का नाम' };
+    if (idea && [idea.en, idea.hi, idea.mr, idea.gu].includes(typed)) return idea;
+    return typed ? { en: typed, hi: typed, mr: typed, gu: typed } : { en: 'Your job title', hi: 'आपके काम का नाम', mr: 'तुमच्या कामाचे नाव', gu: 'તમારા કામનું નામ' };
   })();
 
   const job: Job = {
@@ -209,7 +216,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
     duration: d.duration,
     length: lengthL,
     employer: {
-      name: d.name.trim() || (lang === 'hi' ? KINDS[d.kind].hi : KINDS[d.kind].en),
+      name: d.name.trim() || KINDS[d.kind][lang] || KINDS[d.kind].en,
       kind: KINDS[d.kind],
       verified: true,
       rating: 0,
@@ -218,9 +225,9 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
       since: 2026,
       phone: '',
     },
-    area: area?.name ?? { en: 'Area not chosen', hi: 'इलाका नहीं चुना' },
+    area: area?.name ?? { en: 'Area not chosen', hi: 'इलाका नहीं चुना', mr: 'भाग निवडलेला नाही', gu: 'વિસ્તાર પસંદ કર્યો નથી' },
     city: 'Mumbai',
-    landmark: { en: d.landmark.trim(), hi: d.landmark.trim() },
+    landmark: { en: d.landmark.trim(), hi: d.landmark.trim(), mr: d.landmark.trim(), gu: d.landmark.trim() },
     distanceKm: area?.km ?? 0,
     map: area?.map ?? { x: 50, y: 50 },
     pay: { amount: d.amount, unit: d.unit },
@@ -230,19 +237,19 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
     start: startL,
     perks: d.perks,
     workersNeeded: d.workersNeeded,
-    description: { en: d.description.trim(), hi: d.description.trim() },
+    description: { en: d.description.trim(), hi: d.description.trim(), mr: d.description.trim(), gu: d.description.trim() },
     bring: [],
     postedHoursAgo: 0,
     flags: [],
   };
 
   const checks: { id: string; ok: boolean; step: number; label: L }[] = [
-    { id: 'title', ok: d.title.trim().length >= 6, step: 0, label: { en: 'A clear job title', hi: 'काम का साफ़ नाम' } },
-    { id: 'desc', ok: d.description.trim().length >= 40, step: 0, label: { en: 'Tasks described (40+ letters)', hi: 'काम का विवरण (40+ अक्षर)' } },
-    { id: 'address', ok: !!area && d.landmark.trim().length >= 4, step: 1, label: { en: 'Exact area and landmark', hi: 'सही इलाका और निशानी' } },
-    { id: 'hours', ok: hoursOk, step: 1, label: { en: 'Start and end time', hi: 'शुरू और ख़त्म का समय' } },
-    { id: 'payday', ok: d.payMode.length > 0, step: 2, label: { en: 'Payday and payment mode written', hi: 'भुगतान का दिन और तरीका लिखा' } },
-    { id: 'fair', ok: fair !== null && fair !== 'below', step: 2, label: { en: 'Pay at or above the fair rate', hi: 'मज़दूरी सही दाम या उससे ज़्यादा' } },
+    { id: 'title', ok: d.title.trim().length >= 6, step: 0, label: { en: 'A clear job title', hi: 'काम का साफ़ नाम', mr: 'कामाचे स्पष्ट नाव', gu: 'કામનું સાફ નામ' } },
+    { id: 'desc', ok: d.description.trim().length >= 40, step: 0, label: { en: 'Tasks described (40+ letters)', hi: 'काम का विवरण (40+ अक्षर)', mr: 'कामाचे वर्णन (40+ अक्षरे)', gu: 'કામની વિગત (40+ અક્ષર)' } },
+    { id: 'address', ok: !!area && d.landmark.trim().length >= 4, step: 1, label: { en: 'Exact area and landmark', hi: 'सही इलाका और निशानी', mr: 'अचूक भाग आणि खूण', gu: 'ચોક્કસ વિસ્તાર અને નિશાની' } },
+    { id: 'hours', ok: hoursOk, step: 1, label: { en: 'Start and end time', hi: 'शुरू और ख़त्म का समय', mr: 'सुरू आणि संपण्याची वेळ', gu: 'શરૂ અને પૂરું થવાનો સમય' } },
+    { id: 'payday', ok: d.payMode.length > 0, step: 2, label: { en: 'Payday and payment mode written', hi: 'भुगतान का दिन और तरीका लिखा', mr: 'पगाराचा दिवस आणि पद्धत लिहिली', gu: 'પગારનો દિવસ અને રીત લખી' } },
+    { id: 'fair', ok: fair !== null && fair !== 'below', step: 2, label: { en: 'Pay at or above the fair rate', hi: 'मज़दूरी सही दाम या उससे ज़्यादा', mr: 'मजुरी योग्य दराइतकी किंवा जास्त', gu: 'મજૂરી યોગ્ય દર જેટલી કે વધારે' } },
   ];
   const score = Math.round((checks.filter((c) => c.ok).length / checks.length) * 100);
   const scoreTone = score >= 85 ? 'good' : score >= 50 ? 'ok' : 'low';
@@ -259,7 +266,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
             setD((p) => ({ ...p, step: st }));
           }
           requestAnimationFrame(() => document.getElementById(FIELD_ID[e[0]])?.focus());
-          setAnnounce(t(ERR[e[0]].en, ERR[e[0]].hi));
+          setAnnounce(t(ERR[e[0]].en, ERR[e[0]].hi, ERR[e[0]].mr, ERR[e[0]].gu));
           return;
         }
       }
@@ -267,7 +274,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
     setErrors([]);
     navigated.current = true;
     setD((p) => ({ ...p, step: target, seen: Math.max(p.seen, target) }));
-    setAnnounce(t(`Step ${target + 1} of 4: ${STEPS[target].title.en}`, `कदम ${target + 1} / 4: ${STEPS[target].title.hi}`));
+    setAnnounce(t(`Step ${target + 1} of 4: ${STEPS[target].title.en}`, `कदम ${target + 1} / 4: ${STEPS[target].title.hi}`, `पायरी ${target + 1} / 4: ${STEPS[target].title.mr}`, `પગલું ${target + 1} / 4: ${STEPS[target].title.gu}`));
   };
 
   const publish = () => {
@@ -277,7 +284,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
         setErrors(e);
         navigated.current = true;
         setD((p) => ({ ...p, step: st }));
-        setAnnounce(t(ERR[e[0]].en, ERR[e[0]].hi));
+        setAnnounce(t(ERR[e[0]].en, ERR[e[0]].hi, ERR[e[0]].mr, ERR[e[0]].gu));
         requestAnimationFrame(() => document.getElementById(FIELD_ID[e[0]])?.focus());
         return;
       }
@@ -289,7 +296,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
     }
     navigated.current = true;
     setPublished({ ...job, postedHoursAgo: 0 });
-    setAnnounce(t('Your job is live (demo).', 'आपका काम लाइव है (डेमो)।'));
+    setAnnounce(t('Your job is live (demo).', 'आपका काम लाइव है (डेमो)।', 'तुमचे काम लाइव्ह झाले (डेमो).', 'તમારું કામ લાઇવ થઈ ગયું (ડેમો).'));
   };
 
   const startOver = () => {
@@ -303,7 +310,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
     setErrors([]);
     navigated.current = true;
     setD({ ...DEFAULT_DRAFT });
-    setAnnounce(t('Started a new job post.', 'नया काम डालना शुरू किया।'));
+    setAnnounce(t('Started a new job post.', 'नया काम डालना शुरू किया।', 'नवीन काम टाकायला सुरुवात केली.', 'નવું કામ મૂકવાનું શરૂ કર્યું.'));
   };
 
   const has = (k: ErrKey) => errors.includes(k);
@@ -337,12 +344,14 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
           <CircleCheck aria-hidden="true" />
         </span>
         <h2 ref={headRef} tabIndex={-1} className="h2">
-          <T en="Your job is live (demo)" hi="आपका काम लाइव है (डेमो)" />
+          <T en="Your job is live (demo)" hi="आपका काम लाइव है (डेमो)" mr="तुमचे काम लाइव्ह झाले (डेमो)" gu="તમારું કામ લાઇવ થઈ ગયું (ડેમો)" />
         </h2>
         <p className="lead">
           <T
             en={`${pt.name.en} workers near ${published.area.en} now get a voice alert in their own language. Calls reach you on a private Naka number — your phone stays hidden.`}
             hi={`${published.area.hi} के पास के ${pt.name.hi} को अब उनकी अपनी भाषा में आवाज़ से सूचना मिल रही है। कॉल नाका के प्राइवेट नंबर से आएँगे — आपका नंबर छिपा रहेगा।`}
+            mr={`${published.area.mr} जवळच्या ${pt.name.mr} कामगारांना आता त्यांच्या भाषेत आवाजात सूचना मिळत आहे. फोन नाकाच्या प्रायव्हेट नंबरवरून येतील — तुमचा नंबर लपलेला राहील.`}
+            gu={`${published.area.gu} પાસેના ${pt.name.gu} કામદારોને હવે તેમની પોતાની ભાષામાં અવાજથી સૂચના મળી રહી છે. ફોન નાકાના પ્રાઇવેટ નંબરથી આવશે — તમારો નંબર છુપાયેલો રહેશે.`}
           />
         </p>
         <div
@@ -357,29 +366,29 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
         <ol className={s.next}>
           <li>
             <span>1</span>
-            <T en="Workers tap “I’m interested”" hi="कारीगर “मुझे यह काम चाहिए” दबाते हैं" />
+            <T en="Workers tap “I’m interested”" hi="कारीगर “मुझे यह काम चाहिए” दबाते हैं" mr="कामगार “मला हे काम हवे आहे” दाबतात" gu="કામદારો “મને આ કામ જોઈએ છે” દબાવે છે" />
           </li>
           <li>
             <span>2</span>
-            <T en="You see their skill card and endorsements" hi="आप उनका स्किल कार्ड और राय देखते हैं" />
+            <T en="You see their skill card and endorsements" hi="आप उनका स्किल कार्ड और राय देखते हैं" mr="तुम्ही त्यांचे स्किल कार्ड आणि मत पाहता" gu="તમે તેમનું સ્કિલ કાર્ડ અને અભિપ્રાય જુઓ છો" />
           </li>
           <li>
             <span>3</span>
-            <T en="Agree → both get the same Work Promise" hi="सहमति → दोनों को एक जैसा काम का वादा" />
+            <T en="Agree → both get the same Work Promise" hi="सहमति → दोनों को एक जैसा काम का वादा" mr="संमती → दोघांनाही सारखेच कामाचे वचन" gu="સંમતિ → બંનેને એકસરખું કામનું વચન" />
           </li>
         </ol>
         <div className={s.successActions}>
           <Link href="/jobs" className="btn btn-primary btn-lg">
             <Eye aria-hidden="true" />
-            <T en="See it with other jobs" hi="बाकी कामों के साथ देखें" />
+            <T en="See it with other jobs" hi="बाकी कामों के साथ देखें" mr="इतर कामांसोबत पाहा" gu="બીજાં કામો સાથે જુઓ" />
           </Link>
           <Link href={`/workers?trade=${published.trade}`} className="btn btn-lg">
             <UsersRound aria-hidden="true" />
-            <T en="Invite workers directly" hi="सीधे कारीगर बुलाएँ" />
+            <T en="Invite workers directly" hi="सीधे कारीगर बुलाएँ" mr="थेट कारागीर बोलवा" gu="સીધા કારીગર બોલાવો" />
           </Link>
           <button type="button" className="btn btn-ghost btn-lg" onClick={startOver}>
             <Plus aria-hidden="true" />
-            <T en="Post another job" hi="एक और काम डालें" />
+            <T en="Post another job" hi="एक और काम डालें" mr="आणखी एक काम टाका" gu="બીજું એક કામ મૂકો" />
           </button>
         </div>
       </div>
@@ -418,12 +427,12 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
         <div className={s.saveRow}>
           <span className={s.saved} aria-live="polite">
             <Save aria-hidden="true" />
-            {restored ? <T en="Draft restored · saves on this phone" hi="ड्राफ़्ट वापस आया · इसी फ़ोन पर सेव" /> : <T en="Saves automatically on this phone" hi="इसी फ़ोन पर अपने-आप सेव होता है" />}
+            {restored ? <T en="Draft restored · saves on this phone" hi="ड्राफ़्ट वापस आया · इसी फ़ोन पर सेव" mr="ड्राफ्ट परत आला · याच फोनवर जतन" gu="ડ્રાફ્ટ પાછો આવ્યો · આ જ ફોનમાં સચવાય છે" /> : <T en="Saves automatically on this phone" hi="इसी फ़ोन पर अपने-आप सेव होता है" mr="याच फोनवर आपोआप जतन होते" gu="આ જ ફોનમાં આપમેળે સચવાય છે" />}
           </span>
           {(restored || d.trade || d.title) && (
             <button type="button" className="btn btn-ghost btn-sm" onClick={startOver}>
               <RotateCcw aria-hidden="true" />
-              <T en="Start over" hi="फिर से शुरू करें" />
+              <T en="Start over" hi="फिर से शुरू करें" mr="पुन्हा सुरू करा" gu="ફરીથી શરૂ કરો" />
             </button>
           )}
         </div>
@@ -440,7 +449,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
       >
         <header className={s.panelHead}>
           <span className={s.stepCount}>
-            <T en={`Step ${step + 1} of 4`} hi={`कदम ${step + 1} / 4`} />
+            <T en={`Step ${step + 1} of 4`} hi={`कदम ${step + 1} / 4`} mr={`पायरी ${step + 1} / 4`} gu={`પગલું ${step + 1} / 4`} />
           </span>
           <h2 ref={headRef} tabIndex={-1} className="h3">
             <Tx l={STEPS[step].title} />
@@ -452,7 +461,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
           <div className={s.body} key="s0">
             <fieldset className={s.fs}>
               <legend className="label">
-                <T en="Who is hiring?" hi="काम कौन दे रहा है?" />
+                <T en="Who is hiring?" hi="काम कौन दे रहा है?" mr="काम कोण देत आहे?" gu="કામ કોણ આપે છે?" />
               </legend>
               <div className={s.chips}>
                 {(Object.keys(KINDS) as Kind[]).map((k) => {
@@ -467,14 +476,14 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
               </div>
               <label className="field">
                 <span className="label">
-                  <T en="Name shown to workers" hi="कारीगरों को दिखने वाला नाम" /> <span className="subtle">(<T en="optional" hi="ज़रूरी नहीं" />)</span>
+                  <T en="Name shown to workers" hi="कारीगरों को दिखने वाला नाम" mr="कामगारांना दिसणारे नाव" gu="કામદારોને દેખાતું નામ" /> <span className="subtle">(<T en="optional" hi="ज़रूरी नहीं" mr="गरजेचे नाही" gu="જરૂરી નથી" />)</span>
                 </span>
                 <input
                   className="input"
                   value={d.name}
                   maxLength={40}
                   onChange={(e) => patch({ name: e.target.value })}
-                  placeholder={t('e.g. Mrs. Rao, Gupta Mobiles', 'जैसे: श्रीमती राव, गुप्ता मोबाइल्स')}
+                  placeholder={t('e.g. Mrs. Rao, Gupta Mobiles', 'जैसे: श्रीमती राव, गुप्ता मोबाइल्स', 'उदा. श्रीमती राव, गुप्ता मोबाइल्स', 'જેમ કે: શ્રીમતી રાવ, ગુપ્તા મોબાઇલ્સ')}
                   autoComplete="organization"
                 />
               </label>
@@ -482,7 +491,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
 
             <fieldset className={s.fs}>
               <legend className="label">
-                <T en="Type of work" hi="काम का प्रकार" />
+                <T en="Type of work" hi="काम का प्रकार" mr="कामाचा प्रकार" gu="કામનો પ્રકાર" />
               </legend>
               <div id="pj-trade" tabIndex={-1} className={s.tradeGrid} {...errProps('trade')}>
                 {TRADES.map((tr) => (
@@ -512,20 +521,20 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
 
             <div className="field">
               <label className="label" htmlFor="pj-title">
-                <T en="Short title" hi="छोटा नाम" />
+                <T en="Short title" hi="छोटा नाम" mr="छोटे नाव" gu="ટૂંકું નામ" />
               </label>
               {d.trade && (
                 <div className={s.ideas}>
                   <span className="subtle">
-                    <Sparkles aria-hidden="true" /> <T en="Quick pick:" hi="जल्दी चुनें:" />
+                    <Sparkles aria-hidden="true" /> <T en="Quick pick:" hi="जल्दी चुनें:" mr="पटकन निवडा:" gu="ઝટપટ પસંદ કરો:" />
                   </span>
                   {IDEAS[d.trade].map((idea, i) => (
                     <button
                       key={idea.en}
                       type="button"
                       className={`chip chip-brand ${s.ideaChip}`}
-                      aria-pressed={d.ideaIdx === i && (d.title === idea.en || d.title === idea.hi)}
-                      onClick={() => patch({ title: t(idea.en, idea.hi), ideaIdx: i })}
+                      aria-pressed={d.ideaIdx === i && [idea.en, idea.hi, idea.mr, idea.gu].includes(d.title)}
+                      onClick={() => patch({ title: t(idea.en, idea.hi, idea.mr, idea.gu), ideaIdx: i })}
                     >
                       <Tx l={idea} />
                     </button>
@@ -538,7 +547,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                 value={d.title}
                 maxLength={70}
                 onChange={(e) => patch({ title: e.target.value })}
-                placeholder={t('e.g. Fix leaking bathroom pipe', 'जैसे: बाथरूम की टपकती पाइप ठीक करनी है')}
+                placeholder={t('e.g. Fix leaking bathroom pipe', 'जैसे: बाथरूम की टपकती पाइप ठीक करनी है', 'उदा. बाथरूमचा गळणारा पाईप दुरुस्त करायचा आहे', 'જેમ કે: બાથરૂમની ટપકતી પાઇપ રિપેર કરવાની છે')}
                 {...errProps('title')}
               />
               {errMsg('title')}
@@ -546,7 +555,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
 
             <div className="field">
               <label className="label" htmlFor="pj-desc">
-                <T en="What exactly needs doing?" hi="ठीक-ठीक क्या काम है?" />
+                <T en="What exactly needs doing?" hi="ठीक-ठीक क्या काम है?" mr="नेमके काय काम आहे?" gu="બરાબર શું કામ છે?" />
               </label>
               <textarea
                 id="pj-desc"
@@ -557,12 +566,14 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                 placeholder={t(
                   'e.g. Two bathrooms. Basin pipe leaks, shower mixer needs a new cartridge. We will buy parts — you tell us what. 3rd floor, lift available.',
                   'जैसे: दो बाथरूम। बेसिन की पाइप टपक रही है, शावर मिक्सर में नया कार्ट्रिज लगाना है। सामान हम लाएँगे — आप बताइए क्या। तीसरी मंज़िल, लिफ़्ट है।',
+                  'उदा. दोन बाथरूम. बेसिनचा पाईप गळतोय, शॉवर मिक्सरमध्ये नवीन कार्ट्रिज बसवायचे आहे. सामान आम्ही आणू — तुम्ही फक्त काय लागेल ते सांगा. तिसरा मजला, लिफ्ट आहे.',
+                  'જેમ કે: બે બાથરૂમ. બેસિનની પાઇપ ટપકે છે, શાવર મિક્સરમાં નવું કાર્ટ્રિજ નાખવાનું છે. સામાન અમે લાવીશું — તમે ફક્ત શું જોઈએ એ કહો. ત્રીજો માળ, લિફ્ટ છે.',
                 )}
                 aria-describedby="pj-desc-hint"
               />
               <p id="pj-desc-hint" className={s.hint}>
                 <span>
-                  <T en="Say how big the work is, which floor, and what you will provide." hi="बताइए काम कितना बड़ा है, कौन सी मंज़िल, और आप क्या देंगे।" />
+                  <T en="Say how big the work is, which floor, and what you will provide." hi="बताइए काम कितना बड़ा है, कौन सी मंज़िल, और आप क्या देंगे।" mr="काम किती मोठे आहे, कितवा मजला, आणि तुम्ही काय देणार ते सांगा." gu="કામ કેટલું મોટું છે, કયો માળ, અને તમે શું આપશો એ જણાવો." />
                 </span>
                 <span className={d.description.trim().length >= 40 ? s.countOk : s.count}>
                   {d.description.trim().length >= 40 && <Check aria-hidden="true" />}
@@ -579,13 +590,13 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
             <div className={s.twoCol}>
               <div className="field">
                 <label className="label" htmlFor="pj-area">
-                  <MapPin aria-hidden="true" /> <T en="Area" hi="इलाका" />
+                  <MapPin aria-hidden="true" /> <T en="Area" hi="इलाका" mr="भाग" gu="વિસ્તાર" />
                 </label>
                 <select id="pj-area" className="select" value={d.area} onChange={(e) => patch({ area: e.target.value })} {...errProps('area')}>
-                  <option value="">{t('Choose area…', 'इलाका चुनें…')}</option>
+                  <option value="">{t('Choose area…', 'इलाका चुनें…', 'भाग निवडा…', 'વિસ્તાર પસંદ કરો…')}</option>
                   {AREAS.map((a) => (
                     <option key={a.id} value={a.id}>
-                      {t(a.name.en, a.name.hi)} · {a.km} km
+                      {t(a.name.en, a.name.hi, a.name.mr, a.name.gu)} · {a.km} km
                     </option>
                   ))}
                 </select>
@@ -593,7 +604,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
               </div>
               <div className="field">
                 <label className="label" htmlFor="pj-landmark">
-                  <T en="Building & landmark" hi="बिल्डिंग और निशानी" />
+                  <T en="Building & landmark" hi="बिल्डिंग और निशानी" mr="बिल्डिंग आणि खूण" gu="બિલ્ડિંગ અને નિશાની" />
                 </label>
                 <input
                   id="pj-landmark"
@@ -601,7 +612,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                   value={d.landmark}
                   maxLength={80}
                   onChange={(e) => patch({ landmark: e.target.value })}
-                  placeholder={t('e.g. Tower B, near Galleria Mall', 'जैसे: टावर B, गैलेरिया मॉल के पास')}
+                  placeholder={t('e.g. Tower B, near Galleria Mall', 'जैसे: टावर B, गैलेरिया मॉल के पास', 'उदा. टॉवर B, गॅलेरिया मॉलजवळ', 'જેમ કે: ટાવર B, ગેલેરિયા મૉલ પાસે')}
                 />
               </div>
             </div>
@@ -610,30 +621,32 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
               <T
                 en="Workers see the area now. The flat number is shared only after you both agree."
                 hi="कारीगर अभी सिर्फ़ इलाका देखेंगे। फ़्लैट नंबर दोनों की सहमति के बाद ही बताया जाएगा।"
+                mr="कामगारांना आत्ता फक्त भाग दिसेल. फ्लॅट नंबर तुम्हा दोघांची संमती झाल्यावरच सांगितला जाईल."
+                gu="કામદારોને હમણાં ફક્ત વિસ્તાર દેખાશે. ફ્લેટ નંબર તમારા બંનેની સંમતિ પછી જ જણાવાશે."
               />
             </p>
 
             <fieldset className={s.fs}>
               <legend className="label">
-                <CalendarDays aria-hidden="true" /> <T en="Start" hi="कब से" />
+                <CalendarDays aria-hidden="true" /> <T en="Start" hi="कब से" mr="कधीपासून" gu="ક્યારથી" />
               </legend>
               <div className={`segmented ${s.seg}`}>
                 {(
                   [
-                    ['today', 'Today', 'आज'],
-                    ['tomorrow', 'Tomorrow', 'कल'],
-                    ['date', 'Pick a date', 'तारीख़ चुनें'],
+                    ['today', 'Today', 'आज', 'आज', 'આજે'],
+                    ['tomorrow', 'Tomorrow', 'कल', 'उद्या', 'આવતીકાલે'],
+                    ['date', 'Pick a date', 'तारीख़ चुनें', 'तारीख निवडा', 'તારીખ પસંદ કરો'],
                   ] as const
-                ).map(([v, en, hi]) => (
+                ).map(([v, en, hi, mr, gu]) => (
                   <button key={v} type="button" aria-pressed={d.start === v} onClick={() => patch({ start: v })}>
-                    <T en={en} hi={hi} />
+                    <T en={en} hi={hi} mr={mr} gu={gu} />
                   </button>
                 ))}
               </div>
               {d.start === 'date' && (
                 <label className="field">
                   <span className="sr-only">
-                    <T en="Start date" hi="शुरू की तारीख़" />
+                    <T en="Start date" hi="शुरू की तारीख़" mr="सुरुवातीची तारीख" gu="શરૂઆતની તારીખ" />
                   </span>
                   <input id="pj-date" className="input" type="date" min={minDate} value={d.date} onChange={(e) => patch({ date: e.target.value })} {...errProps('date')} />
                 </label>
@@ -643,7 +656,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
 
             <fieldset className={s.fs}>
               <legend className="label">
-                <T en="How long is the work?" hi="काम कितने समय का है?" />
+                <T en="How long is the work?" hi="काम कितने समय का है?" mr="काम किती दिवसांचे आहे?" gu="કામ કેટલા સમયનું છે?" />
               </legend>
               <div className={s.durGrid}>
                 {DURATION_LIST.map((du) => (
@@ -674,7 +687,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
               {d.duration !== 'daily' && (
                 <div className={s.inline}>
                   <span className="label" id="pj-len">
-                    {d.duration === 'short' ? <T en="Number of days" hi="कितने दिन" /> : <T en="Number of months" hi="कितने महीने" />}
+                    {d.duration === 'short' ? <T en="Number of days" hi="कितने दिन" mr="किती दिवस" gu="કેટલા દિવસ" /> : <T en="Number of months" hi="कितने महीने" mr="किती महिने" gu="કેટલા મહિના" />}
                   </span>
                   <Stepper
                     labelledBy="pj-len"
@@ -682,9 +695,13 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                     min={d.duration === 'short' ? 2 : 1}
                     max={d.duration === 'short' ? 14 : 12}
                     onChange={(v) => patch({ length: v })}
-                    unit={d.duration === 'short' ? { en: 'days', hi: 'दिन' } : { en: d.length === 1 ? 'month' : 'months', hi: d.length === 1 ? 'महीना' : 'महीने' }}
-                    less={t('One less', 'एक कम')}
-                    more={t('One more', 'एक और')}
+                    unit={
+                      d.duration === 'short'
+                        ? { en: 'days', hi: 'दिन', mr: 'दिवस', gu: 'દિવસ' }
+                        : { en: d.length === 1 ? 'month' : 'months', hi: d.length === 1 ? 'महीना' : 'महीने', mr: d.length === 1 ? 'महिना' : 'महिने', gu: d.length === 1 ? 'મહિનો' : 'મહિના' }
+                    }
+                    less={t('One less', 'एक कम', 'एक कमी', 'એક ઓછું')}
+                    more={t('One more', 'एक और', 'एक जास्त', 'એક વધારે')}
                   />
                 </div>
               )}
@@ -692,25 +709,25 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
 
             <fieldset className={s.fs}>
               <legend className="label">
-                <Clock aria-hidden="true" /> <T en="Working hours" hi="काम का समय" />
+                <Clock aria-hidden="true" /> <T en="Working hours" hi="काम का समय" mr="कामाची वेळ" gu="કામનો સમય" />
               </legend>
               <div className={s.timeRow}>
                 <label className="field">
                   <span className="subtle">
-                    <T en="From" hi="से" />
+                    <T en="From" hi="से" mr="पासून" gu="થી" />
                   </span>
                   <input id="pj-hours-start" className="input" type="time" value={d.hoursStart} onChange={(e) => patch({ hoursStart: e.target.value })} />
                 </label>
                 <label className="field">
                   <span className="subtle">
-                    <T en="To" hi="तक" />
+                    <T en="To" hi="तक" mr="पर्यंत" gu="સુધી" />
                   </span>
                   <input id="pj-hours-end" className="input" type="time" value={d.hoursEnd} onChange={(e) => patch({ hoursEnd: e.target.value })} {...errProps('hours')} />
                 </label>
                 <p className={s.hoursOut} aria-live="polite">
                   {hoursOk ? (
                     <>
-                      <b>{Math.round(hoursPerDay * 10) / 10}</b> <T en="hours / day" hi="घंटे / दिन" />
+                      <b>{Math.round(hoursPerDay * 10) / 10}</b> <T en="hours / day" hi="घंटे / दिन" mr="तास / दिवस" gu="કલાક / દિવસ" />
                     </>
                   ) : (
                     '—'
@@ -724,6 +741,8 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                   <T
                     en="More than 9 hours a day counts as overtime — usually paid at double the rate."
                     hi="दिन में 9 घंटे से ज़्यादा काम ओवरटाइम है — इसका आम तौर पर दोगुना रेट मिलता है।"
+                    mr="दिवसाला 9 तासांपेक्षा जास्त काम म्हणजे ओव्हरटाइम — त्याचा साधारणपणे दुप्पट दर मिळतो."
+                    gu="દિવસમાં 9 કલાકથી વધારે કામ એટલે ઓવરટાઇમ — એનો સામાન્ય રીતે બમણો દર મળે છે."
                   />
                 </p>
               )}
@@ -736,7 +755,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
           <div className={s.body} key="s2">
             <div className="field">
               <label className="label" htmlFor="pj-amount">
-                <IndianRupee aria-hidden="true" /> <T en="Pay per worker" hi="हर कारीगर की मज़दूरी" />
+                <IndianRupee aria-hidden="true" /> <T en="Pay per worker" hi="हर कारीगर की मज़दूरी" mr="प्रत्येक कामगाराची मजुरी" gu="દરેક કામદારની મજૂરી" />
               </label>
               <div className={s.payRow}>
                 <div className={s.moneyInput}>
@@ -754,7 +773,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                     {...errProps('amount')}
                   />
                 </div>
-                <div className={`segmented ${s.unitSeg}`} role="group" aria-label={t('Pay is counted per', 'मज़दूरी किस हिसाब से')}>
+                <div className={`segmented ${s.unitSeg}`} role="group" aria-label={t('Pay is counted per', 'मज़दूरी किस हिसाब से', 'मजुरी कशानुसार', 'મજૂરી કયા હિસાબે')}>
                   {UNITS.map((u) => (
                     <button key={u} type="button" aria-pressed={d.unit === u} onClick={() => patch({ unit: u })}>
                       <Tx l={PAY_UNIT[u]} />
@@ -772,7 +791,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                   <FairBand trade={d.trade} perDay={perDay} approx={d.unit !== 'day'} />
                   {d.unit !== 'day' && (
                     <p className="subtle">
-                      <T en="Worked out as a day-rate:" hi="एक दिन के हिसाब से:" /> <b className="money">≈ {rupee(Math.round(perDay))}</b> <T en="/ day" hi="/ दिन" />
+                      <T en="Worked out as a day-rate:" hi="एक दिन के हिसाब से:" mr="एका दिवसाच्या हिशोबाने:" gu="એક દિવસના હિસાબે:" /> <b className="money">≈ {rupee(Math.round(perDay))}</b> <T en="/ day" hi="/ दिन" mr="/ दिवस" gu="/ દિવસ" />
                     </p>
                   )}
                   {fair === 'below' && trade && (
@@ -780,16 +799,18 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                       <TriangleAlert aria-hidden="true" />
                       <div className={s.calloutBody}>
                         <strong>
-                          <T en="This is below fair pay." hi="यह सही मज़दूरी से कम है।" />
+                          <T en="This is below fair pay." hi="यह सही मज़दूरी से कम है।" mr="ही योग्य मजुरीपेक्षा कमी आहे." gu="આ યોગ્ય મજૂરીથી ઓછું છે." />
                         </strong>
                         <span>
                           <T
                             en={`${trade.name.en} work near Kurla usually pays ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} a day. Skilled workers will pick other jobs — and very low pay can be below the legal minimum wage.`}
                             hi={`कुर्ला के पास ${trade.name.hi} को आम तौर पर ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} रोज़ मिलते हैं। हुनरमंद कारीगर दूसरे काम चुन लेंगे — और बहुत कम मज़दूरी क़ानूनी न्यूनतम वेतन से भी कम हो सकती है।`}
+                            mr={`कुर्ल्याजवळ ${trade.name.mr} कामाला साधारणपणे रोज ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} मिळतात. कुशल कारागीर दुसरी कामे निवडतील — आणि खूप कमी मजुरी कायदेशीर किमान वेतनापेक्षाही कमी असू शकते.`}
+                            gu={`કુર્લા પાસે ${trade.name.gu}ને સામાન્ય રીતે રોજના ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} મળે છે. કુશળ કારીગરો બીજાં કામ પસંદ કરી લેશે — અને બહુ ઓછી મજૂરી કાયદેસરના લઘુતમ વેતનથી પણ ઓછી હોઈ શકે.`}
                           />
                         </span>
                         <button type="button" className="btn btn-sm" onClick={() => patch({ amount: fairTarget() })}>
-                          <T en={`Use a fair ${rupee(fairTarget())}`} hi={`सही रेट ${rupee(fairTarget())} लगाएँ`} />
+                          <T en={`Use a fair ${rupee(fairTarget())}`} hi={`सही रेट ${rupee(fairTarget())} लगाएँ`} mr={`योग्य दर ${rupee(fairTarget())} लावा`} gu={`યોગ્ય દર ${rupee(fairTarget())} રાખો`} />
                         </button>
                       </div>
                     </div>
@@ -797,13 +818,13 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                   {fair === 'fair' && (
                     <p className="callout callout-trust">
                       <CircleCheck aria-hidden="true" />
-                      <T en="Fair pay. Workers see a green “Fair pay” mark on your job." hi="सही मज़दूरी। कारीगरों को आपके काम पर हरा “सही मज़दूरी” निशान दिखेगा।" />
+                      <T en="Fair pay. Workers see a green “Fair pay” mark on your job." hi="सही मज़दूरी। कारीगरों को आपके काम पर हरा “सही मज़दूरी” निशान दिखेगा।" mr="योग्य मजुरी. कामगारांना तुमच्या कामावर हिरवी “योग्य मजुरी” खूण दिसेल." gu="યોગ્ય મજૂરી. કામદારોને તમારા કામ પર લીલું “યોગ્ય મજૂરી” નિશાન દેખાશે." />
                     </p>
                   )}
                   {fair === 'above' && (
                     <p className="callout callout-trust">
                       <Sparkles aria-hidden="true" />
-                      <T en="Generous! Expect quick replies from experienced workers." hi="बढ़िया! अनुभवी कारीगर जल्दी जवाब देंगे।" />
+                      <T en="Generous! Expect quick replies from experienced workers." hi="बढ़िया! अनुभवी कारीगर जल्दी जवाब देंगे।" mr="छान! अनुभवी कारागीर लवकर उत्तर देतील." gu="સરસ! અનુભવી કારીગરો જલદી જવાબ આપશે." />
                     </p>
                   )}
                   {fair === 'extreme' && (
@@ -812,6 +833,8 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                       <T
                         en="Very high pay looks like a trick to workers — our safety check will warn them. If the work is heavy, risky or at night, say so in the description."
                         hi="बहुत ज़्यादा मज़दूरी कारीगरों को धोखा लगती है — हमारी सुरक्षा जाँच उन्हें सावधान करेगी। अगर काम भारी, जोखिम वाला या रात का है, तो विवरण में लिखें।"
+                        mr="खूप जास्त मजुरी कामगारांना फसवणूक वाटते — आमची सुरक्षा तपासणी त्यांना सावध करेल. काम जड, धोक्याचे किंवा रात्रीचे असेल तर वर्णनात तसे लिहा."
+                        gu="બહુ વધારે મજૂરી કામદારોને છેતરપિંડી જેવી લાગે છે — અમારી સલામતી તપાસ તેમને સાવધ કરશે. જો કામ ભારે, જોખમી કે રાતનું હોય, તો વિગતમાં લખો."
                       />
                     </p>
                   )}
@@ -819,14 +842,14 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
               ) : (
                 <p className={s.fairEmpty}>
                   <IndianRupee aria-hidden="true" />
-                  <T en="Type an amount to see how fair it is." hi="रकम लिखें — हम बताएँगे कि यह कितनी सही है।" />
+                  <T en="Type an amount to see how fair it is." hi="रकम लिखें — हम बताएँगे कि यह कितनी सही है।" mr="रक्कम लिहा — ती किती योग्य आहे ते आम्ही सांगू." gu="રકમ લખો — એ કેટલી યોગ્ય છે તે અમે કહીશું." />
                 </p>
               )}
             </div>
 
             <fieldset className={s.fs}>
               <legend className="label">
-                <WalletCards aria-hidden="true" /> <T en="When will you pay?" hi="भुगतान कब करेंगे?" />
+                <WalletCards aria-hidden="true" /> <T en="When will you pay?" hi="भुगतान कब करेंगे?" mr="पैसे कधी देणार?" gu="પૈસા ક્યારે આપશો?" />
               </legend>
               <div className={s.payGrid}>
                 {PAYDAYS.map((p) => (
@@ -835,7 +858,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                     <Tx l={PAID_WHEN[p]} />
                     {p === 'same-day' && (
                       <span className={`chip chip-success ${s.best}`}>
-                        <T en="Best for daily work" hi="दिहाड़ी के लिए सबसे अच्छा" />
+                        <T en="Best for daily work" hi="दिहाड़ी के लिए सबसे अच्छा" mr="रोजंदारीसाठी सर्वात चांगले" gu="રોજમદારી માટે સૌથી સારું" />
                       </span>
                     )}
                   </button>
@@ -847,6 +870,8 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                   <T
                     en="Daily-wage workers often need the money the same evening for food and rent."
                     hi="दिहाड़ी कारीगरों को अक्सर खाने और किराए के लिए उसी शाम पैसे चाहिए होते हैं।"
+                    mr="रोजंदारीवरच्या कामगारांना जेवण आणि भाड्यासाठी अनेकदा त्याच संध्याकाळी पैसे लागतात."
+                    gu="રોજમદારી કરતા કામદારોને ઘણી વાર જમવા અને ભાડા માટે એ જ સાંજે પૈસા જોઈએ છે."
                   />
                 </p>
               )}
@@ -855,7 +880,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
             <div className={s.twoCol}>
               <fieldset className={s.fs}>
                 <legend className="label">
-                  <T en="How will you pay?" hi="कैसे भुगतान करेंगे?" />
+                  <T en="How will you pay?" hi="कैसे भुगतान करेंगे?" mr="पैसे कसे देणार?" gu="પૈસા કેવી રીતે આપશો?" />
                 </legend>
                 <div id="pj-paymode" tabIndex={-1} className={s.chips} {...errProps('payMode')}>
                   {MODES.map((m) => (
@@ -868,7 +893,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
               </fieldset>
               <div className={s.fs}>
                 <span className="label" id="pj-workers">
-                  <UsersRound aria-hidden="true" /> <T en="Workers needed" hi="कितने कारीगर चाहिए" />
+                  <UsersRound aria-hidden="true" /> <T en="Workers needed" hi="कितने कारीगर चाहिए" mr="किती कामगार हवेत" gu="કેટલા કામદારો જોઈએ" />
                 </span>
                 <Stepper
                   labelledBy="pj-workers"
@@ -876,16 +901,16 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                   min={1}
                   max={50}
                   onChange={(v) => patch({ workersNeeded: v })}
-                  unit={{ en: d.workersNeeded === 1 ? 'person' : 'people', hi: 'लोग' }}
-                  less={t('One less', 'एक कम')}
-                  more={t('One more', 'एक और')}
+                  unit={{ en: d.workersNeeded === 1 ? 'person' : 'people', hi: 'लोग', mr: d.workersNeeded === 1 ? 'व्यक्ती' : 'लोक', gu: d.workersNeeded === 1 ? 'વ્યક્તિ' : 'લોકો' }}
+                  less={t('One less', 'एक कम', 'एक कमी', 'એક ઓછું')}
+                  more={t('One more', 'एक और', 'एक जास्त', 'એક વધારે')}
                 />
               </div>
             </div>
 
             <fieldset className={s.fs}>
               <legend className="label">
-                <T en="What will you provide?" hi="आप क्या देंगे?" />
+                <T en="What will you provide?" hi="आप क्या देंगे?" mr="तुम्ही काय देणार?" gu="તમે શું આપશો?" />
               </legend>
               <div className={s.chips}>
                 {PERK_LIST.map((p) => (
@@ -900,7 +925,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
             {d.amount > 0 && (
               <p className={s.totalBar}>
                 <span>
-                  <T en="Estimated total" hi="कुल अनुमान" />
+                  <T en="Estimated total" hi="कुल अनुमान" mr="एकूण अंदाज" gu="કુલ અંદાજ" />
                   <small>
                     {d.workersNeeded} × <Tx l={lengthL} />
                   </small>
@@ -918,7 +943,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
               <div className={s.previewCol}>
                 <p className={s.previewLabel}>
                   <Eye aria-hidden="true" />
-                  <T en="This is exactly what workers will see" hi="कारीगरों को बिल्कुल यही दिखेगा" />
+                  <T en="This is exactly what workers will see" hi="कारीगरों को बिल्कुल यही दिखेगा" mr="कामगारांना अगदी हेच दिसेल" gu="કામદારોને બરાબર આ જ દેખાશે" />
                 </p>
                 <div
                   className={s.preview}
@@ -939,7 +964,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                 <div className={s.clarityHead}>
                   <div>
                     <span className="eyebrow">
-                      <T en="Clarity score" hi="साफ़-साफ़ स्कोर" />
+                      <T en="Clarity score" hi="साफ़-साफ़ स्कोर" mr="स्पष्टता स्कोअर" gu="સ્પષ્ટતા સ્કોર" />
                     </span>
                     <p className={s.score}>
                       <b className="money">{score}</b>
@@ -949,15 +974,15 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                   <span className={`chip ${scoreTone === 'good' ? 'chip-success' : scoreTone === 'ok' ? 'chip-warning' : 'chip-danger'}`}>
                     {scoreTone === 'good' ? <CircleCheck aria-hidden="true" /> : <CircleAlert aria-hidden="true" />}
                     {scoreTone === 'good' ? (
-                      <T en="Clear & fair" hi="साफ़ और सही" />
+                      <T en="Clear & fair" hi="साफ़ और सही" mr="स्पष्ट आणि योग्य" gu="સાફ અને યોગ્ય" />
                     ) : scoreTone === 'ok' ? (
-                      <T en="Almost there" hi="बस थोड़ा और" />
+                      <T en="Almost there" hi="बस थोड़ा और" mr="थोडेच बाकी" gu="બસ થોડું બાકી" />
                     ) : (
-                      <T en="Needs more detail" hi="और जानकारी चाहिए" />
+                      <T en="Needs more detail" hi="और जानकारी चाहिए" mr="अजून माहिती हवी" gu="વધુ માહિતી જોઈએ" />
                     )}
                   </span>
                 </div>
-                <div className="meter" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={score} aria-label={t('Clarity score', 'साफ़-साफ़ स्कोर')}>
+                <div className="meter" role="meter" aria-valuemin={0} aria-valuemax={100} aria-valuenow={score} aria-label={t('Clarity score', 'साफ़-साफ़ स्कोर', 'स्पष्टता स्कोअर', 'સ્પષ્ટતા સ્કોર')}>
                   <span style={{ transform: `scaleX(${score / 100})` }} />
                 </div>
                 <ul className={s.checklist}>
@@ -966,18 +991,18 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                       {c.ok ? <CircleCheck aria-hidden="true" /> : <CircleAlert aria-hidden="true" />}
                       <span>
                         <Tx l={c.label} />
-                        <span className="sr-only">{c.ok ? t(' — done', ' — हो गया') : t(' — missing', ' — बाकी')}</span>
+                        <span className="sr-only">{c.ok ? t(' — done', ' — हो गया', ' — झाले', ' — થઈ ગયું') : t(' — missing', ' — बाकी', ' — बाकी', ' — બાકી')}</span>
                       </span>
                       {!c.ok && (
                         <button type="button" className={s.fix} onClick={() => goTo(c.step)}>
-                          <T en="Fix" hi="ठीक करें" />
+                          <T en="Fix" hi="ठीक करें" mr="दुरुस्त करा" gu="સુધારો" />
                         </button>
                       )}
                     </li>
                   ))}
                 </ul>
                 <p className="subtle">
-                  <T en="Clear jobs get more replies — and fewer arguments on payday." hi="साफ़ लिखे काम पर ज़्यादा जवाब आते हैं — और भुगतान के दिन कम झगड़े।" />
+                  <T en="Clear jobs get more replies — and fewer arguments on payday." hi="साफ़ लिखे काम पर ज़्यादा जवाब आते हैं — और भुगतान के दिन कम झगड़े।" mr="स्पष्ट लिहिलेल्या कामाला जास्त उत्तरे येतात — आणि पगाराच्या दिवशी कमी वाद." gu="સાફ લખેલા કામ પર વધુ જવાબ આવે છે — અને પગારના દિવસે ઓછા ઝઘડા." />
                 </p>
               </div>
             </div>
@@ -989,14 +1014,14 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
           {step > 0 ? (
             <button type="button" className="btn btn-ghost" onClick={() => goTo(step - 1)}>
               <ArrowLeft aria-hidden="true" />
-              <T en="Back" hi="पीछे" />
+              <T en="Back" hi="पीछे" mr="मागे" gu="પાછળ" />
             </button>
           ) : (
             <span />
           )}
           {step < 3 ? (
             <button type="submit" className="btn btn-primary btn-lg">
-              <T en="Next" hi="आगे" />
+              <T en="Next" hi="आगे" mr="पुढे" gu="આગળ" />
               <span className={s.nextHint}>
                 · <Tx l={STEPS[step + 1].short} />
               </span>
@@ -1005,7 +1030,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
           ) : (
             <button type="submit" className="btn btn-primary btn-lg">
               <Briefcase aria-hidden="true" />
-              <T en="Publish job" hi="काम डालें" />
+              <T en="Publish job" hi="काम डालें" mr="काम प्रकाशित करा" gu="કામ પ્રકાશિત કરો" />
             </button>
           )}
         </footer>

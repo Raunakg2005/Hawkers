@@ -60,7 +60,7 @@ export default function JobBoard() {
       setListening(true);
       window.setTimeout(() => {
         setListening(false);
-        applySpeech(lang === 'hi' ? 'आज प्लंबर का काम' : 'plumber work today');
+        applySpeech({ en: 'plumber work today', hi: 'आज प्लंबर का काम', mr: 'आज प्लंबरचे काम', gu: 'આજે પ્લમ્બરનું કામ' }[lang]);
       }, 1400);
       return;
     }
@@ -80,7 +80,7 @@ export default function JobBoard() {
       if (food && !j.perks.includes('food')) return false;
       if (verified && !j.employer.verified) return false;
       if (needle) {
-        const hay = `${j.title.en} ${j.title.hi} ${j.area.en} ${j.area.hi} ${j.employer.name} ${j.trade}`.toLowerCase();
+        const hay = `${j.title.en} ${j.title.hi} ${j.title.mr} ${j.title.gu} ${j.area.en} ${j.area.hi} ${j.area.mr} ${j.area.gu} ${j.employer.name} ${j.trade}`.toLowerCase();
         if (!hay.includes(needle)) return false;
       }
       return true;
@@ -120,49 +120,49 @@ export default function JobBoard() {
       <div className="board-search">
         <label className="search-field">
           <Search aria-hidden="true" />
-          <span className="sr-only">{t('Search jobs', 'काम खोजें')}</span>
+          <span className="sr-only">{t('Search jobs', 'काम खोजें', 'काम शोधा', 'કામ શોધો')}</span>
           <input
             className="input"
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder={t('Search: area, work, employer…', 'खोजें: इलाक़ा, काम, मालिक…')}
+            placeholder={t('Search: area, work, employer…', 'खोजें: इलाक़ा, काम, मालिक…', 'शोधा: भाग, काम, मालक…', 'શોધો: વિસ્તાર, કામ, માલિક…')}
             enterKeyHint="search"
           />
           {q && (
-            <button type="button" className="clear" onClick={() => setQ('')} aria-label={t('Clear search', 'खोज साफ़ करें')}>
+            <button type="button" className="clear" onClick={() => setQ('')} aria-label={t('Clear search', 'खोज साफ़ करें', 'शोध पुसा', 'શોધ સાફ કરો')}>
               <X aria-hidden="true" />
             </button>
           )}
         </label>
         <button type="button" className={`mic-btn${listening ? ' is-listening' : ''}`} onClick={listen} aria-pressed={listening}>
           {listening ? <MicOff aria-hidden="true" /> : <Mic aria-hidden="true" />}
-          <span>{listening ? t('Listening…', 'सुन रहे हैं…') : t('Speak', 'बोलें')}</span>
+          <span>{listening ? t('Listening…', 'सुन रहे हैं…', 'ऐकत आहोत…', 'સાંભળીએ છીએ…') : t('Speak', 'बोलें', 'बोला', 'બોલો')}</span>
         </button>
       </div>
       {heard && (
         <p className="heard" aria-live="polite">
-          <T en="You said" hi="आपने कहा" />: <q>{heard}</q>
+          <T en="You said" hi="आपने कहा" mr="तुम्ही म्हणालात" gu="તમે કહ્યું" />: <q>{heard}</q>
           <button type="button" className="btn btn-ghost btn-sm" onClick={reset}>
-            <X aria-hidden="true" /> <T en="Clear" hi="हटाएँ" />
+            <X aria-hidden="true" /> <T en="Clear" hi="हटाएँ" mr="काढा" gu="હટાવો" />
           </button>
         </p>
       )}
 
       {/* duration — the first question for irregular work */}
-      <div className="duration-tabs" role="group" aria-label={t('How long?', 'कितने समय का?')}>
+      <div className="duration-tabs" role="group" aria-label={t('How long?', 'कितने समय का?', 'किती दिवसांचे?', 'કેટલા સમયનું?')}>
         {(['all', 'daily', 'short', 'long'] as const).map((d) => (
           <button key={d} type="button" aria-pressed={duration === d} onClick={() => setDuration(d)} className={`dur-tab dur-${d}`}>
-            <span className="dur-label">{d === 'all' ? <T en="All work" hi="सारे काम" /> : <Tx l={DURATIONS[d].name} />}</span>
+            <span className="dur-label">{d === 'all' ? <T en="All work" hi="सारे काम" mr="सगळी कामे" gu="બધાં કામ" /> : <Tx l={DURATIONS[d].name} />}</span>
             <span className="dur-count">{counts[d]}</span>
           </button>
         ))}
       </div>
 
       {/* trades */}
-      <div className="scroller trade-row" role="group" aria-label={t('Type of work', 'काम का प्रकार')}>
+      <div className="scroller trade-row" role="group" aria-label={t('Type of work', 'काम का प्रकार', 'कामाचा प्रकार', 'કામનો પ્રકાર')}>
         <button type="button" className="filter-chip" aria-pressed={trade === 'all'} onClick={() => setTrade('all')}>
-          <T en="All trades" hi="सभी काम" />
+          <T en="All trades" hi="सभी काम" mr="सर्व कामे" gu="બધાં કામ" />
         </button>
         {TRADES.map((tr) => (
           <button
@@ -182,30 +182,30 @@ export default function JobBoard() {
       {/* toolbar */}
       <div className="board-toolbar">
         <p className="result-count" aria-live="polite">
-          <strong>{results.safe.length}</strong> <T en="jobs near Kurla West naka" hi="काम कुर्ला पश्चिम नाके के पास" />
+          <strong>{results.safe.length}</strong> <T en="jobs near Kurla West naka" hi="काम कुर्ला पश्चिम नाके के पास" mr="कामे कुर्ला पश्चिम नाक्याजवळ" gu="કામ કુર્લા પશ્ચિમ નાકા પાસે" />
         </p>
         <div className="row">
           <button type="button" className="btn btn-sm" aria-expanded={moreOpen} aria-controls="more-filters" onClick={() => setMoreOpen((o) => !o)}>
             <SlidersHorizontal aria-hidden="true" />
-            <T en="Filters" hi="फ़िल्टर" />
+            <T en="Filters" hi="फ़िल्टर" mr="फिल्टर" gu="ફિલ્ટર" />
             {activeExtras > 0 && <span className="badge-count">{activeExtras}</span>}
             <ChevronDown aria-hidden="true" className={moreOpen ? 'rot' : ''} />
           </button>
           <label className="sort-select">
             <ArrowDownWideNarrow aria-hidden="true" />
-            <span className="sr-only">{t('Sort by', 'क्रम')}</span>
+            <span className="sr-only">{t('Sort by', 'क्रम', 'क्रम', 'ક્રમ')}</span>
             <select className="select" value={sort} onChange={(e) => setSort(e.target.value as Sort)}>
-              <option value="near">{t('Nearest first', 'सबसे पास')}</option>
-              <option value="pay">{t('Highest pay', 'सबसे ज़्यादा मज़दूरी')}</option>
-              <option value="new">{t('Newest', 'सबसे नए')}</option>
+              <option value="near">{t('Nearest first', 'सबसे पास', 'सर्वात जवळ', 'સૌથી નજીક')}</option>
+              <option value="pay">{t('Highest pay', 'सबसे ज़्यादा मज़दूरी', 'सर्वात जास्त मजुरी', 'સૌથી વધુ મજૂરી')}</option>
+              <option value="new">{t('Newest', 'सबसे नए', 'सर्वात नवीन', 'સૌથી નવાં')}</option>
             </select>
           </label>
-          <div className="segmented" role="group" aria-label={t('View', 'देखें')}>
+          <div className="segmented" role="group" aria-label={t('View', 'देखें', 'पाहा', 'જુઓ')}>
             <button type="button" aria-pressed={view === 'list'} onClick={() => setView('list')}>
-              <LayoutList aria-hidden="true" /> <T en="List" hi="सूची" />
+              <LayoutList aria-hidden="true" /> <T en="List" hi="सूची" mr="यादी" gu="યાદી" />
             </button>
             <button type="button" aria-pressed={view === 'map'} onClick={() => setView('map')}>
-              <MapIcon aria-hidden="true" /> <T en="Map" hi="नक़्शा" />
+              <MapIcon aria-hidden="true" /> <T en="Map" hi="नक़्शा" mr="नकाशा" gu="નકશો" />
             </button>
           </div>
         </div>
@@ -214,13 +214,13 @@ export default function JobBoard() {
       {moreOpen && (
         <div className="more-filters" id="more-filters">
           <button type="button" className="filter-chip" aria-pressed={sameDay} onClick={() => setSameDay((v) => !v)}>
-            <CalendarClock aria-hidden="true" /> <T en="Paid same day" hi="उसी दिन भुगतान" />
+            <CalendarClock aria-hidden="true" /> <T en="Paid same day" hi="उसी दिन भुगतान" mr="त्याच दिवशी पैसे" gu="એ જ દિવસે ચુકવણી" />
           </button>
           <button type="button" className="filter-chip" aria-pressed={food} onClick={() => setFood((v) => !v)}>
-            <Utensils aria-hidden="true" /> <T en="Lunch given" hi="खाना मिलेगा" />
+            <Utensils aria-hidden="true" /> <T en="Lunch given" hi="खाना मिलेगा" mr="जेवण मिळेल" gu="જમવાનું મળશે" />
           </button>
           <button type="button" className="filter-chip" aria-pressed={verified} onClick={() => setVerified((v) => !v)}>
-            <BadgeCheck aria-hidden="true" /> <T en="Verified employers only" hi="सिर्फ़ जाँचे हुए मालिक" />
+            <BadgeCheck aria-hidden="true" /> <T en="Verified employers only" hi="सिर्फ़ जाँचे हुए मालिक" mr="फक्त पडताळलेले मालक" gu="ફક્ત ચકાસાયેલ માલિક" />
           </button>
         </div>
       )}
@@ -229,10 +229,10 @@ export default function JobBoard() {
         <div className="empty">
           <Search aria-hidden="true" />
           <p>
-            <T en="No jobs match right now. Try fewer filters." hi="अभी कोई काम नहीं मिला। कम फ़िल्टर लगाकर देखें।" />
+            <T en="No jobs match right now. Try fewer filters." hi="अभी कोई काम नहीं मिला। कम फ़िल्टर लगाकर देखें।" mr="आत्ता कोणतेही काम सापडले नाही. कमी फिल्टर लावून पाहा." gu="હમણાં કોઈ કામ મળ્યું નથી. ઓછાં ફિલ્ટર લગાવીને જુઓ." />
           </p>
           <button type="button" className="btn btn-primary" onClick={reset}>
-            <T en="Show all jobs" hi="सारे काम दिखाएँ" />
+            <T en="Show all jobs" hi="सारे काम दिखाएँ" mr="सगळी कामे दाखवा" gu="બધાં કામ બતાવો" />
           </button>
         </div>
       ) : view === 'map' ? (
@@ -251,16 +251,18 @@ export default function JobBoard() {
             <ShieldAlert aria-hidden="true" />
             <div className="stack" style={{ flex: 1 }}>
               <h2 id="risky-h" className="h3">
-                <T en={`${results.risky.length} listings hidden — they look risky`} hi={`${results.risky.length} काम छिपाए गए — ये ख़तरनाक लगते हैं`} />
+                <T en={`${results.risky.length} listings hidden — they look risky`} hi={`${results.risky.length} काम छिपाए गए — ये ख़तरनाक लगते हैं`} mr={`${results.risky.length} कामे लपवली — ती धोकादायक वाटतात`} gu={`${results.risky.length} કામ છુપાવ્યાં — એ જોખમી લાગે છે`} />
               </h2>
               <p className="muted">
                 <T
                   en="They ask for fees, hide the address or promise unreal pay. Our Trust Shield keeps them out of your way."
                   hi="ये फ़ीस माँगते हैं, पता छिपाते हैं या झूठी मज़दूरी का वादा करते हैं। ट्रस्ट शील्ड इन्हें आपसे दूर रखती है।"
+                  mr="हे फी मागतात, पत्ता लपवतात किंवा खोट्या मजुरीचे वचन देतात. ट्रस्ट शील्ड यांना तुमच्यापासून दूर ठेवते."
+                  gu="આ લોકો ફી માંગે છે, સરનામું છુપાવે છે અથવા ખોટી મજૂરીનું વચન આપે છે. ટ્રસ્ટ શીલ્ડ એમને તમારાથી દૂર રાખે છે."
                 />
               </p>
               <button type="button" className="btn btn-sm btn-danger" aria-expanded={showRisky} onClick={() => setShowRisky((v) => !v)}>
-                {showRisky ? <T en="Hide them" hi="छिपाएँ" /> : <T en="Show them anyway" hi="फिर भी दिखाएँ" />}
+                {showRisky ? <T en="Hide them" hi="छिपाएँ" mr="लपवा" gu="છુપાવો" /> : <T en="Show them anyway" hi="फिर भी दिखाएँ" mr="तरीही दाखवा" gu="તો પણ બતાવો" />}
               </button>
             </div>
           </div>

@@ -4,11 +4,30 @@ import { useEffect, useRef, useState } from 'react';
 import { Mic, Pause, Play, RotateCcw, Square, Trash2 } from 'lucide-react';
 import { T } from '@/components/T';
 import { useLang } from '@/lib/prefs';
+import { localeOf } from '@/lib/i18n';
+import type { L, Lang } from '@/data/types';
 import s from './profile.module.css';
 
 const MAX_SECS = 30;
 
 type Phase = 'idle' | 'asking' | 'recording' | 'done';
+
+/**
+ * Text + voice for the practice playback, in the active language. Like
+ * ReadAloud: Marathi may borrow a Hindi voice; with no Gujarati voice the
+ * phone reads the English text instead of garbling Gujarati script.
+ */
+function speechPlan(lang: Lang, texts: L, voices: SpeechSynthesisVoice[]) {
+  const find = (l: Lang) => voices.find((v) => v.lang.replace('_', '-') === localeOf(l)) ?? voices.find((v) => v.lang.toLowerCase().startsWith(l));
+  const own = find(lang);
+  if (own || lang === 'en' || voices.length === 0) return { text: texts[lang], locale: localeOf(lang), voice: own };
+  if (lang === 'mr') {
+    const hiVoice = find('hi');
+    if (hiVoice) return { text: texts.mr, locale: 'hi-IN', voice: hiVoice };
+  }
+  if (lang === 'gu') return { text: texts.en, locale: 'en-IN', voice: find('en') };
+  return { text: texts[lang], locale: localeOf(lang), voice: undefined };
+}
 
 export interface VoiceMeta {
   secs: number;
@@ -30,7 +49,7 @@ export default function VoiceRecorder({
   meta: VoiceMeta | null;
   url: string | null;
   /** text the phone reads aloud when playing a practice (simulated) recording */
-  speech: { en: string; hi: string };
+  speech: L;
   onSave: (meta: VoiceMeta, blob: Blob | null) => void;
   onClear: () => void;
 }) {
@@ -173,8 +192,10 @@ export default function VoiceRecorder({
     if ('speechSynthesis' in window) {
       const synth = window.speechSynthesis;
       synth.cancel();
-      const u = new SpeechSynthesisUtterance(lang === 'hi' ? speech.hi : speech.en);
-      u.lang = lang === 'hi' ? 'hi-IN' : 'en-IN';
+      const sp = speechPlan(lang, speech, synth.getVoices());
+      const u = new SpeechSynthesisUtterance(sp.text);
+      u.lang = sp.locale;
+      if (sp.voice) u.voice = sp.voice;
       u.rate = 0.95;
       u.onend = u.onerror = () => setPlaying(false);
       setPlaying(true);
@@ -211,7 +232,7 @@ export default function VoiceRecorder({
             onClick={recording ? stop : start}
             aria-pressed={recording}
             disabled={phase === 'asking'}
-            aria-label={recording ? t('Stop recording', 'रिकॉर्डिंग रोकें') : t('Start recording', 'रिकॉर्डिंग शुरू करें')}
+            aria-label={recording ? t('Stop recording', 'रिकॉर्डिंग रोकें', 'रेकॉर्डिंग थांबवा', 'રેકોર્ડિંગ બંધ કરો') : t('Start recording', 'रिकॉर्डिंग शुरू करें', 'रेकॉर्डिंग सुरू करा', 'રેકોર્ડિંગ શરૂ કરો')}
           >
             {recording ? <Square aria-hidden="true" /> : <Mic aria-hidden="true" />}
           </button>
@@ -221,7 +242,7 @@ export default function VoiceRecorder({
             className={`${s.micBtn} ${s.micPlay}`}
             onClick={play}
             disabled={noAudio}
-            aria-label={playing ? t('Pause', 'रोकें') : t('Play my intro', 'मेरा परिचय सुनें')}
+            aria-label={playing ? t('Pause', 'रोकें', 'थांबवा', 'રોકો') : t('Play my intro', 'मेरा परिचय सुनें', 'माझी ओळख ऐका', 'મારી ઓળખ સાંભળો')}
           >
             {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
           </button>
@@ -231,42 +252,42 @@ export default function VoiceRecorder({
           {phase === 'idle' && (
             <>
               <strong>
-                <T en="Tap the mic and speak" hi="माइक दबाएँ और बोलें" />
+                <T en="Tap the mic and speak" hi="माइक दबाएँ और बोलें" mr="माईक दाबा आणि बोला" gu="માઇક દબાવો અને બોલો" />
               </strong>
               <span className="subtle">
-                <T en="Up to 30 seconds" hi="30 सेकंड तक" />
+                <T en="Up to 30 seconds" hi="30 सेकंड तक" mr="30 सेकंदांपर्यंत" gu="30 સેકન્ડ સુધી" />
               </span>
             </>
           )}
           {phase === 'asking' && (
             <strong>
-              <T en="Allow the microphone…" hi="माइक की अनुमति दें…" />
+              <T en="Allow the microphone…" hi="माइक की अनुमति दें…" mr="माईकला परवानगी द्या…" gu="માઇકની મંજૂરી આપો…" />
             </strong>
           )}
           {recording && (
             <>
               <strong className={s.recLabel}>
                 <span className={s.recDot} aria-hidden="true" />
-                <T en="Recording" hi="रिकॉर्ड हो रहा है" /> {fmt(secs)}
+                <T en="Recording" hi="रिकॉर्ड हो रहा है" mr="रेकॉर्ड होत आहे" gu="રેકોર્ડ થઈ રહ્યું છે" /> {fmt(secs)}
                 <span className="subtle"> / {fmt(MAX_SECS)}</span>
               </strong>
               <span className="subtle">
-                <T en="Tap the square to stop" hi="रोकने के लिए चौकोर बटन दबाएँ" />
+                <T en="Tap the square to stop" hi="रोकने के लिए चौकोर बटन दबाएँ" mr="थांबवायला चौकोनी बटण दाबा" gu="બંધ કરવા ચોરસ બટન દબાવો" />
               </span>
             </>
           )}
           {phase === 'done' && (
             <>
               <strong>
-                <T en="Voice intro saved" hi="आवाज़ में परिचय सेव हुआ" /> · {fmt(doneSecs)}
+                <T en="Voice intro saved" hi="आवाज़ में परिचय सेव हुआ" mr="आवाजातली ओळख सेव्ह झाली" gu="અવાજમાં ઓળખ સેવ થઈ" /> · {fmt(doneSecs)}
               </strong>
               <span className="subtle">
                 {meta?.simulated ? (
-                  <T en="Practice recording — phone reads it aloud" hi="अभ्यास रिकॉर्डिंग — फ़ोन पढ़कर सुनाएगा" />
+                  <T en="Practice recording — phone reads it aloud" hi="अभ्यास रिकॉर्डिंग — फ़ोन पढ़कर सुनाएगा" mr="सरावाचं रेकॉर्डिंग — फोन वाचून ऐकवेल" gu="પ્રેક્ટિસ રેકોર્ડિંગ — ફોન વાંચીને સંભળાવશે" />
                 ) : noAudio ? (
-                  <T en="Saved earlier. Record again to hear it here." hi="पहले सेव हुआ था। यहाँ सुनने के लिए दोबारा रिकॉर्ड करें।" />
+                  <T en="Saved earlier. Record again to hear it here." hi="पहले सेव हुआ था। यहाँ सुनने के लिए दोबारा रिकॉर्ड करें।" mr="आधी सेव्ह झालं होतं. इथे ऐकायला पुन्हा रेकॉर्ड करा." gu="પહેલાં સેવ થયું હતું. અહીં સાંભળવા ફરી રેકોર્ડ કરો." />
                 ) : (
-                  <T en="Tap play to hear it" hi="सुनने के लिए प्ले दबाएँ" />
+                  <T en="Tap play to hear it" hi="सुनने के लिए प्ले दबाएँ" mr="ऐकायला प्ले दाबा" gu="સાંભળવા પ્લે દબાવો" />
                 )}
               </span>
             </>
@@ -290,11 +311,11 @@ export default function VoiceRecorder({
         <div className="row">
           <button type="button" className="btn btn-sm" onClick={redo}>
             <RotateCcw aria-hidden="true" />
-            <T en="Record again" hi="फिर से रिकॉर्ड करें" />
+            <T en="Record again" hi="फिर से रिकॉर्ड करें" mr="पुन्हा रेकॉर्ड करा" gu="ફરી રેકોર્ડ કરો" />
           </button>
           <button type="button" className="btn btn-sm btn-ghost" onClick={remove}>
             <Trash2 aria-hidden="true" />
-            <T en="Remove" hi="हटाएँ" />
+            <T en="Remove" hi="हटाएँ" mr="काढा" gu="કાઢો" />
           </button>
         </div>
       )}
@@ -305,9 +326,16 @@ export default function VoiceRecorder({
             <T
               en="Microphone is off, so this is a practice recording. Your phone will read your intro aloud instead."
               hi="माइक बंद है, इसलिए यह अभ्यास रिकॉर्डिंग है। आपका फ़ोन आपका परिचय पढ़कर सुनाएगा।"
+              mr="माईक बंद आहे, म्हणून हे सरावाचं रेकॉर्डिंग आहे. तुमचा फोन तुमची ओळख वाचून ऐकवेल."
+              gu="માઇક બંધ છે, એટલે આ પ્રેક્ટિસ રેકોર્ડિંગ છે. તમારો ફોન તમારી ઓળખ વાંચીને સંભળાવશે."
             />
           ) : (
-            <T en="This browser cannot record, so this is a practice recording." hi="यह ब्राउज़र रिकॉर्ड नहीं कर सकता, इसलिए यह अभ्यास रिकॉर्डिंग है।" />
+            <T
+              en="This browser cannot record, so this is a practice recording."
+              hi="यह ब्राउज़र रिकॉर्ड नहीं कर सकता, इसलिए यह अभ्यास रिकॉर्डिंग है।"
+              mr="हा ब्राउझर रेकॉर्ड करू शकत नाही, म्हणून हे सरावाचं रेकॉर्डिंग आहे."
+              gu="આ બ્રાઉઝર રેકોર્ડ કરી શકતું નથી, એટલે આ પ્રેક્ટિસ રેકોર્ડિંગ છે."
+            />
           )}
         </p>
       )}

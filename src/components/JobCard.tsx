@@ -10,9 +10,13 @@ import ReadAloud from './ReadAloud';
 export function jobSpeech(job: Job) {
   const pay = `${job.pay.amount} rupees ${job.pay.unit === 'day' ? 'per day' : job.pay.unit === 'month' ? 'per month' : 'for the full job'}`;
   const payHi = `${job.pay.amount} रुपये ${job.pay.unit === 'day' ? 'रोज़' : job.pay.unit === 'month' ? 'महीना' : 'पूरे काम के'}`;
+  const payMr = `${job.pay.amount} रुपये ${job.pay.unit === 'day' ? 'रोज' : job.pay.unit === 'month' ? 'महिना' : 'पूर्ण कामाचे'}`;
+  const payGu = `${job.pay.amount} રૂપિયા ${job.pay.unit === 'day' ? 'રોજના' : job.pay.unit === 'month' ? 'મહિને' : 'આખા કામના'}`;
   return {
     en: `${job.title.en}. ${pay}. ${PAID_WHEN[job.paidWhen].en}. At ${job.area.en}, ${job.distanceKm} kilometres away. Starts ${job.start.en}, from ${job.hours.start} to ${job.hours.end}.`,
     hi: `${job.title.hi}। ${payHi}। ${PAID_WHEN[job.paidWhen].hi}। ${job.area.hi}, ${job.distanceKm} किलोमीटर दूर। ${job.start.hi} शुरू, ${job.hours.start} से ${job.hours.end} तक।`,
+    mr: `${job.title.mr}. ${payMr}. ${PAID_WHEN[job.paidWhen].mr}. ${job.area.mr}, ${job.distanceKm} किलोमीटर दूर. सुरुवात ${job.start.mr}, ${job.hours.start} ते ${job.hours.end}.`,
+    gu: `${job.title.gu}. ${payGu}. ${PAID_WHEN[job.paidWhen].gu}. ${job.area.gu}, ${job.distanceKm} કિલોમીટર દૂર. શરૂઆત ${job.start.gu}, ${job.hours.start} થી ${job.hours.end} સુધી.`,
   };
 }
 
@@ -56,7 +60,7 @@ export default function JobCard({ job, index = 0, href }: { job: Job; index?: nu
           </p>
         </div>
         <div className="job-card-listen">
-          <ReadAloud en={speech.en} hi={speech.hi} />
+          <ReadAloud en={speech.en} hi={speech.hi} mr={speech.mr} gu={speech.gu} />
         </div>
       </div>
 
@@ -94,7 +98,7 @@ export default function JobCard({ job, index = 0, href }: { job: Job; index?: nu
           <li>
             <UsersRound aria-hidden="true" />
             <span>
-              {job.workersNeeded} <T en="people" hi="लोग" />
+              {job.workersNeeded} <T en="people" hi="लोग" mr="लोक" gu="લોકો" />
             </span>
           </li>
         )}
@@ -109,11 +113,11 @@ export default function JobCard({ job, index = 0, href }: { job: Job; index?: nu
         ))}
         <span className="subtle posted">
           {job.postedHoursAgo < 1 ? (
-            <T en="Just now" hi="अभी" />
+            <T en="Just now" hi="अभी" mr="आत्ताच" gu="હમણાં જ" />
           ) : job.postedHoursAgo < 24 ? (
-            <T en={`${job.postedHoursAgo}h ago`} hi={`${job.postedHoursAgo} घंटे पहले`} />
+            <T en={`${job.postedHoursAgo}h ago`} hi={`${job.postedHoursAgo} घंटे पहले`} mr={`${job.postedHoursAgo} तासांपूर्वी`} gu={`${job.postedHoursAgo} કલાક પહેલાં`} />
           ) : (
-            <T en="1 day ago" hi="1 दिन पहले" />
+            <T en="1 day ago" hi="1 दिन पहले" mr="1 दिवसापूर्वी" gu="1 દિવસ પહેલાં" />
           )}
         </span>
       </div>

@@ -33,20 +33,20 @@ type Answers = { age?: Age; income?: Income; work?: Work };
 type Complete = Required<Answers>;
 
 const AGE: { id: Age; l: { en: string; hi: string } }[] = [
-  { id: 'a18', l: { en: '18 – 40', hi: '18 – 40' } },
-  { id: 'a41', l: { en: '41 – 50', hi: '41 – 50' } },
-  { id: 'a51', l: { en: '51 – 60', hi: '51 – 60' } },
-  { id: 'a60', l: { en: 'Above 60', hi: '60 से ज़्यादा' } },
+  { id: 'a18', l: { en: '18 – 40', hi: '18 – 40', mr: '18 – 40', gu: '18 – 40' } },
+  { id: 'a41', l: { en: '41 – 50', hi: '41 – 50', mr: '41 – 50', gu: '41 – 50' } },
+  { id: 'a51', l: { en: '51 – 60', hi: '51 – 60', mr: '51 – 60', gu: '51 – 60' } },
+  { id: 'a60', l: { en: 'Above 60', hi: '60 से ज़्यादा', mr: '60 पेक्षा जास्त', gu: '60થી વધુ' } },
 ];
 const INCOME: { id: Income; l: { en: string; hi: string } }[] = [
-  { id: 'low', l: { en: 'Up to ₹10,000', hi: '₹10,000 तक' } },
-  { id: 'mid', l: { en: '₹10,000 – 15,000', hi: '₹10,000 – 15,000' } },
-  { id: 'high', l: { en: 'More than ₹15,000', hi: '₹15,000 से ज़्यादा' } },
+  { id: 'low', l: { en: 'Up to ₹10,000', hi: '₹10,000 तक', mr: '₹10,000 पर्यंत', gu: '₹10,000 સુધી' } },
+  { id: 'mid', l: { en: '₹10,000 – 15,000', hi: '₹10,000 – 15,000', mr: '₹10,000 – 15,000', gu: '₹10,000 – 15,000' } },
+  { id: 'high', l: { en: 'More than ₹15,000', hi: '₹15,000 से ज़्यादा', mr: '₹15,000 पेक्षा जास्त', gu: '₹15,000થી વધુ' } },
 ];
 const WORK: { id: Work; l: { en: string; hi: string } }[] = [
-  { id: 'construction', l: { en: 'Building / construction', hi: 'बिल्डिंग / निर्माण' } },
-  { id: 'vendor', l: { en: 'Street vendor', hi: 'रेहड़ी-पटरी' } },
-  { id: 'other', l: { en: 'Other daily work', hi: 'दूसरा दिहाड़ी काम' } },
+  { id: 'construction', l: { en: 'Building / construction', hi: 'बिल्डिंग / निर्माण', mr: 'बिल्डिंग / बांधकाम', gu: 'બિલ્ડિંગ / બાંધકામ' } },
+  { id: 'vendor', l: { en: 'Street vendor', hi: 'रेहड़ी-पटरी', mr: 'फेरीवाला', gu: 'લારી-ગલ્લા / ફેરિયા' } },
+  { id: 'other', l: { en: 'Other daily work', hi: 'दूसरा दिहाड़ी काम', mr: 'इतर रोजंदारी काम', gu: 'બીજું રોજમદારી કામ' } },
 ];
 
 const RULES: Record<string, (a: Complete) => boolean> = {
@@ -112,20 +112,20 @@ export default function SchemeExplorer() {
       {/* ── 1 · What do you need? */}
       <div className="section-head" data-reveal="">
         <span className="eyebrow">
-          <T en="Step 1 · Tap what you need" hi="कदम 1 · जो चाहिए उस पर टैप करें" />
+          <T en="Step 1 · Tap what you need" hi="कदम 1 · जो चाहिए उस पर टैप करें" mr="पायरी 1 · जे हवे त्यावर टॅप करा" gu="પગલું 1 · જે જોઈએ તેના પર ટૅપ કરો" />
         </span>
         <h2 className="h2">
-          <T en="What do you need help with?" hi="आपको किस चीज़ में मदद चाहिए?" />
+          <T en="What do you need help with?" hi="आपको किस चीज़ में मदद चाहिए?" mr="तुम्हाला कशासाठी मदत हवी आहे?" gu="તમને શેમાં મદદ જોઈએ છે?" />
         </h2>
       </div>
 
-      <div className={s.needGrid} role="group" aria-label={t('Filter schemes by need', 'ज़रूरत के हिसाब से योजनाएँ छाँटें')} data-reveal="">
+      <div className={s.needGrid} role="group" aria-label={t('Filter schemes by need', 'ज़रूरत के हिसाब से योजनाएँ छाँटें', 'गरजेनुसार योजना निवडा', 'જરૂરિયાત પ્રમાણે યોજનાઓ પસંદ કરો')} data-reveal="">
         <button type="button" className={s.needBtn} aria-pressed={need === 'all'} onClick={() => setNeed('all')} style={{ '--tile': 'var(--color-heading)' } as React.CSSProperties}>
           <span className={s.needIcon}>
             <LayoutGrid aria-hidden="true" />
           </span>
           <span className={s.needLabel}>
-            <T en="Show all" hi="सब दिखाएँ" />
+            <T en="Show all" hi="सब दिखाएँ" mr="सगळे दाखवा" gu="બધું બતાવો" />
           </span>
           <span className={s.needCount}>{SCHEMES.length}</span>
         </button>
@@ -162,10 +162,10 @@ export default function SchemeExplorer() {
           </span>
           <div>
             <h3 className="h3">
-              <T en="Not sure? Answer 3 quick questions" hi="पक्का नहीं पता? 3 छोटे सवालों के जवाब दें" />
+              <T en="Not sure? Answer 3 quick questions" hi="पक्का नहीं पता? 3 छोटे सवालों के जवाब दें" mr="नक्की माहीत नाही? 3 छोट्या प्रश्नांची उत्तरे द्या" gu="ખાતરી નથી? 3 નાના સવાલોના જવાબ આપો" />
             </h3>
             <p className="muted">
-              <T en="We will mark the schemes that are likely for you. Nothing is saved or sent." hi="हम उन योजनाओं पर निशान लगाएँगे जो शायद आपके लिए हैं। कुछ भी सेव या भेजा नहीं जाता।" />
+              <T en="We will mark the schemes that are likely for you. Nothing is saved or sent." hi="हम उन योजनाओं पर निशान लगाएँगे जो शायद आपके लिए हैं। कुछ भी सेव या भेजा नहीं जाता।" mr="तुमच्यासाठी असू शकतील अशा योजनांवर आम्ही खूण करू. काहीही सेव्ह होत नाही किंवा पाठवले जात नाही." gu="તમારા માટે હોઈ શકે એવી યોજનાઓ પર અમે નિશાન કરીશું. કશું સેવ થતું નથી કે મોકલાતું નથી." />
             </p>
           </div>
           <span className={`chip ${s.eligProgress}`} aria-live="polite">
@@ -174,9 +174,9 @@ export default function SchemeExplorer() {
         </div>
 
         <div className={s.questions}>
-          <Question n={1} q={{ en: 'Your age', hi: 'आपकी उम्र' }} options={AGE} value={answers.age} onPick={(v) => answer('age', v)} />
-          <Question n={2} q={{ en: 'Money you earn in a month', hi: 'महीने की कमाई' }} options={INCOME} value={answers.income} onPick={(v) => answer('income', v)} />
-          <Question n={3} q={{ en: 'Your main work', hi: 'आपका मुख्य काम' }} options={WORK} value={answers.work} onPick={(v) => answer('work', v)} />
+          <Question n={1} q={{ en: 'Your age', hi: 'आपकी उम्र', mr: 'तुमचे वय', gu: 'તમારી ઉંમર' }} options={AGE} value={answers.age} onPick={(v) => answer('age', v)} />
+          <Question n={2} q={{ en: 'Money you earn in a month', hi: 'महीने की कमाई', mr: 'महिन्याची कमाई', gu: 'મહિનાની કમાણી' }} options={INCOME} value={answers.income} onPick={(v) => answer('income', v)} />
+          <Question n={3} q={{ en: 'Your main work', hi: 'आपका मुख्य काम', mr: 'तुमचे मुख्य काम', gu: 'તમારું મુખ્ય કામ' }} options={WORK} value={answers.work} onPick={(v) => answer('work', v)} />
         </div>
 
         <div className={s.eligResult} aria-live="polite">
@@ -209,23 +209,25 @@ export default function SchemeExplorer() {
               <div className="row">
                 <button type="button" className="btn btn-accent" aria-pressed={onlyLikely} onClick={() => (onlyLikely ? setOnlyLikely(false) : showLikely())}>
                   <BadgeCheck aria-hidden="true" />
-                  {onlyLikely ? <T en="Show all schemes again" hi="फिर से सब योजनाएँ दिखाएँ" /> : <T en="Show only these" hi="सिर्फ़ ये दिखाएँ" />}
+                  {onlyLikely ? <T en="Show all schemes again" hi="फिर से सब योजनाएँ दिखाएँ" mr="पुन्हा सगळ्या योजना दाखवा" gu="ફરીથી બધી યોજનાઓ બતાવો" /> : <T en="Show only these" hi="सिर्फ़ ये दिखाएँ" mr="फक्त याच दाखवा" gu="ફક્ત આ બતાવો" />}
                 </button>
                 <button type="button" className="btn btn-ghost" onClick={clearAnswers}>
                   <RotateCcw aria-hidden="true" />
-                  <T en="Start again" hi="फिर से शुरू करें" />
+                  <T en="Start again" hi="फिर से शुरू करें" mr="पुन्हा सुरू करा" gu="ફરીથી શરૂ કરો" />
                 </button>
               </div>
               <p className="subtle">
                 <T
                   en="This is a rough guide, not a promise. Rules change — confirm at a CSC centre or the official website."
                   hi="यह सिर्फ़ अंदाज़ा है, वादा नहीं। नियम बदलते रहते हैं — CSC सेंटर या सरकारी वेबसाइट पर पक्का करें।"
+                  mr="हा फक्त अंदाज आहे, वचन नाही. नियम बदलत असतात — CSC केंद्रात किंवा सरकारी वेबसाइटवर खात्री करा."
+                  gu="આ ફક્ત અંદાજ છે, વચન નથી. નિયમો બદલાતા રહે છે — CSC કેન્દ્ર પર અથવા સરકારી વેબસાઇટ પર ખાતરી કરો."
                 />
               </p>
             </div>
           ) : (
             <p className="subtle">
-              <T en="Pick one answer in each row." hi="हर लाइन में एक जवाब चुनें।" />
+              <T en="Pick one answer in each row." hi="हर लाइन में एक जवाब चुनें।" mr="प्रत्येक ओळीत एक उत्तर निवडा." gu="દરેક લાઇનમાં એક જવાબ પસંદ કરો." />
             </p>
           )}
         </div>
@@ -253,7 +255,7 @@ export default function SchemeExplorer() {
           )}
           {onlyLikely && likely && (
             <span className="chip chip-success">
-              <T en="Likely for you" hi="शायद आपके लिए" />
+              <T en="Likely for you" hi="शायद आपके लिए" mr="कदाचित तुमच्यासाठी" gu="કદાચ તમારા માટે" />
             </span>
           )}
         </p>
@@ -267,7 +269,7 @@ export default function SchemeExplorer() {
             }}
           >
             <RotateCcw aria-hidden="true" />
-            <T en="Clear filter" hi="फ़िल्टर हटाएँ" />
+            <T en="Clear filter" hi="फ़िल्टर हटाएँ" mr="फिल्टर काढा" gu="ફિલ્ટર હટાવો" />
           </button>
         )}
       </div>
@@ -276,7 +278,7 @@ export default function SchemeExplorer() {
         <div className="empty">
           <SearchX aria-hidden="true" />
           <p>
-            <T en="No scheme matches both choices." hi="दोनों चुनावों से मिलती कोई योजना नहीं।" />
+            <T en="No scheme matches both choices." hi="दोनों चुनावों से मिलती कोई योजना नहीं।" mr="दोन्ही निवडींशी जुळणारी योजना नाही." gu="બંને પસંદગી સાથે મેળ ખાતી કોઈ યોજના નથી." />
           </p>
           <button
             type="button"
@@ -286,7 +288,7 @@ export default function SchemeExplorer() {
               setOnlyLikely(false);
             }}
           >
-            <T en="Show all schemes" hi="सब योजनाएँ दिखाएँ" />
+            <T en="Show all schemes" hi="सब योजनाएँ दिखाएँ" mr="सगळ्या योजना दाखवा" gu="બધી યોજનાઓ બતાવો" />
           </button>
         </div>
       )}
@@ -359,12 +361,12 @@ function SchemeCard({ scheme: sc, index, hidden, likely }: { scheme: Scheme; ind
         <ReadAloud en={speech.en} hi={speech.hi} label={t(`Listen: ${sc.name}`, `सुनें: ${sc.name}`)} />
       </header>
 
-      <ul className={s.schemeNeeds} aria-label={t('Helps with', 'इसमें मदद')}>
+      <ul className={s.schemeNeeds} aria-label={t('Helps with', 'इसमें मदद', 'यात मदत', 'આમાં મદદ')}>
         {likely && (
           <li>
             <span className="chip chip-success">
               <BadgeCheck aria-hidden="true" />
-              <T en="Likely for you" hi="शायद आपके लिए" />
+              <T en="Likely for you" hi="शायद आपके लिए" mr="कदाचित तुमच्यासाठी" gu="કદાચ તમારા માટે" />
             </span>
           </li>
         )}
@@ -390,7 +392,7 @@ function SchemeCard({ scheme: sc, index, hidden, likely }: { scheme: Scheme; ind
           <UsersRound aria-hidden="true" />
           <div>
             <span className={s.factLabel}>
-              <T en="Who can apply" hi="कौन ले सकता है" />
+              <T en="Who can apply" hi="कौन ले सकता है" mr="कोण घेऊ शकतो" gu="કોણ લઈ શકે" />
             </span>
             <span className={s.factValue}>
               <Tx l={sc.who} />
@@ -401,7 +403,7 @@ function SchemeCard({ scheme: sc, index, hidden, likely }: { scheme: Scheme; ind
           <IndianRupee aria-hidden="true" />
           <div>
             <span className={s.factLabel}>
-              <T en="Cost to you" hi="आपका ख़र्च" />
+              <T en="Cost to you" hi="आपका ख़र्च" mr="तुमचा खर्च" gu="તમારો ખર્ચ" />
             </span>
             <span className={s.factValue}>
               <Tx l={sc.cost} />
@@ -412,7 +414,7 @@ function SchemeCard({ scheme: sc, index, hidden, likely }: { scheme: Scheme; ind
           <MapPin aria-hidden="true" />
           <div>
             <span className={s.factLabel}>
-              <T en="Where to go" hi="कहाँ जाएँ" />
+              <T en="Where to go" hi="कहाँ जाएँ" mr="कुठे जायचे" gu="ક્યાં જવું" />
             </span>
             <span className={s.factValue}>
               <Tx l={sc.where} />
@@ -423,7 +425,7 @@ function SchemeCard({ scheme: sc, index, hidden, likely }: { scheme: Scheme; ind
 
       <div className={s.block}>
         <h4 className={s.blockTitle}>
-          <T en="Papers to carry" hi="साथ ले जाने वाले कागज़" />
+          <T en="Papers to carry" hi="साथ ले जाने वाले कागज़" mr="सोबत न्यायची कागदपत्रे" gu="સાથે લઈ જવાના દસ્તાવેજ" />
         </h4>
         <ul className={s.docChips}>
           {sc.docs.map((d) => {
@@ -444,7 +446,7 @@ function SchemeCard({ scheme: sc, index, hidden, likely }: { scheme: Scheme; ind
 
       <div className={s.block}>
         <h4 className={s.blockTitle}>
-          <T en="How to apply" hi="आवेदन कैसे करें" />
+          <T en="How to apply" hi="आवेदन कैसे करें" mr="अर्ज कसा करायचा" gu="અરજી કેવી રીતે કરવી" />
         </h4>
         <ol className={s.steps}>
           {sc.how.map((step, i) => (
@@ -469,9 +471,9 @@ function SchemeCard({ scheme: sc, index, hidden, likely }: { scheme: Scheme; ind
         )}
         <a href={sc.site} target="_blank" rel="noopener noreferrer" className="btn">
           <ExternalLink aria-hidden="true" />
-          <T en="Official website" hi="सरकारी वेबसाइट" />
+          <T en="Official website" hi="सरकारी वेबसाइट" mr="सरकारी वेबसाइट" gu="સરકારી વેબસાઇટ" />
           <span className="sr-only">
-            <T en="(opens in a new tab)" hi="(नए टैब में खुलेगा)" />
+            <T en="(opens in a new tab)" hi="(नए टैब में खुलेगा)" mr="(नवीन टॅबमध्ये उघडेल)" gu="(નવા ટૅબમાં ખૂલશે)" />
           </span>
         </a>
       </footer>

@@ -10,9 +10,9 @@ export default function TrustBadge({ score, compact = false }: { score: number; 
   return (
     <span className={`chip ${cls}`} title={`Trust score ${score}/100`}>
       <Icon aria-hidden="true" />
-      {level === 'safe' && <T en="Looks safe" hi="सुरक्षित लगता है" />}
-      {level === 'check' && <T en="Check first" hi="पहले जाँचें" />}
-      {level === 'risky' && <T en="Risky" hi="ख़तरा" />}
+      {level === 'safe' && <T en="Looks safe" hi="सुरक्षित लगता है" mr="सुरक्षित वाटते" gu="સુરક્ષિત લાગે છે" />}
+      {level === 'check' && <T en="Check first" hi="पहले जाँचें" mr="आधी तपासा" gu="પહેલાં તપાસો" />}
+      {level === 'risky' && <T en="Risky" hi="ख़तरा" mr="धोका" gu="જોખમ" />}
       {!compact && <span style={{ opacity: 0.75, fontWeight: 500 }}>· {score}</span>}
     </span>
   );

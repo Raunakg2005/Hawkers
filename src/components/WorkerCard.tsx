@@ -20,7 +20,7 @@ export default function WorkerCard({ worker: w, index = 0 }: { worker: Worker; i
           </h3>
           <p className="worker-trade">
             <TradeIcon trade={w.trade} size={16} />
-            <Tx l={TRADE[w.trade].name} /> · {w.years} <T en="yrs" hi="साल" />
+            <Tx l={TRADE[w.trade].name} /> · {w.years} <T en="yrs" hi="साल" mr="वर्षे" gu="વર્ષ" />
           </p>
         </div>
         <span className={`chip ${w.availableToday ? 'chip-success' : ''}`}>
@@ -41,13 +41,13 @@ export default function WorkerCard({ worker: w, index = 0 }: { worker: Worker; i
             <Star aria-hidden="true" className="star" /> {w.rating}
           </span>
           <small>
-            {w.jobsDone} <T en="jobs" hi="काम" />
+            {w.jobsDone} <T en="jobs" hi="काम" mr="कामे" gu="કામ" />
           </small>
         </div>
         <div>
           <span className="money">{checks}/3</span>
           <small>
-            <T en="checks" hi="जाँच" />
+            <T en="checks" hi="जाँच" mr="तपासण्या" gu="ચકાસણી" />
           </small>
         </div>
       </div>
