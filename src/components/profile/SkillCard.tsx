@@ -44,7 +44,7 @@ export default function SkillCard({
       <header className={s.cardBand}>
         <span className={s.cardBrand}>
           <IdCard aria-hidden="true" />
-          <T en="Naka Skill Card" hi="नाका स्किल कार्ड" mr="नाका स्किल कार्ड" gu="નાકા સ્કિલ કાર્ડ" />
+          <T en="Karigar Skill Card" hi="कारीगर स्किल कार्ड" mr="कारागीर स्किल कार्ड" gu="કારીગર સ્કિલ કાર્ડ" />
         </span>
         <span className={s.cardNo}>{cardNumber(p)}</span>
         <span className={s.bandIcon} aria-hidden="true">
@@ -59,7 +59,7 @@ export default function SkillCard({
               <WorkerAvatar
                 /* The avatar's gradient id comes from the name; the print copy appends 5 letters so its id is unique
                    while the skin tone (name length mod 5) stays identical. */
-                name={`${name || 'Naka worker'}${variant === 'print' ? 'Print' : ''}`}
+                name={`${name || 'Karigar worker'}${variant === 'print' ? 'Print' : ''}`}
                 trade={p.trade}
                 hue={profileHue(p)}
                 size={84}
@@ -244,7 +244,7 @@ export default function SkillCard({
           <ul className={s.badges} aria-label={t('Checks', 'जाँच', 'तपासणी', 'ચકાસણી')}>
             <li className="chip chip-trust">
               <BadgeCheck aria-hidden="true" />
-              <T en="Made on Naka" hi="नाका पर बना" mr="नाकावर बनवलेलं" gu="નાકા પર બનેલું" />
+              <T en="Made on Karigar" hi="कारीगर पर बना" mr="कारागीरवर बनवलेलं" gu="કારીગર પર બનેલું" />
             </li>
             {p.eshram ? (
               <li className="chip chip-success">

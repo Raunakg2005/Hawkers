@@ -50,7 +50,7 @@ export default function ProfileActions({ id, name, relay }: { id: string; name: 
         <Handshake aria-hidden="true" />
         <T en="Make an offer" hi="ऑफ़र दें" mr="ऑफर द्या" gu="ઑફર આપો" />
       </a>
-      <a href={`tel:${relay.replace(/\s/g, '')}`} className="btn btn-accent" aria-label={t(`Call ${first} through Naka’s private line`, `नाका की प्राइवेट लाइन से ${first} को कॉल करें`, `नाकाच्या प्रायव्हेट लाइनवरून ${first} यांना फोन करा`, `નાકાની પ્રાઇવેટ લાઇનથી ${first}ને ફોન કરો`)}>
+      <a href={`tel:${relay.replace(/\s/g, '')}`} className="btn btn-accent" aria-label={t(`Call ${first} through Karigar’s private line`, `कारीगर की प्राइवेट लाइन से ${first} को कॉल करें`, `कारागीरच्या प्रायव्हेट लाइनवरून ${first} यांना फोन करा`, `કારીગરની પ્રાઇવેટ લાઇનથી ${first}ને ફોન કરો`)}>
         <Phone aria-hidden="true" />
         <T en="Call" hi="कॉल करें" mr="फोन करा" gu="ફોન કરો" />
       </a>

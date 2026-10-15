@@ -61,10 +61,10 @@ export default function Header() {
     <>
       <header className={cls}>
         <div className="container header-inner">
-          <Link className="brand" href="/" aria-label={t('Naka — home', 'नाका — होम', 'नाका — होम', 'નાકા — હોમ')}>
+          <Link className="brand" href="/" aria-label={t('Karigar — home', 'कारीगर — होम', 'कारागीर — होम', 'કારીગર — હોમ')}>
             <Logo />
             <span>
-              naka
+              karigar
               <small>
                 <T en="beyond the waiting line" hi="इंतज़ार से आगे" mr="प्रतीक्षेच्या पलीकडे" gu="રાહથી આગળ" />
               </small>

@@ -51,15 +51,15 @@ const muktaVaani = Mukta_Vaani({
 });
 
 const DESCRIPTION =
-  'Naka connects India’s daily-wage workers — plumbers, electricians, painters, masons, helpers — to nearby work with clear pay, a skill card without a résumé, scam protection and welfare schemes.';
+  'Karigar connects India’s skilled daily-wage craftspeople — plumbers, electricians, painters, masons, helpers — to nearby work with clear pay, a skill card without a résumé, scam protection and welfare schemes.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://naka.example'),
-  title: { default: 'Naka — Beyond the waiting line', template: '%s · Naka' },
+  metadataBase: new URL('https://karigar.example'),
+  title: { default: 'Karigar — Beyond the waiting line', template: '%s · Karigar' },
   description: DESCRIPTION,
-  applicationName: 'Naka',
-  openGraph: { type: 'website', siteName: 'Naka', title: 'Naka — Beyond the waiting line', description: DESCRIPTION },
-  twitter: { card: 'summary_large_image', title: 'Naka — Beyond the waiting line', description: DESCRIPTION },
+  applicationName: 'Karigar',
+  openGraph: { type: 'website', siteName: 'Karigar', title: 'Karigar — Beyond the waiting line', description: DESCRIPTION },
+  twitter: { card: 'summary_large_image', title: 'Karigar — Beyond the waiting line', description: DESCRIPTION },
 };
 
 export const viewport: Viewport = {

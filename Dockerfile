@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-# Naka — production image (Next.js standalone server, ~150 MB, runs as non-root)
+# Karigar — production image (Next.js standalone server, ~150 MB, runs as non-root)
 
 # ---------- deps: install exactly what package-lock.json says
 FROM node:22-alpine AS deps

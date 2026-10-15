@@ -34,7 +34,7 @@ const ITEMS: { id: string; icon: LucideIcon; color: string; title: L; hint: L }[
     icon: Handshake,
     color: 'var(--color-success)',
     title: { en: 'Agree pay & payday in writing', hi: 'मज़दूरी और भुगतान का दिन लिखित में तय करें', mr: 'मजुरी आणि पैसे मिळण्याचा दिवस लेखी ठरवा', gu: 'મજૂરી અને પૈસા મળવાનો દિવસ લખીને નક્કી કરો' },
-    hint: { en: 'Use the Naka Work Promise. A phone message also counts.', hi: 'नाका का “काम का वादा” इस्तेमाल करें। फ़ोन का मैसेज भी चलेगा।', mr: 'नाकाचे “कामाचे वचन” वापरा. फोनवरचा मेसेजही चालेल.', gu: 'નાકાનું “કામનું વચન” વાપરો. ફોનનો મેસેજ પણ ચાલશે.' },
+    hint: { en: 'Use the Karigar Work Promise. A phone message also counts.', hi: 'कारीगर का “काम का वादा” इस्तेमाल करें। फ़ोन का मैसेज भी चलेगा।', mr: 'कारागीरचे “कामाचे वचन” वापरा. फोनवरचा मेसेजही चालेल.', gu: 'કારીગરનું “કામનું વચન” વાપરો. ફોનનો મેસેજ પણ ચાલશે.' },
   },
   {
     id: 'fare',

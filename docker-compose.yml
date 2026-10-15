@@ -1,8 +1,8 @@
 services:
   web:
     build: .
-    image: naka:latest
-    container_name: naka
+    image: karigar:latest
+    container_name: karigar
     ports:
       - "3000:3000"
     restart: unless-stopped

@@ -348,10 +348,10 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
         </h2>
         <p className="lead">
           <T
-            en={`${pt.name.en} workers near ${published.area.en} now get a voice alert in their own language. Calls reach you on a private Naka number — your phone stays hidden.`}
-            hi={`${published.area.hi} के पास के ${pt.name.hi} को अब उनकी अपनी भाषा में आवाज़ से सूचना मिल रही है। कॉल नाका के प्राइवेट नंबर से आएँगे — आपका नंबर छिपा रहेगा।`}
-            mr={`${published.area.mr} जवळच्या ${pt.name.mr} कामगारांना आता त्यांच्या भाषेत आवाजात सूचना मिळत आहे. फोन नाकाच्या प्रायव्हेट नंबरवरून येतील — तुमचा नंबर लपलेला राहील.`}
-            gu={`${published.area.gu} પાસેના ${pt.name.gu} કામદારોને હવે તેમની પોતાની ભાષામાં અવાજથી સૂચના મળી રહી છે. ફોન નાકાના પ્રાઇવેટ નંબરથી આવશે — તમારો નંબર છુપાયેલો રહેશે.`}
+            en={`${pt.name.en} workers near ${published.area.en} now get a voice alert in their own language. Calls reach you on a private Karigar number — your phone stays hidden.`}
+            hi={`${published.area.hi} के पास के ${pt.name.hi} को अब उनकी अपनी भाषा में आवाज़ से सूचना मिल रही है। कॉल कारीगर के प्राइवेट नंबर से आएँगे — आपका नंबर छिपा रहेगा।`}
+            mr={`${published.area.mr} जवळच्या ${pt.name.mr} कामगारांना आता त्यांच्या भाषेत आवाजात सूचना मिळत आहे. फोन कारागीरच्या प्रायव्हेट नंबरवरून येतील — तुमचा नंबर लपलेला राहील.`}
+            gu={`${published.area.gu} પાસેના ${pt.name.gu} કામદારોને હવે તેમની પોતાની ભાષામાં અવાજથી સૂચના મળી રહી છે. ફોન કારીગરના પ્રાઇવેટ નંબરથી આવશે — તમારો નંબર છુપાયેલો રહેશે.`}
           />
         </p>
         <div

@@ -12,14 +12,14 @@ export default function Footer() {
           <div className="stack">
             <Link className="brand" href="/">
               <Logo />
-              naka
+              karigar
             </Link>
             <p className="muted" style={{ maxWidth: '38ch' }}>
               <T
-                en="A digital naka for India’s daily-wage workers — find work, show your skill, know your rights. No résumé needed."
-                hi="भारत के दिहाड़ी मज़दूरों के लिए डिजिटल नाका — काम खोजें, हुनर दिखाएँ, अधिकार जानें। बायोडाटा की ज़रूरत नहीं।"
-                mr="भारतातील रोजंदारी कामगारांसाठी डिजिटल नाका — काम शोधा, कौशल्य दाखवा, हक्क जाणा. बायोडाटाची गरज नाही."
-                gu="ભારતના રોજમદાર કામદારો માટે ડિજિટલ નાકા — કામ શોધો, આવડત બતાવો, અધિકાર જાણો. બાયોડેટાની જરૂર નથી."
+                en="A digital home for India’s skilled daily craftspeople — find work, show your skill, know your rights. No résumé needed."
+                hi="भारत के हुनरमंद दिहाड़ी कारीगरों के लिए डिजिटल मंच — काम खोजें, हुनर दिखाएँ, अधिकार जानें। बायोडाटा की ज़रूरत नहीं।"
+                mr="भारतातील कुशल रोजंदारी कारागिरांसाठी डिजिटल व्यासपीठ — काम शोधा, कौशल्य दाखवा, हक्क जाणा. बायोडाटाची गरज नाही."
+                gu="ભારતના કુશળ રોજમદાર કારીગરો માટે ડિજિટલ પ્લેટફોર્મ — કામ શોધો, આવડત બતાવો, અધિકાર જાણો. બાયોડેટાની જરૂર નથી."
               />
             </p>
             <p className="subtle">

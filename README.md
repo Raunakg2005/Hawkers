@@ -1,9 +1,9 @@
-# Naka — Beyond the Waiting Line
+# Karigar — Beyond the Waiting Line
 
-**Connecting India's daily-wage workers to better work, fair pay and their rights.**
+**Connecting India's skilled daily-wage craftspeople and workers to better work, fair pay and their rights.**
 Theme: Inclusive Design · Employment · Digital Empowerment — a frontend-only hackathon build (Next.js, mock data, no backend).
 
-Every morning plumbers, painters, masons, electricians and helpers wait at a *naka* (roadside hiring point) hoping the right person walks by. Naka keeps that familiar way of working and adds a digital layer: nearby jobs with the pay written first, a skill card that replaces a résumé, a trust shield against scams, and rights & schemes in plain language.
+Every morning plumbers, painters, masons, electricians and helpers wait at a *naka* (roadside hiring point) hoping the right person walks by. Karigar transforms that familiar way of working into an empowering digital ecosystem: nearby jobs with the pay written first, a verified skill card that replaces a résumé, a trust shield against scams, and rights & schemes in plain language.
 
 ## What's inside
 
@@ -49,7 +49,7 @@ npm run build && npm start
 ```bash
 docker compose up --build        # http://localhost:3000
 # or
-docker build -t naka . && docker run --rm -p 3000:3000 naka
+docker build -t karigar . && docker run --rm -p 3000:3000 karigar
 ```
 
 The image is a multi-stage build of Next.js `standalone` output on `node:22-alpine`: it runs as a non-root user, has a healthcheck, and `docker-compose.yml` runs it read-only with all capabilities dropped and a 256 MB memory limit.

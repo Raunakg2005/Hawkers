@@ -379,10 +379,10 @@ export function cardSpeech(p: SkillProfile): L {
 
 /** Labels for the Share / WhatsApp text, per language. */
 const SHARE: Record<Lang, { title: string; worker: string; work: string; exp: (y: number) => string; rate: string; day: string; area: string; skills: string; langs: string; today: string }> = {
-  en: { title: 'Naka Skill Card', worker: 'Worker', work: 'Work', exp: (y) => `${y} years experience`, rate: 'Rate', day: 'day', area: 'Area', skills: 'Skills', langs: 'Languages', today: 'Available today' },
-  hi: { title: 'नाका स्किल कार्ड', worker: 'कारीगर', work: 'काम', exp: (y) => `${y} साल का अनुभव`, rate: 'मज़दूरी', day: 'दिन', area: 'जगह', skills: 'हुनर', langs: 'भाषा', today: 'आज खाली हैं' },
-  mr: { title: 'नाका स्किल कार्ड', worker: 'कारागीर', work: 'काम', exp: (y) => `${y} वर्षांचा अनुभव`, rate: 'मजुरी', day: 'दिवस', area: 'ठिकाण', skills: 'कौशल्य', langs: 'भाषा', today: 'आज मोकळे आहेत' },
-  gu: { title: 'નાકા સ્કિલ કાર્ડ', worker: 'કારીગર', work: 'કામ', exp: (y) => `${y} વર્ષનો અનુભવ`, rate: 'મજૂરી', day: 'દિવસ', area: 'જગ્યા', skills: 'આવડત', langs: 'ભાષા', today: 'આજે ખાલી છે' },
+  en: { title: 'Karigar Skill Card', worker: 'Worker', work: 'Work', exp: (y) => `${y} years experience`, rate: 'Rate', day: 'day', area: 'Area', skills: 'Skills', langs: 'Languages', today: 'Available today' },
+  hi: { title: 'कारीगर स्किल कार्ड', worker: 'कारीगर', work: 'काम', exp: (y) => `${y} साल का अनुभव`, rate: 'मज़दूरी', day: 'दिन', area: 'जगह', skills: 'हुनर', langs: 'भाषा', today: 'आज खाली हैं' },
+  mr: { title: 'कारागीर स्किल कार्ड', worker: 'कारागीर', work: 'काम', exp: (y) => `${y} वर्षांचा अनुभव`, rate: 'मजुरी', day: 'दिवस', area: 'ठिकाण', skills: 'कौशल्य', langs: 'भाषा', today: 'आज मोकळे आहेत' },
+  gu: { title: 'કારીગર સ્કિલ કાર્ડ', worker: 'કારીગર', work: 'કામ', exp: (y) => `${y} વર્ષનો અનુભવ`, rate: 'મજૂરી', day: 'દિવસ', area: 'જગ્યા', skills: 'આવડત', langs: 'ભાષા', today: 'આજે ખાલી છે' },
 };
 
 /** Text used for Share / WhatsApp / clipboard. */

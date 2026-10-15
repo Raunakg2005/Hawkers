@@ -129,10 +129,10 @@ const QUESTIONS: Q[] = [
     risky: 'no',
     icon: BadgeCheck,
     q: {
-      en: 'Is the employer verified on Naka?',
-      hi: 'क्या मालिक नाका पर वेरिफ़ाइड है?',
-      mr: 'मालक नाका वर व्हेरिफाइड आहे का?',
-      gu: 'શું માલિક નાકા પર વેરિફાઇડ છે?',
+      en: 'Is the employer verified on Karigar?',
+      hi: 'क्या मालिक कारीगर पर वेरिफ़ाइड है?',
+      mr: 'मालक कारागीर वर व्हेरिफाइड आहे का?',
+      gu: 'શું માલિક કારીગર પર વેરિફાઇડ છે?',
     },
     hint: {
       en: 'Look for the tick badge next to their name on the job card.',
@@ -348,10 +348,10 @@ export default function SafetyChecker() {
   const share = async () => {
     const word = LEVEL[result.level].title;
     const text = tl({
-      en: `Naka safety check: ${word.en} (${result.score}/100). I am checking a job before I go. If I don't call you by evening, please call me.`,
-      hi: `नाका सुरक्षा जाँच: ${word.hi} (${result.score}/100)। मैं एक काम पर जाने से पहले जाँच रहा/रही हूँ। शाम तक मेरा फ़ोन न आए तो मुझे कॉल करना।`,
-      mr: `नाका सुरक्षा तपासणी: ${word.mr} (${result.score}/100). एका कामावर जाण्याआधी मी तपासत आहे. संध्याकाळपर्यंत माझा फोन आला नाही तर मला कॉल करा.`,
-      gu: `નાકા સુરક્ષા તપાસ: ${word.gu} (${result.score}/100). એક કામ પર જતાં પહેલાં હું તપાસ કરું છું. સાંજ સુધી મારો ફોન ન આવે તો મને કૉલ કરજો.`,
+      en: `Karigar safety check: ${word.en} (${result.score}/100). I am checking a job before I go. If I don't call you by evening, please call me.`,
+      hi: `कारीगर सुरक्षा जाँच: ${word.hi} (${result.score}/100)। मैं एक काम पर जाने से पहले जाँच रहा/रही हूँ। शाम तक मेरा फ़ोन न आए तो मुझे कॉल करना।`,
+      mr: `कारागीर सुरक्षा तपासणी: ${word.mr} (${result.score}/100). एका कामावर जाण्याआधी मी तपासत आहे. संध्याकाळपर्यंत माझा फोन आला नाही तर मला कॉल करा.`,
+      gu: `કારીગર સુરક્ષા તપાસ: ${word.gu} (${result.score}/100). એક કામ પર જતાં પહેલાં હું તપાસ કરું છું. સાંજ સુધી મારો ફોન ન આવે તો મને કૉલ કરજો.`,
     });
     try {
       if (navigator.share) {

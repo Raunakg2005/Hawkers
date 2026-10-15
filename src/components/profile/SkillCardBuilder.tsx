@@ -359,10 +359,10 @@ export default function SkillCardBuilder() {
   };
 
   const introSpeech: L = {
-    en: `Namaste, my name is ${p.name.trim() || 'a Naka worker'}. I am a ${p.trade ? TRADE[p.trade].name.en.toLowerCase() : 'worker'} with ${p.years} years of experience.`,
-    hi: `नमस्ते, मेरा नाम ${p.name.trim() || 'नाका कारीगर'} है। मैं ${p.trade ? TRADE[p.trade].name.hi : 'कारीगर'} हूँ और मुझे ${p.years} साल का अनुभव है।`,
-    mr: `नमस्कार, माझं नाव ${p.name.trim() || 'नाका कारागीर'}. मी ${p.trade ? TRADE[p.trade].name.mr : 'कारागीर'} आहे आणि मला ${p.years} वर्षांचा अनुभव आहे.`,
-    gu: `નમસ્તે, મારું નામ ${p.name.trim() || 'નાકા કારીગર'} છે. હું ${p.trade ? TRADE[p.trade].name.gu : 'કારીગર'} છું અને મને ${p.years} વર્ષનો અનુભવ છે.`,
+    en: `Namaste, my name is ${p.name.trim() || 'a Karigar craftsperson'}. I am a ${p.trade ? TRADE[p.trade].name.en.toLowerCase() : 'worker'} with ${p.years} years of experience.`,
+    hi: `नमस्ते, मेरा नाम ${p.name.trim() || 'कारीगर'} है। मैं ${p.trade ? TRADE[p.trade].name.hi : 'कारीगर'} हूँ और मुझे ${p.years} साल का अनुभव है।`,
+    mr: `नमस्कार, माझं नाव ${p.name.trim() || 'कारागीर'}. मी ${p.trade ? TRADE[p.trade].name.mr : 'कारागीर'} आहे आणि मला ${p.years} वर्षांचा अनुभव आहे.`,
+    gu: `નમસ્તે, મારું નામ ${p.name.trim() || 'કારીગર'} છે. હું ${p.trade ? TRADE[p.trade].name.gu : 'કારીગર'} છું અને મને ${p.years} વર્ષનો અનુભવ છે.`,
   };
 
   /* ── Final card actions */
@@ -371,7 +371,7 @@ export default function SkillCardBuilder() {
     const url = window.location.href;
     if (navigator.share) {
       try {
-        await navigator.share({ title: t('My Naka Skill Card', 'मेरा नाका स्किल कार्ड', 'माझं नाका स्किल कार्ड', 'મારું નાકા સ્કિલ કાર્ડ'), text, url });
+        await navigator.share({ title: t('My Karigar Skill Card', 'मेरा कारीगर स्किल कार्ड', 'माझं कारागीर स्किल कार्ड', 'મારું કારીગર સ્કિલ કાર્ડ'), text, url });
         return;
       } catch (e) {
         if ((e as DOMException)?.name === 'AbortError') return;
@@ -537,7 +537,7 @@ export default function SkillCardBuilder() {
             <style>{`@media screen{[data-print-root]{display:none!important}}@media print{body>*:not([data-print-root]){display:none!important}[data-print-root]{display:block!important}[data-print-hide]{display:none!important}@page{margin:12mm}}`}</style>
             <SkillCard p={p} photoUrls={photoUrls} variant="print" />
             <p className={s.printNote}>
-              <T en="Made with Naka — skill cards for daily-wage workers. The QR code is a demo." hi="नाका से बना — दिहाड़ी कामगारों का स्किल कार्ड। QR कोड डेमो है।" mr="नाकावर बनवलेलं — रोजंदारी कामगारांसाठी स्किल कार्ड. QR कोड डेमो आहे." gu="નાકા પર બનાવેલું — રોજમદાર કામદારો માટે સ્કિલ કાર્ડ. QR કોડ ડેમો છે." />
+              <T en="Made with Karigar — skill cards for daily-wage craftspeople. The QR code is a demo." hi="कारीगर से बना — दिहाड़ी कारीगरों का स्किल कार्ड। QR कोड डेमो है।" mr="कारागीरवर बनवलेलं — रोजंदारी कारागिरांसाठी स्किल कार्ड. QR कोड डेमो आहे." gu="કારીગર પર બનાવેલું — રોજમદાર કારીગરો માટે સ્કિલ કાર્ડ. QR કોડ ડેમો છે." />
             </p>
           </div>,
           document.body,
