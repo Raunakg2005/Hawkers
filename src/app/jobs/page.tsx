@@ -16,7 +16,7 @@ export default function JobsPage() {
         <header className="jobs-head" data-reveal="">
           <div>
             <span className="eyebrow">
-              <T en="Find work" hi="काम खोजें" />
+              <T en="Find work" hi="काम खोजें" mr="काम शोधा" gu="કામ શોધો" />
             </span>
             <h1 className="h1">
               <T
@@ -30,6 +30,16 @@ export default function JobsPage() {
                     <span className="gradient-text">आपके नाके</span> के पास काम
                   </>
                 }
+                mr={
+                  <>
+                    <span className="gradient-text">तुमच्या नाक्याजवळ</span> काम
+                  </>
+                }
+                gu={
+                  <>
+                    <span className="gradient-text">તમારા નાકા</span> પાસે કામ
+                  </>
+                }
               />
             </h1>
           </div>
@@ -37,10 +47,10 @@ export default function JobsPage() {
             <MapPin aria-hidden="true" />
             <span>
               <strong>
-                <T en="Kurla West naka" hi="कुर्ला पश्चिम नाका" />
+                <T en="Kurla West naka" hi="कुर्ला पश्चिम नाका" mr="कुर्ला पश्चिम नाका" gu="કુર્લા પશ્ચિમ નાકા" />
               </strong>
               <small>
-                <T en="LBS Marg, Mumbai · updated 2 min ago" hi="LBS मार्ग, मुंबई · 2 मिनट पहले अपडेट" />
+                <T en="LBS Marg, Mumbai · updated 2 min ago" hi="LBS मार्ग, मुंबई · 2 मिनट पहले अपडेट" mr="LBS मार्ग, मुंबई · 2 मिनिटांपूर्वी अपडेट" gu="LBS માર્ગ, મુંબઈ · 2 મિનિટ પહેલાં અપડેટ" />
               </small>
             </span>
           </p>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { LocateFixed } from 'lucide-react';
-import type { Job } from '@/data/types';
+import type { Job, L } from '@/data/types';
 import { rupee, trustScore } from '@/data/trades';
 import { useLang } from '@/lib/prefs';
 import JobCard from '../JobCard';
@@ -12,19 +12,19 @@ import { T } from '../T';
 /** Your naka on the illustrated map (0–100 coordinates). */
 export const HOME = { x: 46, y: 54 };
 
-const AREAS = [
-  { n: 'Goregaon', h: 'गोरेगांव', x: 18, y: 12 },
-  { n: 'Malad', h: 'मालाड', x: 8, y: 26 },
-  { n: 'Andheri', h: 'अंधेरी', x: 36, y: 20 },
-  { n: 'Powai', h: 'पवई', x: 64, y: 22 },
-  { n: 'Mulund', h: 'मुलुंड', x: 86, y: 9 },
-  { n: 'Vikhroli', h: 'विक्रोली', x: 80, y: 32 },
-  { n: 'Santacruz', h: 'सांताक्रूज़', x: 26, y: 40 },
-  { n: 'Ghatkopar', h: 'घाटकोपर', x: 63, y: 41 },
-  { n: 'Kurla', h: 'कुर्ला', x: 47, y: 62 },
-  { n: 'Bandra', h: 'बांद्रा', x: 18, y: 55 },
-  { n: 'Chembur', h: 'चेंबूर', x: 72, y: 70 },
-  { n: 'Dadar', h: 'दादर', x: 28, y: 86 },
+const AREAS: { name: L; x: number; y: number }[] = [
+  { name: { en: 'Goregaon', hi: 'गोरेगांव', mr: 'गोरेगाव', gu: 'ગોરેગાંવ' }, x: 18, y: 12 },
+  { name: { en: 'Malad', hi: 'मालाड', mr: 'मालाड', gu: 'મલાડ' }, x: 8, y: 26 },
+  { name: { en: 'Andheri', hi: 'अंधेरी', mr: 'अंधेरी', gu: 'અંધેરી' }, x: 36, y: 20 },
+  { name: { en: 'Powai', hi: 'पवई', mr: 'पवई', gu: 'પવઈ' }, x: 64, y: 22 },
+  { name: { en: 'Mulund', hi: 'मुलुंड', mr: 'मुलुंड', gu: 'મુલુંડ' }, x: 86, y: 9 },
+  { name: { en: 'Vikhroli', hi: 'विक्रोली', mr: 'विक्रोळी', gu: 'વિક્રોલી' }, x: 80, y: 32 },
+  { name: { en: 'Santacruz', hi: 'सांताक्रूज़', mr: 'सांताक्रूझ', gu: 'સાંતાક્રુઝ' }, x: 26, y: 40 },
+  { name: { en: 'Ghatkopar', hi: 'घाटकोपर', mr: 'घाटकोपर', gu: 'ઘાટકોપર' }, x: 63, y: 41 },
+  { name: { en: 'Kurla', hi: 'कुर्ला', mr: 'कुर्ला', gu: 'કુર્લા' }, x: 47, y: 62 },
+  { name: { en: 'Bandra', hi: 'बांद्रा', mr: 'वांद्रे', gu: 'બાંદ્રા' }, x: 18, y: 55 },
+  { name: { en: 'Chembur', hi: 'चेंबूर', mr: 'चेंबूर', gu: 'ચેમ્બુર' }, x: 72, y: 70 },
+  { name: { en: 'Dadar', hi: 'दादर', mr: 'दादर', gu: 'દાદર' }, x: 28, y: 86 },
 ];
 
 /**
@@ -39,7 +39,7 @@ export default function JobsMap({ jobs }: { jobs: Job[] }) {
 
   return (
     <div className="jobs-map-wrap">
-      <div className="jobs-map" role="group" aria-label={t('Map of jobs around your naka', 'आपके नाके के आसपास कामों का नक़्शा')}>
+      <div className="jobs-map" role="group" aria-label={t('Map of jobs around your naka', 'आपके नाके के आसपास कामों का नक़्शा', 'तुमच्या नाक्याजवळच्या कामांचा नकाशा', 'તમારા નાકાની આસપાસનાં કામનો નકશો')}>
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <defs>
             <pattern id="map-grid" width="5" height="5" patternUnits="userSpaceOnUse">
@@ -68,8 +68,8 @@ export default function JobsMap({ jobs }: { jobs: Job[] }) {
         </svg>
 
         {AREAS.map((a) => (
-          <span key={a.n} className="map-area" style={{ left: `${a.x}%`, top: `${a.y}%` }}>
-            {lang === 'hi' ? a.h : a.n}
+          <span key={a.name.en} className="map-area" style={{ left: `${a.x}%`, top: `${a.y}%` }}>
+            {a.name[lang]}
           </span>
         ))}
         <span className="map-ring-label" style={{ left: `${HOME.x + 7}%`, top: `${HOME.y - 7}%` }}>
@@ -82,7 +82,7 @@ export default function JobsMap({ jobs }: { jobs: Job[] }) {
         <span className="map-home" style={{ left: `${HOME.x}%`, top: `${HOME.y}%` }}>
           <LocateFixed aria-hidden="true" />
           <span>
-            <T en="Your naka" hi="आपका नाका" />
+            <T en="Your naka" hi="आपका नाका" mr="तुमचा नाका" gu="તમારું નાકા" />
           </span>
         </span>
 
@@ -95,7 +95,7 @@ export default function JobsMap({ jobs }: { jobs: Job[] }) {
               className={`map-pin pin-${j.duration}${risky ? ' is-risky' : ''}`}
               style={{ left: `${j.map.x}%`, top: `${j.map.y}%`, '--tile': `var(--trade-${j.trade})` } as React.CSSProperties}
               aria-pressed={sel === j.id}
-              aria-label={`${lang === 'hi' ? j.title.hi : j.title.en}, ${rupee(j.pay.amount)}, ${j.distanceKm} km`}
+              aria-label={`${j.title[lang]}, ${rupee(j.pay.amount)}, ${j.distanceKm} km`}
               onClick={() => setSel(j.id)}
             >
               <TradeIcon trade={j.trade} />
@@ -106,13 +106,13 @@ export default function JobsMap({ jobs }: { jobs: Job[] }) {
 
         <div className="map-legend" aria-hidden="true">
           <span className="chip chip-daily">
-            <span className="dot" /> <T en="Today" hi="आज" />
+            <span className="dot" /> <T en="Today" hi="आज" mr="आज" gu="આજે" />
           </span>
           <span className="chip chip-short">
-            <span className="dot" /> <T en="Few days" hi="कुछ दिन" />
+            <span className="dot" /> <T en="Few days" hi="कुछ दिन" mr="काही दिवस" gu="થોડા દિવસ" />
           </span>
           <span className="chip chip-long">
-            <span className="dot" /> <T en="Months" hi="महीने" />
+            <span className="dot" /> <T en="Months" hi="महीने" mr="महिने" gu="મહિના" />
           </span>
         </div>
       </div>
@@ -122,7 +122,7 @@ export default function JobsMap({ jobs }: { jobs: Job[] }) {
           <JobCard key={selected.id} job={selected} />
         ) : (
           <p className="muted">
-            <T en="Tap a pin to see the job." hi="काम देखने के लिए पिन दबाएँ।" />
+            <T en="Tap a pin to see the job." hi="काम देखने के लिए पिन दबाएँ।" mr="काम पाहण्यासाठी पिन दाबा." gu="કામ જોવા માટે પિન દબાવો." />
           </p>
         )}
       </div>

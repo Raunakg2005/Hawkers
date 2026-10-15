@@ -172,7 +172,7 @@ export default function SkillCard({
                         <Tx l={d.tiny} />
                       </span>
                       <span className="sr-only">
-                        <Tx l={d.short} /> {on ? t('available', 'उपलब्ध', 'मोकळा', 'ખાલી') : t('not available', 'उपलब्ध नहीं', 'मोकळा नाही', 'ખાલી નથી')}
+                        <Tx l={d.short} /> {on ? t('available', 'उपलब्ध', 'उपलब्ध', 'ખાલી') : t('not available', 'उपलब्ध नहीं', 'उपलब्ध नाही', 'ખાલી નથી')}
                       </span>
                     </span>
                   );

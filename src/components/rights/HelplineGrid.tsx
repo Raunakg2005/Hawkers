@@ -35,7 +35,7 @@ export default function HelplineGrid({ compact = false, only }: { compact?: bool
                 <span className="money">{h.number}</span>
                 <span className={s.helpCall}>
                   <PhoneCall aria-hidden="true" />
-                  <T en="Call free" hi="मुफ़्त कॉल" />
+                  <T en="Call free" hi="मुफ़्त कॉल" mr="मोफत कॉल" gu="મફત કૉલ" />
                 </span>
               </span>
             </a>

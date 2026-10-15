@@ -53,7 +53,7 @@ export default function DocChecklist() {
               <small>/{DOC_IDS.length}</small>
             </span>
             <span className={s.docBigLabel}>
-              <T en="papers ready" hi="कागज़ तैयार" />
+              <T en="papers ready" hi="कागज़ तैयार" mr="कागदपत्रे तयार" gu="દસ્તાવેજ તૈયાર" />
             </span>
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function DocChecklist() {
           aria-valuemin={0}
           aria-valuemax={DOC_IDS.length}
           aria-valuenow={have.length}
-          aria-label={t('Papers ready', 'तैयार कागज़')}
+          aria-label={t('Papers ready', 'तैयार कागज़', 'तयार कागदपत्रे', 'તૈયાર દસ્તાવેજ')}
           style={{ '--meter': 'linear-gradient(90deg, var(--color-trust), var(--color-success))' } as React.CSSProperties}
         >
           <span style={{ transform: `scaleX(${pct})` }} />
@@ -71,7 +71,7 @@ export default function DocChecklist() {
 
         <div className={s.readyFor}>
           <p className={s.blockTitle}>
-            <T en="With these papers you can apply for" hi="इन कागज़ों से आप आवेदन कर सकते हैं" />
+            <T en="With these papers you can apply for" hi="इन कागज़ों से आप आवेदन कर सकते हैं" mr="या कागदपत्रांवर तुम्ही अर्ज करू शकता" gu="આ દસ્તાવેજોથી તમે અરજી કરી શકો છો" />
           </p>
           {ready.length ? (
             <ul className={s.likelyChips}>
@@ -86,18 +86,18 @@ export default function DocChecklist() {
             </ul>
           ) : (
             <p className="subtle">
-              <T en="Tick the papers you already have. We will show which schemes you are ready for." hi="जो कागज़ आपके पास हैं उन पर निशान लगाएँ। हम बताएँगे कि आप किन योजनाओं के लिए तैयार हैं।" />
+              <T en="Tick the papers you already have. We will show which schemes you are ready for." hi="जो कागज़ आपके पास हैं उन पर निशान लगाएँ। हम बताएँगे कि आप किन योजनाओं के लिए तैयार हैं।" mr="तुमच्याकडे असलेल्या कागदपत्रांवर खूण करा. तुम्ही कोणत्या योजनांसाठी तयार आहात ते आम्ही दाखवू." gu="તમારી પાસે હોય તે દસ્તાવેજ પર ટિક કરો. તમે કઈ યોજનાઓ માટે તૈયાર છો તે અમે બતાવીશું." />
             </p>
           )}
         </div>
 
         <p className="subtle">
-          <T en="Saved only on this phone. Nobody else can see it." hi="सिर्फ़ इसी फ़ोन में सेव होता है। कोई और नहीं देख सकता।" />
+          <T en="Saved only on this phone. Nobody else can see it." hi="सिर्फ़ इसी फ़ोन में सेव होता है। कोई और नहीं देख सकता।" mr="फक्त याच फोनमध्ये सेव्ह होते. दुसरे कोणी पाहू शकत नाही." gu="ફક્ત આ જ ફોનમાં સેવ થાય છે. બીજું કોઈ જોઈ શકતું નથી." />
         </p>
         {have.length > 0 && (
           <button type="button" className="btn btn-sm btn-ghost" onClick={() => save([])}>
             <RotateCcw aria-hidden="true" />
-            <T en="Clear ticks" hi="निशान हटाएँ" />
+            <T en="Clear ticks" hi="निशान हटाएँ" mr="खुणा काढा" gu="ટિક હટાવો" />
           </button>
         )}
       </aside>
@@ -125,7 +125,7 @@ export default function DocChecklist() {
                     <Tx l={doc.name} />
                     {checked && (
                       <span className={`chip chip-success ${s.docHaveChip}`}>
-                        <T en="I have it" hi="मेरे पास है" />
+                        <T en="I have it" hi="मेरे पास है" mr="माझ्याकडे आहे" gu="મારી પાસે છે" />
                       </span>
                     )}
                   </span>

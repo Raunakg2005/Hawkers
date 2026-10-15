@@ -33,7 +33,7 @@ import { TradeTile } from '@/components/TradeIcon';
 import ReadAloud from '@/components/ReadAloud';
 import { JOBS } from '@/data/jobs';
 import { PAY_UNIT, TRADE, rupee } from '@/data/trades';
-import type { TradeId } from '@/data/types';
+import type { L, TradeId } from '@/data/types';
 import { useLang } from '@/lib/prefs';
 import Toast, { type ToastMsg } from '@/components/profile/Toast';
 import WeekChart from './WeekChart';
@@ -160,7 +160,7 @@ export default function WorkDiary() {
     return (
       <div className={s.skeleton} aria-busy="true">
         <span className="sr-only">
-          <T en="Opening your diary…" hi="आपकी डायरी खुल रही है…" />
+          <T en="Opening your diary…" hi="आपकी डायरी खुल रही है…" mr="तुमची डायरी उघडत आहे…" gu="તમારી ડાયરી ખૂલી રહી છે…" />
         </span>
         <div className={s.skelBlock} />
         <div className={s.skelRow}>
@@ -179,9 +179,9 @@ export default function WorkDiary() {
     writeAvailable(today, on);
     showToast(
       on ? (
-        <T en="You're marked available. Employers nearby can call you." hi="आप खाली दिख रहे हैं। पास के मालिक आपको बुला सकते हैं।" />
+        <T en="You're marked available. Employers nearby can call you." hi="आप खाली दिख रहे हैं। पास के मालिक आपको बुला सकते हैं।" mr="तुम्ही मोकळे दिसत आहात. जवळचे मालक तुम्हाला बोलावू शकतात." gu="તમે ખાલી દેખાઓ છો. નજીકના માલિક તમને બોલાવી શકે છે." />
       ) : (
-        <T en="Marked busy for today." hi="आज के लिए व्यस्त दिखा रहे हैं।" />
+        <T en="Marked busy for today." hi="आज के लिए व्यस्त दिखा रहे हैं।" mr="आजसाठी कामात आहात असे दाखवले आहे." gu="આજ માટે વ્યસ્ત બતાવ્યા છે." />
       ),
     );
   };
@@ -190,7 +190,12 @@ export default function WorkDiary() {
     const entry: DiaryEntry = { ...e, id: `e-${Date.now().toString(36)}` };
     commit([entry, ...entries]);
     showToast(
-      <T en={`Saved! ${rupee(e.amount)} added to your diary.`} hi={`सेव हुआ! ${rupee(e.amount)} डायरी में जुड़ गए।`} />,
+      <T
+        en={`Saved! ${rupee(e.amount)} added to your diary.`}
+        hi={`सेव हुआ! ${rupee(e.amount)} डायरी में जुड़ गए।`}
+        mr={`सेव्ह झाले! ${rupee(e.amount)} डायरीत जोडले.`}
+        gu={`સેવ થયું! ${rupee(e.amount)} ડાયરીમાં ઉમેરાયા.`}
+      />,
     );
   };
 
@@ -198,8 +203,13 @@ export default function WorkDiary() {
     const prev = entries;
     const entry = entries.find((x) => x.id === id);
     commit(entries.map((x) => (x.id === id ? { ...x, paid: true, paidOn: today } : x)));
-    showToast(<T en={`${rupee(entry?.amount ?? 0)} marked as received.`} hi={`${rupee(entry?.amount ?? 0)} मिल गए — दर्ज हुआ।`} />, {
-      label: <T en="Undo" hi="वापस" />,
+    showToast(<T
+        en={`${rupee(entry?.amount ?? 0)} marked as received.`}
+        hi={`${rupee(entry?.amount ?? 0)} मिल गए — दर्ज हुआ।`}
+        mr={`${rupee(entry?.amount ?? 0)} मिळाले — नोंद झाली.`}
+        gu={`${rupee(entry?.amount ?? 0)} મળી ગયા — નોંધ થઈ.`}
+      />, {
+      label: <T en="Undo" hi="वापस" mr="परत घ्या" gu="પાછું કરો" />,
       run: () => commit(prev),
     });
   };
@@ -207,7 +217,7 @@ export default function WorkDiary() {
   const remove = (id: string) => {
     const prev = entries;
     commit(entries.filter((x) => x.id !== id));
-    showToast(<T en="Entry deleted." hi="एंट्री हटाई गई।" />, { label: <T en="Undo" hi="वापस" />, run: () => commit(prev) });
+    showToast(<T en="Entry deleted." hi="एंट्री हटाई गई।" mr="नोंद काढून टाकली." gu="નોંધ કાઢી નાખી." />, { label: <T en="Undo" hi="वापस" mr="परत घ्या" gu="પાછું કરો" />, run: () => commit(prev) });
   };
 
   const download = () => {
@@ -221,26 +231,28 @@ export default function WorkDiary() {
       a.click();
       a.remove();
       window.setTimeout(() => URL.revokeObjectURL(url), 1500);
-      showToast(<T en="Work record downloaded." hi="काम का रिकॉर्ड डाउनलोड हुआ।" />);
+      showToast(<T en="Work record downloaded." hi="काम का रिकॉर्ड डाउनलोड हुआ।" mr="कामाचा रेकॉर्ड डाउनलोड झाला." gu="કામનો રેકોર્ડ ડાઉનલોડ થયો." />);
     } catch {
-      showToast(<T en="Download did not work on this phone." hi="इस फ़ोन पर डाउनलोड नहीं हुआ।" />);
+      showToast(<T en="Download did not work on this phone." hi="इस फ़ोन पर डाउनलोड नहीं हुआ।" mr="या फोनवर डाउनलोड झाले नाही." gu="આ ફોન પર ડાઉનલોડ ન થયું." />);
     }
   };
 
   const greet =
     hour < 12
-      ? { en: 'Good morning', hi: 'सुप्रभात', icon: Sunrise }
+      ? { en: 'Good morning', hi: 'सुप्रभात', mr: 'सुप्रभात', gu: 'સુપ્રભાત', icon: Sunrise }
       : hour < 17
-        ? { en: 'Good afternoon', hi: 'नमस्ते', icon: Sun }
-        : { en: 'Good evening', hi: 'शुभ संध्या', icon: Moon };
+        ? { en: 'Good afternoon', hi: 'नमस्ते', mr: 'नमस्कार', gu: 'નમસ્તે', icon: Sun }
+        : { en: 'Good evening', hi: 'शुभ संध्या', mr: 'शुभ संध्याकाळ', gu: 'શુભ સાંજ', icon: Moon };
   const GreetIcon = greet.icon;
   const monthName = fmtDate(today, lang, { month: 'long' });
   const proofPct = Math.min(1, stats.proofDays / BOARD_DAYS);
   const proofLeft = Math.max(0, BOARD_DAYS - stats.proofDays);
 
-  const summarySpeech = {
+  const summarySpeech: L = {
     en: `${greet.en}${name ? ` ${name}` : ''}. In the last 7 days you earned ${stats.weekEarned} rupees. ${stats.owed ? `${stats.owed} rupees is still owed to you.` : 'Nobody owes you money.'} You worked ${stats.monthDays} days this month.`,
     hi: `${greet.hi}${name ? ` ${name}` : ''}। पिछले 7 दिन में आपने ${stats.weekEarned} रुपये कमाए। ${stats.owed ? `${stats.owed} रुपये अभी आपको मिलने बाक़ी हैं।` : 'किसी पर आपका पैसा बाक़ी नहीं है।'} इस महीने आपने ${stats.monthDays} दिन काम किया।`,
+    mr: `${greet.mr}${name ? ` ${name}` : ''}. मागील 7 दिवसांत तुम्ही ${stats.weekEarned} रुपये कमावले. ${stats.owed ? `तुमचे ${stats.owed} रुपये अजून मिळायचे बाकी आहेत.` : 'कोणाकडेही तुमचे पैसे बाकी नाहीत.'} या महिन्यात तुम्ही ${stats.monthDays} दिवस काम केले.`,
+    gu: `${greet.gu}${name ? ` ${name}` : ''}. છેલ્લા 7 દિવસમાં તમે ${stats.weekEarned} રૂપિયા કમાયા. ${stats.owed ? `તમારા ${stats.owed} રૂપિયા હજી મળવાના બાકી છે.` : 'કોઈની પાસે તમારા પૈસા બાકી નથી.'} આ મહિને તમે ${stats.monthDays} દિવસ કામ કર્યું.`,
   };
 
   return (
@@ -255,16 +267,23 @@ export default function WorkDiary() {
           <h2 className={s.greet}>
             <GreetIcon aria-hidden="true" className={s.greetIcon} />
             <span>
-              <T en={greet.en} hi={greet.hi} />
-              {name ? `, ${name}` : <T en=", friend" hi=", साथी" />}
+              <T en={greet.en} hi={greet.hi} mr={greet.mr} gu={greet.gu} />
+              {name ? `, ${name}` : <T en=", friend" hi=", साथी" mr=", मित्रा" gu=", દોસ્ત" />}
             </span>
           </h2>
           <div className="row">
-            <ReadAloud en={summarySpeech.en} hi={summarySpeech.hi} className="btn btn-sm" label={t('Hear my summary', 'मेरा हिसाब सुनें')} />
+            <ReadAloud
+              en={summarySpeech.en}
+              hi={summarySpeech.hi}
+              mr={summarySpeech.mr}
+              gu={summarySpeech.gu}
+              className="btn btn-sm"
+              label={t('Hear my summary', 'मेरा हिसाब सुनें', 'माझा हिशोब ऐका', 'મારો હિસાબ સાંભળો')}
+            />
             {!name && (
               <Link href="/profile" className="btn btn-sm btn-ghost">
                 <IdCard aria-hidden="true" />
-                <T en="Make your skill card" hi="अपना स्किल कार्ड बनाएँ" />
+                <T en="Make your skill card" hi="अपना स्किल कार्ड बनाएँ" mr="तुमचे स्किल कार्ड बनवा" gu="તમારું સ્કિલ કાર્ડ બનાવો" />
               </Link>
             )}
           </div>
@@ -276,13 +295,13 @@ export default function WorkDiary() {
           </span>
           <span className={s.availText}>
             <strong id="avail-label">
-              <T en="Available for work today" hi="आज काम के लिए खाली हूँ" />
+              <T en="Available for work today" hi="आज काम के लिए खाली हूँ" mr="आज कामासाठी मोकळा/मोकळी आहे" gu="આજે કામ માટે ખાલી છું" />
             </strong>
             <span>
               {available ? (
-                <T en="Employers nearby can see and call you" hi="पास के मालिक आपको देख और बुला सकते हैं" />
+                <T en="Employers nearby can see and call you" hi="पास के मालिक आपको देख और बुला सकते हैं" mr="जवळचे मालक तुम्हाला पाहू आणि बोलावू शकतात" gu="નજીકના માલિક તમને જોઈ અને બોલાવી શકે છે" />
               ) : (
-                <T en="Turn on so employers can call you" hi="चालू करें ताकि मालिक आपको बुला सकें" />
+                <T en="Turn on so employers can call you" hi="चालू करें ताकि मालिक आपको बुला सकें" mr="चालू करा म्हणजे मालक तुम्हाला बोलावू शकतील" gu="ચાલુ કરો જેથી માલિક તમને બોલાવી શકે" />
               )}
             </span>
           </span>
@@ -291,18 +310,23 @@ export default function WorkDiary() {
       </header>
 
       {/* ── Summary tiles */}
-      <ul className={s.tiles} aria-label={t('Summary', 'सारांश')}>
+      <ul className={s.tiles} aria-label={t('Summary', 'सारांश', 'सारांश', 'સારાંશ')}>
         <li className={s.tile} style={{ '--tile': 'var(--color-brand)', '--d': 0 } as React.CSSProperties} data-reveal="">
           <span className="icon-tile sm">
             <Wallet aria-hidden="true" />
           </span>
           <span className={s.tileLabel}>
-            <T en="Earned in last 7 days" hi="पिछले 7 दिन की कमाई" />
+            <T en="Earned in last 7 days" hi="पिछले 7 दिन की कमाई" mr="मागील 7 दिवसांची कमाई" gu="છેલ્લા 7 દિવસની કમાણી" />
           </span>
           <Money value={stats.weekEarned} className={s.tileNum} />
           <span className={s.tileSub}>
             <CircleCheck aria-hidden="true" />
-            <T en={`${rupee(stats.weekReceived)} in hand`} hi={`${rupee(stats.weekReceived)} हाथ में`} />
+            <T
+              en={`${rupee(stats.weekReceived)} in hand`}
+              hi={`${rupee(stats.weekReceived)} हाथ में`}
+              mr={`${rupee(stats.weekReceived)} हातात`}
+              gu={`${rupee(stats.weekReceived)} હાથમાં`}
+            />
           </span>
         </li>
         <li className={`${s.tile} ${stats.owed ? s.tileWarn : ''}`} style={{ '--tile': stats.owed ? 'var(--color-warning)' : 'var(--color-success)', '--d': 1 } as React.CSSProperties} data-reveal="">
@@ -310,17 +334,22 @@ export default function WorkDiary() {
             <HandCoins aria-hidden="true" />
           </span>
           <span className={s.tileLabel}>
-            <T en="Money still owed to you" hi="आपके बाक़ी पैसे" />
+            <T en="Money still owed to you" hi="आपके बाक़ी पैसे" mr="तुमची थकबाकी" gu="તમારી બાકી રકમ" />
           </span>
           <Money value={stats.owed} className={s.tileNum} />
           <span className={s.tileSub}>
             {stats.owed ? (
               <a href="#dues" className={s.tileLink}>
-                <T en={`From ${stats.owedFrom} ${stats.owedFrom === 1 ? 'employer' : 'employers'}`} hi={`${stats.owedFrom} मालिकों से`} />
+                <T
+                  en={`From ${stats.owedFrom} ${stats.owedFrom === 1 ? 'employer' : 'employers'}`}
+                  hi={`${stats.owedFrom} मालिकों से`}
+                  mr={`${stats.owedFrom} ${stats.owedFrom === 1 ? 'मालकाकडून' : 'मालकांकडून'}`}
+                  gu={`${stats.owedFrom} માલિક પાસેથી`}
+                />
                 <ArrowRight aria-hidden="true" />
               </a>
             ) : (
-              <T en="All paid. Well done!" hi="सब मिल गया। बढ़िया!" />
+              <T en="All paid. Well done!" hi="सब मिल गया। बढ़िया!" mr="सगळे पैसे मिळाले. छान!" gu="બધા પૈસા મળી ગયા. સરસ!" />
             )}
           </span>
         </li>
@@ -329,17 +358,17 @@ export default function WorkDiary() {
             <CalendarCheck aria-hidden="true" />
           </span>
           <span className={s.tileLabel}>
-            <T en="Days worked this month" hi="इस महीने काम के दिन" />
+            <T en="Days worked this month" hi="इस महीने काम के दिन" mr="या महिन्यातले कामाचे दिवस" gu="આ મહિને કામના દિવસ" />
           </span>
           <span className={s.tileNumRow}>
             <Count value={stats.monthDays} className={s.tileNum} />
             <span className={s.tileUnit}>
-              <T en="days" hi="दिन" />
+              <T en="days" hi="दिन" mr="दिवस" gu="દિવસ" />
             </span>
           </span>
           <span className={s.tileSub}>
             <Clock aria-hidden="true" />
-            <T en={`in ${monthName}`} hi={`${monthName} में`} />
+            <T en={`in ${monthName}`} hi={`${monthName} में`} mr={`${monthName} मध्ये`} gu={`${monthName}માં`} />
           </span>
         </li>
       </ul>
@@ -352,10 +381,10 @@ export default function WorkDiary() {
               id="chart-title"
               icon={ChartColumn}
               tile="var(--color-accent)"
-              title={<T en="Last 7 days" hi="पिछले 7 दिन" />}
+              title={<T en="Last 7 days" hi="पिछले 7 दिन" mr="मागील 7 दिवस" gu="છેલ્લા 7 દિવસ" />}
               aside={
                 <span className="subtle">
-                  <T en="Tap a day" hi="दिन दबाएँ" />
+                  <T en="Tap a day" hi="दिन दबाएँ" mr="दिवसावर टॅप करा" gu="દિવસ પર ટૅપ કરો" />
                 </span>
               }
             />
@@ -363,12 +392,12 @@ export default function WorkDiary() {
           </section>
 
           <section className={`card ${s.panel} ${s.oHistory}`} aria-labelledby="history-title">
-            <PanelHead id="history-title" icon={History} tile="var(--color-text-muted)" title={<T en="My work history" hi="मेरा काम का हिसाब" />} />
+            <PanelHead id="history-title" icon={History} tile="var(--color-text-muted)" title={<T en="My work history" hi="मेरा काम का हिसाब" mr="माझ्या कामाचा हिशोब" gu="મારા કામનો હિસાબ" />} />
             {groups.length === 0 ? (
               <div className="empty">
                 <NotebookPen aria-hidden="true" />
                 <p>
-                  <T en="Nothing written yet. Add your first day of work." hi="अभी कुछ नहीं लिखा। अपने पहले काम का दिन जोड़ें।" />
+                  <T en="Nothing written yet. Add your first day of work." hi="अभी कुछ नहीं लिखा। अपने पहले काम का दिन जोड़ें।" mr="अजून काही लिहिलेले नाही. तुमचा कामाचा पहिला दिवस जोडा." gu="હજી કંઈ લખ્યું નથી. તમારો કામનો પહેલો દિવસ ઉમેરો." />
                 </p>
               </div>
             ) : (
@@ -378,15 +407,20 @@ export default function WorkDiary() {
                     <h3 className={s.weekHead}>
                       <span>
                         {g.kind === 'this' ? (
-                          <T en="This week" hi="इस हफ़्ते" />
+                          <T en="This week" hi="इस हफ़्ते" mr="या आठवड्यात" gu="આ અઠવાડિયે" />
                         ) : g.kind === 'last' ? (
-                          <T en="Last week" hi="पिछले हफ़्ते" />
+                          <T en="Last week" hi="पिछले हफ़्ते" mr="मागील आठवड्यात" gu="ગયા અઠવાડિયે" />
                         ) : (
-                          <T en={`Week of ${fmtDate(g.wk, 'en', { day: 'numeric', month: 'short' })}`} hi={`${fmtDate(g.wk, 'hi', { day: 'numeric', month: 'short' })} वाला हफ़्ता`} />
+                          <T
+                            en={`Week of ${fmtDate(g.wk, 'en', { day: 'numeric', month: 'short' })}`}
+                            hi={`${fmtDate(g.wk, 'hi', { day: 'numeric', month: 'short' })} वाला हफ़्ता`}
+                            mr={`${fmtDate(g.wk, 'mr', { day: 'numeric', month: 'short' })} चा आठवडा`}
+                            gu={`${fmtDate(g.wk, 'gu', { day: 'numeric', month: 'short' })}વાળું અઠવાડિયું`}
+                          />
                         )}
                       </span>
                       <span className={s.weekTotal}>
-                        {g.list.length} <T en={g.list.length === 1 ? 'job' : 'jobs'} hi="काम" /> · <b>{rupee(g.total)}</b>
+                        {g.list.length} <T en={g.list.length === 1 ? 'job' : 'jobs'} hi="काम" mr={g.list.length === 1 ? 'काम' : 'कामे'} gu="કામ" /> · <b>{rupee(g.total)}</b>
                       </span>
                     </h3>
                     <ul className={s.entries}>
@@ -404,12 +438,12 @@ export default function WorkDiary() {
                               {e.verified ? (
                                 <span className={s.verified}>
                                   <BadgeCheck aria-hidden="true" />
-                                  <T en="Confirmed" hi="पक्का" />
+                                  <T en="Confirmed" hi="पक्का" mr="पक्के" gu="પાકું" />
                                 </span>
                               ) : (
                                 <span className={s.selfRec}>
                                   <NotebookPen aria-hidden="true" />
-                                  <T en="Written by you" hi="आपने लिखा" />
+                                  <T en="Written by you" hi="आपने लिखा" mr="तुम्ही लिहिले" gu="તમે લખ્યું" />
                                 </span>
                               )}
                             </span>
@@ -417,14 +451,19 @@ export default function WorkDiary() {
                           <span className={s.entryRight}>
                             <span className="money">{rupee(e.amount)}</span>
                             <span className={`chip ${e.paid ? 'chip-success' : 'chip-warning'} ${s.entryChip}`}>
-                              {e.paid ? <T en="Paid" hi="मिला" /> : <T en="Due" hi="बाक़ी" />}
+                              {e.paid ? <T en="Paid" hi="मिला" mr="मिळाले" gu="મળ્યા" /> : <T en="Due" hi="बाक़ी" mr="बाकी" gu="બાકી" />}
                             </span>
                           </span>
                           <button
                             type="button"
                             className={`icon-btn ${s.delBtn}`}
                             onClick={() => remove(e.id)}
-                            aria-label={t(`Delete ${e.employer}, ${fmtDate(e.date, 'en')}`, `${e.employer}, ${fmtDate(e.date, 'hi')} हटाएँ`)}
+                            aria-label={t(
+                              `Delete ${e.employer}, ${fmtDate(e.date, 'en')}`,
+                              `${e.employer}, ${fmtDate(e.date, 'hi')} हटाएँ`,
+                              `${e.employer}, ${fmtDate(e.date, 'mr')} काढून टाका`,
+                              `${e.employer}, ${fmtDate(e.date, 'gu')} કાઢી નાખો`,
+                            )}
                           >
                             <Trash2 aria-hidden="true" />
                           </button>
@@ -445,11 +484,13 @@ export default function WorkDiary() {
               id="add-title"
               icon={Plus}
               tile="var(--color-brand)"
-              title={<T en="Add today's work" hi="आज का काम जोड़ें" />}
+              title={<T en="Add today's work" hi="आज का काम जोड़ें" mr="आजचे काम जोडा" gu="આજનું કામ ઉમેરો" />}
               aside={
                 <ReadAloud
                   en="Write who you worked for, what work, how much money, and whether you got paid. Then press Save."
                   hi="लिखें किसके यहाँ काम किया, कौन सा काम, कितने पैसे, और पैसे मिले या नहीं। फिर सेव दबाएँ।"
+                  mr="लिहा कोणाकडे काम केले, कोणते काम, किती पैसे, आणि पैसे मिळाले की नाही. मग सेव्ह दाबा."
+                  gu="લખો કોને ત્યાં કામ કર્યું, કયું કામ, કેટલા પૈસા, અને પૈસા મળ્યા કે નહીં. પછી સેવ દબાવો."
                 />
               }
             />
@@ -461,7 +502,7 @@ export default function WorkDiary() {
               id="dues-title"
               icon={HandCoins}
               tile="var(--color-warning)"
-              title={<T en="Money owed to you" hi="आपके बाक़ी पैसे" />}
+              title={<T en="Money owed to you" hi="आपके बाक़ी पैसे" mr="तुमची थकबाकी" gu="તમારી બાકી રકમ" />}
               aside={stats.owed > 0 ? <span className={`money ${s.duesTotal}`}>{rupee(stats.owed)}</span> : undefined}
             />
             {stats.dues.length === 0 ? (
@@ -469,10 +510,10 @@ export default function WorkDiary() {
                 <PartyPopper aria-hidden="true" />
                 <p>
                   <strong>
-                    <T en="Nobody owes you money" hi="किसी पर आपका पैसा बाक़ी नहीं" />
+                    <T en="Nobody owes you money" hi="किसी पर आपका पैसा बाक़ी नहीं" mr="कोणाकडेही तुमचे पैसे बाकी नाहीत" gu="કોઈની પાસે તમારા પૈસા બાકી નથી" />
                   </strong>
                   <span className="subtle">
-                    <T en="When you mark work as “Not yet”, it shows here." hi="जब आप काम को “अभी नहीं” लिखेंगे, वो यहाँ दिखेगा।" />
+                    <T en="When you mark work as “Not yet”, it shows here." hi="जब आप काम को “अभी नहीं” लिखेंगे, वो यहाँ दिखेगा।" mr="तुम्ही कामापुढे “अजून नाही” लिहाल, तेव्हा ते इथे दिसेल." gu="તમે કામને “હજી નહીં” લખશો, ત્યારે તે અહીં દેખાશે." />
                   </span>
                 </p>
               </div>
@@ -489,7 +530,12 @@ export default function WorkDiary() {
                           <strong>{e.employer}</strong>
                           <span className="subtle">
                             {fmtDate(e.date, lang)} ·{' '}
-                            {age === 0 ? <T en="today" hi="आज" /> : <T en={`${age} ${age === 1 ? 'day' : 'days'} ago`} hi={`${age} दिन पहले`} />}
+                            {age === 0 ? <T en="today" hi="आज" mr="आज" gu="આજે" /> : <T
+                                en={`${age} ${age === 1 ? 'day' : 'days'} ago`}
+                                hi={`${age} दिन पहले`}
+                                mr={`${age} ${age === 1 ? 'दिवसापूर्वी' : 'दिवसांपूर्वी'}`}
+                                gu={`${age} દિવસ પહેલાં`}
+                              />}
                           </span>
                         </span>
                         <span className={`money ${s.dueAmt}`}>{rupee(e.amount)}</span>
@@ -501,9 +547,11 @@ export default function WorkDiary() {
                             <T
                               en={`Waiting ${age} days is too long. You have a right to your wages — free help is available.`}
                               hi={`${age} दिन का इंतज़ार बहुत ज़्यादा है। मज़दूरी पाना आपका हक़ है — मुफ़्त मदद मिल सकती है।`}
+                              mr={`${age} दिवस वाट पाहणे खूप जास्त आहे. मजुरी मिळणे हा तुमचा हक्क आहे — मोफत मदत मिळू शकते.`}
+                              gu={`${age} દિવસની રાહ ઘણી વધારે છે. મજૂરી મેળવવી એ તમારો હક છે — મફત મદદ મળી શકે છે.`}
                             />{' '}
                             <Link href="/rights#rights" className={s.inlineLink}>
-                              <T en="Get help with unpaid wages" hi="बाक़ी मज़दूरी के लिए मदद" />
+                              <T en="Get help with unpaid wages" hi="बाक़ी मज़दूरी के लिए मदद" mr="थकलेल्या मजुरीसाठी मदत" gu="બાકી મજૂરી માટે મદદ" />
                               <ArrowRight aria-hidden="true" />
                             </Link>
                           </span>
@@ -512,11 +560,11 @@ export default function WorkDiary() {
                       <div className={s.dueActions}>
                         <button type="button" className="btn btn-sm btn-success" onClick={() => markPaid(e.id)}>
                           <CircleCheck aria-hidden="true" />
-                          <T en="Mark paid" hi="पैसे मिल गए" />
+                          <T en="Mark paid" hi="पैसे मिल गए" mr="पैसे मिळाले" gu="ચુકવણી થઈ" />
                         </button>
                         <a className="btn btn-sm" href={smsHref(e, name, lang)}>
                           <BellRing aria-hidden="true" />
-                          <T en="Send reminder" hi="याद दिलाएँ" />
+                          <T en="Send reminder" hi="याद दिलाएँ" mr="आठवण करून द्या" gu="યાદ અપાવો" />
                         </a>
                       </div>
                     </li>
@@ -531,10 +579,10 @@ export default function WorkDiary() {
               id="jobs-title"
               icon={Briefcase}
               tile="var(--color-accent)"
-              title={<T en="Coming up" hi="आने वाला काम" />}
+              title={<T en="Coming up" hi="आने वाला काम" mr="येणारे काम" gu="આવનારું કામ" />}
               aside={
                 <Link href="/jobs" className={s.inlineLink}>
-                  <T en="Find more" hi="और खोजें" />
+                  <T en="Find more" hi="और खोजें" mr="आणखी शोधा" gu="વધુ શોધો" />
                   <ArrowRight aria-hidden="true" />
                 </Link>
               }
@@ -557,12 +605,12 @@ export default function WorkDiary() {
                         {status === 'confirmed' ? (
                           <span className="chip chip-success">
                             <FileSignature aria-hidden="true" />
-                            <T en="Confirmed — Work Promise signed" hi="पक्का — काम का वादा साइन हुआ" />
+                            <T en="Confirmed — Work Promise signed" hi="पक्का — काम का वादा साइन हुआ" mr="पक्के — कामाचे वचन सही झाले" gu="પાકું — કામનું વચન સહી થયું" />
                           </span>
                         ) : (
                           <span className="chip chip-accent">
                             <Hourglass aria-hidden="true" />
-                            <T en="Applied — waiting" hi="अर्ज़ी दी — इंतज़ार" />
+                            <T en="Applied — waiting" hi="अर्ज़ी दी — इंतज़ार" mr="अर्ज केला — वाट पाहत आहे" gu="અરજી કરી — રાહ જોવાય છે" />
                           </span>
                         )}
                         <span className={s.jobPay}>
@@ -577,11 +625,11 @@ export default function WorkDiary() {
           </section>
 
           <section className={`card ${s.panel} ${s.proof} ${s.oProof}`} aria-labelledby="proof-title">
-            <PanelHead id="proof-title" icon={Scale} tile="var(--color-trust)" title={<T en="Proof of work" hi="काम का सबूत" />} />
+            <PanelHead id="proof-title" icon={Scale} tile="var(--color-trust)" title={<T en="Proof of work" hi="काम का सबूत" mr="कामाचा पुरावा" gu="કામનો પુરાવો" />} />
             <div className={s.proofTop}>
               <Count value={stats.proofDays} className={s.proofNum} />
               <span className={s.proofOf}>
-                / {BOARD_DAYS} <T en="days" hi="दिन" />
+                / {BOARD_DAYS} <T en="days" hi="दिन" mr="दिवस" gu="દિવસ" />
               </span>
             </div>
             <div
@@ -590,7 +638,7 @@ export default function WorkDiary() {
               aria-valuemin={0}
               aria-valuemax={BOARD_DAYS}
               aria-valuenow={Math.min(stats.proofDays, BOARD_DAYS)}
-              aria-label={t('Confirmed work days toward 90', '90 में से पक्के काम के दिन')}
+              aria-label={t('Confirmed work days toward 90', '90 में से पक्के काम के दिन', '90 पैकी पक्के कामाचे दिवस', '90માંથી પાકા કામના દિવસ')}
             >
               <span style={{ transform: `scaleX(${proofPct})` }} />
             </div>
@@ -599,11 +647,15 @@ export default function WorkDiary() {
                 <T
                   en={`${proofLeft} more days of building work and you can register with the Construction Workers' Welfare Board — pension, accident cover and scholarships for your children.`}
                   hi={`${proofLeft} दिन और निर्माण का काम, फिर आप निर्माण कामगार कल्याण बोर्ड में नाम लिखा सकते हैं — पेंशन, दुर्घटना बीमा और बच्चों की छात्रवृत्ति।`}
+                  mr={`आणखी ${proofLeft} दिवस बांधकामाचे काम, मग तुम्ही बांधकाम कामगार कल्याण मंडळात नाव नोंदवू शकता — पेन्शन, अपघात विमा आणि मुलांना शिष्यवृत्ती.`}
+                  gu={`હજી ${proofLeft} દિવસ બાંધકામનું કામ, પછી તમે બાંધકામ કામદાર કલ્યાણ બોર્ડમાં નામ નોંધાવી શકો — પેન્શન, અકસ્માત વીમો અને બાળકો માટે શિષ્યવૃત્તિ.`}
                 />
               ) : (
                 <T
                   en="You have 90 days! You can now register with the Construction Workers' Welfare Board."
                   hi="आपके 90 दिन पूरे! अब आप निर्माण कामगार कल्याण बोर्ड में नाम लिखा सकते हैं।"
+                  mr="तुमचे 90 दिवस पूर्ण झाले! आता तुम्ही बांधकाम कामगार कल्याण मंडळात नाव नोंदवू शकता."
+                  gu="તમારા 90 દિવસ પૂરા થયા! હવે તમે બાંધકામ કામદાર કલ્યાણ બોર્ડમાં નામ નોંધાવી શકો છો."
                 />
               )}
             </p>
@@ -611,15 +663,17 @@ export default function WorkDiary() {
               <T
                 en={`Counted: days confirmed by employers on Naka in the last 12 months.${stats.selfDays ? ` ${stats.selfDays} days written by you — ask the employer to confirm them.` : ''}`}
                 hi={`गिनती: पिछले 12 महीनों में नाका पर मालिकों ने जो दिन पक्के किए।${stats.selfDays ? ` आपके लिखे ${stats.selfDays} दिन — मालिक से पक्का करवाएँ।` : ''}`}
+                mr={`मोजणी: मागील 12 महिन्यांत नाका वर मालकांनी पक्के केलेले दिवस.${stats.selfDays ? ` तुम्ही लिहिलेले ${stats.selfDays} दिवस — मालकाकडून पक्के करून घ्या.` : ''}`}
+                gu={`ગણતરી: છેલ્લા 12 મહિનામાં નાકા પર માલિકોએ પાકા કરેલા દિવસ.${stats.selfDays ? ` તમે લખેલા ${stats.selfDays} દિવસ — માલિક પાસે પાકા કરાવો.` : ''}`}
               />
             </p>
             <div className={s.proofActions}>
               <button type="button" className="btn btn-accent" onClick={download}>
                 <Download aria-hidden="true" />
-                <T en="Download work record" hi="काम का रिकॉर्ड डाउनलोड करें" />
+                <T en="Download work record" hi="काम का रिकॉर्ड डाउनलोड करें" mr="कामाचा रेकॉर्ड डाउनलोड करा" gu="કામનો રેકોર્ડ ડાઉનલોડ કરો" />
               </button>
               <Link href="/rights#bocw" className={s.inlineLink}>
-                <T en="About the welfare board" hi="कल्याण बोर्ड के बारे में" />
+                <T en="About the welfare board" hi="कल्याण बोर्ड के बारे में" mr="कल्याण मंडळाबद्दल" gu="કલ્યાણ બોર્ડ વિશે" />
                 <ArrowRight aria-hidden="true" />
               </Link>
             </div>
