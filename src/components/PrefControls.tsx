@@ -153,12 +153,12 @@ function LiteSwitch({ long }: { long?: boolean }) {
         <span className="subtle">
           {long
             ? t(
-                'Turns off 3D and animations. Faster on slow internet.',
-                '3D और एनिमेशन बंद। धीमे इंटरनेट पर तेज़।',
-                '3D आणि ॲनिमेशन बंद. हळू इंटरनेटवर जलद.',
-                '3D અને એનિમેશન બંધ. ધીમા ઇન્ટરનેટ પર ઝડપી.',
+                'Turns off animations. Faster on slow internet.',
+                'एनिमेशन बंद। धीमे इंटरनेट पर तेज़।',
+                'ॲनिमेशन बंद. हळू इंटरनेटवर जलद.',
+                'એનિમેશન બંધ. ધીમા ઇન્ટરનેટ પર ઝડપી.',
               )
-            : t('No 3D or animations', '3D और एनिमेशन बंद', '3D आणि ॲनिमेशन बंद', '3D અને એનિમેશન બંધ')}
+            : t('No animations', 'एनिमेशन बंद', 'ॲनिमेशन बंद', 'એનિમેશન બંધ')}
         </span>
       </span>
       <span className="switch" aria-hidden="true" data-on={lite === '1'} />

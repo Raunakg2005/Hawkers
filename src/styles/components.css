@@ -686,6 +686,9 @@
   padding-block: 4px;
   margin-inline: calc(var(--gutter) * -1);
   padding-inline: var(--gutter);
+  /* snap to the padded edge, not the box edge — otherwise the first chip loads
+     scrolled flush against (and clipped by) the card border */
+  scroll-padding-inline: var(--gutter);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -696,6 +699,17 @@
 .scroller > * {
   scroll-snap-align: start;
   flex: none;
+}
+
+/* A mouse can't scroll a row with a hidden scrollbar (and Lenis takes the wheel),
+   so the chips past the edge were unreachable on desktop. Wrap them instead. */
+@media (hover: hover) and (pointer: fine) {
+  .scroller {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
 }
 
 /* Key-value list */

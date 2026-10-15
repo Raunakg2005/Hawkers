@@ -12,6 +12,7 @@ import {
   Languages,
   MapPin,
   Mic,
+  PersonStanding,
   MousePointerClick,
   ShieldCheck,
   Smartphone,
@@ -22,83 +23,65 @@ import {
   WalletCards,
   WifiOff,
 } from 'lucide-react';
-import HeroCanvas from '@/components/HeroCanvas';
-import HeroPoster from '@/components/HeroPoster';
+import NakaScene from '@/components/NakaScene';
 import JobCard from '@/components/JobCard';
 import { T, Tx } from '@/components/T';
-import { TradeIcon, tradeColor } from '@/components/TradeIcon';
-import { TRADES } from '@/data/trades';
+import { TradeIcon, TradeTile, tradeColor } from '@/components/TradeIcon';
+import { PAY_UNIT, TRADE, TRADES, rupee } from '@/data/trades';
 import { JOBS } from '@/data/jobs';
 import { SCHEMES } from '@/data/schemes';
+import type { L } from '@/data/types';
+
+const HERO_JOBS = ['bathroom-pipe-repair-powai', 'wiring-shop-ghatkopar'].map((id) => JOBS.find((j) => j.id === id)!);
 
 export default function Home() {
   const demoJob = JOBS[0];
   return (
     <>
-      {/* ───────────── 1 · 3D scroll story */}
-      <section className="hero-story" data-story="" aria-labelledby="hero-title">
-        <div className="hero-stage">
-          <HeroPoster />
-          <HeroCanvas />
-          <div className="hero-scrim" aria-hidden="true" />
-
-          <div className="container hero-overlay">
-            <div className="beat beat-1">
-              <span className="eyebrow">
-                <T en="Beyond the waiting line" hi="इंतज़ार की कतार से आगे" mr="प्रतीक्षेच्या रांगेपलीकडे" gu="રાહની કતારથી આગળ" />
-              </span>
-              <h1 id="hero-title" className="display">
-                <T
-                  en={
-                    <>
-                      Skill doesn’t need a <span className="gradient-text">résumé.</span>
-                    </>
-                  }
-                  hi={
-                    <>
-                      हुनर को <span className="gradient-text">बायोडाटा</span> नहीं चाहिए।
-                    </>
-                  }
-                  mr={
-                    <>
-                      कौशल्याला <span className="gradient-text">बायोडाटा</span> लागत नाही.
-                    </>
-                  }
-                  gu={
-                    <>
-                      આવડતને <span className="gradient-text">બાયોડેટા</span> જોઈતો નથી.
-                    </>
-                  }
-                />
-              </h1>
-              <p className="lead">
-                <T
-                  en="Every morning, crores of plumbers, painters, masons and helpers wait at a naka hoping the right person walks by. Naka brings the work to them — nearby, fair and safe."
-                  hi="हर सुबह करोड़ों प्लंबर, पेंटर, राजमिस्त्री और हेल्पर नाके पर इंतज़ार करते हैं कि सही आदमी आ जाए। नाका काम को उन तक लाता है — पास में, सही दाम पर, सुरक्षित।"
-                  mr="रोज सकाळी कोट्यवधी प्लंबर, रंगारी, गवंडी आणि मदतनीस नाक्यावर वाट पाहतात की योग्य माणूस येईल. नाका काम त्यांच्यापर्यंत आणतो — जवळ, योग्य मजुरीत, सुरक्षित."
-                  gu="દરરોજ સવારે કરોડો પ્લમ્બર, પેઇન્ટર, કડિયા અને હેલ્પર નાકા પર રાહ જુએ છે કે યોગ્ય વ્યક્તિ આવે. નાકા કામ તેમના સુધી લાવે છે — નજીક, યોગ્ય ભાવે, સુરક્ષિત."
-                />
-              </p>
-            </div>
-
-            <div className="beat beat-2" aria-hidden="true">
-              <span className="eyebrow">
-                <T en="Step 1 · Seen" hi="कदम 1 · पहचान" mr="पायरी 1 · ओळख" gu="પગલું 1 · ઓળખ" />
-              </span>
-              <p className="beat-title">
-                <T en="Work appears nearby — with the pay written first." hi="पास का काम दिखता है — सबसे पहले मज़दूरी लिखी हुई।" mr="जवळचे काम दिसते — आधी मजुरी लिहिलेली." gu="નજીકનું કામ દેખાય છે — સૌથી પહેલાં મજૂરી લખેલી." />
-              </p>
-            </div>
-
-            <div className="beat beat-3" aria-hidden="true">
-              <span className="eyebrow">
-                <T en="Step 2 · Connected" hi="कदम 2 · जुड़ाव" mr="पायरी 2 · जोडणी" gu="પગલું 2 · જોડાણ" />
-              </span>
-              <p className="beat-title">
-                <T en="Every skill finds its job. The whole city opens up." hi="हर हुनर को काम मिलता है। पूरा शहर खुल जाता है।" mr="प्रत्येक कौशल्याला काम मिळते. संपूर्ण शहर खुले होते." gu="દરેક આવડતને કામ મળે છે. આખું શહેર ખૂલી જાય છે." />
-              </p>
-            </div>
-
+      {/* ───────────── 1 · Hero: who it's for, and the naka in 2D */}
+      <section className="hero2" aria-labelledby="hero-title">
+        <div className="container hero2-grid">
+          <div className="hero2-copy">
+            <span className="eyebrow">
+              <T
+                en="For plumbers, painters, masons, electricians & helpers"
+                hi="प्लंबर, पेंटर, राजमिस्त्री, बिजली मिस्त्री और हेल्पर के लिए"
+                mr="प्लंबर, पेंटर, गवंडी, इलेक्ट्रिशियन आणि मदतनीसांसाठी"
+                gu="પ્લમ્બર, પેઇન્ટર, કડિયા, ઇલેક્ટ્રિશિયન અને હેલ્પર માટે"
+              />
+            </span>
+            <h1 id="hero-title" className="hero2-title">
+              <T
+                en={
+                  <>
+                    Skill doesn’t need a <span className="gradient-text">résumé.</span>
+                  </>
+                }
+                hi={
+                  <>
+                    हुनर को <span className="gradient-text">बायोडाटा</span> नहीं चाहिए।
+                  </>
+                }
+                mr={
+                  <>
+                    कौशल्याला <span className="gradient-text">बायोडाटा</span> लागत नाही.
+                  </>
+                }
+                gu={
+                  <>
+                    આવડતને <span className="gradient-text">બાયોડેટા</span> જોઈતો નથી.
+                  </>
+                }
+              />
+            </h1>
+            <p className="lead">
+              <T
+                en="Find daily work near your naka — with the pay written first. No agent, no fee, no résumé."
+                hi="अपने नाके के पास रोज़ का काम खोजें — मज़दूरी सबसे पहले लिखी हुई। न एजेंट, न फ़ीस, न बायोडाटा।"
+                mr="तुमच्या नाक्याजवळ रोजचे काम शोधा — मजुरी सर्वात आधी लिहिलेली. एजंट नाही, फी नाही, बायोडाटा नाही."
+                gu="તમારા નાકા પાસે રોજનું કામ શોધો — મજૂરી સૌથી પહેલાં લખેલી. એજન્ટ નહીં, ફી નહીં, બાયોડેટા નહીં."
+              />
+            </p>
             <div className="hero-actions">
               <Link href="/jobs" className="btn btn-primary btn-lg" data-magnetic="">
                 <Briefcase aria-hidden="true" />
@@ -109,16 +92,39 @@ export default function Home() {
                 <T en="I need a worker" hi="मुझे कारीगर चाहिए" mr="मला कारागीर हवा आहे" gu="મને કારીગર જોઈએ છે" />
               </Link>
             </div>
+            <ul className="hero2-trust">
+              <li>
+                <BadgeCheck aria-hidden="true" />
+                <T en="Free for workers" hi="मज़दूरों के लिए मुफ़्त" mr="कामगारांसाठी मोफत" gu="કામદારો માટે મફત" />
+              </li>
+              <li>
+                <Languages aria-hidden="true" />
+                <span>हिंदी · मराठी · ગુજરાતી · English</span>
+              </li>
+              <li>
+                <WifiOff aria-hidden="true" />
+                <T en="Works on 2G" hi="2G पर चलता है" mr="2G वर चालते" gu="2G પર ચાલે છે" />
+              </li>
+            </ul>
+          </div>
 
-            <ol className="story-dots" aria-hidden="true">
-              <li className="d1" />
-              <li className="d2" />
-              <li className="d3" />
-            </ol>
-            <div className="scroll-hint" aria-hidden="true">
-              <i className="mouse" />
-              <T en="Scroll" hi="नीचे स्क्रॉल करें" mr="खाली स्क्रोल करा" gu="નીચે સ્ક્રોલ કરો" />
-            </div>
+          <div className="naka-art">
+            <NakaScene />
+            {HERO_JOBS.map((job, i) => (
+              <Link key={job.id} href={`/jobs/${job.id}`} className={`ticket ticket-${i + 1}`}>
+                <TradeTile trade={job.trade} size="sm" />
+                <span className="ticket-trade">
+                  <Tx l={TRADE[job.trade].name} />
+                </span>
+                <span className="money">
+                  {rupee(job.pay.amount)} <small><Tx l={PAY_UNIT[job.pay.unit]} /></small>
+                </span>
+                <span className="ticket-where">
+                  <MapPin aria-hidden="true" />
+                  <Tx l={job.area} /> · {job.distanceKm} km
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -159,47 +165,63 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="problem-grid">
-            <article className="stat-card" data-reveal="tilt">
-              <p className="stat">
-                ~<span data-count="90">90</span>%
+          <div className="naka-day">
+            <figure className="ninety" data-reveal="left">
+              <div className="ninety-line" aria-hidden="true">
+                {Array.from({ length: 10 }, (_, i) => (
+                  <PersonStanding key={i} className={i === 9 ? 'is-out' : undefined} />
+                ))}
+              </div>
+              <p className="ninety-big">
+                <T en="9 in 10" hi="10 में से 9" mr="10 पैकी 9" gu="10માંથી 9" />
               </p>
-              <p>
-                <T en="of India’s workers earn in the informal economy" hi="भारत के मज़दूर असंगठित क्षेत्र में कमाते हैं" mr="भारतातील कामगार असंघटित क्षेत्रात कमावतात" gu="ભારતના કામદારો અસંગઠિત ક્ષેત્રમાં કમાય છે" />
-              </p>
-            </article>
-            <article className="stat-card" data-reveal="tilt" style={{ '--d': 1 } as React.CSSProperties}>
-              <p className="stat">
-                <span data-count="30">30</span>
-                <small>
-                  <T en=" crore+" hi=" करोड़+" mr=" कोटी+" gu=" કરોડ+" />
-                </small>
-              </p>
-              <p>
-                <T en="unorganised workers registered on e-Shram — most still find work by word of mouth" hi="मज़दूर ई-श्रम पर पंजीकृत — ज़्यादातर अब भी जान-पहचान से काम ढूँढते हैं" mr="कामगार ई-श्रमवर नोंदणीकृत — बहुतेकांना अजूनही ओळखीतूनच काम मिळते" gu="કામદારો ઈ-શ્રમ પર નોંધાયેલા — મોટા ભાગનાને હજી ઓળખાણથી જ કામ મળે છે" />
-              </p>
-            </article>
-            <article className="stat-card" data-reveal="tilt" style={{ '--d': 2 } as React.CSSProperties}>
-              <p className="stat">
-                <span data-count="0">0</span>
-              </p>
-              <p>
-                <T en="résumés, logins or English needed to use Naka" hi="बायोडाटा, लॉगिन या अंग्रेज़ी — नाका के लिए कुछ नहीं चाहिए" mr="बायोडाटा, लॉगिन किंवा इंग्रजी — नाक्यासाठी काहीही लागत नाही" gu="બાયોડેટા, લૉગિન કે અંગ્રેજી — નાકા માટે કંઈ જ જોઈતું નથી" />
-              </p>
-            </article>
-          </div>
+              <figcaption>
+                <p className="ninety-text">
+                  <T
+                    en="workers in India earn without a contract, a payslip or a fixed employer."
+                    hi="भारत में मज़दूर बिना कॉन्ट्रैक्ट, बिना पगार-पर्ची और बिना पक्के मालिक के कमाते हैं।"
+                    mr="भारतातील कामगार करार, पगार-पावती किंवा कायम मालकाशिवाय कमावतात."
+                    gu="ભારતમાં કામદારો કરાર, પગાર-સ્લિપ કે કાયમી માલિક વગર કમાય છે."
+                  />
+                </p>
+                <p className="ninety-foot">
+                  <T
+                    en="30 crore+ have signed up on e-Shram. Most still find work by standing at the naka."
+                    hi="30 करोड़+ ई-श्रम पर पंजीकृत हैं। ज़्यादातर अब भी नाके पर खड़े होकर काम ढूँढते हैं।"
+                    mr="30 कोटी+ ई-श्रमवर नोंदणीकृत आहेत. बहुतेक अजूनही नाक्यावर उभे राहूनच काम शोधतात."
+                    gu="30 કરોડ+ ઈ-શ્રમ પર નોંધાયેલા છે. મોટા ભાગના હજી નાકા પર ઊભા રહીને જ કામ શોધે છે."
+                  />
+                </p>
+              </figcaption>
+            </figure>
 
-          <div className="pain-row" data-reveal="">
-            {[
-              { en: 'Work depends on who walks by', hi: 'काम इस पर निर्भर कि कौन आ जाए', mr: 'कोण येईल यावरच काम अवलंबून', gu: 'કોણ આવે તેના પર જ કામ આધાર રાખે છે' },
-              { en: 'Pay is settled after the work', hi: 'मज़दूरी काम के बाद तय होती है', mr: 'मजुरी काम झाल्यावर ठरते', gu: 'મજૂરી કામ પછી નક્કી થાય છે' },
-              { en: 'Fake agents take “registration fees”', hi: 'नकली एजेंट “रजिस्ट्रेशन फ़ीस” लेते हैं', mr: 'बनावट एजंट “नोंदणी फी” घेतात', gu: 'નકલી એજન્ટ “રજિસ્ટ્રેશન ફી” લે છે' },
-              { en: 'Welfare schemes feel out of reach', hi: 'सरकारी योजनाएँ पहुँच से बाहर लगती हैं', mr: 'सरकारी योजना आवाक्याबाहेर वाटतात', gu: 'સરકારી યોજનાઓ પહોંચની બહાર લાગે છે' },
-            ].map((p) => (
-              <span key={p.en} className="chip chip-danger">
-                <Tx l={p} />
-              </span>
-            ))}
+            <div className="day" data-reveal="right">
+              <h3 className="day-title">
+                <T en="A morning at Kurla naka" hi="कुर्ला नाके की एक सुबह" mr="कुर्ला नाक्यावरची एक सकाळ" gu="કુર્લા નાકાની એક સવાર" />
+              </h3>
+              <ol className="day-line">
+                {MORNING.map((m) => (
+                  <li key={m.time} className={m.end ? 'is-end' : undefined}>
+                    <time>{m.time}</time>
+                    <div className="day-text">
+                      <p>
+                        <Tx l={m.text} />
+                      </p>
+                      {m.pain && (
+                        <p className="day-pain">
+                          <Tx l={m.pain} />
+                        </p>
+                      )}
+                      {m.end && (
+                        <p className="day-zero">
+                          <T en="₹0 earned today" hi="आज की कमाई ₹0" mr="आजची कमाई ₹0" gu="આજની કમાણી ₹0" />
+                        </p>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </div>
       </section>
@@ -566,6 +588,60 @@ export default function Home() {
 
 /* ───────────── content */
 
+const MORNING: { time: string; text: L; pain?: L; end?: boolean }[] = [
+  {
+    time: '6:00',
+    text: {
+      en: 'Ramesh reaches the naka with his tools and a tiffin. Forty men are already standing there.',
+      hi: 'रमेश औज़ार और टिफ़िन लेकर नाके पहुँचता है। वहाँ चालीस लोग पहले से खड़े हैं।',
+      mr: 'रमेश अवजारे आणि डबा घेऊन नाक्यावर पोहोचतो. तिथे आधीच चाळीस जण उभे आहेत.',
+      gu: 'રમેશ ઓજારો અને ટિફિન લઈને નાકા પર પહોંચે છે. ત્યાં પહેલેથી ચાળીસ લોકો ઊભા છે.',
+    },
+  },
+  {
+    time: '8:30',
+    text: {
+      en: 'A contractor’s tempo stops, picks six men and drives off.',
+      hi: 'एक ठेकेदार का टेम्पो रुकता है, छह लोगों को बैठाता है और चला जाता है।',
+      mr: 'एका ठेकेदाराचा टेम्पो थांबतो, सहा जणांना घेतो आणि निघून जातो.',
+      gu: 'એક ઠેકેદારનો ટેમ્પો ઊભો રહે છે, છ જણને બેસાડે છે અને જતો રહે છે.',
+    },
+    pain: { en: 'Work depends on who walks by', hi: 'काम इस पर निर्भर कि कौन आ जाए', mr: 'कोण येईल यावरच काम अवलंबून', gu: 'કોણ આવે તેના પર જ કામ આધાર રાખે છે' },
+  },
+  {
+    time: '9:15',
+    text: {
+      en: 'Someone needs a plumber “for a small job”. Nobody says the rate. “We’ll see after.”',
+      hi: 'किसी को “छोटे काम” के लिए प्लंबर चाहिए। रेट कोई नहीं बताता। “बाद में देख लेंगे।”',
+      mr: 'कोणाला तरी “छोट्या कामासाठी” प्लंबर हवा आहे. दर कोणी सांगत नाही. “नंतर बघू.”',
+      gu: 'કોઈને “નાના કામ” માટે પ્લમ્બર જોઈએ છે. ભાવ કોઈ કહેતું નથી. “પછી જોઈ લઈશું.”',
+    },
+    pain: { en: 'Pay is settled after the work', hi: 'मज़दूरी काम के बाद तय होती है', mr: 'मजुरी काम झाल्यावर ठरते', gu: 'મજૂરી કામ પછી નક્કી થાય છે' },
+  },
+  {
+    time: '10:40',
+    text: {
+      en: 'An “agent” promises a Dubai job — after a ₹2,000 registration fee.',
+      hi: 'एक “एजेंट” दुबई के काम का वादा करता है — ₹2,000 रजिस्ट्रेशन फ़ीस के बाद।',
+      mr: 'एक “एजंट” दुबईच्या कामाचे वचन देतो — ₹2,000 नोंदणी फी घेतल्यावर.',
+      gu: 'એક “એજન્ટ” દુબઈના કામનું વચન આપે છે — ₹2,000 રજિસ્ટ્રેશન ફી પછી.',
+    },
+    pain: { en: 'Fake agents take “registration fees”', hi: 'नकली एजेंट “रजिस्ट्रेशन फ़ीस” लेते हैं', mr: 'बनावट एजंट “नोंदणी फी” घेतात', gu: 'નકલી એજન્ટ “રજિસ્ટ્રેશન ફી” લે છે' },
+  },
+  {
+    time: '12:30',
+    end: true,
+    text: {
+      en: 'He walks home. He has never heard of the ₹20-a-year accident cover he qualifies for.',
+      hi: 'वह घर लौट जाता है। जिस ₹20 सालाना दुर्घटना बीमे का वह हक़दार है, उसके बारे में उसने कभी सुना ही नहीं।',
+      mr: 'तो घरी परततो. ज्या ₹20 वार्षिक अपघात विम्याचा तो हक्कदार आहे, त्याबद्दल त्याने कधी ऐकलेलेच नाही.',
+      gu: 'તે ઘરે પાછો ફરે છે. જે ₹20 વાર્ષિક અકસ્માત વીમાનો તે હકદાર છે, તેના વિશે તેણે ક્યારેય સાંભળ્યું જ નથી.',
+    },
+    pain: { en: 'Welfare schemes feel out of reach', hi: 'सरकारी योजनाएँ पहुँच से बाहर लगती हैं', mr: 'सरकारी योजना आवाक्याबाहेर वाटतात', gu: 'સરકારી યોજનાઓ પહોંચની બહાર લાગે છે' },
+  },
+];
+
+
 const STEPS = [
   {
     n: 1,
@@ -648,7 +724,7 @@ const STEPS = [
 const FEATURES = [
   { icon: AudioLines, color: 'var(--color-brand)', title: { en: 'Voice first', hi: 'आवाज़ पहले', mr: 'आवाज आधी', gu: 'અવાજ પહેલાં' }, body: { en: 'Search by speaking, hear every card read aloud.', hi: 'बोलकर खोजें, हर कार्ड सुनें।', mr: 'बोलून शोधा, प्रत्येक कार्ड ऐका.', gu: 'બોલીને શોધો, દરેક કાર્ડ સાંભળો.' } },
   { icon: Languages, color: 'var(--color-accent)', title: { en: '4 languages, instantly', hi: '4 भाषाएँ, तुरंत', mr: '4 भाषा, लगेच', gu: '4 ભાષા, તરત જ' }, body: { en: 'Pick English, हिंदी, मराठी or ગુજરાતી — everything switches.', hi: 'English, हिंदी, मराठी या ગુજરાતી चुनें — सब कुछ बदल जाता है।', mr: 'English, हिंदी, मराठी किंवा ગુજરાતી निवडा — सर्व काही बदलते.', gu: 'English, हिंदी, मराठी કે ગુજરાતી પસંદ કરો — બધું બદલાઈ જાય છે.' } },
-  { icon: WifiOff, color: 'var(--color-trust)', title: { en: 'Low data mode', hi: 'कम डेटा मोड', mr: 'कमी डेटा मोड', gu: 'ઓછો ડેટા મોડ' }, body: { en: 'Turns off 3D and motion on slow 2G.', hi: 'धीमे 2G पर 3D और एनिमेशन बंद।', mr: 'हळू 2G वर 3D आणि ॲनिमेशन बंद.', gu: 'ધીમા 2G પર 3D અને એનિમેશન બંધ.' } },
+  { icon: WifiOff, color: 'var(--color-trust)', title: { en: 'Low data mode', hi: 'कम डेटा मोड', mr: 'कमी डेटा मोड', gu: 'ઓછો ડેટા મોડ' }, body: { en: 'Turns off animation on slow 2G.', hi: 'धीमे 2G पर एनिमेशन बंद।', mr: 'हळू 2G वर ॲनिमेशन बंद.', gu: 'ધીમા 2G પર એનિમેશન બંધ.' } },
 ];
 
 const WORKER_POINTS = [

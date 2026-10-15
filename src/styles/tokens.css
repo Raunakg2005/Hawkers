@@ -133,7 +133,7 @@
   --color-short: var(--teal-600);
   --color-long: var(--indigo-600);
 
-  /* trade colours — icon tiles & the 3D hats */
+  /* trade colours — icon tiles & the hero workers' shirts */
   --trade-plumber: #2b7fd8;
   --trade-electrician: #d9a400;
   --trade-carpenter: #b5651d;
@@ -163,7 +163,7 @@
   --shadow-brand: 0 14px 34px -12px rgba(245, 138, 7, 0.55);
   --shadow-accent: 0 14px 34px -12px rgba(82, 64, 227, 0.5);
 
-  /* 3D scene palette (read by the WebGL hero) */
+  /* hero illustration palette (NakaScene) */
   --scene-sky: #fdf3e3;
   --scene-fog: #f8ecd9;
   --scene-ground: #efe4d2;

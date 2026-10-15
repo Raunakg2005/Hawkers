@@ -10,7 +10,7 @@ import type { L, Lang } from '@/data/types';
  *   data-theme  light | dark      colour scheme
  *   data-lang   en | hi | mr | gu which language spans are visible
  *   data-size   md | lg | xl      text scale for low-vision / older users
- *   data-lite   0 | 1             low-data mode: no 3D, no smooth scroll
+ *   data-lite   0 | 1             low-data mode: no animation, no smooth scroll
  *
  * The inline script in ./prefs-script.ts applies saved values before paint.
  */
