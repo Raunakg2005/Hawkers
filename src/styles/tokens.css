@@ -1,0 +1,369 @@
+/* ==========================================================================
+   NAKA — design tokens
+   --------------------------------------------------------------------------
+   The ONLY place raw values live. Every component reads these variables, so
+   re-skinning the product (brand colour, radius, type scale, density) is a
+   change to this one file.
+
+   Sections
+     1. Primitive palette      (raw colours — never used directly by components)
+     2. Semantic tokens: light (default)
+     3. Semantic tokens: dark  (system preference + manual toggle)
+     4. Type, space, radius, elevation, motion, layout, z-index
+     5. User preference modifiers (text size, lite mode)
+   ========================================================================== */
+
+/* 1 ── Primitive palette ─────────────────────────────────────────────────── */
+:root {
+  /* marigold — the brand: warm, Indian, high-visibility like a safety vest */
+  --marigold-50: #fff8eb;
+  --marigold-100: #ffecc7;
+  --marigold-200: #ffd58a;
+  --marigold-300: #ffbd4d;
+  --marigold-400: #ffa41f;
+  --marigold-500: #f58a07;
+  --marigold-600: #d96a02;
+  --marigold-700: #b04d06;
+  --marigold-800: #8f3d0c;
+
+  /* indigo — depth, night sky, trust */
+  --indigo-50: #eef0ff;
+  --indigo-100: #dfe3ff;
+  --indigo-200: #c4caff;
+  --indigo-300: #a0a6fd;
+  --indigo-400: #7d7ff8;
+  --indigo-500: #625cf0;
+  --indigo-600: #5240e3;
+  --indigo-700: #4533c8;
+  --indigo-800: #392ca2;
+  --indigo-900: #1d1a4a;
+
+  /* teal — verified / safe */
+  --teal-100: #ccfbef;
+  --teal-300: #5eead4;
+  --teal-400: #2dd4bf;
+  --teal-500: #14b8a6;
+  --teal-600: #0d9488;
+  --teal-700: #0f766e;
+
+  /* signal colours */
+  --red-100: #ffe1df;
+  --red-400: #f87171;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --amber-100: #fff1c2;
+  --amber-500: #eab308;
+  --amber-600: #ca8a04;
+  --green-100: #d7f8e2;
+  --green-400: #4ade80;
+  --green-500: #22c55e;
+  --green-600: #16a34a;
+  --sky-400: #38bdf8;
+  --sky-600: #0284c7;
+  --rose-400: #fb7185;
+  --rose-500: #f43f5e;
+
+  /* neutrals — warm paper → ink */
+  --paper-0: #ffffff;
+  --paper-50: #fdfbf7;
+  --paper-100: #f8f4ec;
+  --paper-200: #efe9dd;
+  --paper-300: #e1d9ca;
+  --stone-400: #a39a8a;
+  --stone-500: #7b7365;
+  --stone-600: #5c5549;
+  --stone-700: #3d382f;
+  --ink-600: #2a2d3e;
+  --ink-700: #1c1f2e;
+  --ink-800: #141624;
+  --ink-850: #10121d;
+  --ink-900: #0b0c15;
+  --ink-950: #07080e;
+}
+
+/* 2 ── Semantic tokens: LIGHT (default) ──────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  /* surfaces */
+  --color-bg: var(--paper-50);
+  --color-bg-alt: var(--paper-100);
+  --color-surface: var(--paper-0);
+  --color-surface-2: var(--paper-100);
+  --color-surface-3: var(--paper-200);
+  --color-glass: rgba(255, 255, 255, 0.78);
+  --color-glass-strong: rgba(255, 255, 255, 0.94);
+  --color-overlay: rgba(16, 18, 29, 0.48);
+
+  /* lines */
+  --color-border: rgba(28, 31, 46, 0.1);
+  --color-border-strong: rgba(28, 31, 46, 0.2);
+  --color-focus: var(--indigo-500);
+
+  /* text */
+  --color-heading: var(--ink-800);
+  --color-text: var(--ink-600);
+  --color-text-muted: var(--stone-600);
+  --color-text-subtle: var(--stone-500);
+  --color-text-inverse: var(--paper-0);
+
+  /* brand */
+  --color-brand: var(--marigold-500);
+  --color-brand-strong: var(--marigold-600);
+  --color-brand-soft: var(--marigold-100);
+  --color-brand-text: var(--marigold-700);
+  --color-on-brand: var(--ink-900);
+  --color-accent: var(--indigo-600);
+  --color-accent-soft: var(--indigo-50);
+  --color-accent-text: var(--indigo-700);
+  --color-on-accent: var(--paper-0);
+
+  /* status */
+  --color-success: var(--green-600);
+  --color-success-soft: var(--green-100);
+  --color-warning: var(--amber-600);
+  --color-warning-soft: var(--amber-100);
+  --color-danger: var(--red-600);
+  --color-danger-soft: var(--red-100);
+  --color-trust: var(--teal-600);
+  --color-trust-soft: var(--teal-100);
+
+  /* job duration — used on chips, map pins, legends */
+  --color-daily: var(--marigold-600);
+  --color-short: var(--teal-600);
+  --color-long: var(--indigo-600);
+
+  /* trade colours — icon tiles & the 3D hats */
+  --trade-plumber: #2b7fd8;
+  --trade-electrician: #d9a400;
+  --trade-carpenter: #b5651d;
+  --trade-painter: #d6407c;
+  --trade-mason: #7a6f63;
+  --trade-cleaner: #0e9f8e;
+  --trade-labour: #e0611b;
+  --trade-driver: #5a4fd6;
+  --trade-cook: #c0392b;
+  --trade-gardener: #3d9a3f;
+
+  /* gradients */
+  --grad-brand: linear-gradient(135deg, var(--marigold-400) 0%, var(--marigold-600) 100%);
+  --grad-brand-text: linear-gradient(110deg, var(--marigold-600) 0%, #e2531a 55%, var(--indigo-600) 120%);
+  --grad-accent: linear-gradient(135deg, var(--indigo-500) 0%, var(--indigo-700) 100%);
+  --grad-hero: radial-gradient(120% 80% at 70% 0%, #ffe7c2 0%, transparent 55%),
+    radial-gradient(90% 70% at 0% 30%, #e6e6ff 0%, transparent 60%), var(--paper-50);
+  --grad-page: radial-gradient(1100px 600px at 90% -10%, rgba(245, 138, 7, 0.1), transparent 60%),
+    radial-gradient(900px 600px at -10% 20%, rgba(98, 92, 240, 0.07), transparent 60%);
+  --grad-card-sheen: linear-gradient(140deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+
+  /* elevation */
+  --shadow-xs: 0 1px 2px rgba(28, 31, 46, 0.06);
+  --shadow-sm: 0 2px 8px -2px rgba(28, 31, 46, 0.08), 0 1px 2px rgba(28, 31, 46, 0.05);
+  --shadow-md: 0 12px 28px -12px rgba(28, 31, 46, 0.18), 0 2px 6px rgba(28, 31, 46, 0.05);
+  --shadow-lg: 0 30px 60px -24px rgba(28, 31, 46, 0.28), 0 8px 20px -10px rgba(28, 31, 46, 0.1);
+  --shadow-brand: 0 14px 34px -12px rgba(245, 138, 7, 0.55);
+  --shadow-accent: 0 14px 34px -12px rgba(82, 64, 227, 0.5);
+
+  /* 3D scene palette (read by the WebGL hero) */
+  --scene-sky: #fdf3e3;
+  --scene-fog: #f8ecd9;
+  --scene-ground: #efe4d2;
+  --scene-road: #d9ccb6;
+  --scene-building: #f6efe4;
+  --scene-building-2: #e9dcc8;
+  --scene-window: #ffd58a;
+  --scene-glow: 0.25;
+}
+
+/* 3 ── Semantic tokens: DARK ─────────────────────────────────────────────── */
+/* data-theme is always set before first paint by the inline prefs script
+   (saved choice → otherwise the OS preference), so there is no flash. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg: var(--ink-900);
+  --color-bg-alt: var(--ink-850);
+  --color-surface: var(--ink-800);
+  --color-surface-2: var(--ink-700);
+  --color-surface-3: var(--ink-600);
+  --color-glass: rgba(20, 22, 36, 0.72);
+  --color-glass-strong: rgba(20, 22, 36, 0.95);
+  --color-overlay: rgba(4, 5, 10, 0.66);
+
+  --color-border: rgba(214, 220, 255, 0.1);
+  --color-border-strong: rgba(214, 220, 255, 0.2);
+  --color-focus: var(--marigold-300);
+
+  --color-heading: #f6f4ff;
+  --color-text: #d5d7e8;
+  --color-text-muted: #a3a6c0;
+  --color-text-subtle: #7c7f9a;
+  --color-text-inverse: var(--ink-900);
+
+  --color-brand: var(--marigold-400);
+  --color-brand-strong: var(--marigold-300);
+  --color-brand-soft: rgba(255, 164, 31, 0.14);
+  --color-brand-text: var(--marigold-300);
+  --color-on-brand: var(--ink-950);
+  --color-accent: var(--indigo-400);
+  --color-accent-soft: rgba(125, 127, 248, 0.16);
+  --color-accent-text: var(--indigo-200);
+  --color-on-accent: var(--ink-950);
+
+  --color-success: var(--green-400);
+  --color-success-soft: rgba(74, 222, 128, 0.14);
+  --color-warning: #facc15;
+  --color-warning-soft: rgba(250, 204, 21, 0.14);
+  --color-danger: var(--red-400);
+  --color-danger-soft: rgba(248, 113, 113, 0.15);
+  --color-trust: var(--teal-300);
+  --color-trust-soft: rgba(45, 212, 191, 0.14);
+
+  --color-daily: var(--marigold-300);
+  --color-short: var(--teal-300);
+  --color-long: var(--indigo-300);
+
+  --trade-plumber: #5aa8ff;
+  --trade-electrician: #ffd23f;
+  --trade-carpenter: #e39a5b;
+  --trade-painter: #ff79b0;
+  --trade-mason: #b6aa9d;
+  --trade-cleaner: #3fe0c9;
+  --trade-labour: #ff8a4c;
+  --trade-driver: #9b93ff;
+  --trade-cook: #ff7a6b;
+  --trade-gardener: #72d872;
+
+  --grad-brand: linear-gradient(135deg, var(--marigold-300) 0%, var(--marigold-500) 100%);
+  --grad-brand-text: linear-gradient(110deg, var(--marigold-300) 0%, #ff8a4c 50%, var(--indigo-300) 115%);
+  --grad-accent: linear-gradient(135deg, var(--indigo-400) 0%, var(--indigo-600) 100%);
+  --grad-hero: radial-gradient(120% 80% at 70% 0%, #3a2350 0%, transparent 55%),
+    radial-gradient(90% 70% at 0% 30%, #1b2150 0%, transparent 60%), var(--ink-900);
+  --grad-page: radial-gradient(1100px 600px at 90% -10%, rgba(255, 164, 31, 0.1), transparent 60%),
+    radial-gradient(900px 600px at -10% 20%, rgba(98, 92, 240, 0.12), transparent 60%);
+  --grad-card-sheen: linear-gradient(140deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0));
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 14px 30px -12px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 34px 70px -24px rgba(0, 0, 0, 0.75);
+  --shadow-brand: 0 14px 40px -12px rgba(255, 164, 31, 0.45);
+  --shadow-accent: 0 14px 40px -12px rgba(125, 127, 248, 0.45);
+
+  --scene-sky: #0b0c15;
+  --scene-fog: #10111f;
+  --scene-ground: #151728;
+  --scene-road: #1f2238;
+  --scene-building: #24273f;
+  --scene-building-2: #1b1d31;
+  --scene-window: #ffbd4d;
+  --scene-glow: 1;
+}
+
+/* 4 ── Scales ────────────────────────────────────────────────────────────── */
+:root {
+  /* type families — set by next/font in layout.tsx; Devanagari glyphs fall through to Mukta */
+  --font-display: var(--font-bricolage), var(--font-mukta), 'Segoe UI', system-ui, sans-serif;
+  --font-body: var(--font-mukta), 'Segoe UI', system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* fluid type scale (min @360px → max @1440px) */
+  --text-scale: 1;
+  --fs-2xs: calc(0.72rem * var(--text-scale));
+  --fs-xs: calc(0.8rem * var(--text-scale));
+  --fs-sm: calc(0.9rem * var(--text-scale));
+  --fs-md: calc(1rem * var(--text-scale));
+  --fs-lg: calc(clamp(1.08rem, 1rem + 0.35vw, 1.22rem) * var(--text-scale));
+  --fs-xl: calc(clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem) * var(--text-scale));
+  --fs-2xl: calc(clamp(1.5rem, 1.25rem + 1.1vw, 2.1rem) * var(--text-scale));
+  --fs-3xl: calc(clamp(1.9rem, 1.4rem + 2vw, 3rem) * var(--text-scale));
+  --fs-4xl: calc(clamp(2.3rem, 1.6rem + 3.2vw, 4.2rem) * var(--text-scale));
+  --fs-display: calc(clamp(2.6rem, 1.5rem + 5vw, 6rem) * var(--text-scale));
+
+  --lh-tight: 1.05;
+  --lh-snug: 1.25;
+  --lh-body: 1.6;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+  --tracking-tight: -0.025em;
+  --tracking-wide: 0.12em;
+
+  /* spacing (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-section: clamp(4rem, 3rem + 5vw, 8.5rem);
+
+  /* radius */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 36px;
+  --radius-pill: 999px;
+
+  /* touch — WCAG 2.5.5: generous targets for gloved / tired hands */
+  --tap-min: 48px;
+  --tap-lg: 56px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 160ms;
+  --dur-base: 260ms;
+  --dur-slow: 520ms;
+  --dur-reveal: 900ms;
+
+  /* layout */
+  --container: 1240px;
+  --container-narrow: 860px;
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
+  --header-h: 72px;
+  --tabbar-h: 68px;
+
+  /* z-index */
+  --z-base: 1;
+  --z-sticky: 20;
+  --z-header: 50;
+  --z-tabbar: 55;
+  --z-drawer: 70;
+  --z-modal: 80;
+  --z-toast: 90;
+}
+
+/* 5 ── Preference modifiers (set on <html> by the prefs script) ───────────── */
+:root[data-size='lg'] {
+  --text-scale: 1.12;
+}
+:root[data-size='xl'] {
+  --text-scale: 1.25;
+  --tap-min: 56px;
+}
+
+:root[data-lite='1'] {
+  --dur-fast: 0ms;
+  --dur-base: 0ms;
+  --dur-slow: 0ms;
+  --dur-reveal: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --dur-reveal: 0ms;
+  }
+}

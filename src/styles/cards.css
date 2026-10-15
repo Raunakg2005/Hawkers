@@ -1,0 +1,306 @@
+/* ==========================================================================
+   Domain cards — job card & worker card (used on many pages)
+   ========================================================================== */
+
+/* Stretched link: whole card clickable, but inner buttons stay usable */
+.stretched::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+/* ── Job card ────────────────────────────────────────────────────────────── */
+.job-card {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    border-color var(--dur-base),
+    opacity var(--dur-reveal) var(--ease-out);
+}
+
+.job-card.is-in:hover,
+.job-card:not([data-reveal]):hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-strong);
+}
+
+.job-card:focus-within {
+  border-color: var(--color-brand);
+}
+
+.job-card.is-risky {
+  border-color: color-mix(in srgb, var(--color-danger) 40%, transparent);
+  background:
+    repeating-linear-gradient(135deg, color-mix(in srgb, var(--color-danger) 5%, transparent) 0 12px, transparent 12px 24px),
+    var(--color-surface);
+}
+
+.job-card-top {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.job-card-title {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+  min-width: 0;
+}
+
+.job-card h3 {
+  font-size: var(--fs-lg);
+  line-height: 1.25;
+}
+
+.job-card h3 a:hover {
+  color: var(--color-brand-text);
+}
+
+.job-card-employer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.job-card-employer svg {
+  width: 16px;
+  height: 16px;
+}
+
+.job-card-employer .ok {
+  color: var(--color-trust);
+}
+
+.rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: var(--fw-bold);
+  color: var(--color-heading);
+}
+
+.rating svg,
+.star {
+  color: var(--marigold-400);
+  fill: var(--marigold-400);
+}
+
+.job-card-listen {
+  position: relative;
+  z-index: 2;
+}
+
+.job-card-pay {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+}
+
+.job-card-pay .money {
+  font-size: var(--fs-2xl);
+  line-height: 1;
+}
+
+.job-card-pay .unit {
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+}
+
+.job-card-pay .when {
+  margin-left: auto;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-success);
+}
+
+.job-card-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2) var(--space-4);
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+}
+
+.job-card-facts li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.job-card-facts li:first-child {
+  grid-column: 1 / -1;
+}
+
+.job-card-facts svg {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  margin-top: 3px;
+  color: var(--color-text-subtle);
+}
+
+.job-card-facts b {
+  color: var(--color-heading);
+}
+
+.job-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--color-border-strong);
+}
+
+.job-card-foot .posted {
+  margin-left: auto;
+}
+
+/* ── Worker card ─────────────────────────────────────────────────────────── */
+.worker-card {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    opacity var(--dur-reveal) var(--ease-out);
+}
+
+.worker-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--tile);
+}
+
+.worker-card.is-in:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.worker-card-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.worker-card-head > .chip {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+.worker-avatar {
+  border-radius: 18px;
+  flex: none;
+}
+
+.worker-card h3 {
+  font-size: var(--fs-lg);
+}
+
+.worker-card h3 a:hover {
+  color: var(--color-brand-text);
+}
+
+.worker-trade {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--tile);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-sm);
+}
+
+.worker-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+}
+
+.worker-card-stats > div {
+  display: grid;
+  justify-items: center;
+  padding: var(--space-3) var(--space-1);
+  text-align: center;
+}
+
+.worker-card-stats > div + div {
+  border-left: 1px solid var(--color-border);
+}
+
+.worker-card-stats .money {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-lg);
+}
+
+.worker-card-stats .money svg {
+  width: 16px;
+  height: 16px;
+}
+
+.worker-card-stats small {
+  color: var(--color-text-subtle);
+  font-size: var(--fs-xs);
+}
+
+.worker-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.worker-skills .chip {
+  font-size: var(--fs-xs);
+  min-height: 28px;
+}
+
+.worker-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.worker-foot > svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cards-grid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+}
