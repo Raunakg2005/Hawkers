@@ -20,7 +20,7 @@ const ITEMS: { id: string; icon: LucideIcon; color: string; title: L; hint: L }[
     icon: Camera,
     color: 'var(--color-accent)',
     title: { en: 'Take a photo of the gate or name board', hi: 'गेट या नाम के बोर्ड की फ़ोटो लें', mr: 'गेटचा किंवा नावाच्या पाटीचा फोटो काढा', gu: 'ગેટ કે નામના બોર્ડનો ફોટો પાડો' },
-    hint: { en: 'It shows exactly where you worked, useful if pay is not given.', hi: 'इससे पता रहता है कि आपने कहाँ काम किया, पैसे न मिलें तो काम आता है।', mr: 'तुम्ही नेमके कुठे काम केले ते यातून कळते, पैसे मिळाले नाहीत तर उपयोगी पडते.', gu: 'તમે ક્યાં કામ કર્યું તે આનાથી ખબર પડે છે, પૈસા ન મળે તો કામ આવે છે.' },
+    hint: { en: 'It shows exactly where you worked — useful if pay is not given.', hi: 'इससे पता रहता है कि आपने कहाँ काम किया — पैसे न मिलें तो काम आता है।', mr: 'तुम्ही नेमके कुठे काम केले ते यातून कळते — पैसे मिळाले नाहीत तर उपयोगी पडते.', gu: 'તમે ક્યાં કામ કર્યું તે આનાથી ખબર પડે છે — પૈસા ન મળે તો કામ આવે છે.' },
   },
   {
     id: 'number',
@@ -48,7 +48,7 @@ const ITEMS: { id: string; icon: LucideIcon; color: string; title: L; hint: L }[
     icon: UsersRound,
     color: 'var(--trade-painter)',
     title: { en: 'Tell a friend at the naka where you are going', hi: 'नाके पर किसी दोस्त को बताएँ कि कहाँ जा रहे हैं', mr: 'तुम्ही कुठे जात आहात ते नाक्यावरच्या एखाद्या मित्राला सांगा', gu: 'તમે ક્યાં જાઓ છો તે નાકા પરના કોઈ મિત્રને કહો' },
-    hint: { en: 'Better still, go together for a new employer.', hi: 'और भी अच्छा, नए मालिक के यहाँ साथ जाएँ।', mr: 'आणखी चांगले, नव्या मालकाकडे सोबत जा.', gu: 'હજી સારું, નવા માલિકને ત્યાં સાથે જાઓ.' },
+    hint: { en: 'Better still — go together for a new employer.', hi: 'और भी अच्छा — नए मालिक के यहाँ साथ जाएँ।', mr: 'आणखी चांगले — नव्या मालकाकडे सोबत जा.', gu: 'હજી સારું — નવા માલિકને ત્યાં સાથે જાઓ.' },
   },
 ];
 
@@ -66,7 +66,7 @@ export default function BeforeYouGo() {
           {all ? (
             <>
               <PartyPopper aria-hidden="true" />
-              <T en="All done, go safely!" hi="सब हो गया, सुरक्षित जाएँ!" mr="सगळे झाले, सुरक्षित जा!" gu="બધું થઈ ગયું, સંભાળીને જજો!" />
+              <T en="All done — go safely!" hi="सब हो गया — सुरक्षित जाएँ!" mr="सगळे झाले — सुरक्षित जा!" gu="બધું થઈ ગયું — સંભાળીને જજો!" />
             </>
           ) : (
             <T

@@ -282,8 +282,12 @@ main {
 }
 
 .gradient-text {
-  /* solid brand accent: gradient display text read as decoration, not emphasis */
-  color: var(--color-brand-text);
+  background: var(--grad-brand-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* Devanagari matras get clipped without a little room */
+  padding-block: 0.08em;
 }
 
 .section-head {

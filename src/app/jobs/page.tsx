@@ -6,7 +6,7 @@ import { T } from '@/components/T';
 
 export const metadata: Metadata = {
   title: 'Find work near you',
-  description: 'Daily-wage, short-term and long-term jobs near your naka, pay, hours, distance and payday shown first, with risky listings flagged.',
+  description: 'Daily-wage, short-term and long-term jobs near your naka — pay, hours, distance and payday shown first, with risky listings flagged.',
 };
 
 export default function JobsPage() {

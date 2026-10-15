@@ -205,9 +205,9 @@ export default function WorkDiary() {
     commit(entries.map((x) => (x.id === id ? { ...x, paid: true, paidOn: today } : x)));
     showToast(<T
         en={`${rupee(entry?.amount ?? 0)} marked as received.`}
-        hi={`${rupee(entry?.amount ?? 0)} मिल गए, दर्ज हुआ।`}
-        mr={`${rupee(entry?.amount ?? 0)} मिळाले, नोंद झाली.`}
-        gu={`${rupee(entry?.amount ?? 0)} મળી ગયા, નોંધ થઈ.`}
+        hi={`${rupee(entry?.amount ?? 0)} मिल गए — दर्ज हुआ।`}
+        mr={`${rupee(entry?.amount ?? 0)} मिळाले — नोंद झाली.`}
+        gu={`${rupee(entry?.amount ?? 0)} મળી ગયા — નોંધ થઈ.`}
       />, {
       label: <T en="Undo" hi="वापस" mr="परत घ्या" gu="પાછું કરો" />,
       run: () => commit(prev),
@@ -545,10 +545,10 @@ export default function WorkDiary() {
                           <TriangleAlert aria-hidden="true" />
                           <span>
                             <T
-                              en={`Waiting ${age} days is too long. You have a right to your wages, free help is available.`}
-                              hi={`${age} दिन का इंतज़ार बहुत ज़्यादा है। मज़दूरी पाना आपका हक़ है, मुफ़्त मदद मिल सकती है।`}
-                              mr={`${age} दिवस वाट पाहणे खूप जास्त आहे. मजुरी मिळणे हा तुमचा हक्क आहे, मोफत मदत मिळू शकते.`}
-                              gu={`${age} દિવસની રાહ ઘણી વધારે છે. મજૂરી મેળવવી એ તમારો હક છે, મફત મદદ મળી શકે છે.`}
+                              en={`Waiting ${age} days is too long. You have a right to your wages — free help is available.`}
+                              hi={`${age} दिन का इंतज़ार बहुत ज़्यादा है। मज़दूरी पाना आपका हक़ है — मुफ़्त मदद मिल सकती है।`}
+                              mr={`${age} दिवस वाट पाहणे खूप जास्त आहे. मजुरी मिळणे हा तुमचा हक्क आहे — मोफत मदत मिळू शकते.`}
+                              gu={`${age} દિવસની રાહ ઘણી વધારે છે. મજૂરી મેળવવી એ તમારો હક છે — મફત મદદ મળી શકે છે.`}
                             />{' '}
                             <Link href="/rights#rights" className={s.inlineLink}>
                               <T en="Get help with unpaid wages" hi="बाक़ी मज़दूरी के लिए मदद" mr="थकलेल्या मजुरीसाठी मदत" gu="બાકી મજૂરી માટે મદદ" />
@@ -605,12 +605,12 @@ export default function WorkDiary() {
                         {status === 'confirmed' ? (
                           <span className="chip chip-success">
                             <FileSignature aria-hidden="true" />
-                            <T en="Confirmed, Work Promise signed" hi="पक्का, काम का वादा साइन हुआ" mr="पक्के, कामाचे वचन सही झाले" gu="પાકું, કામનું વચન સહી થયું" />
+                            <T en="Confirmed — Work Promise signed" hi="पक्का — काम का वादा साइन हुआ" mr="पक्के — कामाचे वचन सही झाले" gu="પાકું — કામનું વચન સહી થયું" />
                           </span>
                         ) : (
                           <span className="chip chip-accent">
                             <Hourglass aria-hidden="true" />
-                            <T en="Applied, waiting" hi="अर्ज़ी दी, इंतज़ार" mr="अर्ज केला, वाट पाहत आहे" gu="અરજી કરી, રાહ જોવાય છે" />
+                            <T en="Applied — waiting" hi="अर्ज़ी दी — इंतज़ार" mr="अर्ज केला — वाट पाहत आहे" gu="અરજી કરી — રાહ જોવાય છે" />
                           </span>
                         )}
                         <span className={s.jobPay}>
@@ -645,10 +645,10 @@ export default function WorkDiary() {
             <p>
               {proofLeft > 0 ? (
                 <T
-                  en={`${proofLeft} more days of building work and you can register with the Construction Workers' Welfare Board, pension, accident cover and scholarships for your children.`}
-                  hi={`${proofLeft} दिन और निर्माण का काम, फिर आप निर्माण कामगार कल्याण बोर्ड में नाम लिखा सकते हैं, पेंशन, दुर्घटना बीमा और बच्चों की छात्रवृत्ति।`}
-                  mr={`आणखी ${proofLeft} दिवस बांधकामाचे काम, मग तुम्ही बांधकाम कामगार कल्याण मंडळात नाव नोंदवू शकता, पेन्शन, अपघात विमा आणि मुलांना शिष्यवृत्ती.`}
-                  gu={`હજી ${proofLeft} દિવસ બાંધકામનું કામ, પછી તમે બાંધકામ કામદાર કલ્યાણ બોર્ડમાં નામ નોંધાવી શકો, પેન્શન, અકસ્માત વીમો અને બાળકો માટે શિષ્યવૃત્તિ.`}
+                  en={`${proofLeft} more days of building work and you can register with the Construction Workers' Welfare Board — pension, accident cover and scholarships for your children.`}
+                  hi={`${proofLeft} दिन और निर्माण का काम, फिर आप निर्माण कामगार कल्याण बोर्ड में नाम लिखा सकते हैं — पेंशन, दुर्घटना बीमा और बच्चों की छात्रवृत्ति।`}
+                  mr={`आणखी ${proofLeft} दिवस बांधकामाचे काम, मग तुम्ही बांधकाम कामगार कल्याण मंडळात नाव नोंदवू शकता — पेन्शन, अपघात विमा आणि मुलांना शिष्यवृत्ती.`}
+                  gu={`હજી ${proofLeft} દિવસ બાંધકામનું કામ, પછી તમે બાંધકામ કામદાર કલ્યાણ બોર્ડમાં નામ નોંધાવી શકો — પેન્શન, અકસ્માત વીમો અને બાળકો માટે શિષ્યવૃત્તિ.`}
                 />
               ) : (
                 <T
@@ -661,10 +661,10 @@ export default function WorkDiary() {
             </p>
             <p className="subtle">
               <T
-                en={`Counted: days confirmed by employers on Naka in the last 12 months.${stats.selfDays ? ` ${stats.selfDays} days written by you, ask the employer to confirm them.` : ''}`}
-                hi={`गिनती: पिछले 12 महीनों में नाका पर मालिकों ने जो दिन पक्के किए।${stats.selfDays ? ` आपके लिखे ${stats.selfDays} दिन, मालिक से पक्का करवाएँ।` : ''}`}
-                mr={`मोजणी: मागील 12 महिन्यांत नाका वर मालकांनी पक्के केलेले दिवस.${stats.selfDays ? ` तुम्ही लिहिलेले ${stats.selfDays} दिवस, मालकाकडून पक्के करून घ्या.` : ''}`}
-                gu={`ગણતરી: છેલ્લા 12 મહિનામાં નાકા પર માલિકોએ પાકા કરેલા દિવસ.${stats.selfDays ? ` તમે લખેલા ${stats.selfDays} દિવસ, માલિક પાસે પાકા કરાવો.` : ''}`}
+                en={`Counted: days confirmed by employers on Naka in the last 12 months.${stats.selfDays ? ` ${stats.selfDays} days written by you — ask the employer to confirm them.` : ''}`}
+                hi={`गिनती: पिछले 12 महीनों में नाका पर मालिकों ने जो दिन पक्के किए।${stats.selfDays ? ` आपके लिखे ${stats.selfDays} दिन — मालिक से पक्का करवाएँ।` : ''}`}
+                mr={`मोजणी: मागील 12 महिन्यांत नाका वर मालकांनी पक्के केलेले दिवस.${stats.selfDays ? ` तुम्ही लिहिलेले ${stats.selfDays} दिवस — मालकाकडून पक्के करून घ्या.` : ''}`}
+                gu={`ગણતરી: છેલ્લા 12 મહિનામાં નાકા પર માલિકોએ પાકા કરેલા દિવસ.${stats.selfDays ? ` તમે લખેલા ${stats.selfDays} દિવસ — માલિક પાસે પાકા કરાવો.` : ''}`}
               />
             </p>
             <div className={s.proofActions}>

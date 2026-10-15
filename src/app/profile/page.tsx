@@ -9,7 +9,7 @@ import s from '@/components/profile/profile.module.css';
 export const metadata: Metadata = {
   title: 'Skill Card',
   description:
-    'Make your Naka Skill Card in 2 minutes, tap your trade, years, area and fair daily rate, add your voice and work photos. No résumé or certificate needed.',
+    'Make your Naka Skill Card in 2 minutes — tap your trade, years, area and fair daily rate, add your voice and work photos. No résumé or certificate needed.',
 };
 
 const WHY = [
@@ -23,7 +23,7 @@ const WHY = [
     icon: Handshake,
     tile: 'var(--color-trust)',
     title: { en: 'Employers trust it', hi: 'मालिक भरोसा करते हैं', mr: 'मालक विश्वास ठेवतात', gu: 'માલિક ભરોસો કરે છે' },
-    text: { en: 'Skills, fair rate and good words from past employers, in one look.', hi: 'हुनर, सही मज़दूरी और पुराने मालिकों की तारीफ़, एक नज़र में।', mr: 'कौशल्य, योग्य मजुरी आणि जुन्या मालकांनी केलेलं कौतुक, एका नजरेत.', gu: 'આવડત, યોગ્ય મજૂરી અને જૂના માલિકોના વખાણ, એક નજરમાં.' },
+    text: { en: 'Skills, fair rate and good words from past employers — in one look.', hi: 'हुनर, सही मज़दूरी और पुराने मालिकों की तारीफ़ — एक नज़र में।', mr: 'कौशल्य, योग्य मजुरी आणि जुन्या मालकांनी केलेलं कौतुक — एका नजरेत.', gu: 'આવડત, યોગ્ય મજૂરી અને જૂના માલિકોના વખાણ — એક નજરમાં.' },
   },
   {
     icon: Smartphone,
@@ -64,10 +64,10 @@ export default function ProfilePage() {
         }
         lead={
           <T
-            en="Answer 4 easy questions by tapping pictures. Get a work ID card you can show, send or print, and find work that matches it."
-            hi="तस्वीरें दबाकर 4 आसान सवालों के जवाब दें। काम का पहचान कार्ड पाएँ जिसे आप दिखा, भेज या प्रिंट कर सकें, और उसके हिसाब से काम पाएँ।"
-            mr="चित्रं दाबून 4 सोप्या प्रश्नांची उत्तरं द्या. कामाचं ओळखपत्र मिळवा, ते दाखवा, पाठवा किंवा प्रिंट करा, आणि त्याला साजेसं काम शोधा."
-            gu="ચિત્રો દબાવીને 4 સહેલા સવાલોના જવાબ આપો. કામનું ઓળખ કાર્ડ મેળવો, તે બતાવો, મોકલો કે પ્રિન્ટ કરો, અને તેને લાયક કામ શોધો."
+            en="Answer 4 easy questions by tapping pictures. Get a work ID card you can show, send or print — and find work that matches it."
+            hi="तस्वीरें दबाकर 4 आसान सवालों के जवाब दें। काम का पहचान कार्ड पाएँ जिसे आप दिखा, भेज या प्रिंट कर सकें — और उसके हिसाब से काम पाएँ।"
+            mr="चित्रं दाबून 4 सोप्या प्रश्नांची उत्तरं द्या. कामाचं ओळखपत्र मिळवा — ते दाखवा, पाठवा किंवा प्रिंट करा — आणि त्याला साजेसं काम शोधा."
+            gu="ચિત્રો દબાવીને 4 સહેલા સવાલોના જવાબ આપો. કામનું ઓળખ કાર્ડ મેળવો — તે બતાવો, મોકલો કે પ્રિન્ટ કરો — અને તેને લાયક કામ શોધો."
           />
         }
       >

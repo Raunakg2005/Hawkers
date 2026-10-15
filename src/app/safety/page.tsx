@@ -73,10 +73,10 @@ const PAY_TIPS: { icon: LucideIcon; color: string; title: L; body: L }[] = [
     color: 'var(--color-danger)',
     title: { en: 'PIN is only for SENDING money', hi: 'PIN सिर्फ़ पैसे भेजने के लिए है', mr: 'PIN फक्त पैसे पाठवण्यासाठी असतो', gu: 'PIN ફક્ત પૈસા મોકલવા માટે છે' },
     body: {
-      en: 'You never enter your UPI PIN to receive money. If someone says “enter PIN to get paid”, it is a scam.',
-      hi: 'पैसे लेने के लिए कभी UPI PIN नहीं डालना पड़ता। कोई कहे “पैसे पाने के लिए PIN डालो”, तो यह धोखा है।',
-      mr: 'पैसे घेण्यासाठी कधीच UPI PIN टाकावा लागत नाही. कोणी म्हणाले “पैसे मिळवण्यासाठी PIN टाका”, तर ही फसवणूक आहे.',
-      gu: 'પૈસા લેવા માટે ક્યારેય UPI PIN નાખવો પડતો નથી. કોઈ કહે “પૈસા મેળવવા PIN નાખો”, તો આ છેતરપિંડી છે.',
+      en: 'You never enter your UPI PIN to receive money. If someone says “enter PIN to get paid” — it is a scam.',
+      hi: 'पैसे लेने के लिए कभी UPI PIN नहीं डालना पड़ता। कोई कहे “पैसे पाने के लिए PIN डालो” — तो यह धोखा है।',
+      mr: 'पैसे घेण्यासाठी कधीच UPI PIN टाकावा लागत नाही. कोणी म्हणाले “पैसे मिळवण्यासाठी PIN टाका” — तर ही फसवणूक आहे.',
+      gu: 'પૈસા લેવા માટે ક્યારેય UPI PIN નાખવો પડતો નથી. કોઈ કહે “પૈસા મેળવવા PIN નાખો” — તો આ છેતરપિંડી છે.',
     },
   },
   {
@@ -106,10 +106,10 @@ const PAY_TIPS: { icon: LucideIcon; color: string; title: L; body: L }[] = [
     color: 'var(--color-accent)',
     title: { en: 'OTP is like your house key', hi: 'OTP आपके घर की चाबी जैसा है', mr: 'OTP म्हणजे तुमच्या घराची चावी', gu: 'OTP તમારા ઘરની ચાવી જેવો છે' },
     body: {
-      en: 'Bank, police or employer will never ask for it. Don’t tell anyone, not even “for verification”.',
-      hi: 'बैंक, पुलिस या मालिक कभी OTP नहीं माँगते। किसी को न बताएँ, “वेरिफ़िकेशन” के लिए भी नहीं।',
-      mr: 'बँक, पोलीस किंवा मालक कधीच OTP मागत नाहीत. कोणालाही सांगू नका, “व्हेरिफिकेशन”साठीसुद्धा नाही.',
-      gu: 'બેંક, પોલીસ કે માલિક ક્યારેય OTP માંગતા નથી. કોઈને ન કહો, “વેરિફિકેશન” માટે પણ નહીં.',
+      en: 'Bank, police or employer will never ask for it. Don’t tell anyone — not even “for verification”.',
+      hi: 'बैंक, पुलिस या मालिक कभी OTP नहीं माँगते। किसी को न बताएँ — “वेरिफ़िकेशन” के लिए भी नहीं।',
+      mr: 'बँक, पोलीस किंवा मालक कधीच OTP मागत नाहीत. कोणालाही सांगू नका — “व्हेरिफिकेशन”साठीसुद्धा नाही.',
+      gu: 'બેંક, પોલીસ કે માલિક ક્યારેય OTP માંગતા નથી. કોઈને ન કહો — “વેરિફિકેશન” માટે પણ નહીં.',
     },
   },
   {
@@ -168,10 +168,10 @@ export default function SafetyPage() {
         }
         lead={
           <T
-            en="Fake agents target the workers who need work the most. Answer 7 simple questions to see if a job is safe, and learn the signs that protect your money, papers and family."
-            hi="नकली एजेंट उन्हीं मज़दूरों को निशाना बनाते हैं जिन्हें काम की सबसे ज़्यादा ज़रूरत है। 7 आसान सवालों के जवाब दें और जानें कि काम सुरक्षित है या नहीं, और वे निशान सीखें जो आपके पैसे, कागज़ और परिवार को बचाते हैं।"
-            mr="खोटे एजंट अशाच कामगारांना फसवतात ज्यांना कामाची सर्वात जास्त गरज असते. 7 सोप्या प्रश्नांची उत्तरे द्या आणि काम सुरक्षित आहे का ते पाहा, आणि तुमचे पैसे, कागदपत्रे आणि कुटुंब वाचवणाऱ्या खुणा शिका."
-            gu="નકલી એજન્ટ એવા જ કામદારોને નિશાન બનાવે છે જેમને કામની સૌથી વધુ જરૂર છે. 7 સહેલા પ્રશ્નોના જવાબ આપો અને જુઓ કે કામ સુરક્ષિત છે કે નહીં, અને એવા સંકેત શીખો જે તમારા પૈસા, કાગળો અને પરિવારને બચાવે છે."
+            en="Fake agents target the workers who need work the most. Answer 7 simple questions to see if a job is safe — and learn the signs that protect your money, papers and family."
+            hi="नकली एजेंट उन्हीं मज़दूरों को निशाना बनाते हैं जिन्हें काम की सबसे ज़्यादा ज़रूरत है। 7 आसान सवालों के जवाब दें और जानें कि काम सुरक्षित है या नहीं — और वे निशान सीखें जो आपके पैसे, कागज़ और परिवार को बचाते हैं।"
+            mr="खोटे एजंट अशाच कामगारांना फसवतात ज्यांना कामाची सर्वात जास्त गरज असते. 7 सोप्या प्रश्नांची उत्तरे द्या आणि काम सुरक्षित आहे का ते पाहा — आणि तुमचे पैसे, कागदपत्रे आणि कुटुंब वाचवणाऱ्या खुणा शिका."
+            gu="નકલી એજન્ટ એવા જ કામદારોને નિશાન બનાવે છે જેમને કામની સૌથી વધુ જરૂર છે. 7 સહેલા પ્રશ્નોના જવાબ આપો અને જુઓ કે કામ સુરક્ષિત છે કે નહીં — અને એવા સંકેત શીખો જે તમારા પૈસા, કાગળો અને પરિવારને બચાવે છે."
           />
         }
         aside={
@@ -209,10 +209,10 @@ export default function SafetyPage() {
             </h2>
             <p className="lead">
               <T
-                en="Think of the job you were offered, on the phone, at the naka or online. Tap Yes, No or Not sure. Tap the speaker to hear each question."
-                hi="जो काम आपको मिला है उसके बारे में सोचें, फ़ोन पर, नाके पर या ऑनलाइन। हाँ, नहीं या पता नहीं दबाएँ। हर सवाल सुनने के लिए स्पीकर दबाएँ।"
-                mr="तुम्हाला मिळालेल्या कामाचा विचार करा, फोनवर, नाक्यावर किंवा ऑनलाइन. हो, नाही किंवा माहीत नाही दाबा. प्रत्येक प्रश्न ऐकण्यासाठी स्पीकर दाबा."
-                gu="તમને મળેલા કામ વિશે વિચારો, ફોન પર, નાકા પર કે ઑનલાઇન. હા, ના કે ખબર નથી દબાવો. દરેક પ્રશ્ન સાંભળવા સ્પીકર દબાવો."
+                en="Think of the job you were offered — on the phone, at the naka or online. Tap Yes, No or Not sure. Tap the speaker to hear each question."
+                hi="जो काम आपको मिला है उसके बारे में सोचें — फ़ोन पर, नाके पर या ऑनलाइन। हाँ, नहीं या पता नहीं दबाएँ। हर सवाल सुनने के लिए स्पीकर दबाएँ।"
+                mr="तुम्हाला मिळालेल्या कामाचा विचार करा — फोनवर, नाक्यावर किंवा ऑनलाइन. हो, नाही किंवा माहीत नाही दाबा. प्रत्येक प्रश्न ऐकण्यासाठी स्पीकर दाबा."
+                gu="તમને મળેલા કામ વિશે વિચારો — ફોન પર, નાકા પર કે ઑનલાઇન. હા, ના કે ખબર નથી દબાવો. દરેક પ્રશ્ન સાંભળવા સ્પીકર દબાવો."
               />
             </p>
           </div>
@@ -231,7 +231,7 @@ export default function SafetyPage() {
               <T en="7 signs a job may be a trap." hi="7 निशान कि काम एक जाल हो सकता है।" mr="काम म्हणजे सापळा असू शकतो याच्या 7 खुणा." gu="કામ એક જાળ હોઈ શકે તેના 7 સંકેત." />
             </h2>
             <p className="lead">
-              <T en="Naka checks every listing for these signs and shows a warning on the job card. Learn them, they work offline too." hi="नाका हर काम में ये निशान जाँचता है और कार्ड पर चेतावनी दिखाता है। इन्हें याद रखें, ये बिना इंटरनेट भी काम आते हैं।" mr="नाका प्रत्येक कामात या खुणा तपासते आणि कार्डवर इशारा दाखवते. त्या लक्षात ठेवा, इंटरनेटशिवायही उपयोगी पडतात." gu="નાકા દરેક કામમાં આ સંકેત તપાસે છે અને કાર્ડ પર ચેતવણી બતાવે છે. તેને યાદ રાખો, ઇન્ટરનેટ વગર પણ કામ આવે છે." />
+              <T en="Naka checks every listing for these signs and shows a warning on the job card. Learn them — they work offline too." hi="नाका हर काम में ये निशान जाँचता है और कार्ड पर चेतावनी दिखाता है। इन्हें याद रखें — ये बिना इंटरनेट भी काम आते हैं।" mr="नाका प्रत्येक कामात या खुणा तपासते आणि कार्डवर इशारा दाखवते. त्या लक्षात ठेवा — इंटरनेटशिवायही उपयोगी पडतात." gu="નાકા દરેક કામમાં આ સંકેત તપાસે છે અને કાર્ડ પર ચેતવણી બતાવે છે. તેને યાદ રાખો — ઇન્ટરનેટ વગર પણ કામ આવે છે." />
             </p>
           </div>
 
@@ -359,10 +359,10 @@ export default function SafetyPage() {
               </h3>
               <p>
                 <T
-                  en="Your diary shows who still owes you, and becomes proof of work for welfare boards and loans."
-                  hi="डायरी बताती है कि किसका पैसा बाक़ी है, और कल्याण बोर्ड व कर्ज़ के लिए काम का सबूत बनती है।"
-                  mr="डायरी सांगते कोणाकडे पैसे बाकी आहेत, आणि कल्याण मंडळ व कर्जासाठी कामाचा पुरावा बनते."
-                  gu="ડાયરી બતાવે છે કે કોની પાસે પૈસા બાકી છે, અને કલ્યાણ બોર્ડ અને લોન માટે કામનો પુરાવો બને છે."
+                  en="Your diary shows who still owes you — and becomes proof of work for welfare boards and loans."
+                  hi="डायरी बताती है कि किसका पैसा बाक़ी है — और कल्याण बोर्ड व कर्ज़ के लिए काम का सबूत बनती है।"
+                  mr="डायरी सांगते कोणाकडे पैसे बाकी आहेत — आणि कल्याण मंडळ व कर्जासाठी कामाचा पुरावा बनते."
+                  gu="ડાયરી બતાવે છે કે કોની પાસે પૈસા બાકી છે — અને કલ્યાણ બોર્ડ અને લોન માટે કામનો પુરાવો બને છે."
                 />
               </p>
               <Link href="/my-work" className={`btn ${s.ctaBtn}`}>
@@ -379,7 +379,7 @@ export default function SafetyPage() {
         <div className="container">
           <div className={s.helpHead} data-reveal="">
             <h2 className="h3" id="help-title">
-              <T en="Emergency & help lines, tap to call, free" hi="आपातकाल और मदद की लाइनें, टैप करके कॉल करें, मुफ़्त" mr="आणीबाणी आणि मदतीचे नंबर, टॅप करून कॉल करा, मोफत" gu="ઇમરજન્સી અને મદદની લાઇન, ટૅપ કરીને કૉલ કરો, મફત" />
+              <T en="Emergency & help lines — tap to call, free" hi="आपातकाल और मदद की लाइनें — टैप करके कॉल करें, मुफ़्त" mr="आणीबाणी आणि मदतीचे नंबर — टॅप करून कॉल करा, मोफत" gu="ઇમરજન્સી અને મદદની લાઇન — ટૅપ કરીને કૉલ કરો, મફત" />
             </h2>
             <Link href="/rights#help" className="btn btn-sm btn-ghost">
               <T en="What to do if you are not paid" hi="पैसा न मिले तो क्या करें" mr="पैसे मिळाले नाहीत तर काय करावे" gu="પૈસા ન મળે તો શું કરવું" />
@@ -420,10 +420,10 @@ function CompareColumn({ job, kind }: { job: Job; kind: 'real' | 'fake' }) {
       good: true,
       title: { en: 'Exact place is given', hi: 'सही जगह बताई गई है', mr: 'नेमकी जागा सांगितली आहे', gu: 'ચોક્કસ જગ્યા કહી છે' },
       body: {
-        en: `${job.area.en}, ${job.landmark.en}`,
-        hi: `${job.area.hi}, ${job.landmark.hi}`,
-        mr: `${job.area.mr}, ${job.landmark.mr}`,
-        gu: `${job.area.gu}, ${job.landmark.gu}`,
+        en: `${job.area.en} — ${job.landmark.en}`,
+        hi: `${job.area.hi} — ${job.landmark.hi}`,
+        mr: `${job.area.mr} — ${job.landmark.mr}`,
+        gu: `${job.area.gu} — ${job.landmark.gu}`,
       },
     });
     const fair = job.pay.amount >= lo && job.pay.amount <= hi;
@@ -431,20 +431,20 @@ function CompareColumn({ job, kind }: { job: Job; kind: 'real' | 'fake' }) {
       good: fair,
       title: fair ? { en: 'Pay is fair, not “too good”', hi: 'मज़दूरी सही है, “बहुत ज़्यादा” नहीं', mr: 'मजुरी योग्य आहे, “खूप जास्त” नाही', gu: 'મજૂરી યોગ્ય છે, “ખૂબ વધારે” નહીં' } : { en: 'Check the pay', hi: 'मज़दूरी जाँचें', mr: 'मजुरी तपासा', gu: 'મજૂરી તપાસો' },
       body: {
-        en: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].en}, usual for a ${trade.name.en.toLowerCase()} is ${rupee(lo)}, ${rupee(hi)}`,
-        hi: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].hi}, ${trade.name.hi} का आम रेट ${rupee(lo)}, ${rupee(hi)} है`,
-        mr: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].mr}, ${trade.name.mr} साठी नेहमीचा दर ${rupee(lo)}, ${rupee(hi)} आहे`,
-        gu: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].gu}, ${trade.name.gu} માટે સામાન્ય ભાવ ${rupee(lo)}, ${rupee(hi)} છે`,
+        en: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].en} — usual for a ${trade.name.en.toLowerCase()} is ${rupee(lo)}–${rupee(hi)}`,
+        hi: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].hi} — ${trade.name.hi} का आम रेट ${rupee(lo)}–${rupee(hi)} है`,
+        mr: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].mr} — ${trade.name.mr} साठी नेहमीचा दर ${rupee(lo)}–${rupee(hi)} आहे`,
+        gu: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].gu} — ${trade.name.gu} માટે સામાન્ય ભાવ ${rupee(lo)}–${rupee(hi)} છે`,
       },
     });
     notes.push({
       good: true,
       title: { en: 'Hours and payday are clear', hi: 'घंटे और भुगतान का दिन साफ़ है', mr: 'तास आणि पैसे मिळण्याचा दिवस स्पष्ट आहे', gu: 'કલાક અને પૈસા મળવાનો દિવસ ચોખ્ખો છે' },
       body: {
-        en: `${job.hours.start}, ${job.hours.end} · ${PAID_WHEN[job.paidWhen].en} · ${job.payMode.map((m) => PAY_MODE[m].en).join(' / ')}`,
-        hi: `${job.hours.start}, ${job.hours.end} · ${PAID_WHEN[job.paidWhen].hi} · ${job.payMode.map((m) => PAY_MODE[m].hi).join(' / ')}`,
-        mr: `${job.hours.start}, ${job.hours.end} · ${PAID_WHEN[job.paidWhen].mr} · ${job.payMode.map((m) => PAY_MODE[m].mr).join(' / ')}`,
-        gu: `${job.hours.start}, ${job.hours.end} · ${PAID_WHEN[job.paidWhen].gu} · ${job.payMode.map((m) => PAY_MODE[m].gu).join(' / ')}`,
+        en: `${job.hours.start}–${job.hours.end} · ${PAID_WHEN[job.paidWhen].en} · ${job.payMode.map((m) => PAY_MODE[m].en).join(' / ')}`,
+        hi: `${job.hours.start}–${job.hours.end} · ${PAID_WHEN[job.paidWhen].hi} · ${job.payMode.map((m) => PAY_MODE[m].hi).join(' / ')}`,
+        mr: `${job.hours.start}–${job.hours.end} · ${PAID_WHEN[job.paidWhen].mr} · ${job.payMode.map((m) => PAY_MODE[m].mr).join(' / ')}`,
+        gu: `${job.hours.start}–${job.hours.end} · ${PAID_WHEN[job.paidWhen].gu} · ${job.payMode.map((m) => PAY_MODE[m].gu).join(' / ')}`,
       },
     });
     if (job.flags.length === 0)
@@ -477,7 +477,7 @@ function CompareColumn({ job, kind }: { job: Job; kind: 'real' | 'fake' }) {
           <Verdict />
         </span>
         <div>
-          <p className={s.verdict}>{isReal ? <T en="Real job" hi="असली काम" mr="खरे काम" gu="સાચું કામ" /> : <T en="Fake job, a trap" hi="नकली काम, एक जाल" mr="खोटे काम, एक सापळा" gu="નકલી કામ, એક જાળ" />}</p>
+          <p className={s.verdict}>{isReal ? <T en="Real job" hi="असली काम" mr="खरे काम" gu="સાચું કામ" /> : <T en="Fake job — a trap" hi="नकली काम — एक जाल" mr="खोटे काम — एक सापळा" gu="નકલી કામ — એક જાળ" />}</p>
           <p className={s.verdictScore}>
             <T en="Trust score" hi="भरोसा अंक" mr="विश्वास गुण" gu="ભરોસા ગુણ" />{' '}
             <b className="money">
@@ -542,10 +542,10 @@ function WorkPromise({ job }: { job: Job }) {
       icon: Clock,
       k: { en: 'Hours', hi: 'समय', mr: 'वेळ', gu: 'સમય' },
       v: {
-        en: `${job.start.en}, ${job.hours.start}, ${job.hours.end}`,
-        hi: `${job.start.hi}, ${job.hours.start}, ${job.hours.end}`,
-        mr: `${job.start.mr}, ${job.hours.start}, ${job.hours.end}`,
-        gu: `${job.start.gu}, ${job.hours.start}, ${job.hours.end}`,
+        en: `${job.start.en}, ${job.hours.start} – ${job.hours.end}`,
+        hi: `${job.start.hi}, ${job.hours.start} – ${job.hours.end}`,
+        mr: `${job.start.mr}, ${job.hours.start} – ${job.hours.end}`,
+        gu: `${job.start.gu}, ${job.hours.start} – ${job.hours.end}`,
       },
     },
     {

@@ -8,7 +8,7 @@ import s from '@/components/diary/diary.module.css';
 export const metadata: Metadata = {
   title: 'My work diary',
   description:
-    'Write down every day of work in seconds, see what you earned this week, who still owes you money, send polite payment reminders and build proof of work for welfare schemes.',
+    'Write down every day of work in seconds — see what you earned this week, who still owes you money, send polite payment reminders and build proof of work for welfare schemes.',
 };
 
 export default function MyWorkPage() {

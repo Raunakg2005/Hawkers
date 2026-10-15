@@ -293,10 +293,10 @@ export const WORKERS: Worker[] = [
       { en: 'Brick wall', hi: 'ईंट की दीवार', mr: 'विटांची भिंत', gu: 'ઈંટની દીવાલ' },
     ],
     intro: {
-      en: 'Tiles, plaster and brickwork. My line stays straight, I always use a level.',
-      hi: 'टाइल, प्लास्टर और ईंट का काम। मेरी लाइन सीधी रहती है, हमेशा लेवल लगाता हूँ।',
-      mr: 'टाइल्स, प्लास्टर आणि विटांचे काम. माझी लाईन सरळ राहते, मी नेहमी लेव्हल वापरतो.',
-      gu: 'ટાઇલ્સ, પ્લાસ્ટર અને ઈંટનું કામ. મારી લાઇન સીધી રહે છે, હું હંમેશાં લેવલ વાપરું છું.',
+      en: 'Tiles, plaster and brickwork. My line stays straight — I always use a level.',
+      hi: 'टाइल, प्लास्टर और ईंट का काम। मेरी लाइन सीधी रहती है — हमेशा लेवल लगाता हूँ।',
+      mr: 'टाइल्स, प्लास्टर आणि विटांचे काम. माझी लाईन सरळ राहते — मी नेहमी लेव्हल वापरतो.',
+      gu: 'ટાઇલ્સ, પ્લાસ્ટર અને ઈંટનું કામ. મારી લાઇન સીધી રહે છે — હું હંમેશાં લેવલ વાપરું છું.',
     },
     endorsements: [
       {
@@ -337,7 +337,7 @@ export const WORKERS: Worker[] = [
     skills: [
       { en: 'LMV licence', hi: 'LMV लाइसेंस', mr: 'LMV लायसन्स', gu: 'LMV લાઇસન્સ' },
       { en: 'Tempo & pickup', hi: 'टेम्पो और पिकअप', mr: 'टेम्पो आणि पिकअप', gu: 'ટેમ્પો અને પિકઅપ' },
-      { en: 'Knows Thane, Navi Mumbai routes', hi: 'ठाणे, नवी मुंबई के रास्ते पता हैं', mr: 'ठाणे, नवी मुंबईचे रस्ते माहीत आहेत', gu: 'થાણે, નવી મુંબઈના રસ્તા ખબર છે' },
+      { en: 'Knows Thane–Navi Mumbai routes', hi: 'ठाणे–नवी मुंबई के रास्ते पता हैं', mr: 'ठाणे–नवी मुंबईचे रस्ते माहीत आहेत', gu: 'થાણે–નવી મુંબઈના રસ્તા ખબર છે' },
     ],
     intro: {
       en: 'Safe driver, no challan in 8 years. I also help with loading.',

@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Naka, Beyond the waiting line',
+    name: 'Naka — Beyond the waiting line',
     short_name: 'Naka',
-    description: 'Connecting hawkers to better work: nearby jobs, a skill card without a résumé, and your rights.',
+    description: 'Find nearby work, show your skill without a résumé, and know your rights.',
     start_url: '/jobs',
     display: 'standalone',
     background_color: '#fdfbf7',

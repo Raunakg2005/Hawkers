@@ -4,7 +4,7 @@ import { TRADE } from '@/data/trades';
 import { localeOf } from '@/lib/i18n';
 
 /* ==========================================================================
-   Work diary, types, mock seed, date & money helpers (client-side only)
+   Work diary — types, mock seed, date & money helpers (client-side only)
    ========================================================================== */
 
 export interface DiaryEntry {
@@ -175,10 +175,10 @@ export function reminderText(e: DiaryEntry, worker: string, lang: Lang) {
   const day = (l: Lang) => fmtDate(e.date, l, { day: 'numeric', month: 'long' });
   const name = TRADE[e.trade].name;
   const msg: L = {
-    en: `Namaste ${e.employer} ji, this is ${worker || 'your worker'} (${name.en}). A gentle reminder: ${amt} for my work on ${day('en')} is still pending. Please pay when you can, UPI or cash is fine. Thank you!`,
-    hi: `नमस्ते ${e.employer} जी, मैं ${worker || 'आपका कारीगर'} (${name.hi}) बोल रहा/रही हूँ। ${day('hi')} के काम के ${amt} अभी बाक़ी हैं। कृपया जब हो सके भुगतान कर दें, UPI या नकद, दोनों चलेगा। धन्यवाद!`,
-    mr: `नमस्कार ${e.employer} जी, मी ${worker || 'तुमचा कारागीर'} (${name.mr}) बोलत आहे. ${day('mr')} च्या कामाचे ${amt} अजून बाकी आहेत. जमेल तेव्हा कृपया पैसे द्या, UPI किंवा रोख, दोन्ही चालेल. धन्यवाद!`,
-    gu: `નમસ્તે ${e.employer} જી, હું ${worker || 'તમારો કારીગર'} (${name.gu}) બોલું છું. ${day('gu')}ના કામના ${amt} હજી બાકી છે. મહેરબાની કરીને જ્યારે થઈ શકે ત્યારે પૈસા આપી દેજો, UPI કે રોકડા, બંને ચાલશે. આભાર!`,
+    en: `Namaste ${e.employer} ji, this is ${worker || 'your worker'} (${name.en}). A gentle reminder: ${amt} for my work on ${day('en')} is still pending. Please pay when you can — UPI or cash is fine. Thank you!`,
+    hi: `नमस्ते ${e.employer} जी, मैं ${worker || 'आपका कारीगर'} (${name.hi}) बोल रहा/रही हूँ। ${day('hi')} के काम के ${amt} अभी बाक़ी हैं। कृपया जब हो सके भुगतान कर दें — UPI या नकद, दोनों चलेगा। धन्यवाद!`,
+    mr: `नमस्कार ${e.employer} जी, मी ${worker || 'तुमचा कारागीर'} (${name.mr}) बोलत आहे. ${day('mr')} च्या कामाचे ${amt} अजून बाकी आहेत. जमेल तेव्हा कृपया पैसे द्या — UPI किंवा रोख, दोन्ही चालेल. धन्यवाद!`,
+    gu: `નમસ્તે ${e.employer} જી, હું ${worker || 'તમારો કારીગર'} (${name.gu}) બોલું છું. ${day('gu')}ના કામના ${amt} હજી બાકી છે. મહેરબાની કરીને જ્યારે થઈ શકે ત્યારે પૈસા આપી દેજો — UPI કે રોકડા, બંને ચાલશે. આભાર!`,
   };
   const second: Lang = lang === 'en' ? 'hi' : 'en';
   return `${msg[lang]}\n\n${msg[second]}`;
@@ -198,7 +198,7 @@ export function workRecordCsv(list: DiaryEntry[], worker: string) {
   };
   const rows: (string | number)[][] = [
     ['Naka work record'],
-    ['Worker', worker || ', '],
+    ['Worker', worker || '—'],
     ['Made on', dateKey(new Date())],
     ['Verified work days (last 12 months)', verifiedDays(list)],
     [],

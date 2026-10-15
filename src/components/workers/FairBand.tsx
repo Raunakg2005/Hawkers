@@ -50,9 +50,9 @@ export default function FairBand({ trade, perDay, approx = false, compact = fals
       <div className={s.fairHead}>
         <FairChip status={status} />
         <span className="subtle">
-          <T en="Fair band for" hi="सही दाम , " mr="योग्य मर्यादा , " gu="યોગ્ય મર્યાદા , " /> <Tx l={TRADE[trade].name} />:{' '}
+          <T en="Fair band for" hi="सही दाम —" mr="योग्य मर्यादा —" gu="યોગ્ય મર્યાદા —" /> <Tx l={TRADE[trade].name} />:{' '}
           <b className={s.fairRange}>
-            {rupee(fLo)}, {rupee(fHi)}
+            {rupee(fLo)}–{rupee(fHi)}
           </b>{' '}
           <T en="/ day" hi="/ दिन" mr="/ दिवस" gu="/ દિવસ" />
         </span>

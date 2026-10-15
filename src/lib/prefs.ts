@@ -17,7 +17,7 @@ import type { L, Lang } from '@/data/types';
 
 export type PrefName = 'theme' | 'lang' | 'size' | 'lite';
 
-export const PREF_DEFAULTS: Record<PrefName, string> = { theme: 'dark', lang: 'en', size: 'md', lite: '0' };
+export const PREF_DEFAULTS: Record<PrefName, string> = { theme: 'light', lang: 'en', size: 'md', lite: '0' };
 
 const KEY = (name: PrefName) => `naka-${name}`;
 

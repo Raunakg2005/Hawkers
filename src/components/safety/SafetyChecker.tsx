@@ -78,10 +78,10 @@ const QUESTIONS: Q[] = [
       gu: 'શું તમને કામનું પૂરું સરનામું ખબર છે?',
     },
     hint: {
-      en: 'Building name, area and a landmark, not just “come, I will tell you”.',
-      hi: 'बिल्डिंग का नाम, इलाक़ा और कोई निशानी, सिर्फ़ “आओ, बता दूँगा” नहीं।',
-      mr: 'इमारतीचे नाव, भाग आणि जवळची एखादी खूण, फक्त “ये, सांगतो” असे नाही.',
-      gu: 'બિલ્ડિંગનું નામ, વિસ્તાર અને કોઈ નિશાની, ફક્ત “આવ, કહું છું” એવું નહીં.',
+      en: 'Building name, area and a landmark — not just “come, I will tell you”.',
+      hi: 'बिल्डिंग का नाम, इलाक़ा और कोई निशानी — सिर्फ़ “आओ, बता दूँगा” नहीं।',
+      mr: 'इमारतीचे नाव, भाग आणि जवळची एखादी खूण — फक्त “ये, सांगतो” असे नाही.',
+      gu: 'બિલ્ડિંગનું નામ, વિસ્તાર અને કોઈ નિશાની — ફક્ત “આવ, કહું છું” એવું નહીં.',
     },
     short: { en: 'Exact address known', hi: 'पूरा पता मालूम', mr: 'पूर्ण पत्ता माहीत', gu: 'પૂરું સરનામું ખબર' },
   },
@@ -173,10 +173,10 @@ const QUESTIONS: Q[] = [
       gu: 'શું કામ બીજા રાજ્યમાં કે વિદેશમાં છે?',
     },
     hint: {
-      en: 'Far work can be real, but check much more carefully first.',
-      hi: 'दूर का काम असली भी हो सकता है, पर पहले बहुत ध्यान से जाँचें।',
-      mr: 'लांबचे काम खरेही असू शकते, पण आधी खूप नीट तपासा.',
-      gu: 'દૂરનું કામ સાચું પણ હોઈ શકે, પણ પહેલાં ખૂબ ધ્યાનથી તપાસો.',
+      en: 'Far work can be real — but check much more carefully first.',
+      hi: 'दूर का काम असली भी हो सकता है — पर पहले बहुत ध्यान से जाँचें।',
+      mr: 'लांबचे काम खरेही असू शकते — पण आधी खूप नीट तपासा.',
+      gu: 'દૂરનું કામ સાચું પણ હોઈ શકે — પણ પહેલાં ખૂબ ધ્યાનથી તપાસો.',
     },
     short: { en: 'Far away / abroad', hi: 'दूर / विदेश', mr: 'लांब / परदेश', gu: 'દૂર / વિદેશ' },
   },
@@ -226,10 +226,10 @@ const LEVEL: Record<Level, { icon: LucideIcon; title: L; summary: L; steps: L[] 
         gu: 'સરનામું અને માલિકનો નંબર પરિવારને મોકલો.',
       },
       {
-        en: 'Agree the work, pay and payday before you start, a Work Promise.',
-        hi: 'काम शुरू करने से पहले काम, मज़दूरी और भुगतान का दिन तय करें, काम का वादा।',
-        mr: 'काम सुरू करण्याआधी काम, मजुरी आणि पैसे मिळण्याचा दिवस ठरवा, कामाचे वचन.',
-        gu: 'કામ શરૂ કરતાં પહેલાં કામ, મજૂરી અને પૈસા મળવાનો દિવસ નક્કી કરો, કામનું વચન.',
+        en: 'Agree the work, pay and payday before you start — a Work Promise.',
+        hi: 'काम शुरू करने से पहले काम, मज़दूरी और भुगतान का दिन तय करें — काम का वादा।',
+        mr: 'काम सुरू करण्याआधी काम, मजुरी आणि पैसे मिळण्याचा दिवस ठरवा — कामाचे वचन.',
+        gu: 'કામ શરૂ કરતાં પહેલાં કામ, મજૂરી અને પૈસા મળવાનો દિવસ નક્કી કરો — કામનું વચન.',
       },
       {
         en: 'For one-day work, take your pay before you leave.',
@@ -271,7 +271,7 @@ const LEVEL: Record<Level, { icon: LucideIcon; title: L; summary: L; steps: L[] 
   },
   risky: {
     icon: ShieldAlert,
-    title: { en: 'Risky, don’t go yet', hi: 'ख़तरा, अभी न जाएँ', mr: 'धोका, आत्ता जाऊ नका', gu: 'જોખમ, હમણાં ન જાઓ' },
+    title: { en: 'Risky — don’t go yet', hi: 'ख़तरा — अभी न जाएँ', mr: 'धोका — आत्ता जाऊ नका', gu: 'જોખમ — હમણાં ન જાઓ' },
     summary: {
       en: 'This looks like a scam or unsafe work. Protect your money and papers.',
       hi: 'यह धोखा या असुरक्षित काम लगता है। अपने पैसे और कागज़ बचाएँ।',
@@ -286,10 +286,10 @@ const LEVEL: Record<Level, { icon: LucideIcon; title: L; summary: L; steps: L[] 
         gu: 'કોઈ પૈસા ન આપો. OTP, PIN કે ATM કાર્ડ ક્યારેય ન આપો.',
       },
       {
-        en: 'Already paid or shared an OTP? Call 1930 at once, a fast call can stop the money.',
-        hi: 'पैसे दे दिए या OTP बता दिया? तुरंत 1930 पर कॉल करें, जल्दी कॉल करने से पैसा रुक सकता है।',
-        mr: 'पैसे दिले किंवा OTP सांगितला? लगेच 1930 वर कॉल करा, लवकर कॉल केल्यास पैसे थांबू शकतात.',
-        gu: 'પૈસા આપી દીધા કે OTP કહી દીધો? તરત 1930 પર કૉલ કરો, જલદી કૉલ કરવાથી પૈસા અટકી શકે છે.',
+        en: 'Already paid or shared an OTP? Call 1930 at once — a fast call can stop the money.',
+        hi: 'पैसे दे दिए या OTP बता दिया? तुरंत 1930 पर कॉल करें — जल्दी कॉल करने से पैसा रुक सकता है।',
+        mr: 'पैसे दिले किंवा OTP सांगितला? लगेच 1930 वर कॉल करा — लवकर कॉल केल्यास पैसे थांबू शकतात.',
+        gu: 'પૈસા આપી દીધા કે OTP કહી દીધો? તરત 1930 પર કૉલ કરો — જલદી કૉલ કરવાથી પૈસા અટકી શકે છે.',
       },
       {
         en: 'If you feel unsafe or someone is stopping you from leaving, call 112.',
@@ -391,10 +391,10 @@ export default function SafetyChecker() {
                     aria-current={i === step ? 'step' : undefined}
                     onClick={() => go(i)}
                     aria-label={t(
-                      `Question ${i + 1}: ${q.short.en}${a ? `, ${ANSWER_LABEL[a].en}` : ''}`,
-                      `सवाल ${i + 1}: ${q.short.hi}${a ? `, ${ANSWER_LABEL[a].hi}` : ''}`,
-                      `प्रश्न ${i + 1}: ${q.short.mr}${a ? `, ${ANSWER_LABEL[a].mr}` : ''}`,
-                      `પ્રશ્ન ${i + 1}: ${q.short.gu}${a ? `, ${ANSWER_LABEL[a].gu}` : ''}`,
+                      `Question ${i + 1}: ${q.short.en}${a ? ` — ${ANSWER_LABEL[a].en}` : ''}`,
+                      `सवाल ${i + 1}: ${q.short.hi}${a ? ` — ${ANSWER_LABEL[a].hi}` : ''}`,
+                      `प्रश्न ${i + 1}: ${q.short.mr}${a ? ` — ${ANSWER_LABEL[a].mr}` : ''}`,
+                      `પ્રશ્ન ${i + 1}: ${q.short.gu}${a ? ` — ${ANSWER_LABEL[a].gu}` : ''}`,
                     )}
                   >
                     {i + 1}
@@ -479,7 +479,7 @@ export default function SafetyChecker() {
                       <Tx l={ANSWER_LABEL[a]} />
                     </span>
                   ) : (
-                    <span className="subtle">, </span>
+                    <span className="subtle">—</span>
                   )}
                 </button>
               </li>

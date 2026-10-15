@@ -126,7 +126,7 @@ export default function SkillCard({
             <dt>
               <T en="Daily rate" hi="रोज़ की मज़दूरी" mr="रोजचा दर" gu="રોજનો દર" />
             </dt>
-            <dd className="money">{p.rate ? rupee(p.rate) : ', '}</dd>
+            <dd className="money">{p.rate ? rupee(p.rate) : '—'}</dd>
             {band && (
               <dd className={`${s.bandTag} ${s[`band_${band}`]}`}>
                 {band === 'fair' && <T en="Fair pay" hi="सही मज़दूरी" mr="योग्य मजुरी" gu="યોગ્ય મજૂરી" />}
@@ -153,7 +153,7 @@ export default function SkillCard({
               <span className={s.rowLabel}>
                 <T en="Find me at" hi="यहाँ मिलूँगा" mr="इथे भेटेन" gu="અહીં મળીશ" />
               </span>
-              {area ? <Tx l={area} /> : ', '}
+              {area ? <Tx l={area} /> : '—'}
               {p.spot.trim() && <span className={s.rowExtra}> · {p.spot.trim()}</span>}
             </span>
           </li>
@@ -193,7 +193,7 @@ export default function SkillCard({
                       <Tx l={langLabel(l)} />
                     </span>
                   ))
-                : ', '}
+                : '—'}
             </span>
           </li>
         </ul>
@@ -260,7 +260,7 @@ export default function SkillCard({
             {!p.eshram && variant !== 'print' && (
               <li data-print-hide="">
                 <Link href="/rights#e-shram" className={s.eshramLink}>
-                  <T en="Link e-Shram, free" hi="ई-श्रम जोड़ें, मुफ़्त" mr="ई-श्रम जोडा, मोफत" gu="ઈ-શ્રમ જોડો, મફત" />
+                  <T en="Link e-Shram — free" hi="ई-श्रम जोड़ें — मुफ़्त" mr="ई-श्रम जोडा — मोफत" gu="ઈ-શ્રમ જોડો — મફત" />
                   <ArrowRight aria-hidden="true" />
                 </Link>
               </li>

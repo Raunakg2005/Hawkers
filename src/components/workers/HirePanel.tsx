@@ -140,7 +140,7 @@ export default function HirePanel({ worker: w }: { worker: Worker }) {
             </span>
             <div>
               <h2 id={`${uid}-h`} className={s.hireTitle}>
-                <T en={`Hire ${first}, make a fair offer`} hi={`${first} को बुलाएँ, सही ऑफ़र दें`} mr={`${first} यांना बोलवा, योग्य ऑफर द्या`} gu={`${first}ને બોલાવો, યોગ્ય ઑફર આપો`} />
+                <T en={`Hire ${first} — make a fair offer`} hi={`${first} को बुलाएँ — सही ऑफ़र दें`} mr={`${first} यांना बोलवा — योग्य ऑफर द्या`} gu={`${first}ને બોલાવો — યોગ્ય ઑફર આપો`} />
               </h2>
               <p className="subtle">
                 <T en="Both of you will see the same written terms." hi="आप दोनों को एक जैसी लिखी शर्तें दिखेंगी।" mr="तुम्हा दोघांना सारख्याच लिहिलेल्या अटी दिसतील." gu="તમને બંનેને એકસરખી લખેલી શરતો દેખાશે." />
@@ -206,7 +206,7 @@ export default function HirePanel({ worker: w }: { worker: Worker }) {
               </span>
               <div className={s.timeRow}>
                 <input className="input" type="time" aria-label={t('Start time', 'शुरू का समय', 'सुरू होण्याची वेळ', 'શરૂ થવાનો સમય')} value={hours.start} onChange={(e) => setHours((h) => ({ ...h, start: e.target.value }))} />
-                <span aria-hidden="true">, </span>
+                <span aria-hidden="true">–</span>
                 <input className="input" type="time" aria-label={t('End time', 'ख़त्म होने का समय', 'संपण्याची वेळ', 'પૂરું થવાનો સમય')} value={hours.end} onChange={(e) => setHours((h) => ({ ...h, end: e.target.value }))} />
               </div>
             </div>
@@ -270,7 +270,7 @@ export default function HirePanel({ worker: w }: { worker: Worker }) {
             </div>
             <p className={s.total}>
               <span>
-                <T en="Total for" hi="कुल , " mr="एकूण , " gu="કુલ , " /> {span} <Tx l={spanUnit} />
+                <T en="Total for" hi="कुल —" mr="एकूण —" gu="કુલ —" /> {span} <Tx l={spanUnit} />
               </span>
               <b className="money">{rupee(total)}</b>
             </p>
@@ -467,7 +467,7 @@ function WorkPromise({ p, worker: w, refEl, onEdit }: { p: Offer; worker: Worker
               <T en="Hours" hi="समय" mr="वेळ" gu="સમય" />
             </dt>
             <dd>
-              {p.hours.start}, {p.hours.end}
+              {p.hours.start} – {p.hours.end}
             </dd>
           </div>
         </div>

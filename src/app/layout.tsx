@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Bricolage_Grotesque, Mukta, Mukta_Vaani, Pixelify_Sans } from 'next/font/google';
+import { Bricolage_Grotesque, Cinzel, Cormorant_Garamond, Mukta, Mukta_Vaani } from 'next/font/google';
 import 'lenis/dist/lenis.css';
 import './globals.css';
 /*
@@ -10,8 +10,6 @@ import './globals.css';
  */
 import '@/styles/landing.css';
 import '@/styles/jobs.css';
-import '@/styles/story.css';
-import '@/styles/fx.css';
 import '@/app/rights/rights.module.css';
 import '@/app/safety/safety.module.css';
 import '@/components/rights/rights-ui.module.css';
@@ -20,6 +18,7 @@ import '@/components/profile/profile.module.css';
 import '@/components/diary/diary.module.css';
 import '@/components/workers/workers.module.css';
 import '@/components/post-job/postjob.module.css';
+import '@/styles/heaven.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TabBar from '@/components/TabBar';
@@ -28,6 +27,7 @@ import SmoothScroll from '@/components/SmoothScroll';
 import MotionManager from '@/components/MotionManager';
 import { T } from '@/components/T';
 import { PREFS_SCRIPT } from '@/lib/prefs-script';
+import { GoldDefs } from '@/components/heaven/Ornament';
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -43,11 +43,27 @@ const mukta = Mukta({
   display: 'swap',
 });
 
-// Block-game display face for headlines, buttons and labels (Latin only; Indic falls back to Mukta).
-const pixel = Pixelify_Sans({
+// Baroque display pair: Cormorant for headlines, Cinzel (Roman capitals) for labels.
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-pixel',
+  weight: ['600', '700'],
+  variable: '--font-cormorant',
+  display: 'swap',
+});
+
+// italic loaded on its own: Turbopack fails to resolve mixed-style font queries
+const cormorantItalic = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: '600',
+  style: 'italic',
+  variable: '--font-cormorant-italic',
+  display: 'swap',
+});
+
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-cinzel',
   display: 'swap',
 });
 
@@ -73,7 +89,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0b0c15',
+  themeColor: '#fdfbf7',
   colorScheme: 'light dark',
   width: 'device-width',
   initialScale: 1,
@@ -82,12 +98,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="dark" className={`${bricolage.variable} ${mukta.variable} ${muktaVaani.variable} ${pixel.variable}`} suppressHydrationWarning>
+    <html lang="en" data-theme="light" className={`${bricolage.variable} ${mukta.variable} ${muktaVaani.variable} ${cormorant.variable} ${cormorantItalic.variable} ${cinzel.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFS_SCRIPT }} />
       </head>
       {/* extensions (Grammarly, translators…) add attributes to <body>; ignore those diffs */}
       <body suppressHydrationWarning>
+        <GoldDefs />
         <noscript>
           <style>{'[data-reveal]{opacity:1!important;transform:none!important}'}</style>
         </noscript>

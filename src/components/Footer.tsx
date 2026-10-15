@@ -25,6 +25,14 @@ export default function Footer() {
             <p className="subtle">
               <T en="Hackathon prototype · all data is mock" hi="हैकाथॉन प्रोटोटाइप · सारा डेटा नमूना है" mr="हॅकेथॉन प्रोटोटाइप · सर्व डेटा नमुना आहे" gu="હેકાથોન પ્રોટોટાઇપ · બધો ડેટા નમૂનો છે" />
             </p>
+            <p className="credits">
+              <T
+                en="Frescoes: Giulio Romano, Room of the Giants (photo Livioandronico2013); Tiepolo, Allegory of Merit (photo Archaeodontosaurus); Correggio, Assumption (photo Livioandronico2013), all CC BY-SA 4.0 via Wikimedia Commons. Tiepolo, Apollo and the Continents, public domain."
+                hi="भित्तिचित्र: जूलियो रोमानो, तिएपोलो, कोरेजियो। फ़ोटो Livioandronico2013 और Archaeodontosaurus, CC BY-SA 4.0, विकिमीडिया कॉमन्स।"
+                mr="भित्तिचित्रे: ज्युलिओ रोमानो, तिएपोलो, कोरेजिओ. फोटो Livioandronico2013 आणि Archaeodontosaurus, CC BY-SA 4.0, विकिमीडिया कॉमन्स."
+                gu="ભીંતચિત્રો: જુલિયો રોમાનો, તિએપોલો, કોરેજિયો. ફોટો Livioandronico2013 અને Archaeodontosaurus, CC BY-SA 4.0, વિકિમીડિયા કૉમન્સ."
+              />
+            </p>
           </div>
 
           <div>

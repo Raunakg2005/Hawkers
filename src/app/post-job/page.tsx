@@ -9,7 +9,7 @@ import s from '@/components/post-job/postjob.module.css';
 
 export const metadata: Metadata = {
   title: 'Post a job',
-  description: 'Post a job for nearby daily-wage workers in 2 minutes, with clear pay, hours and payday, a live fair-pay check and no fees.',
+  description: 'Post a job for nearby daily-wage workers in 2 minutes — with clear pay, hours and payday, a live fair-pay check and no fees.',
 };
 
 const GOOD = [
@@ -36,7 +36,7 @@ const GOOD = [
   {
     icon: MapPin,
     title: { en: 'A clear address', hi: 'साफ़ पता', mr: 'स्पष्ट पत्ता', gu: 'સાફ સરનામું' },
-    body: { en: 'Exact place and a contact person on site, no “call for address”.', hi: 'सही जगह और साइट पर संपर्क व्यक्ति, “पता फ़ोन पर” नहीं।', mr: 'अचूक जागा आणि साइटवर संपर्कासाठी एक माणूस, “पत्ता फोनवर” नाही.', gu: 'ચોક્કસ જગ્યા અને સાઇટ પર સંપર્ક માટે એક માણસ, “સરનામું ફોન પર” નહીં.' },
+    body: { en: 'Exact place and a contact person on site — no “call for address”.', hi: 'सही जगह और साइट पर संपर्क व्यक्ति — “पता फ़ोन पर” नहीं।', mr: 'अचूक जागा आणि साइटवर संपर्कासाठी एक माणूस — “पत्ता फोनवर” नाही.', gu: 'ચોક્કસ જગ્યા અને સાઇટ પર સંપર્ક માટે એક માણસ — “સરનામું ફોન પર” નહીં.' },
   },
   {
     icon: Droplets,
@@ -77,17 +77,17 @@ export default function PostJobPage() {
         }
         lead={
           <T
-            en="Four short steps. Workers nearby hear your job in their language, with the pay, place, hours and payday written clearly, so the right person shows up."
-            hi="चार छोटे कदम। पास के कारीगर आपका काम अपनी भाषा में सुनते हैं, मज़दूरी, जगह, समय और भुगतान का दिन साफ़ लिखा, ताकि सही आदमी पहुँचे।"
-            mr="चार छोट्या पायऱ्या. जवळचे कामगार तुमचे काम त्यांच्या भाषेत ऐकतात, मजुरी, जागा, वेळ आणि पगाराचा दिवस स्पष्ट लिहिलेला, म्हणजे योग्य माणूस पोहोचतो."
-            gu="ચાર નાનાં પગલાં. નજીકના કામદારો તમારું કામ પોતાની ભાષામાં સાંભળે છે, મજૂરી, જગ્યા, સમય અને પગારનો દિવસ સાફ લખેલો, જેથી યોગ્ય માણસ પહોંચે."
+            en="Four short steps. Workers nearby hear your job in their language — with the pay, place, hours and payday written clearly, so the right person shows up."
+            hi="चार छोटे कदम। पास के कारीगर आपका काम अपनी भाषा में सुनते हैं — मज़दूरी, जगह, समय और भुगतान का दिन साफ़ लिखा, ताकि सही आदमी पहुँचे।"
+            mr="चार छोट्या पायऱ्या. जवळचे कामगार तुमचे काम त्यांच्या भाषेत ऐकतात — मजुरी, जागा, वेळ आणि पगाराचा दिवस स्पष्ट लिहिलेला, म्हणजे योग्य माणूस पोहोचतो."
+            gu="ચાર નાનાં પગલાં. નજીકના કામદારો તમારું કામ પોતાની ભાષામાં સાંભળે છે — મજૂરી, જગ્યા, સમય અને પગારનો દિવસ સાફ લખેલો, જેથી યોગ્ય માણસ પહોંચે."
           />
         }
       >
         <ul className={s.heroChips}>
           <li className="chip chip-success">
             <ShieldCheck aria-hidden="true" />
-            <T en="Free, no commission" hi="मुफ़्त, कोई कमीशन नहीं" mr="मोफत, कोणतेही कमिशन नाही" gu="મફત, કોઈ કમિશન નહીં" />
+            <T en="Free — no commission" hi="मुफ़्त — कोई कमीशन नहीं" mr="मोफत — कोणतेही कमिशन नाही" gu="મફત — કોઈ કમિશન નહીં" />
           </li>
           <li className="chip chip-accent">
             <Smartphone aria-hidden="true" />
@@ -144,10 +144,10 @@ export default function PostJobPage() {
                 <T en="Minimum wage is the law." hi="न्यूनतम मज़दूरी क़ानून है।" mr="किमान मजुरी हा कायदा आहे." gu="લઘુતમ મજૂરી એ કાયદો છે." />
               </strong>{' '}
               <T
-                en="Paying below your state’s minimum wage is illegal under the Code on Wages, 2019, even for one day of work. The fair band we show is above it."
-                hi="वेतन संहिता, 2019 के तहत राज्य की न्यूनतम मज़दूरी से कम देना ग़ैर-क़ानूनी है, एक दिन के काम के लिए भी। हमारा दिखाया सही दाम उससे ऊपर है।"
-                mr="वेतन संहिता, 2019 नुसार राज्याच्या किमान मजुरीपेक्षा कमी देणे बेकायदेशीर आहे, अगदी एका दिवसाच्या कामासाठीसुद्धा. आम्ही दाखवलेली योग्य मर्यादा त्यापेक्षा जास्त आहे."
-                gu="વેતન સંહિતા, 2019 મુજબ રાજ્યની લઘુતમ મજૂરીથી ઓછું આપવું ગેરકાયદેસર છે, એક દિવસના કામ માટે પણ. અમે બતાવેલી યોગ્ય મર્યાદા તેનાથી વધારે છે."
+                en="Paying below your state’s minimum wage is illegal under the Code on Wages, 2019 — even for one day of work. The fair band we show is above it."
+                hi="वेतन संहिता, 2019 के तहत राज्य की न्यूनतम मज़दूरी से कम देना ग़ैर-क़ानूनी है — एक दिन के काम के लिए भी। हमारा दिखाया सही दाम उससे ऊपर है।"
+                mr="वेतन संहिता, 2019 नुसार राज्याच्या किमान मजुरीपेक्षा कमी देणे बेकायदेशीर आहे — अगदी एका दिवसाच्या कामासाठीसुद्धा. आम्ही दाखवलेली योग्य मर्यादा त्यापेक्षा जास्त आहे."
+                gu="વેતન સંહિતા, 2019 મુજબ રાજ્યની લઘુતમ મજૂરીથી ઓછું આપવું ગેરકાયદેસર છે — એક દિવસના કામ માટે પણ. અમે બતાવેલી યોગ્ય મર્યાદા તેનાથી વધારે છે."
               />{' '}
               <Link href="/rights#rights" className={s.lawLink}>
                 <T en="Workers’ rights" hi="मज़दूरों के अधिकार" mr="कामगारांचे हक्क" gu="કામદારોના હક" />

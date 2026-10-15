@@ -283,7 +283,7 @@ export default function VoiceRecorder({
               </strong>
               <span className="subtle">
                 {meta?.simulated ? (
-                  <T en="Practice recording, phone reads it aloud" hi="अभ्यास रिकॉर्डिंग, फ़ोन पढ़कर सुनाएगा" mr="सरावाचं रेकॉर्डिंग, फोन वाचून ऐकवेल" gu="પ્રેક્ટિસ રેકોર્ડિંગ, ફોન વાંચીને સંભળાવશે" />
+                  <T en="Practice recording — phone reads it aloud" hi="अभ्यास रिकॉर्डिंग — फ़ोन पढ़कर सुनाएगा" mr="सरावाचं रेकॉर्डिंग — फोन वाचून ऐकवेल" gu="પ્રેક્ટિસ રેકોર્ડિંગ — ફોન વાંચીને સંભળાવશે" />
                 ) : noAudio ? (
                   <T en="Saved earlier. Record again to hear it here." hi="पहले सेव हुआ था। यहाँ सुनने के लिए दोबारा रिकॉर्ड करें।" mr="आधी सेव्ह झालं होतं. इथे ऐकायला पुन्हा रेकॉर्ड करा." gu="પહેલાં સેવ થયું હતું. અહીં સાંભળવા ફરી રેકોર્ડ કરો." />
                 ) : (

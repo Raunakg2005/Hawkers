@@ -156,10 +156,10 @@ export default function AddWorkForm({
         ) : (
           <p id="amount-hint" className="subtle">
             <T
-              en={`Fair for ${TRADE[trade].name.en}: ${rupee(fair[0])}, ${rupee(fair[1])} a day`}
-              hi={`${TRADE[trade].name.hi} के लिए सही: ${rupee(fair[0])}, ${rupee(fair[1])} रोज़`}
-              mr={`${TRADE[trade].name.mr} साठी योग्य: रोज ${rupee(fair[0])}, ${rupee(fair[1])}`}
-              gu={`${TRADE[trade].name.gu} માટે યોગ્ય: રોજના ${rupee(fair[0])}, ${rupee(fair[1])}`}
+              en={`Fair for ${TRADE[trade].name.en}: ${rupee(fair[0])}–${rupee(fair[1])} a day`}
+              hi={`${TRADE[trade].name.hi} के लिए सही: ${rupee(fair[0])}–${rupee(fair[1])} रोज़`}
+              mr={`${TRADE[trade].name.mr} साठी योग्य: रोज ${rupee(fair[0])}–${rupee(fair[1])}`}
+              gu={`${TRADE[trade].name.gu} માટે યોગ્ય: રોજના ${rupee(fair[0])}–${rupee(fair[1])}`}
             />
           </p>
         )}

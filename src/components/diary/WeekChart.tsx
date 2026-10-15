@@ -71,7 +71,7 @@ export default function WeekChart({ entries, today }: { entries: DiaryEntry[]; t
               style={{ '--i': i } as React.CSSProperties}
             >
               <span className={s.barValue} aria-hidden="true">
-                {d.total ? shortRupee(d.total) : ', '}
+                {d.total ? shortRupee(d.total) : '—'}
               </span>
               <span className={s.barTrack} aria-hidden="true">
                 <span className={s.bar} style={{ '--h': `${(d.total / max) * 100}%` } as React.CSSProperties}>

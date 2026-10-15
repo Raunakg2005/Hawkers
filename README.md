@@ -1,6 +1,6 @@
 # Naka — Beyond the Waiting Line
 
-**Connecting hawkers (the plumbers, carpenters, electricians, painters, sweepers and labourers who wait at roadside hiring points) to better work, fair pay and their rights.**
+**Connecting India's daily-wage workers to better work, fair pay and their rights.**
 Theme: Inclusive Design · Employment · Digital Empowerment — a frontend-only hackathon build (Next.js, mock data, no backend).
 
 Every morning plumbers, painters, masons, electricians and helpers wait at a *naka* (roadside hiring point) hoping the right person walks by. Naka keeps that familiar way of working and adds a digital layer: nearby jobs with the pay written first, a skill card that replaces a résumé, a trust shield against scams, and rights & schemes in plain language.

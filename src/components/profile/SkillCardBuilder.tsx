@@ -423,10 +423,10 @@ export default function SkillCardBuilder() {
           </h2>
           <p className="lead">
             <T
-              en="Employers see your skill, years and fair rate at a glance, no résumé, no certificate needed."
-              hi="मालिक एक नज़र में आपका हुनर, अनुभव और सही मज़दूरी देख लेते हैं, न बायोडाटा, न सर्टिफ़िकेट।"
-              mr="मालकांना एका नजरेत तुमचं कौशल्य, अनुभव आणि योग्य मजुरी दिसते, ना बायोडाटा, ना सर्टिफिकेट."
-              gu="માલિકને એક નજરમાં તમારી આવડત, અનુભવ અને યોગ્ય મજૂરી દેખાય છે, ન બાયોડેટા, ન સર્ટિફિકેટ."
+              en="Employers see your skill, years and fair rate at a glance — no résumé, no certificate needed."
+              hi="मालिक एक नज़र में आपका हुनर, अनुभव और सही मज़दूरी देख लेते हैं — न बायोडाटा, न सर्टिफ़िकेट।"
+              mr="मालकांना एका नजरेत तुमचं कौशल्य, अनुभव आणि योग्य मजुरी दिसते — ना बायोडाटा, ना सर्टिफिकेट."
+              gu="માલિકને એક નજરમાં તમારી આવડત, અનુભવ અને યોગ્ય મજૂરી દેખાય છે — ન બાયોડેટા, ન સર્ટિફિકેટ."
             />
           </p>
         </div>
@@ -537,7 +537,7 @@ export default function SkillCardBuilder() {
             <style>{`@media screen{[data-print-root]{display:none!important}}@media print{body>*:not([data-print-root]){display:none!important}[data-print-root]{display:block!important}[data-print-hide]{display:none!important}@page{margin:12mm}}`}</style>
             <SkillCard p={p} photoUrls={photoUrls} variant="print" />
             <p className={s.printNote}>
-              <T en="Made with Naka, skill cards for daily-wage workers. The QR code is a demo." hi="नाका से बना, दिहाड़ी कामगारों का स्किल कार्ड। QR कोड डेमो है।" mr="नाकावर बनवलेलं, रोजंदारी कामगारांसाठी स्किल कार्ड. QR कोड डेमो आहे." gu="નાકા પર બનાવેલું, રોજમદાર કામદારો માટે સ્કિલ કાર્ડ. QR કોડ ડેમો છે." />
+              <T en="Made with Naka — skill cards for daily-wage workers. The QR code is a demo." hi="नाका से बना — दिहाड़ी कामगारों का स्किल कार्ड। QR कोड डेमो है।" mr="नाकावर बनवलेलं — रोजंदारी कामगारांसाठी स्किल कार्ड. QR कोड डेमो आहे." gu="નાકા પર બનાવેલું — રોજમદાર કામદારો માટે સ્કિલ કાર્ડ. QR કોડ ડેમો છે." />
             </p>
           </div>,
           document.body,
@@ -820,7 +820,7 @@ export default function SkillCardBuilder() {
                 </div>
                 <div className="row">
                   <button type="button" className="btn btn-sm btn-ghost" onClick={() => update({ days: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat'] })}>
-                    <T en="Mon, Sat" hi="सोम, शनि" mr="सोम, शनि" gu="સોમ, શનિ" />
+                    <T en="Mon – Sat" hi="सोम – शनि" mr="सोम – शनि" gu="સોમ – શનિ" />
                   </button>
                   <button type="button" className="btn btn-sm btn-ghost" onClick={() => update({ days: DAYS.map((d) => d.id) })}>
                     <T en="All 7 days" hi="सातों दिन" mr="सातही दिवस" gu="સાતેય દિવસ" />
@@ -857,9 +857,9 @@ export default function SkillCardBuilder() {
                       <T en="My daily rate" hi="मेरी रोज़ की मज़दूरी" mr="माझा रोजचा दर" gu="મારો રોજનો દર" />
                     </label>
                     <span className="subtle">
-                      <T en={`Fair for ${TRADE[p.trade].name.en}: ${rupee(fair[0])}, ${rupee(fair[1])}`} hi={`${TRADE[p.trade].name.hi} के लिए सही: ${rupee(fair[0])}, ${rupee(fair[1])}`}
-                        mr={`${TRADE[p.trade].name.mr} साठी योग्य: ${rupee(fair[0])}, ${rupee(fair[1])}`}
-                        gu={`${TRADE[p.trade].name.gu} માટે યોગ્ય: ${rupee(fair[0])}, ${rupee(fair[1])}`}
+                      <T en={`Fair for ${TRADE[p.trade].name.en}: ${rupee(fair[0])}–${rupee(fair[1])}`} hi={`${TRADE[p.trade].name.hi} के लिए सही: ${rupee(fair[0])}–${rupee(fair[1])}`}
+                        mr={`${TRADE[p.trade].name.mr} साठी योग्य: ${rupee(fair[0])}–${rupee(fair[1])}`}
+                        gu={`${TRADE[p.trade].name.gu} માટે યોગ્ય: ${rupee(fair[0])}–${rupee(fair[1])}`}
                       />
                     </span>
                   </div>
@@ -922,13 +922,13 @@ export default function SkillCardBuilder() {
                     {band === 'below' && (
                       <>
                         <CircleAlert aria-hidden="true" />
-                        <T en="This is below fair pay. Your skill is worth more, you can ask for more." hi="यह सही मज़दूरी से कम है। आपका हुनर ज़्यादा का हक़दार है, आप ज़्यादा माँग सकते हैं।" mr="हे योग्य मजुरीपेक्षा कमी आहे. तुमच्या कौशल्याची किंमत जास्त आहे, तुम्ही जास्त मागू शकता." gu="આ યોગ્ય મજૂરી કરતાં ઓછું છે. તમારી આવડતની કિંમત વધારે છે, તમે વધારે માગી શકો છો." />
+                        <T en="This is below fair pay. Your skill is worth more — you can ask for more." hi="यह सही मज़दूरी से कम है। आपका हुनर ज़्यादा का हक़दार है — आप ज़्यादा माँग सकते हैं।" mr="हे योग्य मजुरीपेक्षा कमी आहे. तुमच्या कौशल्याची किंमत जास्त आहे — तुम्ही जास्त मागू शकता." gu="આ યોગ્ય મજૂરી કરતાં ઓછું છે. તમારી આવડતની કિંમત વધારે છે — તમે વધારે માગી શકો છો." />
                       </>
                     )}
                     {band === 'above' && (
                       <>
                         <Sparkles aria-hidden="true" />
-                        <T en="Higher than usual. Fine if your work is special, explain why in your voice intro." hi="आम से ज़्यादा। अगर आपका काम ख़ास है तो ठीक, वजह अपने आवाज़ वाले परिचय में बताएँ।" mr="नेहमीपेक्षा जास्त. तुमचं काम खास असेल तर ठीक, कारण तुमच्या आवाजातल्या ओळखीत सांगा." gu="સામાન્ય કરતાં વધારે. તમારું કામ ખાસ હોય તો બરાબર, કારણ તમારી અવાજવાળી ઓળખમાં કહો." />
+                        <T en="Higher than usual. Fine if your work is special — explain why in your voice intro." hi="आम से ज़्यादा। अगर आपका काम ख़ास है तो ठीक — वजह अपने आवाज़ वाले परिचय में बताएँ।" mr="नेहमीपेक्षा जास्त. तुमचं काम खास असेल तर ठीक — कारण तुमच्या आवाजातल्या ओळखीत सांगा." gu="સામાન્ય કરતાં વધારે. તમારું કામ ખાસ હોય તો બરાબર — કારણ તમારી અવાજવાળી ઓળખમાં કહો." />
                       </>
                     )}
                   </p>
@@ -1020,10 +1020,10 @@ export default function SkillCardBuilder() {
                 <PhotoSlots urls={photoUrls} count={p.photos} onAdd={addPhoto} onRemove={removePhoto} />
                 <p className="subtle">
                   <T
-                    en="A finished wall, a neat pipe joint, a polished door, photos speak louder than certificates. Photos stay on your phone in this demo."
-                    hi="पूरी हुई दीवार, साफ़ पाइप जोड़, चमकता दरवाज़ा, फ़ोटो सर्टिफ़िकेट से ज़्यादा बोलती है। इस डेमो में फ़ोटो आपके फ़ोन में ही रहती हैं।"
-                    mr="पूर्ण झालेली भिंत, नीट केलेला पाईपचा जोड, चमकणारं दार, फोटो सर्टिफिकेटपेक्षा जास्त बोलतात. या डेमोमध्ये फोटो तुमच्या फोनमध्येच राहतात."
-                    gu="પૂરી થયેલી દીવાલ, સરસ પાઇપ જોડાણ, ચમકતો દરવાજો, ફોટા સર્ટિફિકેટ કરતાં વધારે બોલે છે. આ ડેમોમાં ફોટા તમારા ફોનમાં જ રહે છે."
+                    en="A finished wall, a neat pipe joint, a polished door — photos speak louder than certificates. Photos stay on your phone in this demo."
+                    hi="पूरी हुई दीवार, साफ़ पाइप जोड़, चमकता दरवाज़ा — फ़ोटो सर्टिफ़िकेट से ज़्यादा बोलती है। इस डेमो में फ़ोटो आपके फ़ोन में ही रहती हैं।"
+                    mr="पूर्ण झालेली भिंत, नीट केलेला पाईपचा जोड, चमकणारं दार — फोटो सर्टिफिकेटपेक्षा जास्त बोलतात. या डेमोमध्ये फोटो तुमच्या फोनमध्येच राहतात."
+                    gu="પૂરી થયેલી દીવાલ, સરસ પાઇપ જોડાણ, ચમકતો દરવાજો — ફોટા સર્ટિફિકેટ કરતાં વધારે બોલે છે. આ ડેમોમાં ફોટા તમારા ફોનમાં જ રહે છે."
                   />
                 </p>
               </fieldset>
@@ -1080,7 +1080,7 @@ export default function SkillCardBuilder() {
         <div id="card-preview" className={s.previewBody} data-lenis-prevent="">
           <p className={s.previewLabel}>
             <Eye aria-hidden="true" />
-            <T en="Live preview, changes as you go" hi="लाइव झलक, भरते ही बदलती है" mr="लाइव्ह झलक, भरताच बदलते" gu="લાઇવ ઝલક, ભરતાં જ બદલાય છે" />
+            <T en="Live preview — changes as you go" hi="लाइव झलक — भरते ही बदलती है" mr="लाइव्ह झलक — भरताच बदलते" gu="લાઇવ ઝલક — ભરતાં જ બદલાય છે" />
           </p>
           <SkillCard p={p} photoUrls={photoUrls} variant="preview" />
         </div>
