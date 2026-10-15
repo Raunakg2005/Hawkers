@@ -348,10 +348,10 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
         </h2>
         <p className="lead">
           <T
-            en={`${pt.name.en} workers near ${published.area.en} now get a voice alert in their own language. Calls reach you on a private Naka number — your phone stays hidden.`}
-            hi={`${published.area.hi} के पास के ${pt.name.hi} को अब उनकी अपनी भाषा में आवाज़ से सूचना मिल रही है। कॉल नाका के प्राइवेट नंबर से आएँगे — आपका नंबर छिपा रहेगा।`}
-            mr={`${published.area.mr} जवळच्या ${pt.name.mr} कामगारांना आता त्यांच्या भाषेत आवाजात सूचना मिळत आहे. फोन नाकाच्या प्रायव्हेट नंबरवरून येतील — तुमचा नंबर लपलेला राहील.`}
-            gu={`${published.area.gu} પાસેના ${pt.name.gu} કામદારોને હવે તેમની પોતાની ભાષામાં અવાજથી સૂચના મળી રહી છે. ફોન નાકાના પ્રાઇવેટ નંબરથી આવશે — તમારો નંબર છુપાયેલો રહેશે.`}
+            en={`${pt.name.en} workers near ${published.area.en} now get a voice alert in their own language. Calls reach you on a private Naka number, your phone stays hidden.`}
+            hi={`${published.area.hi} के पास के ${pt.name.hi} को अब उनकी अपनी भाषा में आवाज़ से सूचना मिल रही है। कॉल नाका के प्राइवेट नंबर से आएँगे, आपका नंबर छिपा रहेगा।`}
+            mr={`${published.area.mr} जवळच्या ${pt.name.mr} कामगारांना आता त्यांच्या भाषेत आवाजात सूचना मिळत आहे. फोन नाकाच्या प्रायव्हेट नंबरवरून येतील, तुमचा नंबर लपलेला राहील.`}
+            gu={`${published.area.gu} પાસેના ${pt.name.gu} કામદારોને હવે તેમની પોતાની ભાષામાં અવાજથી સૂચના મળી રહી છે. ફોન નાકાના પ્રાઇવેટ નંબરથી આવશે, તમારો નંબર છુપાયેલો રહેશે.`}
           />
         </p>
         <div
@@ -564,10 +564,10 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                 maxLength={500}
                 onChange={(e) => patch({ description: e.target.value })}
                 placeholder={t(
-                  'e.g. Two bathrooms. Basin pipe leaks, shower mixer needs a new cartridge. We will buy parts — you tell us what. 3rd floor, lift available.',
-                  'जैसे: दो बाथरूम। बेसिन की पाइप टपक रही है, शावर मिक्सर में नया कार्ट्रिज लगाना है। सामान हम लाएँगे — आप बताइए क्या। तीसरी मंज़िल, लिफ़्ट है।',
-                  'उदा. दोन बाथरूम. बेसिनचा पाईप गळतोय, शॉवर मिक्सरमध्ये नवीन कार्ट्रिज बसवायचे आहे. सामान आम्ही आणू — तुम्ही फक्त काय लागेल ते सांगा. तिसरा मजला, लिफ्ट आहे.',
-                  'જેમ કે: બે બાથરૂમ. બેસિનની પાઇપ ટપકે છે, શાવર મિક્સરમાં નવું કાર્ટ્રિજ નાખવાનું છે. સામાન અમે લાવીશું — તમે ફક્ત શું જોઈએ એ કહો. ત્રીજો માળ, લિફ્ટ છે.',
+                  'e.g. Two bathrooms. Basin pipe leaks, shower mixer needs a new cartridge. We will buy parts, you tell us what. 3rd floor, lift available.',
+                  'जैसे: दो बाथरूम। बेसिन की पाइप टपक रही है, शावर मिक्सर में नया कार्ट्रिज लगाना है। सामान हम लाएँगे, आप बताइए क्या। तीसरी मंज़िल, लिफ़्ट है।',
+                  'उदा. दोन बाथरूम. बेसिनचा पाईप गळतोय, शॉवर मिक्सरमध्ये नवीन कार्ट्रिज बसवायचे आहे. सामान आम्ही आणू, तुम्ही फक्त काय लागेल ते सांगा. तिसरा मजला, लिफ्ट आहे.',
+                  'જેમ કે: બે બાથરૂમ. બેસિનની પાઇપ ટપકે છે, શાવર મિક્સરમાં નવું કાર્ટ્રિજ નાખવાનું છે. સામાન અમે લાવીશું, તમે ફક્ત શું જોઈએ એ કહો. ત્રીજો માળ, લિફ્ટ છે.',
                 )}
                 aria-describedby="pj-desc-hint"
               />
@@ -730,7 +730,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                       <b>{Math.round(hoursPerDay * 10) / 10}</b> <T en="hours / day" hi="घंटे / दिन" mr="तास / दिवस" gu="કલાક / દિવસ" />
                     </>
                   ) : (
-                    '—'
+                    ', '
                   )}
                 </p>
               </div>
@@ -739,10 +739,10 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                 <p className="callout callout-warning">
                   <TriangleAlert aria-hidden="true" />
                   <T
-                    en="More than 9 hours a day counts as overtime — usually paid at double the rate."
-                    hi="दिन में 9 घंटे से ज़्यादा काम ओवरटाइम है — इसका आम तौर पर दोगुना रेट मिलता है।"
-                    mr="दिवसाला 9 तासांपेक्षा जास्त काम म्हणजे ओव्हरटाइम — त्याचा साधारणपणे दुप्पट दर मिळतो."
-                    gu="દિવસમાં 9 કલાકથી વધારે કામ એટલે ઓવરટાઇમ — એનો સામાન્ય રીતે બમણો દર મળે છે."
+                    en="More than 9 hours a day counts as overtime, usually paid at double the rate."
+                    hi="दिन में 9 घंटे से ज़्यादा काम ओवरटाइम है, इसका आम तौर पर दोगुना रेट मिलता है।"
+                    mr="दिवसाला 9 तासांपेक्षा जास्त काम म्हणजे ओव्हरटाइम, त्याचा साधारणपणे दुप्पट दर मिळतो."
+                    gu="દિવસમાં 9 કલાકથી વધારે કામ એટલે ઓવરટાઇમ, એનો સામાન્ય રીતે બમણો દર મળે છે."
                   />
                 </p>
               )}
@@ -803,10 +803,10 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                         </strong>
                         <span>
                           <T
-                            en={`${trade.name.en} work near Kurla usually pays ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} a day. Skilled workers will pick other jobs — and very low pay can be below the legal minimum wage.`}
-                            hi={`कुर्ला के पास ${trade.name.hi} को आम तौर पर ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} रोज़ मिलते हैं। हुनरमंद कारीगर दूसरे काम चुन लेंगे — और बहुत कम मज़दूरी क़ानूनी न्यूनतम वेतन से भी कम हो सकती है।`}
-                            mr={`कुर्ल्याजवळ ${trade.name.mr} कामाला साधारणपणे रोज ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} मिळतात. कुशल कारागीर दुसरी कामे निवडतील — आणि खूप कमी मजुरी कायदेशीर किमान वेतनापेक्षाही कमी असू शकते.`}
-                            gu={`કુર્લા પાસે ${trade.name.gu}ને સામાન્ય રીતે રોજના ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} મળે છે. કુશળ કારીગરો બીજાં કામ પસંદ કરી લેશે — અને બહુ ઓછી મજૂરી કાયદેસરના લઘુતમ વેતનથી પણ ઓછી હોઈ શકે.`}
+                            en={`${trade.name.en} work near Kurla usually pays ${rupee(trade.fair[0])}, ${rupee(trade.fair[1])} a day. Skilled workers will pick other jobs, and very low pay can be below the legal minimum wage.`}
+                            hi={`कुर्ला के पास ${trade.name.hi} को आम तौर पर ${rupee(trade.fair[0])}, ${rupee(trade.fair[1])} रोज़ मिलते हैं। हुनरमंद कारीगर दूसरे काम चुन लेंगे, और बहुत कम मज़दूरी क़ानूनी न्यूनतम वेतन से भी कम हो सकती है।`}
+                            mr={`कुर्ल्याजवळ ${trade.name.mr} कामाला साधारणपणे रोज ${rupee(trade.fair[0])}, ${rupee(trade.fair[1])} मिळतात. कुशल कारागीर दुसरी कामे निवडतील, आणि खूप कमी मजुरी कायदेशीर किमान वेतनापेक्षाही कमी असू शकते.`}
+                            gu={`કુર્લા પાસે ${trade.name.gu}ને સામાન્ય રીતે રોજના ${rupee(trade.fair[0])}, ${rupee(trade.fair[1])} મળે છે. કુશળ કારીગરો બીજાં કામ પસંદ કરી લેશે, અને બહુ ઓછી મજૂરી કાયદેસરના લઘુતમ વેતનથી પણ ઓછી હોઈ શકે.`}
                           />
                         </span>
                         <button type="button" className="btn btn-sm" onClick={() => patch({ amount: fairTarget() })}>
@@ -831,10 +831,10 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                     <p className="callout callout-warning">
                       <CircleAlert aria-hidden="true" />
                       <T
-                        en="Very high pay looks like a trick to workers — our safety check will warn them. If the work is heavy, risky or at night, say so in the description."
-                        hi="बहुत ज़्यादा मज़दूरी कारीगरों को धोखा लगती है — हमारी सुरक्षा जाँच उन्हें सावधान करेगी। अगर काम भारी, जोखिम वाला या रात का है, तो विवरण में लिखें।"
-                        mr="खूप जास्त मजुरी कामगारांना फसवणूक वाटते — आमची सुरक्षा तपासणी त्यांना सावध करेल. काम जड, धोक्याचे किंवा रात्रीचे असेल तर वर्णनात तसे लिहा."
-                        gu="બહુ વધારે મજૂરી કામદારોને છેતરપિંડી જેવી લાગે છે — અમારી સલામતી તપાસ તેમને સાવધ કરશે. જો કામ ભારે, જોખમી કે રાતનું હોય, તો વિગતમાં લખો."
+                        en="Very high pay looks like a trick to workers, our safety check will warn them. If the work is heavy, risky or at night, say so in the description."
+                        hi="बहुत ज़्यादा मज़दूरी कारीगरों को धोखा लगती है, हमारी सुरक्षा जाँच उन्हें सावधान करेगी। अगर काम भारी, जोखिम वाला या रात का है, तो विवरण में लिखें।"
+                        mr="खूप जास्त मजुरी कामगारांना फसवणूक वाटते, आमची सुरक्षा तपासणी त्यांना सावध करेल. काम जड, धोक्याचे किंवा रात्रीचे असेल तर वर्णनात तसे लिहा."
+                        gu="બહુ વધારે મજૂરી કામદારોને છેતરપિંડી જેવી લાગે છે, અમારી સલામતી તપાસ તેમને સાવધ કરશે. જો કામ ભારે, જોખમી કે રાતનું હોય, તો વિગતમાં લખો."
                       />
                     </p>
                   )}
@@ -842,7 +842,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
               ) : (
                 <p className={s.fairEmpty}>
                   <IndianRupee aria-hidden="true" />
-                  <T en="Type an amount to see how fair it is." hi="रकम लिखें — हम बताएँगे कि यह कितनी सही है।" mr="रक्कम लिहा — ती किती योग्य आहे ते आम्ही सांगू." gu="રકમ લખો — એ કેટલી યોગ્ય છે તે અમે કહીશું." />
+                  <T en="Type an amount to see how fair it is." hi="रकम लिखें, हम बताएँगे कि यह कितनी सही है।" mr="रक्कम लिहा, ती किती योग्य आहे ते आम्ही सांगू." gu="રકમ લખો, એ કેટલી યોગ્ય છે તે અમે કહીશું." />
                 </p>
               )}
             </div>
@@ -991,7 +991,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                       {c.ok ? <CircleCheck aria-hidden="true" /> : <CircleAlert aria-hidden="true" />}
                       <span>
                         <Tx l={c.label} />
-                        <span className="sr-only">{c.ok ? t(' — done', ' — हो गया', ' — झाले', ' — થઈ ગયું') : t(' — missing', ' — बाकी', ' — बाकी', ' — બાકી')}</span>
+                        <span className="sr-only">{c.ok ? t(', done', ', हो गया', ', झाले', ', થઈ ગયું') : t(', missing', ', बाकी', ', बाकी', ', બાકી')}</span>
                       </span>
                       {!c.ok && (
                         <button type="button" className={s.fix} onClick={() => goTo(c.step)}>
@@ -1002,7 +1002,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                   ))}
                 </ul>
                 <p className="subtle">
-                  <T en="Clear jobs get more replies — and fewer arguments on payday." hi="साफ़ लिखे काम पर ज़्यादा जवाब आते हैं — और भुगतान के दिन कम झगड़े।" mr="स्पष्ट लिहिलेल्या कामाला जास्त उत्तरे येतात — आणि पगाराच्या दिवशी कमी वाद." gu="સાફ લખેલા કામ પર વધુ જવાબ આવે છે — અને પગારના દિવસે ઓછા ઝઘડા." />
+                  <T en="Clear jobs get more replies, and fewer arguments on payday." hi="साफ़ लिखे काम पर ज़्यादा जवाब आते हैं, और भुगतान के दिन कम झगड़े।" mr="स्पष्ट लिहिलेल्या कामाला जास्त उत्तरे येतात, आणि पगाराच्या दिवशी कमी वाद." gu="સાફ લખેલા કામ પર વધુ જવાબ આવે છે, અને પગારના દિવસે ઓછા ઝઘડા." />
                 </p>
               </div>
             </div>

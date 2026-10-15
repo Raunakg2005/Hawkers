@@ -84,10 +84,10 @@ export default function JobActions(p: Props) {
     setReporting(false);
     setToast(
       t(
-        `Thanks — reported as “${reason}”. We will check it.`,
-        `धन्यवाद — “${reason}” के रूप में रिपोर्ट किया। हम जाँच करेंगे।`,
-        `धन्यवाद — “${reason}” अशी तक्रार नोंदवली. आम्ही तपासू.`,
-        `આભાર — “${reason}” તરીકે ફરિયાદ નોંધી. અમે તપાસ કરીશું.`,
+        `Thanks, reported as “${reason}”. We will check it.`,
+        `धन्यवाद, “${reason}” के रूप में रिपोर्ट किया। हम जाँच करेंगे।`,
+        `धन्यवाद, “${reason}” अशी तक्रार नोंदवली. आम्ही तपासू.`,
+        `આભાર, “${reason}” તરીકે ફરિયાદ નોંધી. અમે તપાસ કરીશું.`,
       ),
     );
   };
@@ -95,10 +95,10 @@ export default function JobActions(p: Props) {
   const allChecked = checks.every(Boolean);
   const confirmItems = [
     {
-      en: `Pay is ${p.pay} ${p.unit.en} — ${p.paid.en.toLowerCase()}`,
-      hi: `मज़दूरी ${p.pay} ${p.unit.hi} — ${p.paid.hi}`,
-      mr: `मजुरी ${p.pay} ${p.unit.mr} — ${p.paid.mr}`,
-      gu: `મજૂરી ${p.pay} ${p.unit.gu} — ${p.paid.gu}`,
+      en: `Pay is ${p.pay} ${p.unit.en}, ${p.paid.en.toLowerCase()}`,
+      hi: `मज़दूरी ${p.pay} ${p.unit.hi}, ${p.paid.hi}`,
+      mr: `मजुरी ${p.pay} ${p.unit.mr}, ${p.paid.mr}`,
+      gu: `મજૂરી ${p.pay} ${p.unit.gu}, ${p.paid.gu}`,
     },
     {
       en: `Work time ${p.hours}, starting ${p.start.en}`,
@@ -150,7 +150,7 @@ export default function JobActions(p: Props) {
         ) : stage === 'confirm' ? (
           <div className="stack" aria-live="polite">
             <p className="label">
-              <T en="Before you say yes — check the Work Promise:" hi="हाँ कहने से पहले — काम का वादा जाँचें:" mr="हो म्हणण्याआधी — कामाचे वचन तपासा:" gu="હા કહેતાં પહેલાં — કામનું વચન તપાસો:" />
+              <T en="Before you say yes, check the Work Promise:" hi="हाँ कहने से पहले, काम का वादा जाँचें:" mr="हो म्हणण्याआधी, कामाचे वचन तपासा:" gu="હા કહેતાં પહેલાં, કામનું વચન તપાસો:" />
             </p>
             <div className="confirm-list">
               {confirmItems.map((c, i) => (

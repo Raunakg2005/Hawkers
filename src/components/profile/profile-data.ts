@@ -2,7 +2,7 @@ import type { L, Lang, TradeId } from '@/data/types';
 import { TRADE } from '@/data/trades';
 
 /* ==========================================================================
-   Skill Card — data, types and helpers (client-side only, mock)
+   Skill Card, data, types and helpers (client-side only, mock)
    ========================================================================== */
 
 /** Tap-to-add skill suggestions per trade. Plain words a worker would use. */
@@ -391,7 +391,7 @@ export function shareText(p: SkillProfile, lang: Lang) {
   const area = areaLabel(p.area);
   const w = SHARE[lang];
   return [
-    `🪪 ${w.title} — ${p.name.trim() || w.worker}`,
+    `🪪 ${w.title}, ${p.name.trim() || w.worker}`,
     t ? `${w.work}: ${t.name[lang]} · ${w.exp(p.years)}` : '',
     p.rate ? `${w.rate}: ₹${p.rate.toLocaleString('en-IN')} / ${w.day}` : '',
     area ? `${w.area}: ${area[lang]}${p.spot ? ` (${p.spot})` : ''}` : '',

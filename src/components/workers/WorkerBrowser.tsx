@@ -108,7 +108,7 @@ export default function WorkerBrowser({ initialTrade }: { initialTrade: TradeId 
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder={t('Search name or skill — e.g. “tiles”, “inverter”', 'नाम या हुनर खोजें — जैसे “टाइल”, “इन्वर्टर”', 'नाव किंवा कौशल्य शोधा — उदा. “टाइल्स”, “इन्व्हर्टर”', 'નામ કે આવડત શોધો — જેમ કે “ટાઇલ્સ”, “ઇન્વર્ટર”')}
+              placeholder={t('Search name or skill, e.g. “tiles”, “inverter”', 'नाम या हुनर खोजें, जैसे “टाइल”, “इन्वर्टर”', 'नाव किंवा कौशल्य शोधा, उदा. “टाइल्स”, “इन्व्हर्टर”', 'નામ કે આવડત શોધો, જેમ કે “ટાઇલ્સ”, “ઇન્વર્ટર”')}
               enterKeyHint="search"
             />
             {q && (
@@ -206,14 +206,14 @@ export default function WorkerBrowser({ initialTrade }: { initialTrade: TradeId 
         <div className="empty">
           <SearchX aria-hidden="true" />
           <p className="h3">
-            <T en="No one matches all of that — yet." hi="इन सब शर्तों पर अभी कोई नहीं मिला।" mr="या सगळ्या अटींमध्ये बसणारे अजून कोणी नाही." gu="આ બધી શરતોમાં બંધબેસતું હજી કોઈ નથી." />
+            <T en="No one matches all of that, yet." hi="इन सब शर्तों पर अभी कोई नहीं मिला।" mr="या सगळ्या अटींमध्ये बसणारे अजून कोणी नाही." gu="આ બધી શરતોમાં બંધબેસતું હજી કોઈ નથી." />
           </p>
           <p>
             <T
-              en="Try a wider distance or turn off “Available today”. Or post the job — workers nearby get a voice alert and come to you."
-              hi="दूरी बढ़ाकर देखें या “आज खाली” बंद करें। या काम डाल दें — पास के कारीगरों को आवाज़ में सूचना जाएगी और वे आप तक आएँगे।"
-              mr="अंतर वाढवून पाहा किंवा “आज मोकळे” बंद करा. किंवा काम टाका — जवळच्या कामगारांना आवाजात सूचना जाईल आणि ते तुमच्याकडे येतील."
-              gu="અંતર વધારીને જુઓ અથવા “આજે ખાલી” બંધ કરો. અથવા કામ મૂકો — નજીકના કામદારોને અવાજમાં સૂચના જશે અને તેઓ તમારી પાસે આવશે."
+              en="Try a wider distance or turn off “Available today”. Or post the job, workers nearby get a voice alert and come to you."
+              hi="दूरी बढ़ाकर देखें या “आज खाली” बंद करें। या काम डाल दें, पास के कारीगरों को आवाज़ में सूचना जाएगी और वे आप तक आएँगे।"
+              mr="अंतर वाढवून पाहा किंवा “आज मोकळे” बंद करा. किंवा काम टाका, जवळच्या कामगारांना आवाजात सूचना जाईल आणि ते तुमच्याकडे येतील."
+              gu="અંતર વધારીને જુઓ અથવા “આજે ખાલી” બંધ કરો. અથવા કામ મૂકો, નજીકના કામદારોને અવાજમાં સૂચના જશે અને તેઓ તમારી પાસે આવશે."
             />
           </p>
           <div className="row" style={{ justifyContent: 'center' }}>

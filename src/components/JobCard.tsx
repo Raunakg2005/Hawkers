@@ -85,7 +85,7 @@ export default function JobCard({ job, index = 0, href }: { job: Job; index?: nu
         <li>
           <Clock aria-hidden="true" />
           <span>
-            {job.hours.start} – {job.hours.end}
+            {job.hours.start}, {job.hours.end}
           </span>
         </li>
         <li>

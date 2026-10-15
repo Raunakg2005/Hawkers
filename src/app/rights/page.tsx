@@ -30,7 +30,7 @@ import s from './rights.module.css';
 export const metadata: Metadata = {
   title: 'Rights & support',
   description:
-    'Government schemes for daily-wage workers in plain words — e-Shram, Ayushman Bharat, pension, accident cover, ration — the papers you need, your rights at work and free helplines.',
+    'Government schemes for daily-wage workers in plain words, e-Shram, Ayushman Bharat, pension, accident cover, ration, the papers you need, your rights at work and free helplines.',
 };
 
 const RIGHT_ICONS: { icon: LucideIcon; color: string }[] = [
@@ -151,10 +151,10 @@ export default function RightsPage() {
         }
         lead={
           <T
-            en="Government schemes and labour laws in plain words — what you get, which papers to carry, where to go, and who to call when something goes wrong."
-            hi="सरकारी योजनाएँ और श्रम क़ानून आसान शब्दों में — क्या मिलेगा, कौन से कागज़ ले जाएँ, कहाँ जाएँ, और कुछ गड़बड़ हो तो किसे फ़ोन करें।"
-            mr="सरकारी योजना आणि कामगार कायदे सोप्या शब्दांत — काय मिळेल, कोणती कागदपत्रे न्यायची, कुठे जायचे, आणि काही चुकले तर कोणाला फोन करायचा."
-            gu="સરકારી યોજનાઓ અને શ્રમ કાયદા સરળ શબ્દોમાં — શું મળશે, કયા દસ્તાવેજ લઈ જવા, ક્યાં જવું, અને કંઈ ખોટું થાય તો કોને ફોન કરવો."
+            en="Government schemes and labour laws in plain words, what you get, which papers to carry, where to go, and who to call when something goes wrong."
+            hi="सरकारी योजनाएँ और श्रम क़ानून आसान शब्दों में, क्या मिलेगा, कौन से कागज़ ले जाएँ, कहाँ जाएँ, और कुछ गड़बड़ हो तो किसे फ़ोन करें।"
+            mr="सरकारी योजना आणि कामगार कायदे सोप्या शब्दांत, काय मिळेल, कोणती कागदपत्रे न्यायची, कुठे जायचे, आणि काही चुकले तर कोणाला फोन करायचा."
+            gu="સરકારી યોજનાઓ અને શ્રમ કાયદા સરળ શબ્દોમાં, શું મળશે, કયા દસ્તાવેજ લઈ જવા, ક્યાં જવું, અને કંઈ ખોટું થાય તો કોને ફોન કરવો."
           />
         }
         aside={
@@ -211,10 +211,10 @@ export default function RightsPage() {
             </h2>
             <p className="lead">
               <T
-                en="Most schemes need the same few papers. Tick what you have — the rest, you can get made at an Aadhaar centre, bank or CSC."
-                hi="ज़्यादातर योजनाओं में वही कुछ कागज़ लगते हैं। जो आपके पास हैं उन पर निशान लगाएँ — बाक़ी आधार केंद्र, बैंक या CSC पर बनवा सकते हैं।"
-                mr="बहुतेक योजनांसाठी तीच काही कागदपत्रे लागतात. तुमच्याकडे असलेल्यांवर खूण करा — बाकीची आधार केंद्र, बँक किंवा CSC मध्ये काढून घेता येतात."
-                gu="મોટાભાગની યોજનાઓમાં એ જ થોડા દસ્તાવેજ જોઈએ છે. તમારી પાસે હોય તેના પર ટિક કરો — બાકીના આધાર કેન્દ્ર, બેંક કે CSC પર બનાવડાવી શકો છો."
+                en="Most schemes need the same few papers. Tick what you have, the rest, you can get made at an Aadhaar centre, bank or CSC."
+                hi="ज़्यादातर योजनाओं में वही कुछ कागज़ लगते हैं। जो आपके पास हैं उन पर निशान लगाएँ, बाक़ी आधार केंद्र, बैंक या CSC पर बनवा सकते हैं।"
+                mr="बहुतेक योजनांसाठी तीच काही कागदपत्रे लागतात. तुमच्याकडे असलेल्यांवर खूण करा, बाकीची आधार केंद्र, बँक किंवा CSC मध्ये काढून घेता येतात."
+                gu="મોટાભાગની યોજનાઓમાં એ જ થોડા દસ્તાવેજ જોઈએ છે. તમારી પાસે હોય તેના પર ટિક કરો, બાકીના આધાર કેન્દ્ર, બેંક કે CSC પર બનાવડાવી શકો છો."
               />
             </p>
           </div>
@@ -234,10 +234,10 @@ export default function RightsPage() {
             </h2>
             <p className="lead">
               <T
-                en="These rules protect daily-wage work too — paid in cash or UPI, with or without a written contract."
-                hi="ये नियम दिहाड़ी काम पर भी लागू होते हैं — नकद या UPI से भुगतान हो, लिखित समझौता हो या न हो।"
-                mr="हे नियम रोजंदारीच्या कामालाही लागू होतात — पैसे रोख मिळोत की UPI ने, लेखी करार असो वा नसो."
-                gu="આ નિયમો રોજમદારી કામને પણ લાગુ પડે છે — ચુકવણી રોકડમાં થાય કે UPIથી, લેખિત કરાર હોય કે ન હોય."
+                en="These rules protect daily-wage work too, paid in cash or UPI, with or without a written contract."
+                hi="ये नियम दिहाड़ी काम पर भी लागू होते हैं, नकद या UPI से भुगतान हो, लिखित समझौता हो या न हो।"
+                mr="हे नियम रोजंदारीच्या कामालाही लागू होतात, पैसे रोख मिळोत की UPI ने, लेखी करार असो वा नसो."
+                gu="આ નિયમો રોજમદારી કામને પણ લાગુ પડે છે, ચુકવણી રોકડમાં થાય કે UPIથી, લેખિત કરાર હોય કે ન હોય."
               />
             </p>
           </div>
@@ -325,7 +325,7 @@ export default function RightsPage() {
 
           <div className={s.helpHead} data-reveal="">
             <h3 className="h3">
-              <T en="Free helplines — tap a card to call" hi="मुफ़्त हेल्पलाइन — कॉल करने के लिए कार्ड पर टैप करें" mr="मोफत हेल्पलाइन — कॉल करण्यासाठी कार्डवर टॅप करा" gu="મફત હેલ્પલાઇન — કૉલ કરવા માટે કાર્ડ પર ટૅપ કરો" />
+              <T en="Free helplines, tap a card to call" hi="मुफ़्त हेल्पलाइन, कॉल करने के लिए कार्ड पर टैप करें" mr="मोफत हेल्पलाइन, कॉल करण्यासाठी कार्डवर टॅप करा" gu="મફત હેલ્પલાઇન, કૉલ કરવા માટે કાર્ડ પર ટૅપ કરો" />
             </h3>
             <p className="muted">
               <T en="All calls are free. Lines work 24×7 unless stated." hi="सभी कॉल मुफ़्त हैं। ज़्यादातर लाइनें 24 घंटे चालू रहती हैं।" mr="सगळे कॉल मोफत आहेत. बहुतेक लाइन 24 तास चालू असतात." gu="બધા કૉલ મફત છે. મોટાભાગની લાઇન 24 કલાક ચાલુ રહે છે." />
@@ -355,10 +355,10 @@ export default function RightsPage() {
               <p>
                 <b>
                   <T
-                    en="Government schemes are never sold. If an agent asks for money to “get” you a free card — say no and call 14434."
-                    hi="सरकारी योजनाएँ बेची नहीं जातीं। अगर कोई एजेंट मुफ़्त कार्ड “बनवाने” के पैसे माँगे — मना करें और 14434 पर कॉल करें।"
-                    mr="सरकारी योजना कधीही विकल्या जात नाहीत. कोणी एजंट मोफत कार्ड “काढून देण्यासाठी” पैसे मागत असेल — नाही म्हणा आणि 14434 वर कॉल करा."
-                    gu="સરકારી યોજનાઓ ક્યારેય વેચાતી નથી. જો કોઈ એજન્ટ મફત કાર્ડ “બનાવી આપવા” પૈસા માગે — ના પાડો અને 14434 પર કૉલ કરો."
+                    en="Government schemes are never sold. If an agent asks for money to “get” you a free card, say no and call 14434."
+                    hi="सरकारी योजनाएँ बेची नहीं जातीं। अगर कोई एजेंट मुफ़्त कार्ड “बनवाने” के पैसे माँगे, मना करें और 14434 पर कॉल करें।"
+                    mr="सरकारी योजना कधीही विकल्या जात नाहीत. कोणी एजंट मोफत कार्ड “काढून देण्यासाठी” पैसे मागत असेल, नाही म्हणा आणि 14434 वर कॉल करा."
+                    gu="સરકારી યોજનાઓ ક્યારેય વેચાતી નથી. જો કોઈ એજન્ટ મફત કાર્ડ “બનાવી આપવા” પૈસા માગે, ના પાડો અને 14434 પર કૉલ કરો."
                   />
                 </b>
               </p>

@@ -749,12 +749,12 @@ textarea {
 
 .act-display {
   font-size: calc(clamp(2.8rem, 1.6rem + 5vw, 6.2rem) * var(--text-scale, 1));
-  line-height: 0.98;
+  line-height: 1.04;
 }
 
 .act-title {
   font-size: calc(clamp(2.2rem, 1.4rem + 3.2vw, 4.4rem) * var(--text-scale, 1));
-  line-height: 1.02;
+  line-height: 1.1;
 }
 
 .act-display em,
@@ -766,7 +766,9 @@ textarea {
   background-clip: text;
   color: transparent;
   padding-right: 0.06em;
-  padding-bottom: 0.08em;
+  padding-bottom: 0.14em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .act-lead {
@@ -1188,5 +1190,12 @@ body:not(:has(.asc)) .asc-rail {
 .asc[data-act='1'] .rays,
 .asc[data-act='2'] .rays,
 .asc[data-act='3'] .rays {
+  display: none;
+}
+
+/* eyebrow restraint: the page hero keeps its label, later sections let the
+   headline speak alone */
+main section ~ section .eyebrow,
+main .section ~ .section .eyebrow {
   display: none;
 }

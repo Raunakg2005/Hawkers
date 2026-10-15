@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!w) return { title: 'Worker not found' };
   const trade = TRADE[w.trade].name.en;
   return {
-    title: `${w.name} — ${trade}`,
+    title: `${w.name}, ${trade}`,
     description: `${w.name}, ${trade.toLowerCase()} with ${w.years} years of experience near ${w.area.en}. Rated ${w.rating}★ across ${w.jobsDone} jobs. ${w.intro.en}`,
   };
 }
@@ -199,10 +199,10 @@ export default async function WorkerProfilePage({ params }: Props) {
                     <Info aria-hidden="true" />
                     <span>
                       <T
-                        en={`A monthly rate for a fixed daily slot (usually 2–3 hours a day). For a full-day event, the fair band for ${trade.name.en.toLowerCase()} work is ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} a day.`}
-                        hi={`महीने का रेट — रोज़ तय समय के लिए (आम तौर पर दिन में 2–3 घंटे)। पूरे दिन के कार्यक्रम के लिए ${trade.name.hi} का सही दाम ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} रोज़ है।`}
-                        mr={`महिन्याचा दर — रोज ठरलेल्या वेळेसाठी (साधारण दिवसाला 2–3 तास). पूर्ण दिवसाच्या कार्यक्रमासाठी ${trade.name.mr} कामाची योग्य मर्यादा रोज ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} आहे.`}
-                        gu={`મહિનાનો દર — રોજ નક્કી સમય માટે (સામાન્ય રીતે દિવસના 2–3 કલાક). આખા દિવસના પ્રસંગ માટે ${trade.name.gu}ના કામની યોગ્ય મર્યાદા રોજના ${rupee(trade.fair[0])}–${rupee(trade.fair[1])} છે.`}
+                        en={`A monthly rate for a fixed daily slot (usually 2-3 hours a day). For a full-day event, the fair band for ${trade.name.en.toLowerCase()} work is ${rupee(trade.fair[0])}, ${rupee(trade.fair[1])} a day.`}
+                        hi={`महीने का रेट, रोज़ तय समय के लिए (आम तौर पर दिन में 2-3 घंटे)। पूरे दिन के कार्यक्रम के लिए ${trade.name.hi} का सही दाम ${rupee(trade.fair[0])}, ${rupee(trade.fair[1])} रोज़ है।`}
+                        mr={`महिन्याचा दर, रोज ठरलेल्या वेळेसाठी (साधारण दिवसाला 2-3 तास). पूर्ण दिवसाच्या कार्यक्रमासाठी ${trade.name.mr} कामाची योग्य मर्यादा रोज ${rupee(trade.fair[0])}, ${rupee(trade.fair[1])} आहे.`}
+                        gu={`મહિનાનો દર, રોજ નક્કી સમય માટે (સામાન્ય રીતે દિવસના 2-3 કલાક). આખા દિવસના પ્રસંગ માટે ${trade.name.gu}ના કામની યોગ્ય મર્યાદા રોજના ${rupee(trade.fair[0])}, ${rupee(trade.fair[1])} છે.`}
                       />
                     </span>
                   </p>
@@ -213,32 +213,32 @@ export default async function WorkerProfilePage({ params }: Props) {
                       {status === 'fair' && (
                         <T
                           en={`${first}’s rate sits inside the fair band for ${trade.name.en.toLowerCase()} work near you. Fair pay means they show up, on time, again.`}
-                          hi={`${first} का रेट आपके इलाके में ${trade.name.hi} के सही दाम के अंदर है। सही मज़दूरी का मतलब — समय पर आना, बार-बार आना।`}
-                          mr={`${first} यांचा दर तुमच्या भागातील ${trade.name.mr} कामाच्या योग्य मर्यादेत आहे. योग्य मजुरी म्हणजे — वेळेवर येणे, पुन्हा पुन्हा येणे.`}
-                          gu={`${first}નો દર તમારા વિસ્તારમાં ${trade.name.gu}ના કામની યોગ્ય મર્યાદામાં છે. યોગ્ય મજૂરી એટલે — સમયસર આવવું, વારંવાર આવવું.`}
+                          hi={`${first} का रेट आपके इलाके में ${trade.name.hi} के सही दाम के अंदर है। सही मज़दूरी का मतलब, समय पर आना, बार-बार आना।`}
+                          mr={`${first} यांचा दर तुमच्या भागातील ${trade.name.mr} कामाच्या योग्य मर्यादेत आहे. योग्य मजुरी म्हणजे, वेळेवर येणे, पुन्हा पुन्हा येणे.`}
+                          gu={`${first}નો દર તમારા વિસ્તારમાં ${trade.name.gu}ના કામની યોગ્ય મર્યાદામાં છે. યોગ્ય મજૂરી એટલે, સમયસર આવવું, વારંવાર આવવું.`}
                         />
                       )}
                       {status === 'above' && (
                         <T
-                          en={`A little above the usual band — that reflects ${w.years} years of experience and a ${w.rating}★ rating.`}
-                          hi={`आम दाम से थोड़ा ऊपर — ${w.years} साल का अनुभव और ${w.rating}★ रेटिंग इसकी वजह है।`}
-                          mr={`नेहमीच्या दरापेक्षा थोडे जास्त — ${w.years} वर्षांचा अनुभव आणि ${w.rating}★ रेटिंग हे त्याचे कारण आहे.`}
-                          gu={`સામાન્ય દર કરતાં થોડું વધારે — ${w.years} વર્ષનો અનુભવ અને ${w.rating}★ રેટિંગ એનું કારણ છે.`}
+                          en={`A little above the usual band, that reflects ${w.years} years of experience and a ${w.rating}★ rating.`}
+                          hi={`आम दाम से थोड़ा ऊपर, ${w.years} साल का अनुभव और ${w.rating}★ रेटिंग इसकी वजह है।`}
+                          mr={`नेहमीच्या दरापेक्षा थोडे जास्त, ${w.years} वर्षांचा अनुभव आणि ${w.rating}★ रेटिंग हे त्याचे कारण आहे.`}
+                          gu={`સામાન્ય દર કરતાં થોડું વધારે, ${w.years} વર્ષનો અનુભવ અને ${w.rating}★ રેટિંગ એનું કારણ છે.`}
                         />
                       )}
                       {status === 'below' && (
                         <T
-                          en={`${first} asks less than the usual band. Please consider paying at least ${rupee(trade.fair[0])} — it is the fair rate for this work.`}
-                          hi={`${first} आम दाम से कम माँगते हैं। कृपया कम से कम ${rupee(trade.fair[0])} देने का सोचें — इस काम का यही सही दाम है।`}
-                          mr={`${first} नेहमीच्या दरापेक्षा कमी मागतात. कृपया किमान ${rupee(trade.fair[0])} देण्याचा विचार करा — या कामाचा हाच योग्य दर आहे.`}
-                          gu={`${first} સામાન્ય દર કરતાં ઓછું માગે છે. મહેરબાની કરીને ઓછામાં ઓછા ${rupee(trade.fair[0])} આપવાનું વિચારો — આ કામનો આ જ યોગ્ય દર છે.`}
+                          en={`${first} asks less than the usual band. Please consider paying at least ${rupee(trade.fair[0])}, it is the fair rate for this work.`}
+                          hi={`${first} आम दाम से कम माँगते हैं। कृपया कम से कम ${rupee(trade.fair[0])} देने का सोचें, इस काम का यही सही दाम है।`}
+                          mr={`${first} नेहमीच्या दरापेक्षा कमी मागतात. कृपया किमान ${rupee(trade.fair[0])} देण्याचा विचार करा, या कामाचा हाच योग्य दर आहे.`}
+                          gu={`${first} સામાન્ય દર કરતાં ઓછું માગે છે. મહેરબાની કરીને ઓછામાં ઓછા ${rupee(trade.fair[0])} આપવાનું વિચારો, આ કામનો આ જ યોગ્ય દર છે.`}
                         />
                       )}
                     </p>
                   </>
                 )}
                 <p className="subtle">
-                  <T en="Indicative band from local naka rates — not an official wage." hi="नाके के आम रेट से अनुमान — सरकारी दर नहीं।" mr="नाक्यावरच्या नेहमीच्या दरांवरून अंदाज — सरकारी दर नाही." gu="નાકાના સામાન્ય દર પરથી અંદાજ — સરકારી દર નથી." />
+                  <T en="Indicative band from local naka rates, not an official wage." hi="नाके के आम रेट से अनुमान, सरकारी दर नहीं।" mr="नाक्यावरच्या नेहमीच्या दरांवरून अंदाज, सरकारी दर नाही." gu="નાકાના સામાન્ય દર પરથી અંદાજ, સરકારી દર નથી." />
                 </p>
               </article>
 
@@ -310,10 +310,10 @@ export default async function WorkerProfilePage({ params }: Props) {
                 </ul>
                 <p className="subtle">
                   <T
-                    en="Photos are kept private until you hire — workers choose what to share."
-                    hi="फ़ोटो काम पक्का होने तक निजी रहती हैं — क्या दिखाना है, कारीगर खुद तय करते हैं।"
-                    mr="काम पक्के होईपर्यंत फोटो खासगी राहतात — काय दाखवायचे ते कारागीर स्वतः ठरवतात."
-                    gu="કામ પાકું થાય ત્યાં સુધી ફોટા ખાનગી રહે છે — શું બતાવવું એ કારીગર જાતે નક્કી કરે છે."
+                    en="Photos are kept private until you hire, workers choose what to share."
+                    hi="फ़ोटो काम पक्का होने तक निजी रहती हैं, क्या दिखाना है, कारीगर खुद तय करते हैं।"
+                    mr="काम पक्के होईपर्यंत फोटो खासगी राहतात, काय दाखवायचे ते कारागीर स्वतः ठरवतात."
+                    gu="કામ પાકું થાય ત્યાં સુધી ફોટા ખાનગી રહે છે, શું બતાવવું એ કારીગર જાતે નક્કી કરે છે."
                   />
                 </p>
               </article>
@@ -390,7 +390,7 @@ export default async function WorkerProfilePage({ params }: Props) {
             <span>
               <T en="Need a team, or work for many days? " hi="टीम चाहिए, या कई दिन का काम है? " mr="टीम हवी आहे, की अनेक दिवसांचे काम आहे? " gu="ટીમ જોઈએ છે, કે ઘણા દિવસનું કામ છે? " />
               <Link href={`/post-job?trade=${w.trade}`} className={s.textLink}>
-                <T en="Post a job — 2 minutes" hi="काम डालें — 2 मिनट" mr="काम टाका — 2 मिनिटे" gu="કામ મૂકો — 2 મિનિટ" />
+                <T en="Post a job, 2 minutes" hi="काम डालें, 2 मिनट" mr="काम टाका, 2 मिनिटे" gu="કામ મૂકો, 2 મિનિટ" />
               </Link>
             </span>
           </p>

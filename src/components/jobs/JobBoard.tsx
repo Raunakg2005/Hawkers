@@ -251,7 +251,7 @@ export default function JobBoard() {
             <ShieldAlert aria-hidden="true" />
             <div className="stack" style={{ flex: 1 }}>
               <h2 id="risky-h" className="h3">
-                <T en={`${results.risky.length} listings hidden — they look risky`} hi={`${results.risky.length} काम छिपाए गए — ये ख़तरनाक लगते हैं`} mr={`${results.risky.length} कामे लपवली — ती धोकादायक वाटतात`} gu={`${results.risky.length} કામ છુપાવ્યાં — એ જોખમી લાગે છે`} />
+                <T en={`${results.risky.length} listings hidden, they look risky`} hi={`${results.risky.length} काम छिपाए गए, ये ख़तरनाक लगते हैं`} mr={`${results.risky.length} कामे लपवली, ती धोकादायक वाटतात`} gu={`${results.risky.length} કામ છુપાવ્યાં, એ જોખમી લાગે છે`} />
               </h2>
               <p className="muted">
                 <T

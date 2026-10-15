@@ -61,7 +61,7 @@ export default function Header() {
     <>
       <header className={cls}>
         <div className="container header-inner">
-          <Link className="brand" href="/" aria-label={t('Naka — home', 'नाका — होम', 'नाका — होम', 'નાકા — હોમ')}>
+          <Link className="brand" href="/" aria-label={t('Naka, home', 'नाका, होम', 'नाका, होम', 'નાકા, હોમ')}>
             <Logo />
             <span>
               naka

@@ -72,7 +72,7 @@ export const RISK: Record<RiskFlag, { label: L; why: L; weight: number }> = {
   },
   'pay-too-high': {
     label: { en: 'Pay is far above normal', hi: 'मज़दूरी बहुत ज़्यादा है', mr: 'मजुरी खूपच जास्त आहे', gu: 'મજૂરી ખૂબ વધારે છે' },
-    why: { en: 'Pay 2–3× the usual rate is a common trick to lure workers.', hi: 'आम रेट से 2–3 गुना पैसा अक्सर धोखे का तरीका होता है।', mr: 'नेहमीपेक्षा 2–3 पट मजुरी ही कामगारांना फसवण्याची नेहमीची युक्ती असते.', gu: 'સામાન્ય દર કરતાં 2–3 ગણી મજૂરી એ કામદારોને ફસાવવાની જાણીતી ચાલ છે.' },
+    why: { en: 'Pay 2-3× the usual rate is a common trick to lure workers.', hi: 'आम रेट से 2-3 गुना पैसा अक्सर धोखे का तरीका होता है।', mr: 'नेहमीपेक्षा 2-3 पट मजुरी ही कामगारांना फसवण्याची नेहमीची युक्ती असते.', gu: 'સામાન્ય દર કરતાં 2-3 ગણી મજૂરી એ કામદારોને ફસાવવાની જાણીતી ચાલ છે.' },
     weight: 20,
   },
   unverified: {

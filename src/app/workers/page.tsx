@@ -10,7 +10,7 @@ import s from '@/components/workers/workers.module.css';
 
 export const metadata: Metadata = {
   title: 'Hire skilled workers',
-  description: 'Find verified plumbers, electricians, painters, masons and helpers near you — with clear rates, real endorsements and fair-pay guidance.',
+  description: 'Find verified plumbers, electricians, painters, masons and helpers near you, with clear rates, real endorsements and fair-pay guidance.',
 };
 
 const VERIFY = [
@@ -30,10 +30,10 @@ const VERIFY = [
     color: 'var(--color-trust)',
     title: { en: 'e-Shram linked', hi: 'ई-श्रम से जुड़ा', mr: 'ई-श्रमशी जोडलेले', gu: 'ઈ-શ્રમ સાથે જોડાયેલ' },
     body: {
-      en: 'Registered on the government’s e-Shram portal — so they are covered by accident insurance and welfare schemes.',
-      hi: 'सरकार के ई-श्रम पोर्टल पर पंजीकृत — यानी दुर्घटना बीमा और कल्याण योजनाओं का फ़ायदा मिलता है।',
-      mr: 'सरकारच्या ई-श्रम पोर्टलवर नोंदणी झालेली — म्हणजे अपघात विमा आणि कल्याण योजनांचा फायदा मिळतो.',
-      gu: 'સરકારના ઈ-શ્રમ પોર્ટલ પર નોંધાયેલ — એટલે અકસ્માત વીમા અને કલ્યાણ યોજનાઓનો લાભ મળે છે.',
+      en: 'Registered on the government’s e-Shram portal, so they are covered by accident insurance and welfare schemes.',
+      hi: 'सरकार के ई-श्रम पोर्टल पर पंजीकृत, यानी दुर्घटना बीमा और कल्याण योजनाओं का फ़ायदा मिलता है।',
+      mr: 'सरकारच्या ई-श्रम पोर्टलवर नोंदणी झालेली, म्हणजे अपघात विमा आणि कल्याण योजनांचा फायदा मिळतो.',
+      gu: 'સરકારના ઈ-શ્રમ પોર્ટલ પર નોંધાયેલ, એટલે અકસ્માત વીમા અને કલ્યાણ યોજનાઓનો લાભ મળે છે.',
     },
   },
   {
@@ -41,10 +41,10 @@ const VERIFY = [
     color: 'var(--color-success)',
     title: { en: 'Police verified', hi: 'पुलिस सत्यापन', mr: 'पोलीस पडताळणी', gu: 'પોલીસ ચકાસણી' },
     body: {
-      en: 'For work inside homes, many workers choose a police verification. It is free for them — Naka helps file it.',
-      hi: 'घर के अंदर के काम के लिए कई कारीगर पुलिस सत्यापन करवाते हैं। उनके लिए मुफ़्त है — नाका मदद करता है।',
-      mr: 'घरातल्या कामासाठी अनेक कारागीर पोलीस पडताळणी करून घेतात. त्यांच्यासाठी ती मोफत आहे — नाका अर्ज भरायला मदत करते.',
-      gu: 'ઘરની અંદરના કામ માટે ઘણા કારીગરો પોલીસ ચકાસણી કરાવે છે. તેમના માટે એ મફત છે — નાકા અરજી કરવામાં મદદ કરે છે.',
+      en: 'For work inside homes, many workers choose a police verification. It is free for them, Naka helps file it.',
+      hi: 'घर के अंदर के काम के लिए कई कारीगर पुलिस सत्यापन करवाते हैं। उनके लिए मुफ़्त है, नाका मदद करता है।',
+      mr: 'घरातल्या कामासाठी अनेक कारागीर पोलीस पडताळणी करून घेतात. त्यांच्यासाठी ती मोफत आहे, नाका अर्ज भरायला मदत करते.',
+      gu: 'ઘરની અંદરના કામ માટે ઘણા કારીગરો પોલીસ ચકાસણી કરાવે છે. તેમના માટે એ મફત છે, નાકા અરજી કરવામાં મદદ કરે છે.',
     },
   },
   {
@@ -96,10 +96,10 @@ export default function WorkersPage() {
         }
         lead={
           <T
-            en="Verified plumbers, electricians, painters, masons and helpers from nakas near you. See their real work and what past employers said — then make a clear, fair offer."
-            hi="आपके पास के नाकों से जाँचे हुए प्लंबर, बिजली मिस्त्री, पेंटर, राजमिस्त्री और हेल्पर। उनका असली काम और पुराने मालिकों की राय देखें — फिर साफ़ और सही ऑफ़र दें।"
-            mr="तुमच्या जवळच्या नाक्यांवरचे पडताळलेले प्लंबर, इलेक्ट्रिशियन, पेंटर, गवंडी आणि हेल्पर. त्यांचे खरे काम आणि आधीच्या मालकांचे मत पाहा — मग स्पष्ट आणि योग्य ऑफर द्या."
-            gu="તમારી નજીકના નાકાઓના ચકાસાયેલા પ્લમ્બર, ઇલેક્ટ્રિશિયન, પેઇન્ટર, કડિયા અને હેલ્પર. તેમનું સાચું કામ અને અગાઉના માલિકોનો અભિપ્રાય જુઓ — પછી સાફ અને યોગ્ય ઑફર આપો."
+            en="Verified plumbers, electricians, painters, masons and helpers from nakas near you. See their real work and what past employers said, then make a clear, fair offer."
+            hi="आपके पास के नाकों से जाँचे हुए प्लंबर, बिजली मिस्त्री, पेंटर, राजमिस्त्री और हेल्पर। उनका असली काम और पुराने मालिकों की राय देखें, फिर साफ़ और सही ऑफ़र दें।"
+            mr="तुमच्या जवळच्या नाक्यांवरचे पडताळलेले प्लंबर, इलेक्ट्रिशियन, पेंटर, गवंडी आणि हेल्पर. त्यांचे खरे काम आणि आधीच्या मालकांचे मत पाहा, मग स्पष्ट आणि योग्य ऑफर द्या."
+            gu="તમારી નજીકના નાકાઓના ચકાસાયેલા પ્લમ્બર, ઇલેક્ટ્રિશિયન, પેઇન્ટર, કડિયા અને હેલ્પર. તેમનું સાચું કામ અને અગાઉના માલિકોનો અભિપ્રાય જુઓ, પછી સાફ અને યોગ્ય ઑફર આપો."
           />
         }
         aside={
@@ -149,14 +149,14 @@ export default function WorkersPage() {
               <T en="How we verify" hi="हम कैसे जाँचते हैं" mr="आम्ही कसे पडताळतो" gu="અમે કેવી રીતે ચકાસીએ છીએ" />
             </span>
             <h2 className="h2">
-              <T en="Trust that goes both ways." hi="भरोसा — दोनों तरफ़ से।" mr="विश्वास — दोन्ही बाजूंनी." gu="ભરોસો — બંને બાજુથી." />
+              <T en="Trust that goes both ways." hi="भरोसा, दोनों तरफ़ से।" mr="विश्वास, दोन्ही बाजूंनी." gu="ભરોસો, બંને બાજુથી." />
             </h2>
             <p className="lead">
               <T
-                en="Workers check employers before they travel. Employers see what has been verified — shown with a tick and a word, never hidden in small print."
-                hi="कारीगर जाने से पहले मालिक को जाँचते हैं। मालिक देखते हैं कि क्या-क्या जाँचा गया है — सही के निशान और शब्द के साथ, छोटे अक्षरों में छिपा नहीं।"
-                mr="कामगार जाण्याआधी मालकाची माहिती तपासतात. मालक पाहतात की काय काय पडताळले आहे — बरोबरच्या खुणेसह आणि शब्दात, बारीक अक्षरात लपवलेले नाही."
-                gu="કામદારો જતાં પહેલાં માલિકને તપાસે છે. માલિકો જુએ છે કે શું શું ચકાસાયું છે — ખરાની નિશાની અને શબ્દ સાથે, ઝીણા અક્ષરોમાં છુપાવેલું નહીં."
+                en="Workers check employers before they travel. Employers see what has been verified, shown with a tick and a word, never hidden in small print."
+                hi="कारीगर जाने से पहले मालिक को जाँचते हैं। मालिक देखते हैं कि क्या-क्या जाँचा गया है, सही के निशान और शब्द के साथ, छोटे अक्षरों में छिपा नहीं।"
+                mr="कामगार जाण्याआधी मालकाची माहिती तपासतात. मालक पाहतात की काय काय पडताळले आहे, बरोबरच्या खुणेसह आणि शब्दात, बारीक अक्षरात लपवलेले नाही."
+                gu="કામદારો જતાં પહેલાં માલિકને તપાસે છે. માલિકો જુએ છે કે શું શું ચકાસાયું છે, ખરાની નિશાની અને શબ્દ સાથે, ઝીણા અક્ષરોમાં છુપાવેલું નહીં."
               />
             </p>
           </div>
@@ -205,10 +205,10 @@ export default function WorkersPage() {
               </h2>
               <p className="lead">
                 <T
-                  en="Two minutes, no login. Workers nearby hear it in their language — with your pay, place and payday written clearly."
-                  hi="दो मिनट, कोई लॉगिन नहीं। पास के कारीगर इसे अपनी भाषा में सुनते हैं — मज़दूरी, जगह और भुगतान का दिन साफ़ लिखा हुआ।"
-                  mr="दोन मिनिटे, लॉगिन नाही. जवळचे कामगार ते त्यांच्या भाषेत ऐकतात — तुमची मजुरी, जागा आणि पगाराचा दिवस स्पष्ट लिहिलेला."
-                  gu="બે મિનિટ, કોઈ લૉગિન નહીં. નજીકના કામદારો એને પોતાની ભાષામાં સાંભળે છે — તમારી મજૂરી, જગ્યા અને પગારનો દિવસ સાફ લખેલો."
+                  en="Two minutes, no login. Workers nearby hear it in their language, with your pay, place and payday written clearly."
+                  hi="दो मिनट, कोई लॉगिन नहीं। पास के कारीगर इसे अपनी भाषा में सुनते हैं, मज़दूरी, जगह और भुगतान का दिन साफ़ लिखा हुआ।"
+                  mr="दोन मिनिटे, लॉगिन नाही. जवळचे कामगार ते त्यांच्या भाषेत ऐकतात, तुमची मजुरी, जागा आणि पगाराचा दिवस स्पष्ट लिहिलेला."
+                  gu="બે મિનિટ, કોઈ લૉગિન નહીં. નજીકના કામદારો એને પોતાની ભાષામાં સાંભળે છે, તમારી મજૂરી, જગ્યા અને પગારનો દિવસ સાફ લખેલો."
                 />
               </p>
             </div>

@@ -146,7 +146,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
             <section className="jd-section" aria-labelledby="promise-h" data-reveal="">
               <h2 id="promise-h">
                 <ScrollText aria-hidden="true" />
-                <T en="Work Promise — the terms, before you go" hi="काम का वादा — जाने से पहले सारी शर्तें" mr="कामाचे वचन — जाण्याआधी सगळ्या अटी" gu="કામનું વચન — જતાં પહેલાં બધી શરતો" />
+                <T en="Work Promise, the terms, before you go" hi="काम का वादा, जाने से पहले सारी शर्तें" mr="कामाचे वचन, जाण्याआधी सगळ्या अटी" gu="કામનું વચન, જતાં પહેલાં બધી શરતો" />
               </h2>
               <div className="promise">
                 <dl className="promise-grid">
@@ -175,7 +175,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
                     ))}
                   </Fact>
                   <Fact icon={<Clock />} tile="var(--color-accent)" label={{ en: 'Hours', hi: 'समय', mr: 'वेळ', gu: 'સમય' }}>
-                    {job.hours.start} – {job.hours.end}
+                    {job.hours.start}, {job.hours.end}
                   </Fact>
                   <Fact icon={<CalendarDays />} tile="var(--color-accent)" label={{ en: 'Starts', hi: 'कब से', mr: 'कधीपासून', gu: 'ક્યારથી' }}>
                     <Tx l={job.start} />
@@ -223,12 +223,12 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
               </h2>
               <div className="card fair-meter">
                 <p>
-                  {fairState === 'fair' && <T en={`Yes — about ${rupee(daily)} a day is normal for a ${trade.name.en.toLowerCase()} here.`} hi={`हाँ — यहाँ ${trade.name.hi} के लिए लगभग ${rupee(daily)} रोज़ सामान्य है।`} mr={`होय — इथे ${trade.name.mr} साठी रोज सुमारे ${rupee(daily)} नेहमीचे आहे.`} gu={`હા — અહીં ${trade.name.gu} માટે રોજના લગભગ ${rupee(daily)} સામાન્ય છે.`} />}
-                  {fairState === 'high' && <T en={`Good pay — about ${rupee(daily)} a day, above the usual rate.`} hi={`अच्छी मज़दूरी — लगभग ${rupee(daily)} रोज़, आम रेट से ज़्यादा।`} mr={`चांगली मजुरी — रोज सुमारे ${rupee(daily)}, नेहमीच्या दरापेक्षा जास्त.`} gu={`સારી મજૂરી — રોજના લગભગ ${rupee(daily)}, સામાન્ય ભાવ કરતાં વધારે.`} />}
-                  {fairState === 'low' && <T en={`Below normal — about ${rupee(daily)} a day. You can ask for more.`} hi={`सामान्य से कम — लगभग ${rupee(daily)} रोज़। आप ज़्यादा माँग सकते हैं।`} mr={`नेहमीपेक्षा कमी — रोज सुमारे ${rupee(daily)}. तुम्ही जास्त मागू शकता.`} gu={`સામાન્ય કરતાં ઓછી — રોજના લગભગ ${rupee(daily)}. તમે વધારે માંગી શકો છો.`} />}
-                  {fairState === 'suspicious' && <T en={`Too good to be true — ${rupee(daily)} a day is far above normal. Be careful.`} hi={`सच होने के लिए बहुत अच्छा — ${rupee(daily)} रोज़ सामान्य से बहुत ज़्यादा है। सावधान रहें।`} mr={`खरे वाटण्याइतके चांगले नाही — रोज ${rupee(daily)} हे नेहमीपेक्षा खूपच जास्त आहे. सावध राहा.`} gu={`સાચું માનવા જેવું નથી — રોજના ${rupee(daily)} સામાન્ય કરતાં ઘણા વધારે છે. સાવધાન રહો.`} />}
+                  {fairState === 'fair' && <T en={`Yes, about ${rupee(daily)} a day is normal for a ${trade.name.en.toLowerCase()} here.`} hi={`हाँ, यहाँ ${trade.name.hi} के लिए लगभग ${rupee(daily)} रोज़ सामान्य है।`} mr={`होय, इथे ${trade.name.mr} साठी रोज सुमारे ${rupee(daily)} नेहमीचे आहे.`} gu={`હા, અહીં ${trade.name.gu} માટે રોજના લગભગ ${rupee(daily)} સામાન્ય છે.`} />}
+                  {fairState === 'high' && <T en={`Good pay, about ${rupee(daily)} a day, above the usual rate.`} hi={`अच्छी मज़दूरी, लगभग ${rupee(daily)} रोज़, आम रेट से ज़्यादा।`} mr={`चांगली मजुरी, रोज सुमारे ${rupee(daily)}, नेहमीच्या दरापेक्षा जास्त.`} gu={`સારી મજૂરી, રોજના લગભગ ${rupee(daily)}, સામાન્ય ભાવ કરતાં વધારે.`} />}
+                  {fairState === 'low' && <T en={`Below normal, about ${rupee(daily)} a day. You can ask for more.`} hi={`सामान्य से कम, लगभग ${rupee(daily)} रोज़। आप ज़्यादा माँग सकते हैं।`} mr={`नेहमीपेक्षा कमी, रोज सुमारे ${rupee(daily)}. तुम्ही जास्त मागू शकता.`} gu={`સામાન્ય કરતાં ઓછી, રોજના લગભગ ${rupee(daily)}. તમે વધારે માંગી શકો છો.`} />}
+                  {fairState === 'suspicious' && <T en={`Too good to be true, ${rupee(daily)} a day is far above normal. Be careful.`} hi={`सच होने के लिए बहुत अच्छा, ${rupee(daily)} रोज़ सामान्य से बहुत ज़्यादा है। सावधान रहें।`} mr={`खरे वाटण्याइतके चांगले नाही, रोज ${rupee(daily)} हे नेहमीपेक्षा खूपच जास्त आहे. सावध राहा.`} gu={`સાચું માનવા જેવું નથી, રોજના ${rupee(daily)} સામાન્ય કરતાં ઘણા વધારે છે. સાવધાન રહો.`} />}
                 </p>
-                <div className="fair-track" role="img" aria-label={`Fair band ${rupee(trade.fair[0])}–${rupee(trade.fair[1])}, this job ${rupee(daily)} per day`}>
+                <div className="fair-track" role="img" aria-label={`Fair band ${rupee(trade.fair[0])}, ${rupee(trade.fair[1])}, this job ${rupee(daily)} per day`}>
                   <span className="fair-marker" style={{ left: `${pos}%` }} />
                 </div>
                 <div className="fair-labels">
@@ -236,14 +236,14 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
                     <T en="Low" hi="कम" mr="कमी" gu="ઓછી" />
                   </span>
                   <span>
-                    <T en="Fair" hi="सही" mr="योग्य" gu="યોગ્ય" /> {rupee(trade.fair[0])}–{rupee(trade.fair[1])}
+                    <T en="Fair" hi="सही" mr="योग्य" gu="યોગ્ય" /> {rupee(trade.fair[0])}, {rupee(trade.fair[1])}
                   </span>
                   <span>
                     <T en="Too high" hi="बहुत ज़्यादा" mr="खूप जास्त" gu="ઘણી વધારે" />
                   </span>
                 </div>
                 <p className="subtle">
-                  <T en="Indicative city band from Naka listings — not an official minimum wage." hi="नाका के कामों से शहर का अनुमानित दायरा — सरकारी न्यूनतम मज़दूरी नहीं।" mr="नाकावरच्या कामांवरून शहरातला अंदाजे दर — ही सरकारी किमान मजुरी नाही." gu="નાકાનાં કામ પરથી શહેરનો અંદાજિત દર — સરકારી લઘુતમ મજૂરી નથી." />{' '}
+                  <T en="Indicative city band from Naka listings, not an official minimum wage." hi="नाका के कामों से शहर का अनुमानित दायरा, सरकारी न्यूनतम मज़दूरी नहीं।" mr="नाकावरच्या कामांवरून शहरातला अंदाजे दर, ही सरकारी किमान मजुरी नाही." gu="નાકાનાં કામ પરથી શહેરનો અંદાજિત દર, સરકારી લઘુતમ મજૂરી નથી." />{' '}
                   <Link href="/rights#rights" style={{ textDecoration: 'underline' }}>
                     <T en="Know your wage rights" hi="मज़दूरी के अधिकार जानें" mr="मजुरीचे हक्क जाणून घ्या" gu="મજૂરીના હક જાણો" />
                   </Link>
@@ -298,7 +298,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
               <section className="jd-section" aria-labelledby="route-h" data-reveal="">
                 <h2 id="route-h">
                   <MapPin aria-hidden="true" />
-                  <T en={`Getting there — ${km} km from your naka`} hi={`कैसे पहुँचें — आपके नाके से ${km} किमी`} mr={`कसे पोहोचाल — तुमच्या नाक्यापासून ${km} किमी`} gu={`કેવી રીતે પહોંચશો — તમારા નાકાથી ${km} કિમી`} />
+                  <T en={`Getting there, ${km} km from your naka`} hi={`कैसे पहुँचें, आपके नाके से ${km} किमी`} mr={`कसे पोहोचाल, तुमच्या नाक्यापासून ${km} किमी`} gu={`કેવી રીતે પહોંચશો, તમારા નાકાથી ${km} કિમી`} />
                 </h2>
                 <div className="route">
                   {km <= 3 && (
@@ -317,7 +317,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
                     <span>
                       <strong>~{Math.round(km * 4 + 10)} min</strong>
                       <small className="muted">
-                        <T en="Bus · ₹10–20" hi="बस · ₹10–20" mr="बस · ₹10–20" gu="બસ · ₹10–20" />
+                        <T en="Bus · ₹10-20" hi="बस · ₹10-20" mr="बस · ₹10-20" gu="બસ · ₹10-20" />
                       </small>
                     </span>
                   </div>
@@ -346,7 +346,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
               pay={rupee(job.pay.amount)}
               unit={PAY_UNIT[job.pay.unit]}
               paid={PAID_WHEN[job.paidWhen]}
-              hours={`${job.hours.start}–${job.hours.end}`}
+              hours={`${job.hours.start}, ${job.hours.end}`}
               start={job.start}
               phone={job.employer.phone}
               employer={job.employer.name}
@@ -388,7 +388,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
                         <Star aria-hidden="true" className="star" style={{ width: 16, height: 16, display: 'inline' }} /> {job.employer.rating}
                       </>
                     ) : (
-                      '—'
+                      ', '
                     )}
                   </strong>
                   <small>
@@ -402,7 +402,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
                   </small>
                 </div>
                 <div>
-                  <strong>{job.employer.verified ? '100%' : '—'}</strong>
+                  <strong>{job.employer.verified ? '100%' : ', '}</strong>
                   <small>
                     <T en="paid on time" hi="समय पर भुगतान" mr="वेळेवर पैसे" gu="સમયસર ચુકવણી" />
                   </small>

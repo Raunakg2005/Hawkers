@@ -1,7 +1,7 @@
 import type { L, Scheme, SchemeNeed } from './types';
 
 /* Summaries of real central-government schemes, simplified for a demo.
-   Amounts/eligibility change — the UI always links to the official site and
+   Amounts/eligibility change, the UI always links to the official site and
    asks users to confirm there or at a CSC (Common Service Centre). */
 
 export const NEEDS: Record<SchemeNeed, { label: L }> = {
@@ -27,13 +27,13 @@ export const SCHEMES: Scheme[] = [
       mr: '12 अंकी UAN कार्ड, जे तुम्ही कामगार आहात हे दाखवते. यामुळे इतर अनेक योजनांचा रस्ता खुला होतो आणि संकटाच्या वेळी सरकार तुमच्यापर्यंत पोहोचू शकते.',
       gu: '12 અંકનું UAN કાર્ડ, જે બતાવે છે કે તમે કામદાર છો. તેનાથી બીજી ઘણી યોજનાઓનો રસ્તો ખૂલે છે અને મુશ્કેલીના સમયે સરકાર તમારા સુધી પહોંચી શકે છે.',
     },
-    who: { en: 'Age 16–59, working in the unorganised sector, not paying income tax, not in EPFO/ESIC.', hi: 'उम्र 16–59, असंगठित क्षेत्र में काम, इनकम टैक्स नहीं भरते, EPFO/ESIC में नहीं।', mr: 'वय 16–59, असंघटित क्षेत्रात काम, इन्कम टॅक्स भरत नाही, EPFO/ESIC मध्ये नाही.', gu: 'ઉંમર 16–59, અસંગઠિત ક્ષેત્રમાં કામ, ઇન્કમ ટેક્સ ભરતા નથી, EPFO/ESICમાં નથી.' },
+    who: { en: 'Age 16-59, working in the unorganised sector, not paying income tax, not in EPFO/ESIC.', hi: 'उम्र 16-59, असंगठित क्षेत्र में काम, इनकम टैक्स नहीं भरते, EPFO/ESIC में नहीं।', mr: 'वय 16-59, असंघटित क्षेत्रात काम, इन्कम टॅक्स भरत नाही, EPFO/ESIC मध्ये नाही.', gu: 'ઉંમર 16-59, અસંગઠિત ક્ષેત્રમાં કામ, ઇન્કમ ટેક્સ ભરતા નથી, EPFO/ESICમાં નથી.' },
     cost: { en: 'Free', hi: 'मुफ़्त', mr: 'मोफत', gu: 'મફત' },
     docs: ['aadhaar', 'mobile', 'bank'],
     how: [
       { en: 'Go to a CSC centre or open eshram.gov.in', hi: 'CSC सेंटर जाएँ या eshram.gov.in खोलें', mr: 'CSC केंद्रात जा किंवा eshram.gov.in उघडा', gu: 'CSC કેન્દ્ર પર જાઓ અથવા eshram.gov.in ખોલો' },
       { en: 'Verify with Aadhaar OTP', hi: 'आधार OTP से पुष्टि करें', mr: 'आधार OTP ने खात्री करा', gu: 'આધાર OTPથી ખાતરી કરો' },
-      { en: 'Fill trade, address and bank — download your card', hi: 'काम, पता और बैंक भरें — कार्ड डाउनलोड करें', mr: 'काम, पत्ता आणि बँकेची माहिती भरा — कार्ड डाउनलोड करा', gu: 'કામ, સરનામું અને બેંકની વિગત ભરો — કાર્ડ ડાઉનલોડ કરો' },
+      { en: 'Fill trade, address and bank, download your card', hi: 'काम, पता और बैंक भरें, कार्ड डाउनलोड करें', mr: 'काम, पत्ता आणि बँकेची माहिती भरा, कार्ड डाउनलोड करा', gu: 'કામ, સરનામું અને બેંકની વિગત ભરો, કાર્ડ ડાઉનલોડ કરો' },
     ],
     where: { en: 'CSC centre / eshram.gov.in', hi: 'CSC सेंटर / eshram.gov.in', mr: 'CSC केंद्र / eshram.gov.in', gu: 'CSC કેન્દ્ર / eshram.gov.in' },
     helpline: '14434',
@@ -50,8 +50,8 @@ export const SCHEMES: Scheme[] = [
       mr: 'तुम्ही दर महिन्याला थोडे पैसे भरता; सरकारही तेवढेच पैसे भरते. 60 वर्षांनंतर दर महिन्याला पक्की पेन्शन मिळते.',
       gu: 'તમે દર મહિને થોડા પૈસા જમા કરો છો; સરકાર પણ એટલા જ ઉમેરે છે. 60 વર્ષ પછી દર મહિને પાકું પેન્શન મળે છે.',
     },
-    who: { en: 'Age 18–40, monthly income up to ₹15,000, unorganised worker.', hi: 'उम्र 18–40, मासिक आमदनी ₹15,000 तक, असंगठित मज़दूर।', mr: 'वय 18–40, महिन्याचे उत्पन्न ₹15,000 पर्यंत, असंघटित कामगार.', gu: 'ઉંમર 18–40, મહિનાની આવક ₹15,000 સુધી, અસંગઠિત કામદાર.' },
-    cost: { en: '₹55–₹200 per month depending on age', hi: 'उम्र के अनुसार ₹55–₹200 महीना', mr: 'वयानुसार दर महिना ₹55–₹200', gu: 'ઉંમર પ્રમાણે દર મહિને ₹55–₹200' },
+    who: { en: 'Age 18-40, monthly income up to ₹15,000, unorganised worker.', hi: 'उम्र 18-40, मासिक आमदनी ₹15,000 तक, असंगठित मज़दूर।', mr: 'वय 18-40, महिन्याचे उत्पन्न ₹15,000 पर्यंत, असंघटित कामगार.', gu: 'ઉંમર 18-40, મહિનાની આવક ₹15,000 સુધી, અસંગઠિત કામદાર.' },
+    cost: { en: '₹55-₹200 per month depending on age', hi: 'उम्र के अनुसार ₹55-₹200 महीना', mr: 'वयानुसार दर महिना ₹55-₹200', gu: 'ઉંમર પ્રમાણે દર મહિને ₹55-₹200' },
     docs: ['aadhaar', 'bank', 'mobile'],
     how: [
       { en: 'Visit a CSC with Aadhaar and bank passbook', hi: 'आधार और बैंक पासबुक लेकर CSC जाएँ', mr: 'आधार आणि बँक पासबुक घेऊन CSC मध्ये जा', gu: 'આધાર અને બેંક પાસબુક લઈને CSC પર જાઓ' },
@@ -73,7 +73,7 @@ export const SCHEMES: Scheme[] = [
       mr: 'अपघातात मृत्यू झाला किंवा पूर्ण अपंगत्व आले तर कुटुंबाला ₹2 लाख. थोडे अपंगत्व आले तर ₹1 लाख.',
       gu: 'અકસ્માતમાં મૃત્યુ થાય કે પૂરી વિકલાંગતા આવે તો પરિવારને ₹2 લાખ. થોડી વિકલાંગતા આવે તો ₹1 લાખ.',
     },
-    who: { en: 'Age 18–70 with a bank account.', hi: 'उम्र 18–70, बैंक खाता हो।', mr: 'वय 18–70, बँक खाते असावे.', gu: 'ઉંમર 18–70, બેંક ખાતું હોવું જોઈએ.' },
+    who: { en: 'Age 18-70 with a bank account.', hi: 'उम्र 18-70, बैंक खाता हो।', mr: 'वय 18-70, बँक खाते असावे.', gu: 'ઉંમર 18-70, બેંક ખાતું હોવું જોઈએ.' },
     cost: { en: '₹20 per year, auto-debited', hi: '₹20 सालाना, खाते से अपने-आप कटेगा', mr: 'वर्षाला ₹20, खात्यातून आपोआप कापले जातील', gu: 'વર્ષે ₹20, ખાતામાંથી આપમેળે કપાશે' },
     docs: ['aadhaar', 'bank'],
     how: [
@@ -89,7 +89,7 @@ export const SCHEMES: Scheme[] = [
     short: { en: '₹2 lakh life cover for ₹436 a year', hi: '₹436 साल में ₹2 लाख का जीवन बीमा', mr: 'वर्षाला ₹436 मध्ये ₹2 लाखांचा जीवन विमा', gu: 'વર્ષે ₹436માં ₹2 લાખનો જીવન વીમો' },
     needs: ['insurance', 'family'],
     benefit: { en: 'Your family gets ₹2 lakh if you die for any reason.', hi: 'किसी भी कारण से मृत्यु पर परिवार को ₹2 लाख मिलते हैं।', mr: 'कोणत्याही कारणाने मृत्यू झाला तर कुटुंबाला ₹2 लाख मिळतात.', gu: 'કોઈ પણ કારણે મૃત્યુ થાય તો પરિવારને ₹2 લાખ મળે છે.' },
-    who: { en: 'Age 18–50 with a bank account.', hi: 'उम्र 18–50, बैंक खाता हो।', mr: 'वय 18–50, बँक खाते असावे.', gu: 'ઉંમર 18–50, બેંક ખાતું હોવું જોઈએ.' },
+    who: { en: 'Age 18-50 with a bank account.', hi: 'उम्र 18-50, बैंक खाता हो।', mr: 'वय 18-50, बँक खाते असावे.', gu: 'ઉંમર 18-50, બેંક ખાતું હોવું જોઈએ.' },
     cost: { en: '₹436 per year', hi: '₹436 सालाना', mr: 'वर्षाला ₹436', gu: 'વર્ષે ₹436' },
     docs: ['aadhaar', 'bank'],
     how: [
@@ -133,7 +133,7 @@ export const SCHEMES: Scheme[] = [
       gu: 'ગેરંટી વગર નાની લોન તબક્કાવાર; સમયસર ચૂકવો તો વ્યાજમાં રાહત અને ડિજિટલ પેમેન્ટ પર કૅશબૅક.',
     },
     who: { en: 'Street vendors and hawkers with a vending certificate or recommendation letter from the city body.', hi: 'रेहड़ी-पटरी विक्रेता जिनके पास नगर निगम का प्रमाणपत्र या सिफ़ारिश पत्र हो।', mr: 'नगरपालिकेचे व्हेंडिंग प्रमाणपत्र किंवा शिफारस पत्र असलेले फेरीवाले.', gu: 'નગરપાલિકાનું વેન્ડિંગ પ્રમાણપત્ર કે ભલામણ પત્ર ધરાવતા લારી-ગલ્લાવાળા અને ફેરિયા.' },
-    cost: { en: 'Loan — repay in monthly instalments', hi: 'कर्ज़ — मासिक किस्तों में चुकाएँ', mr: 'कर्ज — महिन्याच्या हप्त्यांत फेडा', gu: 'લોન — મહિનાના હપ્તામાં ચૂકવો' },
+    cost: { en: 'Loan, repay in monthly instalments', hi: 'कर्ज़, मासिक किस्तों में चुकाएँ', mr: 'कर्ज, महिन्याच्या हप्त्यांत फेडा', gu: 'લોન, મહિનાના હપ્તામાં ચૂકવો' },
     docs: ['aadhaar', 'bank', 'mobile', 'vendor'],
     how: [
       { en: 'Apply at pmsvanidhi.mohua.gov.in or a CSC', hi: 'pmsvanidhi.mohua.gov.in या CSC पर आवेदन करें', mr: 'pmsvanidhi.mohua.gov.in वर किंवा CSC मध्ये अर्ज करा', gu: 'pmsvanidhi.mohua.gov.in પર અથવા CSC પર અરજી કરો' },
@@ -148,12 +148,12 @@ export const SCHEMES: Scheme[] = [
     short: { en: 'State board benefits for building workers', hi: 'निर्माण मज़दूरों के लिए राज्य बोर्ड के लाभ', mr: 'बांधकाम कामगारांसाठी राज्य मंडळाचे लाभ', gu: 'બાંધકામ કામદારો માટે રાજ્ય બોર્ડના લાભ' },
     needs: ['family', 'health', 'housing', 'id'],
     benefit: {
-      en: 'Registered construction workers can get help for children’s education, maternity, tools, medical costs and housing — varies by state.',
-      hi: 'पंजीकृत निर्माण मज़दूरों को बच्चों की पढ़ाई, प्रसूति, औज़ार, इलाज और घर के लिए मदद — हर राज्य में अलग।',
-      mr: 'नोंदणी केलेल्या बांधकाम कामगारांना मुलांचे शिक्षण, बाळंतपण, अवजारे, उपचारांचा खर्च आणि घरासाठी मदत मिळू शकते — प्रत्येक राज्यात वेगळी.',
-      gu: 'નોંધાયેલા બાંધકામ કામદારોને બાળકોના ભણતર, પ્રસૂતિ, ઓજારો, સારવારના ખર્ચ અને ઘર માટે મદદ મળી શકે છે — દરેક રાજ્યમાં અલગ.',
+      en: 'Registered construction workers can get help for children’s education, maternity, tools, medical costs and housing, varies by state.',
+      hi: 'पंजीकृत निर्माण मज़दूरों को बच्चों की पढ़ाई, प्रसूति, औज़ार, इलाज और घर के लिए मदद, हर राज्य में अलग।',
+      mr: 'नोंदणी केलेल्या बांधकाम कामगारांना मुलांचे शिक्षण, बाळंतपण, अवजारे, उपचारांचा खर्च आणि घरासाठी मदत मिळू शकते, प्रत्येक राज्यात वेगळी.',
+      gu: 'નોંધાયેલા બાંધકામ કામદારોને બાળકોના ભણતર, પ્રસૂતિ, ઓજારો, સારવારના ખર્ચ અને ઘર માટે મદદ મળી શકે છે, દરેક રાજ્યમાં અલગ.',
     },
-    who: { en: 'Age 18–60, worked 90+ days in construction in the last year.', hi: 'उम्र 18–60, पिछले साल 90+ दिन निर्माण कार्य किया हो।', mr: 'वय 18–60, मागच्या वर्षी 90+ दिवस बांधकामावर काम केलेले असावे.', gu: 'ઉંમર 18–60, ગયા વર્ષે 90+ દિવસ બાંધકામમાં કામ કર્યું હોય.' },
+    who: { en: 'Age 18-60, worked 90+ days in construction in the last year.', hi: 'उम्र 18-60, पिछले साल 90+ दिन निर्माण कार्य किया हो।', mr: 'वय 18-60, मागच्या वर्षी 90+ दिवस बांधकामावर काम केलेले असावे.', gu: 'ઉંમર 18-60, ગયા વર્ષે 90+ દિવસ બાંધકામમાં કામ કર્યું હોય.' },
     cost: { en: 'Small registration fee (state-wise)', hi: 'छोटी रजिस्ट्रेशन फ़ीस (राज्य के अनुसार)', mr: 'थोडी नोंदणी फी (राज्यानुसार)', gu: 'થોડી નોંધણી ફી (રાજ્ય પ્રમાણે)' },
     docs: ['aadhaar', 'bank', 'photo', 'work90'],
     how: [
@@ -230,7 +230,7 @@ export const HELPLINES: { name: L; number: string; what: L }[] = [
 export const RIGHTS: { title: L; body: L; law: string }[] = [
   {
     title: { en: 'At least minimum wage', hi: 'कम से कम न्यूनतम मज़दूरी', mr: 'किमान मजुरी तरी मिळालीच पाहिजे', gu: 'ઓછામાં ઓછી લઘુતમ મજૂરી' },
-    body: { en: 'Every state notifies a minimum daily wage for each skill level. Paying less is illegal — for men and women equally.', hi: 'हर राज्य हर कौशल स्तर के लिए न्यूनतम दैनिक मज़दूरी तय करता है। उससे कम देना ग़ैरक़ानूनी है — पुरुष और महिला दोनों के लिए बराबर।', mr: 'प्रत्येक राज्य प्रत्येक कौशल्यासाठी रोजची किमान मजुरी ठरवते. त्यापेक्षा कमी देणे बेकायदेशीर आहे — पुरुष आणि महिला दोघांसाठी सारखेच.', gu: 'દરેક રાજ્ય દરેક કુશળતા માટે રોજની લઘુતમ મજૂરી નક્કી કરે છે. તેનાથી ઓછું આપવું ગેરકાનૂની છે — પુરુષો અને સ્ત્રીઓ બંને માટે સરખું.' },
+    body: { en: 'Every state notifies a minimum daily wage for each skill level. Paying less is illegal, for men and women equally.', hi: 'हर राज्य हर कौशल स्तर के लिए न्यूनतम दैनिक मज़दूरी तय करता है। उससे कम देना ग़ैरक़ानूनी है, पुरुष और महिला दोनों के लिए बराबर।', mr: 'प्रत्येक राज्य प्रत्येक कौशल्यासाठी रोजची किमान मजुरी ठरवते. त्यापेक्षा कमी देणे बेकायदेशीर आहे, पुरुष आणि महिला दोघांसाठी सारखेच.', gu: 'દરેક રાજ્ય દરેક કુશળતા માટે રોજની લઘુતમ મજૂરી નક્કી કરે છે. તેનાથી ઓછું આપવું ગેરકાનૂની છે, પુરુષો અને સ્ત્રીઓ બંને માટે સરખું.' },
     law: 'Code on Wages, 2019',
   },
   {
