@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { JOBS } from '@/data/jobs';
 import { WORKERS } from '@/data/workers';
 
-const BASE = 'https://naka.example';
+const BASE = 'https://karigar.example';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ['', '/jobs', '/workers', '/profile', '/post-job', '/rights', '/safety', '/my-work'];

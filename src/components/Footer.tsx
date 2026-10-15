@@ -79,7 +79,7 @@ export default function Footer() {
         </div>
 
         <div className="footer-big" aria-hidden="true">
-          naka · नाका
+          karigar · कारीगर
         </div>
 
         <div className="footer-bottom">
