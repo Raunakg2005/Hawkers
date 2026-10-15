@@ -45,7 +45,7 @@ export default function WeekChart({ entries, today }: { entries: DiaryEntry[]; t
 
       <div className={s.chart} role="group" aria-label={t('Earnings, last 7 days', 'पिछले 7 दिन की कमाई')} aria-describedby="chart-summary">
         {avg > 0 && (
-          <div className={s.avgLine} style={{ '--y': `${(avg / max) * 100}%` } as React.CSSProperties} aria-hidden="true">
+          <div className={s.avgLine} style={{ '--y': (avg / max).toFixed(3) } as React.CSSProperties} aria-hidden="true">
             <span>
               <T en={`avg ${shortRupee(avg)}`} hi={`औसत ${shortRupee(avg)}`} />
             </span>
