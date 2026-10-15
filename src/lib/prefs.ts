@@ -1,13 +1,14 @@
 'use client';
 
 import { useSyncExternalStore } from 'react';
+import type { L, Lang } from '@/data/types';
 
 /**
  * User preferences live as data-attributes on <html> so that CSS (and server
  * rendered markup) can react to them with zero JS re-rendering:
  *
  *   data-theme  light | dark      colour scheme
- *   data-lang   en | hi           which language spans are visible
+ *   data-lang   en | hi | mr | gu which language spans are visible
  *   data-size   md | lg | xl      text scale for low-vision / older users
  *   data-lite   0 | 1             low-data mode: no 3D, no smooth scroll
  *
@@ -28,7 +29,7 @@ export function getPref(name: PrefName): string {
 export function setPref(name: PrefName, value: string) {
   const root = document.documentElement;
   root.dataset[name] = value;
-  if (name === 'lang') root.lang = value === 'hi' ? 'hi' : 'en';
+  if (name === 'lang') root.lang = value;
   if (name === 'theme') {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', value === 'dark' ? '#0b0c15' : '#fdfbf7');
   }
@@ -54,9 +55,14 @@ export function usePref(name: PrefName): string {
   );
 }
 
-/** Pick a string for the active language — for attributes (placeholder, aria-label) in client components. */
+/**
+ * Pick a string for the active language — for attributes (placeholder,
+ * aria-label, share text…) in client components.
+ *   t('Listen', 'सुनें', 'ऐका', 'સાંભળો')   or   tl(someL)
+ */
 export function useLang() {
-  const lang = usePref('lang') as 'en' | 'hi';
-  const t = (en: string, hi: string) => (lang === 'hi' ? hi : en);
-  return { lang, t };
+  const lang = usePref('lang') as Lang;
+  const t = (en: string, hi: string, mr: string, gu: string) => ({ en, hi, mr, gu })[lang] ?? en;
+  const tl = (l: L) => l[lang] ?? l.en;
+  return { lang, t, tl };
 }

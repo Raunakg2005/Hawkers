@@ -16,10 +16,10 @@ export function fairStatus(trade: TradeId, perDay: number): FairStatus {
 }
 
 const STATUS = {
-  below: { cls: 'chip-danger', Icon: TriangleAlert, en: 'Below fair pay', hi: 'सही मज़दूरी से कम' },
-  fair: { cls: 'chip-success', Icon: CircleCheck, en: 'Fair pay', hi: 'सही मज़दूरी' },
-  above: { cls: 'chip-trust', Icon: ThumbsUp, en: 'Generous pay', hi: 'बढ़िया मज़दूरी' },
-  extreme: { cls: 'chip-warning', Icon: CircleAlert, en: 'Unusually high', hi: 'असामान्य रूप से ज़्यादा' },
+  below: { cls: 'chip-danger', Icon: TriangleAlert, en: 'Below fair pay', hi: 'सही मज़दूरी से कम', mr: 'योग्य मजुरीपेक्षा कमी', gu: 'યોગ્ય મજૂરીથી ઓછું' },
+  fair: { cls: 'chip-success', Icon: CircleCheck, en: 'Fair pay', hi: 'सही मज़दूरी', mr: 'योग्य मजुरी', gu: 'યોગ્ય મજૂરી' },
+  above: { cls: 'chip-trust', Icon: ThumbsUp, en: 'Generous pay', hi: 'बढ़िया मज़दूरी', mr: 'चांगली मजुरी', gu: 'સારી મજૂરી' },
+  extreme: { cls: 'chip-warning', Icon: CircleAlert, en: 'Unusually high', hi: 'असामान्य रूप से ज़्यादा', mr: 'नेहमीपेक्षा खूप जास्त', gu: 'સામાન્ય કરતાં ઘણું વધારે' },
 } as const;
 
 export function FairChip({ status }: { status: FairStatus }) {
@@ -27,7 +27,7 @@ export function FairChip({ status }: { status: FairStatus }) {
   return (
     <span className={`chip ${st.cls}`}>
       <st.Icon aria-hidden="true" />
-      <T en={st.en} hi={st.hi} />
+      <T en={st.en} hi={st.hi} mr={st.mr} gu={st.gu} />
     </span>
   );
 }
@@ -50,11 +50,11 @@ export default function FairBand({ trade, perDay, approx = false, compact = fals
       <div className={s.fairHead}>
         <FairChip status={status} />
         <span className="subtle">
-          <T en="Fair band for" hi="सही दाम —" /> <Tx l={TRADE[trade].name} />:{' '}
+          <T en="Fair band for" hi="सही दाम —" mr="योग्य मर्यादा —" gu="યોગ્ય મર્યાદા —" /> <Tx l={TRADE[trade].name} />:{' '}
           <b className={s.fairRange}>
             {rupee(fLo)}–{rupee(fHi)}
           </b>{' '}
-          <T en="/ day" hi="/ दिन" />
+          <T en="/ day" hi="/ दिन" mr="/ दिवस" gu="/ દિવસ" />
         </span>
       </div>
       <div
@@ -73,13 +73,13 @@ export default function FairBand({ trade, perDay, approx = false, compact = fals
       </div>
       <div className={s.fairScale} aria-hidden="true">
         <span>
-          <T en="Low" hi="कम" />
+          <T en="Low" hi="कम" mr="कमी" gu="ઓછું" />
         </span>
         <span>
-          <T en="Fair" hi="सही" />
+          <T en="Fair" hi="सही" mr="योग्य" gu="યોગ્ય" />
         </span>
         <span>
-          <T en="High" hi="ज़्यादा" />
+          <T en="High" hi="ज़्यादा" mr="जास्त" gu="વધારે" />
         </span>
       </div>
     </div>

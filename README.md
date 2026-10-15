@@ -22,8 +22,8 @@ Every morning plumbers, painters, masons, electricians and helpers wait at a *na
 ## Inclusive design decisions
 
 - **Icon + colour + word**, never colour alone; big 48 px+ tap targets; bottom tab bar within thumb reach on phones.
-- **Hindi / English** switch (`A | अ`) — both languages are server-rendered and swapped by CSS, so switching is instant and works without JS.
-- **Read aloud** on every job card and key text (browser speech synthesis, no network), **voice search**.
+- **4 languages — English, हिंदी (Hindi), मराठी (Marathi), ગુજરાતી (Gujarati).** Each is written in its own script in the picker; first-time visitors get a small "choose your language" sheet, and the browser language is used if it matches. All languages are server-rendered and swapped by CSS, so switching is instant and works without JS. The `L` type requires all four, so TypeScript flags any missing translation.
+- **Read aloud** on every job card and key text (browser speech synthesis, no network) — Marathi falls back to a Hindi voice and Gujarati to English when the phone has no voice for it. **Voice search** understands trade words in all four languages.
 - **Text size** (3 steps) and **low-data mode** (turns off 3D, smooth scroll and animations; auto-enabled on 2G / Save-Data).
 - Pay is always the biggest thing on a card; duration is the first filter — built around irregular work.
 - Respects `prefers-reduced-motion`; skip link, landmarks, labelled controls, visible focus.
@@ -43,5 +43,15 @@ npm install
 npm run dev      # http://localhost:3000
 npm run build && npm start
 ```
+
+### Docker
+
+```bash
+docker compose up --build        # http://localhost:3000
+# or
+docker build -t naka . && docker run --rm -p 3000:3000 naka
+```
+
+The image is a multi-stage build of Next.js `standalone` output on `node:22-alpine`: it runs as a non-root user, has a healthcheck, and `docker-compose.yml` runs it read-only with all capabilities dropped and a 256 MB memory limit.
 
 All data is mock (`src/data/*`). Scheme details are simplified for the demo — always confirm on the official site or at a CSC.

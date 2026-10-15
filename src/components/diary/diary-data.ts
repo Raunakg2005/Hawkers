@@ -1,6 +1,7 @@
-import type { L, TradeId } from '@/data/types';
+import type { L, Lang, TradeId } from '@/data/types';
 import { JOBS } from '@/data/jobs';
 import { TRADE } from '@/data/trades';
+import { localeOf } from '@/lib/i18n';
 
 /* ==========================================================================
    Work diary — types, mock seed, date & money helpers (client-side only)
@@ -47,17 +48,17 @@ export const daysBetween = (a: Date, b: Date) => Math.round((parseKey(dateKey(b)
 /** Monday of the week containing d. */
 export const weekStart = (d: Date) => addDays(d, -((d.getDay() + 6) % 7));
 
-export const fmtDate = (k: string, lang: 'en' | 'hi', opts: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' }) =>
-  new Intl.DateTimeFormat(lang === 'hi' ? 'hi-IN' : 'en-IN', opts).format(parseKey(k));
+export const fmtDate = (k: string, lang: Lang, opts: Intl.DateTimeFormatOptions = { weekday: 'short', day: 'numeric', month: 'short' }) =>
+  new Intl.DateTimeFormat(localeOf(lang), opts).format(parseKey(k));
 
 export const WEEKDAY_SHORT: L[] = [
-  { en: 'Sun', hi: 'रवि' },
-  { en: 'Mon', hi: 'सोम' },
-  { en: 'Tue', hi: 'मंगल' },
-  { en: 'Wed', hi: 'बुध' },
-  { en: 'Thu', hi: 'गुरु' },
-  { en: 'Fri', hi: 'शुक्र' },
-  { en: 'Sat', hi: 'शनि' },
+  { en: 'Sun', hi: 'रवि', mr: 'रवि', gu: 'રવિ' },
+  { en: 'Mon', hi: 'सोम', mr: 'सोम', gu: 'સોમ' },
+  { en: 'Tue', hi: 'मंगल', mr: 'मंगळ', gu: 'મંગળ' },
+  { en: 'Wed', hi: 'बुध', mr: 'बुध', gu: 'બુધ' },
+  { en: 'Thu', hi: 'गुरु', mr: 'गुरु', gu: 'ગુરુ' },
+  { en: 'Fri', hi: 'शुक्र', mr: 'शुक्र', gu: 'શુક્ર' },
+  { en: 'Sat', hi: 'शनि', mr: 'शनि', gu: 'શનિ' },
 ];
 
 /* ── Employers we know (for phone numbers + suggestions) */
@@ -165,15 +166,25 @@ export function writeAvailable(today: string, on: boolean) {
 
 export const shortRupee = (n: number) => (n >= 1000 ? `₹${(n / 1000).toFixed(n % 1000 === 0 ? 0 : 1)}k` : `₹${n}`);
 
-/** Polite bilingual payment reminder. Active language first. */
-export function reminderText(e: DiaryEntry, worker: string, lang: 'en' | 'hi') {
+/**
+ * Polite bilingual payment reminder: the active language first, then English
+ * (or, when the active language is English, English then Hindi).
+ */
+export function reminderText(e: DiaryEntry, worker: string, lang: Lang) {
   const amt = `₹${e.amount.toLocaleString('en-IN')}`;
-  const en = `Namaste ${e.employer} ji, this is ${worker || 'your worker'} (${TRADE[e.trade].name.en}). A gentle reminder: ${amt} for my work on ${fmtDate(e.date, 'en', { day: 'numeric', month: 'long' })} is still pending. Please pay when you can — UPI or cash is fine. Thank you!`;
-  const hi = `नमस्ते ${e.employer} जी, मैं ${worker || 'आपका कारीगर'} (${TRADE[e.trade].name.hi}) बोल रहा/रही हूँ। ${fmtDate(e.date, 'hi', { day: 'numeric', month: 'long' })} के काम के ${amt} अभी बाक़ी हैं। कृपया जब हो सके भुगतान कर दें — UPI या नकद, दोनों चलेगा। धन्यवाद!`;
-  return lang === 'hi' ? `${hi}\n\n${en}` : `${en}\n\n${hi}`;
+  const day = (l: Lang) => fmtDate(e.date, l, { day: 'numeric', month: 'long' });
+  const name = TRADE[e.trade].name;
+  const msg: L = {
+    en: `Namaste ${e.employer} ji, this is ${worker || 'your worker'} (${name.en}). A gentle reminder: ${amt} for my work on ${day('en')} is still pending. Please pay when you can — UPI or cash is fine. Thank you!`,
+    hi: `नमस्ते ${e.employer} जी, मैं ${worker || 'आपका कारीगर'} (${name.hi}) बोल रहा/रही हूँ। ${day('hi')} के काम के ${amt} अभी बाक़ी हैं। कृपया जब हो सके भुगतान कर दें — UPI या नकद, दोनों चलेगा। धन्यवाद!`,
+    mr: `नमस्कार ${e.employer} जी, मी ${worker || 'तुमचा कारागीर'} (${name.mr}) बोलत आहे. ${day('mr')} च्या कामाचे ${amt} अजून बाकी आहेत. जमेल तेव्हा कृपया पैसे द्या — UPI किंवा रोख, दोन्ही चालेल. धन्यवाद!`,
+    gu: `નમસ્તે ${e.employer} જી, હું ${worker || 'તમારો કારીગર'} (${name.gu}) બોલું છું. ${day('gu')}ના કામના ${amt} હજી બાકી છે. મહેરબાની કરીને જ્યારે થઈ શકે ત્યારે પૈસા આપી દેજો — UPI કે રોકડા, બંને ચાલશે. આભાર!`,
+  };
+  const second: Lang = lang === 'en' ? 'hi' : 'en';
+  return `${msg[lang]}\n\n${msg[second]}`;
 }
 
-export function smsHref(e: DiaryEntry, worker: string, lang: 'en' | 'hi') {
+export function smsHref(e: DiaryEntry, worker: string, lang: Lang) {
   const phone = EMPLOYER_PHONES[e.employer] ?? '';
   return `sms:${phone}?body=${encodeURIComponent(reminderText(e, worker, lang))}`;
 }

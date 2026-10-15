@@ -1,7 +1,8 @@
-export type Lang = 'en' | 'hi';
+/** English, Hindi, Marathi, Gujarati. */
+export type Lang = 'en' | 'hi' | 'mr' | 'gu';
 
-/** A bilingual string. */
-export type L = { en: string; hi: string };
+/** A string in every supported language (all required, so tsc catches gaps). */
+export type L = { en: string; hi: string; mr: string; gu: string };
 
 export type TradeId =
   | 'plumber'

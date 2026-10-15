@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react';
 import Logo from './Logo';
 import NavIcon from './NavIcon';
 import { T, Tx } from './T';
-import { A11yMenu, LangToggle, PrefPanel, ThemeToggle } from './PrefControls';
+import { A11yMenu, LangPicker, PrefPanel, ThemeToggle } from './PrefControls';
 import { NAV, NAV_MORE, isActive } from '@/lib/nav';
 import { useLang } from '@/lib/prefs';
 
@@ -61,12 +61,12 @@ export default function Header() {
     <>
       <header className={cls}>
         <div className="container header-inner">
-          <Link className="brand" href="/" aria-label={t('Naka — home', 'नाका — होम')}>
+          <Link className="brand" href="/" aria-label={t('Naka — home', 'नाका — होम', 'नाका — होम', 'નાકા — હોમ')}>
             <Logo />
             <span>
               naka
               <small>
-                <T en="beyond the waiting line" hi="इंतज़ार से आगे" />
+                <T en="beyond the waiting line" hi="इंतज़ार से आगे" mr="प्रतीक्षेच्या पलीकडे" gu="રાહથી આગળ" />
               </small>
             </span>
           </Link>
@@ -81,7 +81,7 @@ export default function Header() {
           </nav>
 
           <div className="header-actions">
-            <LangToggle />
+            <LangPicker />
             <span className="hide-sm">
               <ThemeToggle />
             </span>
@@ -89,13 +89,13 @@ export default function Header() {
               <A11yMenu />
             </span>
             <Link className="btn btn-primary btn-sm header-cta" href="/my-work" data-magnetic="">
-              <T en="My work" hi="मेरा काम" />
+              <T en="My work" hi="मेरा काम" mr="माझे काम" gu="મારું કામ" />
               <ArrowRight aria-hidden="true" />
             </Link>
             <button
               className="burger"
               type="button"
-              aria-label={open ? t('Close menu', 'मेनू बंद करें') : t('Open menu', 'मेनू खोलें')}
+              aria-label={open ? t('Close menu', 'मेनू बंद करें', 'मेनू बंद करा', 'મેનૂ બંધ કરો') : t('Open menu', 'मेनू खोलें', 'मेनू उघडा', 'મેનૂ ખોલો')}
               aria-expanded={open}
               aria-controls="mobile-menu"
               onClick={() => setOpen((o) => !o)}

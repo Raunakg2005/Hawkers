@@ -261,9 +261,10 @@
 
 /* 4 ── Scales ────────────────────────────────────────────────────────────── */
 :root {
-  /* type families — set by next/font in layout.tsx; Devanagari glyphs fall through to Mukta */
-  --font-display: var(--font-bricolage), var(--font-mukta), 'Segoe UI', system-ui, sans-serif;
-  --font-body: var(--font-mukta), 'Segoe UI', system-ui, sans-serif;
+  /* type families — set by next/font in layout.tsx. Latin → Bricolage/Mukta,
+     Devanagari (Hindi, Marathi) → Mukta, Gujarati → Mukta Vaani (same design family) */
+  --font-display: var(--font-bricolage), var(--font-mukta), var(--font-mukta-vaani), 'Segoe UI', system-ui, sans-serif;
+  --font-body: var(--font-mukta), var(--font-mukta-vaani), 'Segoe UI', system-ui, sans-serif;
   --font-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   /* fluid type scale (min @360px → max @1440px) */
