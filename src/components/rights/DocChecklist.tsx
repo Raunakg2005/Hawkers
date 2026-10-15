@@ -133,7 +133,7 @@ export default function DocChecklist() {
                     <Tx l={doc.tip} />
                   </span>
                   <span className={s.docUsed}>
-                    <T en={`Needed for ${usedBy.length}:`} hi={`${usedBy.length} योजनाओं में ज़रूरी:`} /> {usedBy.map((sc) => sc.name).join(' · ')}
+                    <T en={`Needed for ${usedBy.length}:`} hi={`${usedBy.length} योजनाओं में ज़रूरी:`} mr={`${usedBy.length} योजनांसाठी लागते:`} gu={`${usedBy.length} યોજનાઓ માટે જરૂરી:`} /> {usedBy.map((sc) => sc.name).join(' · ')}
                   </span>
                 </span>
               </label>

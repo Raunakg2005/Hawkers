@@ -154,6 +154,16 @@ export default function SafetyPage() {
                 जाने से <span className="gradient-text">पहले</span> काम जाँचें।
               </>
             }
+            mr={
+              <>
+                जाण्याच्या <span className="gradient-text">आधी</span> काम तपासा.
+              </>
+            }
+            gu={
+              <>
+                જતાં <span className="gradient-text">પહેલાં</span> કામ તપાસો.
+              </>
+            }
           />
         }
         lead={
@@ -239,7 +249,12 @@ export default function SafetyPage() {
                       <span className="icon-tile lg" style={tile}>
                         <Icon aria-hidden="true" />
                       </span>
-                      <ReadAloud en={`${r.label.en}. ${r.why.en}`} hi={`${r.label.hi}। ${r.why.hi}`} />
+                      <ReadAloud
+                        en={`${r.label.en}. ${r.why.en}`}
+                        hi={`${r.label.hi}। ${r.why.hi}`}
+                        mr={`${r.label.mr}. ${r.why.mr}`}
+                        gu={`${r.label.gu}. ${r.why.gu}`}
+                      />
                     </div>
                     <h3 className={s.flagTitle}>
                       <Tx l={r.label} />
@@ -397,12 +412,19 @@ function CompareColumn({ job, kind }: { job: Job; kind: 'real' | 'fake' }) {
         body: {
           en: `★ ${job.employer.rating} from ${job.employer.reviews} reviews · ${job.employer.hires} hires on Naka`,
           hi: `★ ${job.employer.rating}, ${job.employer.reviews} रिव्यू · नाका पर ${job.employer.hires} बार काम दिया`,
+          mr: `★ ${job.employer.rating}, ${job.employer.reviews} रिव्ह्यू · नाका वर ${job.employer.hires} वेळा काम दिले`,
+          gu: `★ ${job.employer.rating}, ${job.employer.reviews} રિવ્યૂ · નાકા પર ${job.employer.hires} વાર કામ આપ્યું`,
         },
       });
     notes.push({
       good: true,
       title: { en: 'Exact place is given', hi: 'सही जगह बताई गई है', mr: 'नेमकी जागा सांगितली आहे', gu: 'ચોક્કસ જગ્યા કહી છે' },
-      body: { en: `${job.area.en} — ${job.landmark.en}`, hi: `${job.area.hi} — ${job.landmark.hi}` },
+      body: {
+        en: `${job.area.en} — ${job.landmark.en}`,
+        hi: `${job.area.hi} — ${job.landmark.hi}`,
+        mr: `${job.area.mr} — ${job.landmark.mr}`,
+        gu: `${job.area.gu} — ${job.landmark.gu}`,
+      },
     });
     const fair = job.pay.amount >= lo && job.pay.amount <= hi;
     notes.push({
@@ -411,6 +433,8 @@ function CompareColumn({ job, kind }: { job: Job; kind: 'real' | 'fake' }) {
       body: {
         en: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].en} — usual for a ${trade.name.en.toLowerCase()} is ${rupee(lo)}–${rupee(hi)}`,
         hi: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].hi} — ${trade.name.hi} का आम रेट ${rupee(lo)}–${rupee(hi)} है`,
+        mr: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].mr} — ${trade.name.mr} साठी नेहमीचा दर ${rupee(lo)}–${rupee(hi)} आहे`,
+        gu: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].gu} — ${trade.name.gu} માટે સામાન્ય ભાવ ${rupee(lo)}–${rupee(hi)} છે`,
       },
     });
     notes.push({
@@ -419,6 +443,8 @@ function CompareColumn({ job, kind }: { job: Job; kind: 'real' | 'fake' }) {
       body: {
         en: `${job.hours.start}–${job.hours.end} · ${PAID_WHEN[job.paidWhen].en} · ${job.payMode.map((m) => PAY_MODE[m].en).join(' / ')}`,
         hi: `${job.hours.start}–${job.hours.end} · ${PAID_WHEN[job.paidWhen].hi} · ${job.payMode.map((m) => PAY_MODE[m].hi).join(' / ')}`,
+        mr: `${job.hours.start}–${job.hours.end} · ${PAID_WHEN[job.paidWhen].mr} · ${job.payMode.map((m) => PAY_MODE[m].mr).join(' / ')}`,
+        gu: `${job.hours.start}–${job.hours.end} · ${PAID_WHEN[job.paidWhen].gu} · ${job.payMode.map((m) => PAY_MODE[m].gu).join(' / ')}`,
       },
     });
     if (job.flags.length === 0)
@@ -433,6 +459,8 @@ function CompareColumn({ job, kind }: { job: Job; kind: 'real' | 'fake' }) {
           body: {
             en: `${rupee(job.pay.amount)} a day is ${times}× the top usual rate (${rupee(hi)}) for a ${trade.name.en.toLowerCase()}.`,
             hi: `${rupee(job.pay.amount)} रोज़, ${trade.name.hi} के सबसे ऊँचे आम रेट (${rupee(hi)}) का ${times} गुना है।`,
+            mr: `रोज ${rupee(job.pay.amount)} म्हणजे ${trade.name.mr} च्या सर्वात जास्त नेहमीच्या दराच्या (${rupee(hi)}) ${times} पट.`,
+            gu: `રોજના ${rupee(job.pay.amount)}, ${trade.name.gu}ના સૌથી ઊંચા સામાન્ય ભાવ (${rupee(hi)}) કરતાં ${times} ગણા છે.`,
           },
         });
       } else {
@@ -500,12 +528,35 @@ function CompareColumn({ job, kind }: { job: Job; kind: 'real' | 'fake' }) {
 function WorkPromise({ job }: { job: Job }) {
   const rows: { icon: LucideIcon; k: L; v: L }[] = [
     { icon: BadgeCheck, k: { en: 'Work', hi: 'काम', mr: 'काम', gu: 'કામ' }, v: job.title },
-    { icon: MapPin, k: { en: 'Place', hi: 'जगह', mr: 'जागा', gu: 'જગ્યા' }, v: { en: `${job.area.en}, ${job.landmark.en}`, hi: `${job.area.hi}, ${job.landmark.hi}` } },
-    { icon: Clock, k: { en: 'Hours', hi: 'समय', mr: 'वेळ', gu: 'સમય' }, v: { en: `${job.start.en}, ${job.hours.start} – ${job.hours.end}`, hi: `${job.start.hi}, ${job.hours.start} – ${job.hours.end}` } },
+    {
+      icon: MapPin,
+      k: { en: 'Place', hi: 'जगह', mr: 'जागा', gu: 'જગ્યા' },
+      v: {
+        en: `${job.area.en}, ${job.landmark.en}`,
+        hi: `${job.area.hi}, ${job.landmark.hi}`,
+        mr: `${job.area.mr}, ${job.landmark.mr}`,
+        gu: `${job.area.gu}, ${job.landmark.gu}`,
+      },
+    },
+    {
+      icon: Clock,
+      k: { en: 'Hours', hi: 'समय', mr: 'वेळ', gu: 'સમય' },
+      v: {
+        en: `${job.start.en}, ${job.hours.start} – ${job.hours.end}`,
+        hi: `${job.start.hi}, ${job.hours.start} – ${job.hours.end}`,
+        mr: `${job.start.mr}, ${job.hours.start} – ${job.hours.end}`,
+        gu: `${job.start.gu}, ${job.hours.start} – ${job.hours.end}`,
+      },
+    },
     {
       icon: IndianRupee,
       k: { en: 'Pay', hi: 'मज़दूरी', mr: 'मजुरी', gu: 'મજૂરી' },
-      v: { en: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].en}`, hi: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].hi}` },
+      v: {
+        en: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].en}`,
+        hi: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].hi}`,
+        mr: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].mr}`,
+        gu: `${rupee(job.pay.amount)} ${PAY_UNIT[job.pay.unit].gu}`,
+      },
     },
     {
       icon: CalendarCheck,
@@ -513,6 +564,8 @@ function WorkPromise({ job }: { job: Job }) {
       v: {
         en: `${PAID_WHEN[job.paidWhen].en} · ${job.payMode.map((m) => PAY_MODE[m].en).join(' / ')}`,
         hi: `${PAID_WHEN[job.paidWhen].hi} · ${job.payMode.map((m) => PAY_MODE[m].hi).join(' / ')}`,
+        mr: `${PAID_WHEN[job.paidWhen].mr} · ${job.payMode.map((m) => PAY_MODE[m].mr).join(' / ')}`,
+        gu: `${PAID_WHEN[job.paidWhen].gu} · ${job.payMode.map((m) => PAY_MODE[m].gu).join(' / ')}`,
       },
     },
   ];
@@ -520,7 +573,12 @@ function WorkPromise({ job }: { job: Job }) {
     rows.push({
       icon: Handshake,
       k: { en: 'Also', hi: 'साथ में', mr: 'सोबत', gu: 'સાથે' },
-      v: { en: job.perks.map((p) => PERKS[p].en).join(', '), hi: job.perks.map((p) => PERKS[p].hi).join(', ') },
+      v: {
+        en: job.perks.map((p) => PERKS[p].en).join(', '),
+        hi: job.perks.map((p) => PERKS[p].hi).join(', '),
+        mr: job.perks.map((p) => PERKS[p].mr).join(', '),
+        gu: job.perks.map((p) => PERKS[p].gu).join(', '),
+      },
     });
 
   return (
