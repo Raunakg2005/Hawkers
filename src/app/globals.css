@@ -1,0 +1,6 @@
+/* Global stylesheet entry. Order matters: tokens → base → components → chrome. */
+@import '../styles/tokens.css';
+@import '../styles/base.css';
+@import '../styles/components.css';
+@import '../styles/chrome.css';
+@import '../styles/cards.css';
