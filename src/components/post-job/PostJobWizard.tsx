@@ -352,7 +352,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
             if ((e.target as HTMLElement).closest('a')) e.preventDefault();
           }}
         >
-          <JobCard job={published} />
+          <JobCard job={published} href={null} />
         </div>
         <ol className={s.next}>
           <li>
@@ -926,7 +926,7 @@ export default function PostJobWizard({ initialTrade }: { initialTrade: TradeId 
                     if ((e.target as HTMLElement).closest('a')) e.preventDefault();
                   }}
                 >
-                  <JobCard job={job} />
+                  <JobCard job={job} href={null} />
                 </div>
                 {job.description.en && (
                   <p className={s.previewDesc}>
