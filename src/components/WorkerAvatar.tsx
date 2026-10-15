@@ -8,16 +8,18 @@ const SKIN = ['#8d5524', '#a8693a', '#c68642', '#7a4a26', '#b0794a'];
  */
 export default function WorkerAvatar({ name, trade, hue, hair = 'short', size = 64 }: { name: string; trade: TradeId; hue: number; hair?: 'short' | 'long'; size?: number }) {
   const skin = SKIN[name.length % SKIN.length];
+  // unique per name + size so two avatars of the same person on a page don't share a gradient id
+  const gid = `bg-${name.replace(/\W/g, '')}-${size}`;
   const hat = trade === 'mason' || trade === 'labour' || trade === 'electrician' || trade === 'plumber';
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" className="worker-avatar" role="img" aria-label={name}>
       <defs>
-        <linearGradient id={`bg-${name.replace(/\W/g, '')}`} x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={gid} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor={`hsl(${hue} 85% 82%)`} />
           <stop offset="1" stopColor={`hsl(${(hue + 40) % 360} 80% 66%)`} />
         </linearGradient>
       </defs>
-      <rect width="64" height="64" rx="18" fill={`url(#bg-${name.replace(/\W/g, '')})`} />
+      <rect width="64" height="64" rx="18" fill={`url(#${gid})`} />
       <path d="M10 64c2-13 11-19 22-19s20 6 22 19z" fill={`var(--trade-${trade})`} />
       <path d="M27 44h10v6a5 5 0 0 1-10 0z" fill={skin} />
       <ellipse cx="32" cy="31" rx="11" ry="12.5" fill={skin} />

@@ -352,8 +352,12 @@ export default function WorkDiary() {
               id="chart-title"
               icon={ChartColumn}
               tile="var(--color-accent)"
-              title={<T en="This week's earnings" hi="इस हफ़्ते की कमाई" />}
-              aside={<span className="subtle">{<T en="Tap a day" hi="दिन दबाएँ" />}</span>}
+              title={<T en="Last 7 days" hi="पिछले 7 दिन" />}
+              aside={
+                <span className="subtle">
+                  <T en="Tap a day" hi="दिन दबाएँ" />
+                </span>
+              }
             />
             <WeekChart entries={entries} today={today} />
           </section>

@@ -1048,7 +1048,7 @@ export default function SkillCardBuilder() {
           </span>
           <ChevronDown aria-hidden="true" className={s.chev} />
         </button>
-        <div id="card-preview" className={s.previewBody}>
+        <div id="card-preview" className={s.previewBody} data-lenis-prevent="">
           <p className={s.previewLabel}>
             <Eye aria-hidden="true" />
             <T en="Live preview — changes as you go" hi="लाइव झलक — भरते ही बदलती है" />

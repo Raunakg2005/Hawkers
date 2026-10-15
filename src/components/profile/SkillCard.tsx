@@ -56,7 +56,14 @@ export default function SkillCard({
         <div className={s.cardIdentity}>
           <div className={s.avatarRing}>
             {p.trade ? (
-              <WorkerAvatar name={name || 'Naka worker'} trade={p.trade} hue={profileHue(p)} size={84} />
+              <WorkerAvatar
+                /* The avatar's gradient id comes from the name; the print copy appends 5 letters so its id is unique
+                   while the skin tone (name length mod 5) stays identical. */
+                name={`${name || 'Naka worker'}${variant === 'print' ? 'Print' : ''}`}
+                trade={p.trade}
+                hue={profileHue(p)}
+                size={84}
+              />
             ) : (
               <span className={s.avatarEmpty}>
                 <UserRound aria-hidden="true" />

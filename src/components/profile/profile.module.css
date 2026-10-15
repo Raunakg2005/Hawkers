@@ -96,7 +96,7 @@
   color: var(--color-heading);
 }
 
-.progressMeter {
+.progressMeter:global(.meter) {
   height: 12px;
 }
 
@@ -475,7 +475,7 @@
   height: 18px;
 }
 
-.skillChip {
+.skillChip:global(.filter-chip) {
   white-space: normal;
   text-align: left;
   line-height: 1.25;
@@ -506,14 +506,14 @@
   gap: var(--space-2);
 }
 
-.dayChip {
+.dayChip:global(.filter-chip) {
   justify-content: center;
   padding: 0 var(--space-1);
   border-radius: var(--radius-md);
 }
 
 @media (max-width: 400px) {
-  .dayChip {
+  .dayChip:global(.filter-chip) {
     font-size: var(--fs-xs);
   }
 }
@@ -554,17 +554,17 @@
   font-size: var(--fs-lg);
 }
 
-.bigSwitch {
+.bigSwitch:global(.switch) {
   width: 64px;
   height: 36px;
 }
 
-.bigSwitch::after {
+.bigSwitch:global(.switch)::after {
   width: 28px;
   height: 28px;
 }
 
-.bigSwitch[aria-checked='true']::after {
+.bigSwitch:global(.switch)[aria-checked='true']::after {
   transform: translateX(28px);
 }
 
@@ -732,7 +732,7 @@
 }
 
 /* ── Step 4 ──────────────────────────────────────────────────────────────── */
-.nameInput {
+.nameInput:global(.input) {
   min-height: var(--tap-lg);
   font-size: var(--fs-xl);
   font-weight: var(--fw-bold);
@@ -1084,6 +1084,16 @@
   width: 18px;
   height: 18px;
   color: var(--color-brand-text);
+}
+
+@media (min-width: 1024px) {
+  .previewBody {
+    max-height: calc(100vh - var(--header-h) - 28px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    padding: 2px 4px var(--space-4) 2px;
+  }
 }
 
 @media (max-width: 1023px) {
@@ -1640,10 +1650,34 @@
   }
 }
 
-/* print copy */
+/* print copy — always printed with light colours, whatever the screen theme */
 .printRoot {
   display: none;
   padding: 0;
+  color-scheme: light;
+  --color-surface: var(--paper-0);
+  --color-surface-2: var(--paper-100);
+  --color-surface-3: var(--paper-200);
+  --color-glass: var(--paper-0);
+  --color-heading: var(--ink-800);
+  --color-text: var(--ink-600);
+  --color-text-muted: var(--stone-600);
+  --color-text-subtle: var(--stone-500);
+  --color-border: var(--paper-300);
+  --color-border-strong: var(--stone-400);
+  --color-brand: var(--marigold-500);
+  --color-brand-soft: var(--marigold-100);
+  --color-brand-text: var(--marigold-700);
+  --color-accent-soft: var(--indigo-50);
+  --color-accent-text: var(--indigo-700);
+  --color-success: var(--green-600);
+  --color-success-soft: var(--green-100);
+  --color-warning: var(--amber-600);
+  --color-warning-soft: var(--amber-100);
+  --color-trust: var(--teal-600);
+  --color-trust-soft: var(--teal-100);
+  background: var(--paper-0);
+  color: var(--ink-600);
 }
 
 .cardPrint {
