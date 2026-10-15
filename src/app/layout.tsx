@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Bricolage_Grotesque, Mukta, Mukta_Vaani } from 'next/font/google';
+import { Bricolage_Grotesque, Mukta, Mukta_Vaani, Pixelify_Sans } from 'next/font/google';
 import 'lenis/dist/lenis.css';
 import './globals.css';
 /*
@@ -10,6 +10,7 @@ import './globals.css';
  */
 import '@/styles/landing.css';
 import '@/styles/jobs.css';
+import '@/styles/story.css';
 import '@/app/rights/rights.module.css';
 import '@/app/safety/safety.module.css';
 import '@/components/rights/rights-ui.module.css';
@@ -38,6 +39,14 @@ const mukta = Mukta({
   subsets: ['latin', 'devanagari'],
   weight: ['400', '500', '600', '700', '800'],
   variable: '--font-mukta',
+  display: 'swap',
+});
+
+// Block-game display face for headlines, buttons and labels (Latin only; Indic falls back to Mukta).
+const pixel = Pixelify_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-pixel',
   display: 'swap',
 });
 
@@ -72,7 +81,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="light" className={`${bricolage.variable} ${mukta.variable} ${muktaVaani.variable}`} suppressHydrationWarning>
+    <html lang="en" data-theme="light" className={`${bricolage.variable} ${mukta.variable} ${muktaVaani.variable} ${pixel.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFS_SCRIPT }} />
       </head>
