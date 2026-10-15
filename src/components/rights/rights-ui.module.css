@@ -1,0 +1,761 @@
+/* ==========================================================================
+   Rights & support — interactive pieces (scheme explorer, documents,
+   helplines). Tokens only.
+   ========================================================================== */
+
+/* ── Need picker ─────────────────────────────────────────────────────────── */
+.explorer {
+  display: grid;
+}
+
+.needGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 148px), 1fr));
+  gap: var(--space-3);
+}
+
+.needBtn {
+  --tile: var(--color-brand);
+  position: relative;
+  display: grid;
+  justify-items: start;
+  align-content: space-between;
+  gap: var(--space-3);
+  min-height: 118px;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-heading);
+  text-align: left;
+  box-shadow: var(--shadow-xs);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    border-color var(--dur-fast),
+    background-color var(--dur-fast),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.needBtn:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--tile) 55%, transparent);
+  box-shadow: var(--shadow-md);
+}
+
+.needBtn:active {
+  transform: scale(0.97);
+}
+
+.needBtn[aria-pressed='true'] {
+  border-color: var(--tile);
+  background: color-mix(in srgb, var(--tile) 10%, var(--color-surface));
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--tile) 22%, transparent),
+    var(--shadow-md);
+}
+
+.needIcon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  color: var(--tile);
+  background: color-mix(in srgb, var(--tile) 14%, transparent);
+  transition:
+    background-color var(--dur-fast),
+    color var(--dur-fast),
+    transform var(--dur-base) var(--ease-spring);
+}
+
+.needIcon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.needBtn[aria-pressed='true'] .needIcon {
+  background: var(--tile);
+  color: var(--color-surface);
+  transform: scale(1.06) rotate(-4deg);
+}
+
+.needLabel {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-md);
+  line-height: var(--lh-snug);
+}
+
+.needCount {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding-inline: 6px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-muted);
+  background: var(--color-surface-2);
+}
+
+.needBtn[aria-pressed='true'] .needCount {
+  color: var(--tile);
+  background: var(--color-surface);
+}
+
+/* ── Eligibility helper ──────────────────────────────────────────────────── */
+.elig {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  padding: clamp(1.1rem, 0.8rem + 1.5vw, 2rem);
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 22%, var(--color-border));
+  background:
+    radial-gradient(80% 120% at 100% 0%, color-mix(in srgb, var(--color-accent) 9%, transparent), transparent 60%),
+    var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.eligHead {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.eligHead p {
+  margin-top: var(--space-1);
+}
+
+.eligProgress {
+  font-variant-numeric: tabular-nums;
+}
+
+.questions {
+  display: grid;
+  gap: var(--space-5);
+}
+
+@media (min-width: 1100px) {
+  .questions {
+    grid-template-columns: 1fr 1.1fr 1.2fr;
+    gap: var(--space-6);
+  }
+}
+
+.question {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.qLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--fw-bold);
+  color: var(--color-heading);
+}
+
+.qNum {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: var(--fs-sm);
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+}
+
+.qOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.qOptions > button {
+  white-space: normal;
+  text-align: left;
+}
+
+.eligResult {
+  padding-top: var(--space-5);
+  border-top: 1px dashed var(--color-border-strong);
+}
+
+.eligDone {
+  display: grid;
+  gap: var(--space-4);
+  animation: rise var(--dur-slow) var(--ease-out);
+}
+
+.eligCount {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--fs-xl);
+  font-family: var(--font-display);
+  color: var(--color-heading);
+}
+
+.eligCount svg {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  color: var(--color-success);
+}
+
+.likelyChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.likelyChips a {
+  min-height: 40px;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.likelyChips a:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ── List head ───────────────────────────────────────────────────────────── */
+.listHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: var(--space-12) 0 var(--space-5);
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.showing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-lg);
+  color: var(--color-text-muted);
+}
+
+.showing b {
+  color: var(--color-heading);
+}
+
+/* ── Scheme card ─────────────────────────────────────────────────────────── */
+.schemeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr));
+  gap: var(--space-5);
+}
+
+.scheme {
+  --tile: var(--color-brand);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: clamp(1.1rem, 0.9rem + 1vw, 1.75rem);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.scheme[hidden] {
+  display: none;
+}
+
+.scheme::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: linear-gradient(90deg, var(--tile), color-mix(in srgb, var(--tile) 30%, transparent));
+}
+
+.scheme.isLikely {
+  border-color: color-mix(in srgb, var(--color-success) 55%, transparent);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--color-success) 16%, transparent),
+    var(--shadow-sm);
+}
+
+.scheme:target {
+  border-color: var(--color-brand);
+  animation: target-glow 2.4s var(--ease-out) 1;
+}
+
+@keyframes target-glow {
+  0%,
+  40% {
+    box-shadow:
+      0 0 0 6px color-mix(in srgb, var(--color-brand) 35%, transparent),
+      var(--shadow-lg);
+  }
+}
+
+.schemeTop {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.schemeTitle {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.schemeTitle h3 {
+  font-size: var(--fs-xl);
+  line-height: var(--lh-snug);
+}
+
+.schemeShort {
+  font-weight: var(--fw-semibold);
+  color: var(--tile);
+}
+
+.schemeNeeds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chipIcon {
+  color: var(--tile);
+}
+
+.benefit {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--tile) 8%, transparent);
+  color: var(--color-text);
+}
+
+.facts {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.facts li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.facts svg {
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  color: var(--color-text-subtle);
+}
+
+.facts div {
+  display: grid;
+}
+
+.factLabel {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-subtle);
+}
+
+.factValue {
+  font-weight: var(--fw-semibold);
+  color: var(--color-heading);
+}
+
+.block {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.blockTitle {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--color-heading);
+  letter-spacing: 0;
+}
+
+.docChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.docChip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  border: 1.5px dashed var(--color-border-strong);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  transition:
+    border-color var(--dur-fast),
+    background-color var(--dur-fast);
+}
+
+.docChip:hover {
+  border-style: solid;
+  border-color: var(--color-trust);
+  background: var(--color-trust-soft);
+}
+
+.docChip svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-trust);
+}
+
+.steps {
+  display: grid;
+  gap: var(--space-3);
+  counter-reset: none;
+}
+
+.steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.steps li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 34px;
+  bottom: calc(var(--space-3) * -1 + 2px);
+  width: 2px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--tile) 25%, transparent);
+}
+
+.stepNum {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-weight: var(--fw-black);
+  font-size: var(--fs-sm);
+  color: var(--tile);
+  background: color-mix(in srgb, var(--tile) 14%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--tile) 35%, transparent);
+}
+
+.steps li > span:last-child {
+  padding-top: 3px;
+  color: var(--color-text);
+}
+
+.schemeFoot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 480px) {
+  .schemeFoot > a {
+    flex: 1 1 100%;
+  }
+}
+
+/* ── My documents ────────────────────────────────────────────────────────── */
+.docs {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .docs {
+    grid-template-columns: minmax(300px, 360px) 1fr;
+  }
+
+  .docSummary {
+    position: sticky;
+    top: calc(var(--header-h) + 12px);
+  }
+}
+
+.docSummary {
+  display: grid;
+  gap: var(--space-5);
+  padding: clamp(1.1rem, 0.9rem + 1vw, 1.75rem);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(100% 80% at 0% 0%, color-mix(in srgb, var(--color-trust) 12%, transparent), transparent 70%),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+.docSummary > button {
+  justify-self: start;
+}
+
+.docScore {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.docScore p {
+  display: grid;
+}
+
+.docBig {
+  font-size: var(--fs-4xl);
+  line-height: 1;
+}
+
+.docBig small {
+  font-size: 0.45em;
+  color: var(--color-text-subtle);
+}
+
+.docBigLabel {
+  font-weight: var(--fw-bold);
+  color: var(--color-text-muted);
+}
+
+.readyFor {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.docList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: var(--space-3);
+}
+
+.docItem {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  height: 100%;
+  min-height: var(--tap-lg);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast),
+    background-color var(--dur-base),
+    transform var(--dur-fast);
+}
+
+.docItem:hover {
+  border-color: var(--color-border-strong);
+}
+
+.docItem:active {
+  transform: scale(0.99);
+}
+
+.docHave {
+  border-color: color-mix(in srgb, var(--color-success) 55%, transparent);
+  background: color-mix(in srgb, var(--color-success) 7%, var(--color-surface));
+}
+
+.docInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.docBox {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-top: 2px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-border-strong);
+  background: var(--color-surface);
+  transition:
+    background-color var(--dur-fast),
+    border-color var(--dur-fast);
+}
+
+.docBox svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 3;
+  color: var(--color-text-inverse);
+  transform: scale(0);
+  transition: transform var(--dur-base) var(--ease-spring);
+}
+
+.docInput:checked + .docBox {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.docInput:checked + .docBox svg {
+  transform: scale(1);
+}
+
+.docInput:focus-visible + .docBox {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.docText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.docName {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: var(--fw-bold);
+  color: var(--color-heading);
+}
+
+.docHaveChip {
+  min-height: 24px;
+  font-size: var(--fs-2xs);
+  animation: rise var(--dur-base) var(--ease-out);
+}
+
+.docTip {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.docUsed {
+  margin-top: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--color-text-subtle);
+}
+
+/* ── Helplines ───────────────────────────────────────────────────────────── */
+.helpGrid,
+.helpStrip {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.helpGrid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+}
+
+.helpStrip {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+}
+
+.helpCard {
+  --tile: var(--color-brand);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-4);
+  height: 100%;
+  min-height: 92px;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-xs);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    border-color var(--dur-fast),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.helpCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--tile);
+  box-shadow: var(--shadow-md);
+}
+
+.helpCard:active {
+  transform: scale(0.98);
+}
+
+.helpText {
+  display: grid;
+  min-width: 0;
+}
+
+.helpName {
+  font-weight: var(--fw-bold);
+  color: var(--color-heading);
+  line-height: var(--lh-snug);
+}
+
+.helpWhat {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: var(--lh-snug);
+}
+
+.helpNumber {
+  display: grid;
+  justify-items: end;
+  gap: var(--space-1);
+}
+
+.helpNumber :global(.money) {
+  font-size: var(--fs-2xl);
+  line-height: 1;
+}
+
+.helpCall {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+  color: var(--color-heading);
+  background: color-mix(in srgb, var(--tile) 16%, transparent);
+}
+
+.helpCall svg {
+  width: 14px;
+  height: 14px;
+  color: var(--tile);
+}

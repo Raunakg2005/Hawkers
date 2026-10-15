@@ -1,0 +1,491 @@
+/* ==========================================================================
+   /safety — page-level layout. Interactive parts live in
+   components/safety/safety-ui.module.css. Tokens only.
+   ========================================================================== */
+
+/* ── Hero extras ─────────────────────────────────────────────────────────── */
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.jump a {
+  background: var(--color-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.jump a svg {
+  color: var(--color-danger);
+}
+
+.sos {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-glass-strong);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 25%, var(--color-border));
+  box-shadow: var(--shadow-lg);
+}
+
+.sosTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-lg);
+  color: var(--color-heading);
+}
+
+.sosTitle svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-danger);
+}
+
+/* ── Red flags ───────────────────────────────────────────────────────────── */
+.flags {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+  gap: var(--space-4);
+}
+
+.flagCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.flagCard::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: var(--tile);
+}
+
+.flagTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.flagTitle {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+}
+
+.flagSev {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-3);
+}
+
+.flagSev :global(.meter) {
+  height: 8px;
+}
+
+/* ── Real vs fake ────────────────────────────────────────────────────────── */
+.compare {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (min-width: 1000px) {
+  .compare {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.vs {
+  justify-self: center;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-lg);
+  color: var(--color-bg);
+  background: var(--color-heading);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 1000px) {
+  .vs {
+    align-self: start;
+    margin-top: 220px;
+  }
+}
+
+.col {
+  --lvl: var(--color-success);
+  --lvl-soft: var(--color-success-soft);
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.colReal {
+  --lvl: var(--color-success);
+  --lvl-soft: var(--color-success-soft);
+}
+
+.colFake {
+  --lvl: var(--color-danger);
+  --lvl-soft: var(--color-danger-soft);
+}
+
+.colHead {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  background: var(--lvl-soft);
+}
+
+.verdictIcon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  color: var(--color-surface);
+  background: var(--lvl);
+}
+
+.verdictIcon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.verdict {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-xl);
+  line-height: 1.15;
+  color: color-mix(in srgb, var(--lvl) 70%, var(--color-heading));
+}
+
+.verdictScore {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.verdictScore b {
+  font-size: var(--fs-lg);
+}
+
+.quote {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  border: 1.5px dashed color-mix(in srgb, var(--color-danger) 45%, transparent);
+  background: var(--color-surface);
+  font-style: italic;
+  color: var(--color-heading);
+}
+
+.quote svg {
+  width: 22px;
+  height: 22px;
+  color: var(--color-danger);
+}
+
+.notes {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--lvl) 6%, var(--color-surface));
+  border: 1px solid color-mix(in srgb, var(--lvl) 30%, transparent);
+}
+
+/* little pointer up to the job card */
+.notes::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 40px;
+  width: 16px;
+  height: 16px;
+  transform: rotate(45deg);
+  background: inherit;
+  border-top: 1px solid color-mix(in srgb, var(--lvl) 30%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--lvl) 30%, transparent);
+}
+
+.notes li {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.notes li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 13px;
+  top: 30px;
+  bottom: calc(var(--space-3) * -1);
+  width: 2px;
+  background: color-mix(in srgb, var(--lvl) 25%, transparent);
+}
+
+.noteIcon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+
+.noteIcon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.noteGood .noteIcon {
+  color: var(--color-success);
+}
+
+.noteBad .noteIcon {
+  color: var(--color-danger);
+}
+
+.noteText {
+  display: grid;
+  gap: 2px;
+  padding-top: 2px;
+}
+
+.noteText b {
+  color: var(--color-heading);
+}
+
+.noteText > span {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* ── Before you go ───────────────────────────────────────────────────────── */
+.goGrid {
+  display: grid;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+@media (min-width: 1000px) {
+  .goGrid {
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--space-10);
+  }
+
+  .promise {
+    position: sticky;
+    top: calc(var(--header-h) + 12px);
+  }
+}
+
+.promise {
+  position: relative;
+  display: grid;
+  gap: var(--space-5);
+  padding: clamp(1.25rem, 1rem + 1vw, 2rem);
+  border-radius: var(--radius-xl);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 31px, color-mix(in srgb, var(--color-accent) 6%, transparent) 31px 32px),
+    var(--color-surface);
+  border: 2px dashed color-mix(in srgb, var(--color-success) 45%, transparent);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.promiseHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding-right: 96px;
+}
+
+.promiseTitle {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-black);
+}
+
+.promiseRows {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.promiseRows > div {
+  display: grid;
+  grid-template-columns: minmax(96px, auto) 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px dashed var(--color-border-strong);
+}
+
+.promiseRows dt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-subtle);
+}
+
+.promiseRows dt svg {
+  width: 18px;
+  height: 18px;
+  color: var(--color-success);
+}
+
+.promiseRows dd {
+  margin: 0;
+  font-weight: var(--fw-bold);
+  color: var(--color-heading);
+}
+
+.signs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+  gap: var(--space-3);
+}
+
+.signs p {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-success-soft);
+}
+
+.signs p > svg {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  color: var(--color-success);
+}
+
+.signs p > span {
+  display: grid;
+  line-height: var(--lh-snug);
+}
+
+.signs b {
+  color: var(--color-heading);
+}
+
+.stamp {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-4);
+  padding: var(--space-1) var(--space-3);
+  border: 3px double var(--color-success);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-success);
+  transform: rotate(-10deg);
+  opacity: 0.85;
+}
+
+/* ── Payment tips ────────────────────────────────────────────────────────── */
+.tips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--space-4);
+}
+
+.tip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.tipTitle {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-snug);
+}
+
+.tipCta {
+  background: var(--grad-accent);
+  border-color: transparent;
+  color: var(--color-on-accent);
+  box-shadow: var(--shadow-accent);
+}
+
+.tipCta .tipTitle {
+  color: var(--color-on-accent);
+}
+
+.ctaIcon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-on-accent) 18%, transparent);
+}
+
+.ctaIcon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.ctaBtn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* ── Helplines strip ─────────────────────────────────────────────────────── */
+.helpHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}

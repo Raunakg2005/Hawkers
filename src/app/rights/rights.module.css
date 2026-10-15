@@ -1,0 +1,220 @@
+/* ==========================================================================
+   /rights — page-level layout. Interactive parts live in
+   components/rights/rights-ui.module.css. Tokens only.
+   ========================================================================== */
+
+/* ── Hero extras ─────────────────────────────────────────────────────────── */
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.jump a {
+  background: var(--color-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.jump a svg {
+  color: var(--color-trust);
+}
+
+.facts {
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  padding: clamp(1.1rem, 0.9rem + 1vw, 1.75rem);
+  border-radius: var(--radius-xl);
+  background: var(--color-glass-strong);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.factsHead {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-lg);
+  color: var(--color-heading);
+}
+
+.facts ul {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.facts li a {
+  display: grid;
+  gap: 2px;
+  min-height: var(--tap-min);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--tile);
+  background: color-mix(in srgb, var(--tile) 9%, transparent);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    background-color var(--dur-fast);
+}
+
+.facts li a:hover {
+  transform: translateX(4px);
+  background: color-mix(in srgb, var(--tile) 15%, transparent);
+}
+
+.factBig {
+  font-size: var(--fs-2xl);
+  line-height: 1.1;
+}
+
+.factSmall {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+/* ── Rights cards ────────────────────────────────────────────────────────── */
+.rightsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: var(--space-5);
+}
+
+.rightCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: clamp(1.1rem, 0.9rem + 1vw, 1.75rem);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.rightCard::before {
+  content: '';
+  position: absolute;
+  inset: auto -30% -55% auto;
+  width: 220px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--tile) 14%, transparent), transparent 70%);
+  pointer-events: none;
+}
+
+.rightTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.rightN {
+  margin-left: auto;
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-black);
+  line-height: 1;
+  color: color-mix(in srgb, var(--tile) 35%, transparent);
+}
+
+.law {
+  margin-top: auto;
+  align-self: flex-start;
+  white-space: normal;
+  text-align: left;
+}
+
+.law svg {
+  color: var(--tile);
+}
+
+/* ── Grievance flow ──────────────────────────────────────────────────────── */
+.flow {
+  --gap: var(--space-5);
+  display: grid;
+  gap: var(--gap);
+}
+
+@media (min-width: 960px) {
+  .flow {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.flowStep {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* connector to the next step: down on phones, across on desktop */
+.flowStep:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--space-5) + 17px);
+  bottom: calc(var(--gap) * -1);
+  width: 2px;
+  height: var(--gap);
+  background: repeating-linear-gradient(180deg, var(--color-border-strong) 0 4px, transparent 4px 8px);
+}
+
+@media (min-width: 960px) {
+  .flowStep:not(:last-child)::after {
+    left: auto;
+    right: calc(var(--gap) * -1);
+    top: calc(var(--space-5) + 25px);
+    bottom: auto;
+    width: var(--gap);
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--color-border-strong) 0 4px, transparent 4px 8px);
+  }
+}
+
+.flowTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.flowNum {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  color: var(--color-surface);
+  background: var(--tile);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--tile) 18%, transparent);
+}
+
+.flowAction {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.helpHead {
+  display: grid;
+  gap: var(--space-1);
+  margin: var(--space-16) 0 var(--space-5);
+}
+
+/* ── Disclaimer ──────────────────────────────────────────────────────────── */
+.disclaimer {
+  padding: var(--space-5) var(--space-6);
+}
+
+.disclaimerTitle {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-lg);
+  color: var(--color-heading);
+}

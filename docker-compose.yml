@@ -1,0 +1,21 @@
+services:
+  web:
+    build: .
+    image: naka:latest
+    container_name: naka
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /app/.next/cache
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 256M
