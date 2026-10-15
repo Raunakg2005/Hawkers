@@ -846,23 +846,23 @@ textarea {
 }
 
 /* copy rises in as each act arrives */
-.act-copy > * {
+.act-copy > :not(.orn-corner) {
   transition:
     opacity 0.9s var(--ease-out),
     transform 0.9s var(--ease-out);
 }
 
-.asc[data-act='0'] #act-0 .act-copy > *,
-.asc[data-act='1'] #act-1 .act-copy > *,
-.asc[data-act='2'] #act-2 .act-copy > *,
-.asc[data-act='3'] #act-3 .act-copy > *,
-.asc[data-act='4'] #act-4 .act-copy > *,
-.asc[data-act='5'] #act-5 .act-copy > * {
+.asc[data-act='0'] #act-0 .act-copy > :not(.orn-corner),
+.asc[data-act='1'] #act-1 .act-copy > :not(.orn-corner),
+.asc[data-act='2'] #act-2 .act-copy > :not(.orn-corner),
+.asc[data-act='3'] #act-3 .act-copy > :not(.orn-corner),
+.asc[data-act='4'] #act-4 .act-copy > :not(.orn-corner),
+.asc[data-act='5'] #act-5 .act-copy > :not(.orn-corner) {
   opacity: 1;
   transform: none;
 }
 
-.act .act-copy > * {
+.act .act-copy > :not(.orn-corner) {
   opacity: 0.25;
   transform: translateY(18px);
 }
