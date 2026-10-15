@@ -1,0 +1,209 @@
+/* ════════════════════════════════════════════════════════════════════════════
+ * Pixel skin: the whole site in the voxel world's language. Loaded last, it
+ * only re-points tokens and adds block-game bevels; every page inherits it.
+ * ════════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* blocky corners: crisp, never round */
+  --radius-xs: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 10px;
+  --radius-pill: 4px;
+
+  /* pixel display face for Latin; Indic scripts fall through to Mukta */
+  --font-display: var(--font-pixel), var(--font-mukta), var(--font-mukta-vaani), 'Segoe UI', system-ui, sans-serif;
+
+  /* hard, offset "block" shadows instead of soft blur */
+  --px-edge: rgba(28, 31, 46, 0.9);
+  --shadow-xs: 2px 2px 0 rgba(28, 31, 46, 0.18);
+  --shadow-sm: 3px 3px 0 rgba(28, 31, 46, 0.18);
+  --shadow-md: 4px 4px 0 rgba(28, 31, 46, 0.22);
+  --shadow-lg: 6px 6px 0 rgba(28, 31, 46, 0.25);
+  --shadow-brand: 4px 4px 0 #8f3d0c;
+  --shadow-accent: 4px 4px 0 #1d1a4a;
+}
+
+:root[data-theme='dark'] {
+  --px-edge: #000;
+  --color-bg: #0b0c1d;
+  --color-bg-alt: #10122a;
+  --color-surface: #161a3a;
+  --shadow-xs: 2px 2px 0 rgba(0, 0, 0, 0.6);
+  --shadow-sm: 3px 3px 0 rgba(0, 0, 0, 0.6);
+  --shadow-md: 4px 4px 0 rgba(0, 0, 0, 0.65);
+  --shadow-lg: 6px 6px 0 rgba(0, 0, 0, 0.7);
+}
+
+/* a faint block grid on the page, like a world seen from above */
+body {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-heading) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-heading) 4%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.grain {
+  display: none;
+}
+
+h1,
+h2,
+.display,
+.h1,
+.h2,
+.h3 {
+  letter-spacing: -0.01em;
+}
+
+/* ── Buttons: raised blocks you press into the ground ───────────────────── */
+
+.btn {
+  border-width: 2px;
+  border-color: var(--px-edge);
+  box-shadow:
+    inset 3px 3px 0 rgba(255, 255, 255, 0.28),
+    inset -3px -3px 0 rgba(0, 0, 0, 0.22),
+    0 4px 0 var(--px-edge);
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  transition:
+    transform 90ms steps(2),
+    box-shadow 90ms steps(2),
+    background-color var(--dur-fast),
+    filter var(--dur-fast);
+}
+
+.btn:hover {
+  border-color: var(--px-edge);
+  filter: brightness(1.08);
+}
+
+.btn:active {
+  transform: translateY(4px);
+  box-shadow:
+    inset 3px 3px 0 rgba(0, 0, 0, 0.2),
+    inset -3px -3px 0 rgba(255, 255, 255, 0.15),
+    0 0 0 var(--px-edge);
+}
+
+.btn-primary,
+.btn-primary:hover {
+  background: var(--color-brand);
+  border-color: var(--px-edge);
+  box-shadow:
+    inset 3px 3px 0 rgba(255, 236, 199, 0.65),
+    inset -3px -3px 0 rgba(143, 61, 12, 0.55),
+    0 4px 0 var(--px-edge);
+}
+
+.btn-ghost,
+.btn-glass {
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.12),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.25),
+    0 4px 0 var(--px-edge);
+}
+
+.story .btn-glass {
+  border-color: #000;
+}
+
+.story .btn-primary {
+  box-shadow:
+    inset 3px 3px 0 rgba(255, 236, 199, 0.65),
+    inset -3px -3px 0 rgba(143, 61, 12, 0.55),
+    0 4px 0 #000,
+    0 0 40px -6px rgba(255, 164, 31, 0.55);
+}
+
+/* ── Surfaces: cards, panels, chips and inputs get pixel edges ──────────── */
+
+.card,
+.job-card,
+.stat-card,
+[class*='card_'],
+[class*='Card'],
+[class*='panel'],
+[class*='Panel'] {
+  border-width: 2px;
+  box-shadow: var(--shadow-md);
+}
+
+.chip,
+.badge,
+[class*='chip'],
+[class*='badge'],
+[class*='pill'] {
+  border-radius: var(--radius-sm);
+}
+
+input,
+select,
+textarea {
+  border-radius: var(--radius-sm) !important;
+  border-width: 2px !important;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+:focus-visible {
+  outline-style: solid;
+  outline-width: 3px;
+  outline-offset: 2px;
+}
+
+/* header and tab bar read as an inventory bar */
+.site-header.is-scrolled {
+  border-bottom: 2px solid var(--px-edge);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.tab-bar,
+.tabbar,
+[class*='tab-bar'] {
+  border-top: 2px solid var(--px-edge);
+}
+
+/* scroll progress: a filling XP bar */
+.scroll-progress {
+  height: 6px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.scroll-progress span {
+  background: repeating-linear-gradient(90deg, #7cf35a 0 10px, #4cc72e 10px 12px);
+}
+
+/* pixel scrollbar */
+html {
+  scrollbar-color: var(--color-brand) var(--color-bg-alt);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand);
+  border: 2px solid var(--px-edge);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-alt);
+}
+
+::selection {
+  background: var(--color-brand);
+  color: #1a1206;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:active {
+    transition: none;
+  }
+}

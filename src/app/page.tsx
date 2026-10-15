@@ -3,7 +3,14 @@ import { ArrowRight, Briefcase, IdCard, Landmark, MapPin, NotebookPen, ShieldAle
 import CityStage from '@/components/city/CityStage';
 import Words from '@/components/city/Words';
 import { T, Tx } from '@/components/T';
-import { DURATIONS } from '@/data/trades';
+import BlockDrop, { DropWords } from '@/components/scrollfx/BlockDrop';
+import Hotbar from '@/components/scrollfx/Hotbar';
+import PixelCurtain from '@/components/scrollfx/PixelCurtain';
+import XpStats from '@/components/scrollfx/XpStats';
+import { TradeIcon, tradeColor } from '@/components/TradeIcon';
+import { DURATIONS, TRADES } from '@/data/trades';
+import { JOBS } from '@/data/jobs';
+import { SCHEMES } from '@/data/schemes';
 import type { L } from '@/data/types';
 
 /* One morning at the naka, in six acts. Each act answers one goal of the brief. */
@@ -265,6 +272,89 @@ export default function Home() {
           </div>
         </section>
       </CityStage>
+
+      <div className="fx-world">
+        {/* Effect 4 · the promise lands block by block */}
+        <BlockDrop
+          after={
+            <p className="bd-after">
+              <T
+                en="Work comes some days and not others. Naka is built around that: short jobs, clear pay, and a record of every day you worked."
+                hi="काम किसी दिन मिलता है, किसी दिन नहीं। नाका इसी के लिए बना है: छोटे काम, साफ़ मज़दूरी, और हर काम के दिन का हिसाब।"
+                mr="काम कधी मिळते, कधी नाही. नाका यासाठीच बनले आहे: छोटी कामे, स्पष्ट मजुरी, आणि प्रत्येक कामाच्या दिवसाची नोंद."
+                gu="કામ ક્યારેક મળે, ક્યારેક નહીં. નાકા એના માટે જ બન્યું છે: નાનાં કામ, સ્પષ્ટ મજૂરી, અને દરેક કામના દિવસનો હિસાબ."
+              />
+            </p>
+          }
+        >
+          <T
+            en={<DropWords t="Built for *irregular* work." />}
+            hi={<DropWords t="*अनियमित* काम के लिए बना।" />}
+            mr={<DropWords t="*अनियमित* कामासाठी बनवलेले." />}
+            gu={<DropWords t="*અનિયમિત* કામ માટે બનેલું." />}
+          />
+        </BlockDrop>
+
+        {/* Effect 2 · every trade in the hotbar, with its fair day-rate */}
+        <Hotbar
+            head={
+              <>
+                <h2 className="fx-title">
+                  <T en="Every trade has a slot." hi="हर हुनर की अपनी जगह।" mr="प्रत्येक कौशल्याला स्वतःची जागा." gu="દરેક આવડતની પોતાની જગ્યા." />
+                </h2>
+                <p className="fx-sub">
+                  <T
+                    en="A fair day-rate for each trade, so nobody works for less."
+                    hi="हर काम की सही दिहाड़ी, ताकि कोई कम में काम न करे।"
+                    mr="प्रत्येक कामाची योग्य रोजंदारी, जेणेकरून कोणी कमी पैशात काम करू नये."
+                    gu="દરેક કામની યોગ્ય રોજમદારી, જેથી કોઈ ઓછામાં કામ ન કરે."
+                  />
+                </p>
+              </>
+            }
+            slots={TRADES.map((t) => (
+              <span key={t.id} className="hb-item" style={{ '--tile': tradeColor(t.id) } as React.CSSProperties}>
+                <TradeIcon trade={t.id} />
+                <small>
+                  <Tx l={t.name} />
+                </small>
+              </span>
+            ))}
+            details={TRADES.map((t) => (
+              <div key={t.id}>
+                <p className="hb-name">
+                  <Tx l={t.name} />
+                </p>
+                <p className="hb-rate">
+                  ₹{t.fair[0].toLocaleString('en-IN')}-{t.fair[1].toLocaleString('en-IN')}{' '}
+                  <T en="/ day" hi="/ दिन" mr="/ दिवस" gu="/ દિવસ" />
+                </p>
+                <p className="hb-verb">
+                  <Tx l={t.verb} />
+                  {' · '}
+                  <T en="sample guide rate" hi="नमूना दर" mr="नमुना दर" gu="નમૂના દર" />
+                </p>
+              </div>
+            ))}
+          />
+
+        {/* Effects 1 + 3 · the stats break out of stone, then level up */}
+        <PixelCurtain>
+        <XpStats
+          head={
+            <h2 className="fx-title">
+              <T en="Everything you need, one level at a time." hi="जो चाहिए सब, एक-एक लेवल करके।" mr="जे हवे ते सगळे, एकेक लेव्हल करून." gu="જે જોઈએ તે બધું, એક પછી એક લેવલ." />
+            </h2>
+          }
+          stats={[
+            { value: JOBS.length, label: <T en="sample jobs near the naka" hi="नाके के पास नमूना काम" mr="नाक्याजवळ नमुना कामे" gu="નાકા પાસે નમૂના કામ" /> },
+            { value: TRADES.length, label: <T en="trades with a fair-pay guide" hi="सही-मज़दूरी गाइड वाले हुनर" mr="योग्य-मजुरी मार्गदर्शक असलेली कौशल्ये" gu="યોગ્ય-મજૂરી માર્ગદર્શિકાવાળી આવડત" /> },
+            { value: SCHEMES.length, label: <T en="welfare schemes explained" hi="सरकारी योजनाएँ समझाई गईं" mr="सरकारी योजना समजावल्या" gu="સરકારી યોજનાઓ સમજાવી" /> },
+            { value: 4, label: <T en="languages, with read-aloud" hi="भाषाएँ, सुनने की सुविधा के साथ" mr="भाषा, ऐकण्याच्या सोयीसह" gu="ભાષાઓ, સાંભળવાની સુવિધા સાથે" /> },
+          ]}
+        />
+        </PixelCurtain>
+      </div>
     </>
   );
 }

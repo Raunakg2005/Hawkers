@@ -11,6 +11,7 @@ import './globals.css';
 import '@/styles/landing.css';
 import '@/styles/jobs.css';
 import '@/styles/story.css';
+import '@/styles/fx.css';
 import '@/app/rights/rights.module.css';
 import '@/app/safety/safety.module.css';
 import '@/components/rights/rights-ui.module.css';
@@ -19,6 +20,7 @@ import '@/components/profile/profile.module.css';
 import '@/components/diary/diary.module.css';
 import '@/components/workers/workers.module.css';
 import '@/components/post-job/postjob.module.css';
+import '@/styles/pixel.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TabBar from '@/components/TabBar';
@@ -72,7 +74,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#fdfbf7',
+  themeColor: '#0b0c15',
   colorScheme: 'light dark',
   width: 'device-width',
   initialScale: 1,
@@ -81,7 +83,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="light" className={`${bricolage.variable} ${mukta.variable} ${muktaVaani.variable} ${pixel.variable}`} suppressHydrationWarning>
+    <html lang="en" data-theme="dark" className={`${bricolage.variable} ${mukta.variable} ${muktaVaani.variable} ${pixel.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: PREFS_SCRIPT }} />
       </head>
