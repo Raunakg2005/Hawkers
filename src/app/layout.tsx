@@ -20,7 +20,6 @@ import '@/components/profile/profile.module.css';
 import '@/components/diary/diary.module.css';
 import '@/components/workers/workers.module.css';
 import '@/components/post-job/postjob.module.css';
-import '@/styles/pixel.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import TabBar from '@/components/TabBar';

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import dynamic from 'next/dynamic';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -30,6 +30,7 @@ export default function CityStage({ rail, children }: { rail: ReactNode; childre
   const [mode, setMode] = useState<'pending' | '3d' | 'static'>('pending');
   const [ready, setReady] = useState(false);
   const [active, setActive] = useState(true);
+  const markReady = useCallback(() => setReady(true), []);
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -121,7 +122,7 @@ export default function CityStage({ rail, children }: { rail: ReactNode; childre
         <div className="stage-backdrop" />
         {mode === '3d' && (
           <div className={`stage-canvas${ready ? ' is-ready' : ''}`}>
-            <CityCanvas active={active} onReady={() => setReady(true)} />
+            <CityCanvas active={active} onReady={markReady} />
           </div>
         )}
         <div className="stage-scrim" />

@@ -1,14 +1,14 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { PerformanceMonitor, Sparkles } from '@react-three/drei';
 import { Bloom, EffectComposer, ToneMapping, Vignette } from '@react-three/postprocessing';
 import { ToneMappingMode } from 'postprocessing';
 import * as THREE from 'three';
 import { smooth, story } from './story';
-import { Atmosphere, ChaiStall, City, Clouds, Scooter, Street, StreetLamp, Trees, useCity } from './world';
-import { Arcs, GovOffice, JobPins, SkillCard, Trust, Workers, usePins } from './actors';
+import { ChaiStall, City, Scooter, Sky, Street, StreetLamp, Trees, useCity } from './real-world';
+import { Arcs, GovOffice, JobPins, People, SkillCard, Trust, usePins } from './real-actors';
 
 /* ────────────────────────────────────────────────────────────────────────────
  * Camera path. One key per act (held a little so you can read), plus the
@@ -21,15 +21,15 @@ type Key = { p: number; pos: [number, number, number]; look: [number, number, nu
 const KEYS: Key[] = [
   { p: 0.0, pos: [0.6, 2.7, 12], look: [0, 1.45, 0], sx: -0.6 },
   { p: 0.05, pos: [0.4, 2.8, 11.4], look: [0, 1.5, 0], sx: -0.6 },
-  { p: 0.17, pos: [0, 21, 32], look: [0, 1, -10], sx: -0.35 },
-  { p: 0.24, pos: [3, 19, 30], look: [0, 1, -10], sx: -0.35 },
+  { p: 0.17, pos: [0, 30, 44], look: [0, 9, -18], sx: -0.35 },
+  { p: 0.24, pos: [4, 28, 42], look: [0, 9, -18], sx: -0.35 },
   { p: 0.36, pos: [0.4, 2.3, 8.4], look: [1.9, 1.8, 1.6], sx: -0.7 },
   { p: 0.45, pos: [0.2, 2.2, 8], look: [2, 1.85, 1.8], sx: -0.7 },
   { p: 0.56, pos: [-0.4, 3.4, 10.6], look: [-3.3, 2.2, 2.4], sx: 0.7 },
   { p: 0.65, pos: [-0.8, 3.6, 10.2], look: [-3.3, 2.2, 2.4], sx: 0.7 },
   { p: 0.76, pos: [2.4, 4.9, 9.4], look: [7.4, 2.3, -2.6], sx: -0.7 },
   { p: 0.84, pos: [2.8, 5.1, 9], look: [7.4, 2.3, -2.6], sx: -0.7 },
-  { p: 1.0, pos: [0, 30, 38], look: [0, 3, -14], sx: 0 },
+  { p: 1.0, pos: [0, 26, 40], look: [0, 8, -18], sx: 0 },
 ];
 
 const vA = new THREE.Vector3();
@@ -91,22 +91,42 @@ function Dust() {
   return show ? <Sparkles count={70} scale={[26, 6, 14]} position={[0, 3, -2]} size={3} speed={0.25} color="#ffd29a" opacity={0.7} /> : null;
 }
 
-function Scene({ quality }: { quality: 'high' | 'low' }) {
+/**
+ * Mounts once every asset in the Suspense boundary has loaded, then compiles
+ * all shaders in parallel (KHR_parallel_shader_compile) before the first frame,
+ * so the page never freezes on a synchronous compile.
+ */
+function Ready({ onWarm }: { onWarm: () => void }) {
+  const { gl, scene, camera } = useThree();
+  useEffect(() => {
+    let cancelled = false;
+    gl.compileAsync(scene, camera)
+      .catch(() => undefined)
+      .then(() => {
+        if (!cancelled) onWarm();
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [gl, scene, camera, onWarm]);
+  return null;
+}
+
+function Scene() {
   const buildings = useCity();
   const pins = usePins(buildings);
   return (
     <>
-      <Atmosphere shadows={quality === 'high'} />
+      <Sky />
       <Street />
       <City buildings={buildings} />
-      <Clouds />
       <Trees />
       <ChaiStall />
-      <StreetLamp x={0} />
-      <StreetLamp x={-6.4} />
-      <Scooter x={-5.5} z={4.4} color="#e5384a" rot={0.2} />
-      <Scooter x={6.2} z={4.9} color="#5eead4" rot={-0.3} />
-      <Workers />
+      <StreetLamp x={0.15} />
+      <StreetLamp x={-6.6} />
+      <Scooter x={-5.5} z={4.4} color="#b3202e" rot={0.2} />
+      <Scooter x={6.2} z={4.9} color="#1f6f78" rot={-0.3} />
+      <People />
       <JobPins pins={pins} />
       <Arcs pins={pins} />
       <SkillCard />
@@ -119,6 +139,11 @@ function Scene({ quality }: { quality: 'high' | 'low' }) {
 }
 
 export default function CityCanvas({ active, onReady }: { active: boolean; onReady: () => void }) {
+  const [warm, setWarm] = useState(false);
+  const onWarm = useCallback(() => {
+    setWarm(true);
+    requestAnimationFrame(() => requestAnimationFrame(onReady));
+  }, [onReady]);
   const [quality, setQuality] = useState<'high' | 'low'>('high');
   const [dpr, setDpr] = useState(1.5);
 
@@ -143,7 +168,7 @@ export default function CityCanvas({ active, onReady }: { active: boolean; onRea
   return (
     <Canvas
       className="city-canvas"
-      frameloop={active ? 'always' : 'never'}
+      frameloop={active && warm ? 'always' : 'never'}
       dpr={dpr}
       shadows={quality === 'high' ? 'soft' : false}
       camera={{ fov: 38, near: 0.1, far: 600, position: [0.6, 2.5, 10.5] }}
@@ -151,7 +176,6 @@ export default function CityCanvas({ active, onReady }: { active: boolean; onRea
       onCreated={({ gl }) => {
         gl.toneMapping = THREE.ACESFilmicToneMapping;
         gl.toneMappingExposure = 1.05;
-        requestAnimationFrame(onReady);
       }}
       aria-hidden="true"
     >
@@ -161,7 +185,10 @@ export default function CityCanvas({ active, onReady }: { active: boolean; onRea
           setQuality('low');
         }}
       />
-      <Scene quality={quality} />
+      <Suspense fallback={null}>
+        <Scene />
+        <Ready onWarm={onWarm} />
+      </Suspense>
       {quality === 'high' ? (
         <EffectComposer multisampling={0} enableNormalPass={false}>
           <Bloom mipmapBlur intensity={0.85} luminanceThreshold={0.85} luminanceSmoothing={0.2} radius={0.7} />

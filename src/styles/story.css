@@ -27,27 +27,17 @@
   z-index: 0;
 }
 
-/* painted dawn: what low-data visitors see, and what everyone sees while 3D loads */
+/* while the 3D loads (and for low-data visitors): the real dawn sky, blurred,
+   darkened at night and brightening with the story */
 .stage-backdrop {
   position: absolute;
-  inset: 0;
+  inset: -40px;
   background:
-    radial-gradient(60vmax 40vmax at 50% calc(115% - var(--story, 0) * 45%), rgba(255, 190, 110, calc(0.15 + var(--story, 0) * 0.75)), transparent 70%),
-    linear-gradient(to bottom, #05061a 0%, #141a4a calc(55% - var(--story, 0) * 20%), #8a3f6a 100%);
-}
-
-.stage-backdrop::after {
-  /* skyline silhouette */
-  content: '';
-  position: absolute;
-  inset: auto 0 0;
-  height: 34%;
-  background:
-    linear-gradient(to top, #0b0a20 0 22%, transparent 22%),
-    repeating-linear-gradient(90deg, #12112c 0 5vw, transparent 5vw 6.5vw, #17163a 6.5vw 10vw, transparent 10vw 11vw);
-  mask-image: linear-gradient(to top, #000 0 40%, transparent 40%), repeating-linear-gradient(90deg, #000 0 7vw, transparent 7vw 8vw);
-  -webkit-mask-image: linear-gradient(to top, #000 0 40%, transparent 40%), repeating-linear-gradient(90deg, #000 0 7vw, transparent 7vw 8vw);
-  opacity: 0.9;
+    linear-gradient(to bottom, rgba(5, 6, 26, calc(0.85 - var(--story, 0) * 0.55)), rgba(5, 6, 26, 0.35) 55%, rgba(5, 6, 26, 0.9)),
+    url('/3d/dawn.png') 62% 70% / cover no-repeat,
+    #0b0c1d;
+  filter: blur(18px) saturate(1.15) brightness(calc(0.45 + var(--story, 0) * 0.55));
+  transform: scale(1.08);
 }
 
 .stage-canvas {

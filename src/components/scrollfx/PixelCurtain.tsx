@@ -4,11 +4,11 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import { range, useScrollFx } from './engine';
 
 /**
- * Effect 1 · Pixel curtain. The section arrives hidden under a wall of blocks
- * that break away in a noisy order as you scroll it into view; the blocks at
- * the breaking edge flash marigold, like a pickaxe working through stone.
+ * Effect 1 · Dissolve curtain. The section arrives hidden under a fine grid of
+ * tiles that dissolve in a noisy order as you scroll it into view, with a warm
+ * glow running along the dissolving edge.
  */
-export default function PixelCurtain({ children, block = 30 }: { children: ReactNode; block?: number }) {
+export default function PixelCurtain({ children, block = 14 }: { children: ReactNode; block?: number }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const grid = useRef<{ cols: number; rows: number; order: Float32Array; shade: Float32Array; w: number; h: number }>(null);
 
@@ -66,7 +66,7 @@ export default function PixelCurtain({ children, block = 30 }: { children: React
         const s = g.shade[i];
         if (d < 0.05) {
           // breaking edge
-          ctx.fillStyle = s > 0.5 ? '#ffa41f' : '#ffd58a';
+          ctx.fillStyle = s > 0.5 ? 'rgba(255,164,31,0.85)' : 'rgba(255,213,138,0.7)';
           const k = (d / 0.05) * block;
           ctx.fillRect(x * block + (block - k) / 2, y * block + (block - k) / 2, k, k);
         } else {

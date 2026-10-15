@@ -5,11 +5,11 @@ import * as THREE from 'three';
  * Drawn once at load with system fonts, so the scene needs no font files.
  */
 
-// the pixel face next/font registered on <html>, read at draw time
+// the display face next/font registered on <html>, read at draw time
 const FONT_FALLBACK = 'system-ui, sans-serif';
 let FONT = FONT_FALLBACK;
 if (typeof document !== 'undefined') {
-  const v = getComputedStyle(document.documentElement).getPropertyValue('--font-pixel').trim();
+  const v = getComputedStyle(document.documentElement).getPropertyValue('--font-bricolage').trim();
   if (v) FONT = `${v}, ${FONT_FALLBACK}`;
 }
 

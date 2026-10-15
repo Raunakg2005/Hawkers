@@ -457,3 +457,173 @@
 .fx-xp .fx-title {
   text-align: center;
 }
+
+/* ════════════════════════════════════════════════════════════════════════════
+ * Realistic finish: glass, light and depth instead of pixel bevels.
+ * ════════════════════════════════════════════════════════════════════════════ */
+
+.fx-world {
+  --curtain: #0a0b18;
+  background:
+    radial-gradient(80% 50% at 50% 0%, rgba(255, 164, 31, 0.08), transparent 60%),
+    linear-gradient(#0a0b18, #0c0d1f);
+}
+
+.fx-title {
+  font-family: var(--font-display);
+  font-weight: var(--fw-black);
+  letter-spacing: -0.03em;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* hotbar → glass carousel */
+.hb-slot {
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 20px 40px -20px rgba(0, 0, 0, 0.8);
+}
+
+.hb-slot svg {
+  filter: drop-shadow(0 6px 14px color-mix(in srgb, var(--tile, #ffa41f) 60%, transparent));
+}
+
+.hb-slot small {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.hb-selector {
+  border: 2px solid rgba(255, 196, 120, 0.9);
+  border-radius: 28px;
+  box-shadow:
+    0 0 0 6px rgba(255, 164, 31, 0.12),
+    0 0 60px rgba(255, 164, 31, 0.45);
+}
+
+.hb-name {
+  font-weight: var(--fw-black);
+  letter-spacing: -0.02em;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.hb-rate {
+  color: #ffbd4d;
+  text-shadow: 0 0 24px rgba(255, 164, 31, 0.5);
+}
+
+.hb-progress {
+  height: 4px;
+  border: 0;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.hb-progress span {
+  background: linear-gradient(90deg, #ffbd4d, #f58a07);
+  box-shadow: 0 0 16px rgba(255, 164, 31, 0.8);
+}
+
+/* XP → a glowing progress line and glass stat cards */
+.xp-bar {
+  height: 6px;
+  border: 0;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+.xp-fill {
+  border-radius: 6px;
+  background: linear-gradient(90deg, #5eead4, #ffbd4d);
+  box-shadow: 0 0 24px rgba(255, 189, 77, 0.6);
+}
+
+.xp-badge {
+  display: none;
+}
+
+.xp-stat {
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 30px 60px -30px rgba(0, 0, 0, 0.8);
+  transition:
+    transform 0.6s var(--ease-out),
+    border-color 0.6s;
+}
+
+.xp-stat[data-lvl='true'] {
+  transform: translateY(-8px);
+  border-color: rgba(94, 234, 212, 0.55);
+}
+
+.xp-num {
+  font-weight: var(--fw-black);
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 30px rgba(255, 189, 77, 0.45);
+}
+
+.xp-stat[data-lvl='true'] .xp-sparks {
+  animation: xp-glow 0.9s var(--ease-out) forwards;
+}
+
+@keyframes xp-glow {
+  0% {
+    opacity: 0.9;
+    transform: scale(0);
+    box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.6);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+    box-shadow: 0 0 0 80px rgba(94, 234, 212, 0);
+  }
+}
+
+.xp-sparks {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* falling words → heavy glass tiles */
+.bd-line {
+  font-weight: var(--fw-black);
+  letter-spacing: -0.035em;
+}
+
+.bd-word {
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 30px 50px -24px rgba(0, 0, 0, 0.85);
+}
+
+.bd-word.hot {
+  border-color: rgba(255, 220, 160, 0.6);
+  background: linear-gradient(160deg, #ffbd4d, #f58a07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 30px 60px -20px rgba(245, 138, 7, 0.65);
+}
+
+/* curtain → a fine dissolve */
+.fx-curtain-canvas {
+  image-rendering: auto;
+  filter: blur(1px);
+}
